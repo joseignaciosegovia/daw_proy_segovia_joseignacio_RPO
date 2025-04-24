@@ -59,9 +59,9 @@
                 <td><?php echo $pista['nombre'] ?></td>
                 <td><?php echo $pista['localizacion'] ?></td>
                 <td><?php echo $pista['precioReserva'] . "€" ?></td>
-                <td><a href="consultarReservas.php"><button>Consultar reservas</button></a></td>
-                <td><a href="consultarCalendario.php"><button>Calendario</button></a></td>
-                <td><a href="editarPista.php"><button>Editar</button></a></td>
+                <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
+                <td><?php echo "<a href=\"consultarCalendario.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
+                <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>
             </tr>
                 <?php 
                     $cont++;
@@ -74,3 +74,12 @@
     </form>
     </body>
 </html>
+<?php
+    // Mensaje de error cuando volvemos después de pinchar en algún botón (como cuando no hay reservas para la pista seleccionada)
+    if (isset($_SESSION['error'])) {
+        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+        echo "</div>";
+    }
+?>

@@ -58,12 +58,14 @@ class Crud {
         
         $this->base->Consulta($consulta);
         $data = array();
-        // Recorremos el array "datos" (donde están los registros de la tabla)
-        foreach ($this->base->datos as $value) {
-            // En cada iteración, guardamos los datos de cada registro en el array "data"
-            array_push($data, $value);
+        if($this->base->datos != null){
+            // Recorremos el array "datos" (donde están los registros de la tabla)
+            foreach ($this->base->datos as $value) {
+                // En cada iteración, guardamos los datos de cada registro en el array "data"
+                array_push($data, $value);
+            }
+            return $data;
         }
-        return $data;
     }
 
     // Comprueba si el acceso ha sido correcto
