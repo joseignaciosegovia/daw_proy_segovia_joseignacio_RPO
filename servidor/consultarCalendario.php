@@ -26,11 +26,7 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $reservas = $crud->listar("reservas", " WHERE pista = \"$_GET[pista]\"");
-        if($reservas == null){
-            // NO IMPRIME EL MENSAJE, SINO QUE DIRECTAMENTE VA A intranet.php
-            error("No hay ninguna reserva para la pista " . $_GET['pista']);
-        }
+        $calendario = $crud->listar("calendarios", " WHERE pista = \"$_GET[pista]\"");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,35 +44,17 @@
         <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     </head>
     <body>
-        <h1>Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
-        <table class="table table-hover">
-            <thead>
-                <th>#</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Cliente</th>
-                <th>Estado</th>
-            </thead>
-            <tbody>
-        <?php
-            $cont = 1;
-            
-            foreach($reservas as $reserva){
-        ?>
-                <tr>
-                <th><?php echo $cont ?></th>
-                <td><?php echo $reserva['fecha'] ?></td>
-                <td><?php echo $reserva['hora'] ?></td>
-                <td><?php echo $reserva['cliente'] ?></td>
-                <td><?php echo $reserva['estado'] ?></td>
-            </tr>
+        <h1>Calendario de la pista <?php echo "$_GET[pista]" ?></h1>
         <?php 
-                $cont++;
+            // Recibe bien las fechas
+            foreach($calendario as $fecha){
+                echo "$fecha[fechaOcupada] $fecha[horaOcupada]";
+                echo "</br>";
             }
         ?>
+
     </body>
 </html>
-
 <?php
     }
 ?>
