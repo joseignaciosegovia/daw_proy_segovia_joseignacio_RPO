@@ -7,13 +7,13 @@
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
-        header('Location:accesoGestor.php');
+        header('Location: accesoAdministrador.php');
         die();
     }
 
-    // Si ya hemos iniciado sesión como gestor, dirigimos a la página de gestión
-    /*if (!empty($_SESSION["gestor"])) {
-        header("Location: ../index.php");
+    // Si ya hemos iniciado sesión como administrador, dirigimos a la página de gestión
+    /*if (!empty($_SESSION["administrador"])) {
+        header("Location: intranet.php");
         exit();
     }*/
 
@@ -39,71 +39,24 @@
             $contraseña = trim($_POST['pass']);
 
             $crud = new Crud(new DB("proyecto"));
-            $acceso;
-            $fecha = time();
-            $fechaBloqueado = 0;
-
-            // Si es la primera vez que intentamos acceder con este usuario
-            if(!isset($_SESSION[$nombre])){
-                $_SESSION[$nombre]['bloqueado'] = 0;
-            }
-
-            // Si el usuario con el que intentamos acceder está bloqueado
-            if($_SESSION[$nombre]['bloqueado'] + 600 >= $fecha)
-                error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión durante diez minutos");
-            
-            // Si el usuario no está bloqueado
-            // Si el nombre de usuario o la contraseña son solo espacios en blanco
-            if (strlen($nombre) == 0 || strlen($contraseña) == 0) {
-                error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
-            }
 
             // Comprobamos si existe un administrador con el usuario y la contraseña introducidos
             
             $administrador = $crud->isValido("gestores", $nombre, $contraseña);
             // Si no existe, mostramos el error y actualizamos la página
             if ($administrador == null) {
-                $acceso = "Denegado";
-                $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
-                
                 unset($_POST['login']);
-                
-                // Comprobamos si el usuario debería bloquearse
-                $accesosIncorrectos = 0;
-                $accesos = $crud->listar("conexiones", " WHERE usuario = \"$nombre\" AND (hora + 180) >= $fecha ORDER BY hora DESC");
-                
-                // Recorremos los accesos con este usuario en los últimos tres minutos empezando por los más recientes
-                foreach($accesos as $acceso) {
-                    // Si el acceso fue denegado, incrementamos el número de accesos incorrectos
-                    if($acceso['acceso'] == "Denegado")
-                        $accesosIncorrectos++;
-                    // Si el acceso fue aceptado, dejamos de contar
-                    else {
-                        $accesosIncorrectos = 0;
-                        break;
-                    }
-                    // Guardamos la fecha del intento más reciente porque será la fecha en que se bloquee el usuario
-                    if($accesosIncorrectos == 1) 
-                        $fechaBloqueado = $acceso['hora'];
-                    // Si ha habido cinco accesos denegados seguidos bloqueamos al usuario guardando la fecha de bloqueo
-                    else if($accesosIncorrectos == 5) {
-                        $_SESSION[$nombre]['bloqueado'] = $fechaBloqueado;
-                        error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión en los próximos diez minutos");
-                    }
-                }
                 
                 error("Credenciales Inválidas");
             }
 
             // Si el acceso es correcto
-            $acceso = "Concedido";
-            $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
 
-            $_SESSION['cliente'] = $nombre;
+            $_SESSION['administrador'] = $nombre;
 
             // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
-            header('Location:../index.php');
+            header('Location: intranet.php');
         } else {
             ?>
             <div class="container mt-5">
