@@ -1,6 +1,6 @@
 <?php
     // Cargamos la cabecera
-    require_once "vista/header.php";
+    require_once "vista/template/header.php";
 ?>
             <div class="btn-group">
                 
@@ -19,7 +19,7 @@
 
         <?php
             // Cargamos el pie
-            require_once "vista/footer.php";
+            require_once "vista/template/footer.php";
         ?>
        <script type="module" src="js/main.js"></script>
     </body>

@@ -1,13 +1,14 @@
 <?php
     session_start();
 
+    use Clases\DB;
     require_once "../controlador/Crud.php";
 
     $nombreCliente = $_SESSION['cliente'];
 
     if($nombreCliente) {
-        $crud = new Crud();
-        $cliente = $crud->obtenerDatos("clientes", ["usuario" => $nombreCliente], []);
+        $crud = new Crud(new DB("proyecto"));
+        $cliente = $crud->obtener("clientes", "usuario = $nombreCliente");
 
         $clienteJSON = json_encode($cliente);
         echo $clienteJSON;

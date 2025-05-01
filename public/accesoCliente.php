@@ -4,7 +4,7 @@
     use Clases\DB;
     require_once "../controlador/Crud.php";
     require_once "../modelo/Conexion.inc.php";
-    require_once "../src/Cliente.php";
+    require_once "../modelo/Cliente.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
