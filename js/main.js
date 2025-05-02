@@ -1,10 +1,5 @@
 import {
-    cargarNovedades,
-    cargarOfertas,
-    cargarOrdenadores,
-    cargarComponentes,
     handle_cerrarClientes,
-    handle_buyOrden,
     handle_trabajadores,
     handle_clientes,
     handle_registroClientes,
@@ -14,14 +9,8 @@ import {
 const carritoIcono = document.querySelector('.bi-cart-dash');
 const cesta = document.getElementById('cesta');
 
-const lupaIcono = document.querySelector('.bi-search');
 const usuarioIcono = document.querySelector('.bi-person-circle');
 const seccionUsuario = document.getElementById('usuario');
-const cerrarCesta = document.querySelector('#cerrar-cesta');
-const novedades = document.querySelector('#novedades');
-const ofertas = document.querySelector('#ofertas');
-const ordenadores = document.querySelector('#ordenadores');
-const componentes = document.querySelector('#componentes');
 
 // Botón para el acceso de los trabajadores
 const btnTrabajadores = document.querySelector(".btn-trabajadores");
@@ -34,14 +23,6 @@ btnClientes.addEventListener("click", handle_clientes);
 // Botón para el registro de los clientes
 const btnRegistroClientes = document.querySelector(".btn-login");
 btnRegistroClientes.addEventListener("click", handle_registroClientes);
-
-// Productos del carrito
-let productosCarrito = [];
-
-// Pulsamos en el icono del carrito
-carritoIcono.addEventListener("click", () => {
-    cesta.style.display = "block";
-});
 
 // Pulsamos en el icono del usuario
 usuarioIcono.addEventListener("click", () => {

@@ -104,7 +104,7 @@
 
             // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
-            header('Location:../reservarPista.php');
+            header('Location:../public/reservarPista.php');
         } else {
             ?>
             <div class="container mt-5">

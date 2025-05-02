@@ -2,11 +2,6 @@
     // Cargamos la cabecera
     require_once "vista/template/header.php";
 ?>
-            <div class="btn-group">
-                
-            </div>
-        </header>
-
         <div id="usuario">
             <h2 class="usuario-titulo">Usuario</h2>
             <button type="button" class="btn-trabajadores">Acceso a Administradores</button>
@@ -22,5 +17,3 @@
             require_once "vista/template/footer.php";
         ?>
        <script type="module" src="js/main.js"></script>
-    </body>
-</html>
