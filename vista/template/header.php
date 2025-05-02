@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Electrónica online</title>
+        <title>Reserva de pistas</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -17,10 +17,9 @@
     <body>
         <header>
             <div id="cabecera">
-                <h1><a href="http://localhost/Aplicacion/index.php">ELECTRÓNICA ONLINE</a></h1>
+                <h1><a href="http://localhost/proyecto/index.php">Moral de Calatrava</a></h1>
+                <h1><a href="http://localhost/proyecto/index.php">Palacio de Deportes y Polideportivo</a></h1>
                 <div id="iconosCabecera">
-                    <a><i class="bi bi-cart-dash"></i></a>
-                    <a><i class="bi bi-search"></i></a>
                     <a><i class="bi bi-person-circle"></i></a>
                 </div>
             </div>
