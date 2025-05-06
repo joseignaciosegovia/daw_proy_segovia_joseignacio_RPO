@@ -2,9 +2,10 @@
 <html lang="es">
     <head>
         <!-- Metadatos -->
-        <meta charset="UTF-8" />
-        <meta name="author" content="José Ignacio"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="author" content="José Ignacio Segovia Ramírez">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Página de reservas de pistas online de pistas polideportivas en Moral de Calatrava">
         <!-- Titulo -->
         <title>Reserva de pistas | Moral de Calatrava</title>
         <!-- Favicon -->
