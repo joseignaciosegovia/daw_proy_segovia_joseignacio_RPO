@@ -49,34 +49,20 @@
     // Cargamos la cabecera
     require_once "../vista/template/header.php";
 ?>
-        </header>
 
-        <div id="usuario">
-            <h2 class="usuario-titulo">Usuario</h2>
-            <button type="button" class="btn-trabajadores">Acceso a trabajadores</button>
-            <button type="button" class="btn-usu">Acceso a usuarios</button>
-            <button type="button" class="btn-login">Registrarse</button>
-            <i class="bi bi-x-circle" id="cerrarUsuario"></i>
-        </div>
-
-        <div>
+    <div class="container">
         <div class="row">
+        
+        <?php require_once "../vista/template/nav.php"; ?>
+
+            <div class="col d-flex align-items-center">
             <?php
-                $cliente = $crud->obtener("clientes", "email = \"q@gmail.com\"")[0];
+                $cliente = $crud->obtener("clientes", "email = \"marLop@gmail.com\"")[0];
 
                 // CORREGIR CON EL INICIO DE SESIÓN
                 $_SESSION['cliente'] = $cliente['email'];
 
             ?>
-            
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                    <span class="font-weight-bold"><?php echo $cliente['nombre'] ?></span>
-                    <span class="text-black-50"><?php echo $cliente['email'] ?></span>
-                    <span></span>
-                </div>
-            </div>
             
             <div class="col-md-5 border-right">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -113,7 +99,9 @@
                     }
                 ?>
             </form>
+            </div>
         </div>
+    </div>
         <?php
             // Cargamos el pie
             require_once "../vista/template/footer.php";
