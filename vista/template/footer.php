@@ -1,5 +1,5 @@
             <footer>
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row">
                         <h2>Información de interés</h2>
                     </div>

@@ -2,18 +2,24 @@
     // Cargamos la cabecera
     require_once "vista/template/header.php";
 ?>
-        <div id="usuario">
-            <h2 class="usuario-titulo">Usuario</h2>
-            <button type="button" class="btn-trabajadores">Acceso a Administradores</button>
-            <button type="button" class="btn-usu">Acceso a Clientes</button>
-            <button type="button" class="btn-login">Registrarse</button>
-            <i class="bi bi-x-circle" id="cerrarUsuario"></i>
-        </div>
 
-        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h2>Reservar pistas del polideportivo</h2>
+                <p>En esta página podrás registrarte para reservar las pistas del polideportivo y de la Ciudad Deportiva de Moral de Calatrava</p>
+            </div>
+            <div class="col">
+                <form>
 
-        <?php
-            // Cargamos el pie
-            require_once "vista/template/footer.php";
-        ?>
-       <script type="module" src="js/main.js"></script>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <?php
+        // Cargamos el pie
+        require_once "vista/template/footer.php";
+    ?>
+    <!-- <script type="module" src="js/main.js"></script> -->

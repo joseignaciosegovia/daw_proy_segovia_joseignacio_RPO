@@ -1,7 +1,7 @@
 #cabecera {
-    width: 100%;
+    /*width: 100%;
     display: flex;
-    align-items: center;
+    align-items: center;*/
 }
 
 i {
@@ -9,7 +9,7 @@ i {
 }
 
 h1 {
-    font-family: Georgia; /* CAMBIAR FUENTE */
+    font-family: Arial; /* CAMBIAR FUENTE */
     margin-left: auto;
 }
 
