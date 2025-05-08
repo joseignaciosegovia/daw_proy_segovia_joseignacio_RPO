@@ -1,6 +1,8 @@
 <?php
 
-require_once "../modelo/Conexion.inc.php";
+require_once getcwd() . "/modelo/Conexion.inc.php";
+
+//require_once $_SERVER['SERVER_ADDR'] . "/modelo/Conexion.inc.php";
 
 class Crud {
     private $base;

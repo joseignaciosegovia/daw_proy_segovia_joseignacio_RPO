@@ -1,9 +1,6 @@
 import {
-    handle_cerrarClientes,
-    handle_trabajadores,
-    handle_clientes,
-    handle_registroClientes,
-} from './funciones.js';
+  validacionJS
+} from './validacion.js';
 
 // Iconos
 const carritoIcono = document.querySelector('.bi-cart-dash');
@@ -11,19 +8,7 @@ const cesta = document.getElementById('cesta');
 
 const usuarioIcono = document.querySelector('.bi-person-circle');
 const seccionUsuario = document.getElementById('usuario');
-
-// Botón para el acceso de los trabajadores
-const btnTrabajadores = document.querySelector(".btn-trabajadores");
-btnTrabajadores.addEventListener("click", handle_trabajadores);
-
-// Botón para el acceso de los clientes
-const btnClientes = document.querySelector(".btn-usu");
-btnClientes.addEventListener("click", handle_clientes);
-
-// Botón para el registro de los clientes
-const btnRegistroClientes = document.querySelector(".btn-login");
-btnRegistroClientes.addEventListener("click", handle_registroClientes);
-
+/*
 // Pulsamos en el icono del usuario
 usuarioIcono.addEventListener("click", () => {
 
@@ -60,8 +45,10 @@ seccionUsuario.addEventListener("click", () => {
     seccionUsuario.style.display = "none";
 });
 
+*/
+
 window.addEventListener('load', function() {
-    seccionUsuario.style.display = "none";
+    validacionJS();
 
     
 });

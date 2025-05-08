@@ -50,55 +50,57 @@
     require_once "../vista/template/header.php";
 ?>
 
+    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container">
         <div class="row">
-        
-        <?php require_once "../vista/template/nav.php"; ?>
+            <!-- La barra de navegación será la primera columna -->
+            <?php require_once "../vista/template/nav.php"; ?>
 
+            <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
-            <?php
-                $cliente = $crud->obtener("clientes", "email = \"marLop@gmail.com\"")[0];
-
-                // CORREGIR CON EL INICIO DE SESIÓN
-                $_SESSION['cliente'] = $cliente['email'];
-
-            ?>
-            
-            <div class="col-md-5 border-right">
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Perfil</h4>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Nombre</label>
-                                <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Correo electrónico</label>
-                                <input type="text" class="form-control" placeholder="Correo" name="Email" value="<?php echo $cliente['email'] ?>">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">Teléfono</label>
-                                <input type="text" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
-                            </div>
-                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
-                    </div>
-                </div>
                 <?php
-                    // Si hay algún error lo mostramos aquí
-                    if (isset($_SESSION['error'])) {
-                        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-                        echo $_SESSION['error'];
-                        unset($_SESSION['error']);
-                        echo "</div>";
-                    }
+                    $cliente = $crud->obtener("clientes", "email = \"marLop@gmail.com\"")[0];
+
+                    // CORREGIR CON EL INICIO DE SESIÓN
+                    $_SESSION['cliente'] = $cliente['email'];
+
                 ?>
-            </form>
+                
+                <div class="col-md-5 border-right">
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Perfil</h4>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">Nombre</label>
+                                    <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="labels">Correo electrónico</label>
+                                    <input type="text" class="form-control" placeholder="Correo" name="Email" value="<?php echo $cliente['email'] ?>">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="labels">Teléfono</label>
+                                    <input type="text" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                                </div>
+                            </div>
+                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
+                        </div>
+                    </div>
+                    <?php
+                        // Si hay algún error lo mostramos aquí
+                        if (isset($_SESSION['error'])) {
+                            echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            echo "</div>";
+                        }
+                    ?>
+                </form>
             </div>
         </div>
     </div>
