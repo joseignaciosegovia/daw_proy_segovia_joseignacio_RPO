@@ -23,7 +23,7 @@
     <body>
         <header>
             <div class="container-fluid" id="cabecera">
-                <div class="row d-flex align-items-center">
+                <div class="row d-flex align-items-center py-3">
                     <div class="col">
                         <a href="index.php"><img src="/proyecto/imagenes/IconoPelota.png" alt="Logo de la página"></img></a>
                     </div>

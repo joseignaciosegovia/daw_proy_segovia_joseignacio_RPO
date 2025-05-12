@@ -4,6 +4,15 @@
     align-items: center;*/
 }
 
+#informacionPrincipal {
+    background-color: #666666;
+    color: white;
+}
+
+nav {
+    background-color: #CCCCCC;
+}
+
 i {
     font-size: x-large;
 }

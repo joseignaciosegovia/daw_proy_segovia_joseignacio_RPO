@@ -1,17 +1,18 @@
 <!-- La barra de navegación será una columna dentro del contenido principal de la página -->
-<div class="col">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Datos personales</a>
-        </div>
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Nueva reserva</a>
-        </div>
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/proyecto/public">Mis reservas</a>
-        </div>
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Buzón de incidencias</a>
-        </div>
-    </nav>
-</div>
+<div class="row">
+    <div class="col">
+        <nav class="navbar bg-primary col-4 ms-5 my-2 mb-4">
+            <div class="container-fluid py-2">
+                <a class="navbar-brand mb-0 h1 link-light" href="#">Datos personales</a>
+            </div>
+            <div class="container-fluid py-2">
+                <a class="navbar-brand mb-0 h1 link-light" href="#">Nueva reserva</a>
+            </div>
+            <div class="container-fluid py-2">
+                <a class="navbar-brand mb-0 h1 link-light" href="/proyecto/public">Mis reservas</a>
+            </div>
+            <div class="container-fluid py-2">
+                <a class="navbar-brand mb-0 h1 link-light" href="#">Buzón de incidencias</a>
+            </div>
+        </nav>
+    </div>

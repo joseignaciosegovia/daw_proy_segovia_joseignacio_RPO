@@ -3,9 +3,9 @@
 
     use Clases\Cliente;
     use Clases\DB;
-    require_once getcwd() . "/controlador/Crud.php";
-    require_once getcwd() . "/modelo/Cliente.php";
-    require_once getcwd() . "/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
@@ -23,7 +23,7 @@
         $nombre = ucwords($nombre); 
     }
     
-    // Si pulsamos el botón "Crear usuario"
+    // Si pulsamos el botón "Crear Usuario"
     if (isset($_POST['datos'])) {
 
         $datos = json_decode($_POST['datos']);
@@ -63,13 +63,6 @@
         $cliente = new Cliente($email, password_hash($datos->contraseña, PASSWORD_DEFAULT), $nombre, $telefono);
 
         $crud->insertar("clientes", "\"$cliente->email\", \"$cliente->contraseña\", \"$cliente->nombre\", $cliente->telefono");
-
-        // Ventana que indica que el cliente se ha creado correctamente
-        // NO MUESTRA LA VENTANA
-        echo "<dialog open>
-          <p>El perfil se ha actualizado correctamente</p>
-        <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
 
@@ -79,18 +72,20 @@
     } else {
 ?>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col d-flex align-items-center">
-                <div class="row">
-                    <h2>Reservar pistas del polideportivo</h2>
+    <div class="container-fluid my-3">
+        <div class="row column-gap-3">
+            <div class="col pt-4" id="informacionPrincipal">
+                <div class="row px-4">
+                    <h2>Reservar pistas del polideportivo y de la Ciudad Deportiva</h2>
                     <p>En esta página podrás registrarte para reservar las pistas del polideportivo y de la Ciudad Deportiva de Moral de Calatrava</p>
                 </div>
             </div>
             <div class="col">
-                <form class="row g-3 needs-validation" name="crearUsuario" novalidate>
-                    <h2 class="d-flex justify-content-center">Registrarse</h2>
-                    <div class="mb-3 col-6">
+                <h2 class="d-flex justify-content-center">Registrarse</h2>
+                <a class="btn btn-secondary my-2 d-flex justify-content-center" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
+                
+                <form class="row needs-validation px-4" name="crearUsuario" novalidate>
+                    <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre Completo</label>
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre Completo" required>
                         <div class="invalid-feedback">
@@ -100,7 +95,7 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
                         <div class="invalid-feedback">
@@ -110,7 +105,7 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" required>
                         <div id="passwordHelpBlock" class="form-text">
@@ -123,7 +118,7 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3">
                         <label for="confirmarContraseña" class="form-label">Confirmar contraseña</label>
                         <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" required>
                         <div class="invalid-feedback">
@@ -133,7 +128,7 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control" id="telefono" placeholder="Teléfono (opcional)" pattern="[0-9]{9}">
                         <div class="invalid-feedback">
@@ -143,7 +138,10 @@
                             Dato correcto
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="crear">Crear Usuario</button>
+                    <div class="mb-3 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary form-floating" name="crear">Crear Usuario</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>

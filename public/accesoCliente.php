@@ -2,9 +2,9 @@
     session_start();
 
     use Clases\DB;
-    require_once "../controlador/Crud.php";
-    require_once "../modelo/Conexion.inc.php";
-    require_once "../modelo/Cliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
@@ -13,10 +13,10 @@
     }
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio
-    /*if (!empty($_SESSION["cliente"])) {
-        header("Location: ../index.php");
+    if (!empty($_SESSION["cliente"])) {
+        header("Location: reservarPista.php");
         exit();
-    }*/
+    }
 
 ?>
 <!DOCTYPE html>
@@ -104,7 +104,7 @@
 
             // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
 
-            header('Location:../public/reservarPista.php');
+            header('Location: reservarPista.php');
         } else {
             ?>
             <div class="container mt-5">
@@ -112,7 +112,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Iniciar sesión</h3>
-                            <h4>¿No tienes cuenta? <a href="registroCliente.php">Regístrate aquí</a></h4>
+                            <a class="btn btn-secondary" href="../index.php">Si no tienes cuenta, regístrate aquí</a>
                         </div>
                         <div class="card-body">
                             <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
@@ -120,7 +120,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
+                                    <input type="text" class="form-control" placeholder="email" name='usuario' required>
 
                                 </div>
                                 <div class="input-group form-group">
@@ -130,7 +130,7 @@
                                     <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Login" class="btn float-right btn-success" name='login'>
+                                    <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
                                 </div>
                             </form>
                         </div>

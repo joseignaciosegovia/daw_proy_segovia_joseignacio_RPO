@@ -57,8 +57,9 @@ function showFeedBack(input, valid, message) {
       const ncContraseña = document.getElementById('contraseña');
   
       if (ncConfirmar.value !== ncContraseña.value){
-        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
         isValid = false;
+        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+        firstInvalidElement = ncConfirmar;
       }
       else if (!ncConfirmar.checkValidity()) {
         isValid = false;

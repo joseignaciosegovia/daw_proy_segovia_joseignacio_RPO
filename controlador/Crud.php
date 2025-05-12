@@ -1,8 +1,6 @@
 <?php
 
-require_once getcwd() . "/modelo/Conexion.inc.php";
-
-//require_once $_SERVER['SERVER_ADDR'] . "/modelo/Conexion.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
 
 class Crud {
     private $base;
@@ -40,6 +38,10 @@ class Crud {
     }
 
     function obtener($tabla, $condicion) {
+
+        // Limpiamos los datos
+        $this->base->datos = null;
+        
         $consulta = "select * from " . $tabla . " where " . $condicion;
 
         try {
