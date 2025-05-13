@@ -50,7 +50,7 @@
 
         nombreNoVacio($nombre);
 
-        $respuesta = $crud->obtener("clientes", "email = \"$email\"");
+        $respuesta = $crud->obtener("clientes", "where email = \"$email\"");
         if($respuesta != null) {
             error("El email está repetido");
         }

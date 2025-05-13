@@ -36,7 +36,7 @@
 
     $crud = new Crud(new DB("proyecto"));
 
-    $pistas = $crud->listar("pistas", "");
+    $pistas = $crud->listar("*", "pistas", "");
 
 ?>
     <table class="table table-hover">

@@ -42,7 +42,7 @@ class Crud {
         // Limpiamos los datos
         $this->base->datos = null;
         
-        $consulta = "select * from " . $tabla . " where " . $condicion;
+        $consulta = "select * from " . $tabla . " " . $condicion;
 
         try {
             $this->base->Consulta($consulta);
@@ -53,12 +53,12 @@ class Crud {
         return $this->base->datos;
     }
 
-    function listar($tabla, $condicion) {
+    function listar($seleccion, $tabla, $condicion) {
 
         // Limpiamos los datos
         $this->base->datos = null;
         
-        $consulta = "select * from " . $tabla . $condicion;
+        $consulta = "select " . $seleccion . " from " . $tabla . " " . $condicion;
         
         $this->base->Consulta($consulta);
         $data = array();
@@ -76,7 +76,7 @@ class Crud {
     function isValido($tabla, $email, $contraseña) {
         try {
             // Obtenemos la contraseña del documento que tiene el nombre de usuario introducido
-            $resultado = $this->obtener($tabla, "email = \"$email\"")[0];
+            $resultado = $this->obtener($tabla, "where email = \"$email\"")[0];
 
             // Si se ha encontrado un usuario
             if($resultado) {

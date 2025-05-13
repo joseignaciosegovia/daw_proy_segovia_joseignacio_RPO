@@ -71,7 +71,7 @@
                 
                 // Comprobamos si el usuario debería bloquearse
                 $accesosIncorrectos = 0;
-                $accesos = $crud->listar("conexiones", " WHERE usuario = \"$nombre\" AND (hora + 180) >= $fecha ORDER BY hora DESC");
+                $accesos = $crud->listar("*", "conexiones", " WHERE usuario = \"$nombre\" AND (hora + 180) >= $fecha ORDER BY hora DESC");
                 
                 // Recorremos los accesos con este usuario en los últimos tres minutos empezando por los más recientes
                 foreach($accesos as $acceso) {

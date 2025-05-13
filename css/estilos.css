@@ -2,11 +2,20 @@
     /*width: 100%;
     display: flex;
     align-items: center;*/
+    background-color: #FFCC66;
 }
 
 #informacionPrincipal {
     background-color: #666666;
     color: white;
+}
+
+#seccionPrincipal {
+    background-color: #FFCC66;
+}
+
+#bienvenido {
+    background-color: #FFCC66;
 }
 
 nav {

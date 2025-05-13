@@ -26,7 +26,7 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $calendario = $crud->listar("calendarios", " WHERE pista = \"$_GET[pista]\"");
+        $calendario = $crud->listar("*", "calendarios", " WHERE pista = \"$_GET[pista]\"");
 ?>
 <!DOCTYPE html>
 <html lang="es">

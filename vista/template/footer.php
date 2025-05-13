@@ -63,6 +63,8 @@
             <!-- JavaScript del proyecto -->
             <!-- <script type="module" src="/proyecto/js/main.js"></script> -->
             <!-- <script type="module" src="/proyecto/js/validacion.js"></script> -->
-            <script type="module" src="/proyecto/js/calendar.js"></script>
+            
+            <script src="/proyecto/js/calendar.js"></script>
+            <script src="/proyecto/js/daypilot-all.min.js"></script>
         </body>
 </html>

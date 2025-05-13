@@ -59,7 +59,7 @@
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
                 <?php
-                    $cliente = $crud->obtener("clientes", "email = \"marLop@gmail.com\"")[0];
+                    $cliente = $crud->obtener("clientes", "where email = \"marLop@gmail.com\"")[0];
 
                     // CORREGIR CON EL INICIO DE SESIÓN
                     $_SESSION['cliente'] = $cliente['email'];

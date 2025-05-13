@@ -26,7 +26,7 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $crud->listar("reservas", " WHERE pista = \"$_GET[pista]\"");
+        $crud->listar("*", "reservas", " WHERE pista = \"$_GET[pista]\"");
         if($reservas == null){
             // NO IMPRIME EL MENSAJE, SINO QUE DIRECTAMENTE VA A intranet.php
             error("No hay ninguna reserva para la pista " . $_GET['pista']);

@@ -8,7 +8,7 @@
 
     if($nombreCliente) {
         $crud = new Crud(new DB("proyecto"));
-        $cliente = $crud->obtener("clientes", "usuario = $nombreCliente");
+        $cliente = $crud->obtener("clientes", "where usuario = $nombreCliente");
 
         $clienteJSON = json_encode($cliente);
         echo $clienteJSON;
