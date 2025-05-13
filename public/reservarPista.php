@@ -2,7 +2,6 @@
 
     session_start();
 
-    use Clases\Cliente;
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";

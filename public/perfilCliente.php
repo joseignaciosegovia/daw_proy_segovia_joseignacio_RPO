@@ -2,37 +2,32 @@
     session_start();
 
     use Clases\DB;
-    require_once "../controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
-        header('Location:perfil.php');
+        header('Location: perfilCliente.php');
         die();
     }
 
     $crud = new Crud(new DB("proyecto"));
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
-    /*if (empty($_SESSION["cliente"])) {
+    if (empty($_SESSION["cliente"])) {
         header("Location: ../index.php");
         exit();
-    }*/
+    }
 
     // Si pulsamos el botón de actualizar perfil
     if (isset($_POST['Actualizar'])) {
-        // Si se ha cambiado el nombre de usuario y coincide con uno ya existente
-        /*if($_SESSION["cliente"] != $_POST['Usuario'] && $crud->obtener("clientes", ["usuario" => $_POST['Usuario']], [])){
-            error("Error, El nombre de usuario ya existe.");
-        }*/
-
         $cliente = [
             "nombre" => $_POST['Nombre'],
-            "email" => $_POST['Email'],
+            "contraseña" => password_hash($_POST['Contraseña'], PASSWORD_DEFAULT),
             "telefono" => $_POST['Telefono']
         ];
 
-        $valores = "email = \"$cliente[email]\", nombre = \"$cliente[nombre]\", telefono = $cliente[telefono]";
-        $condicion = "email = \"$_SESSION[cliente]\"";
+        $valores = "nombre = \"$cliente[nombre]\", telefono = $cliente[telefono], contraseña = \"$cliente[contraseña]\"";
+        $condicion = "where email = \"$_SESSION[cliente]\"";
 
         // Actualizamos el perfil en la base de datos
         $crud->actualizar("clientes", $valores, $condicion);
@@ -51,7 +46,7 @@
 ?>
 
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
             <?php require_once "../vista/template/nav.php"; ?>
@@ -59,11 +54,7 @@
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
                 <?php
-                    $cliente = $crud->obtener("clientes", "where email = \"marLop@gmail.com\"")[0];
-
-                    // CORREGIR CON EL INICIO DE SESIÓN
-                    $_SESSION['cliente'] = $cliente['email'];
-
+                    $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
                 ?>
                 
                 <div class="col-md-5 border-right">
@@ -76,16 +67,44 @@
                                 <div class="col-md-6">
                                     <label class="labels">Nombre</label>
                                     <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
+                                    <div class="invalid-feedback">
+                                        Introduzca un nombre
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Dato correcto
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <label class="labels">Correo electrónico</label>
-                                    <input type="text" class="form-control" placeholder="Correo" name="Email" value="<?php echo $cliente['email'] ?>">
+                                    <label class="labels">Contraseña</label>
+                                    <input type="text" class="form-control" placeholder="Contraseña" name="Contraseña" value="">
+                                    <div class="invalid-feedback">
+                                        Introduzca una contraseña válida
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Dato correcto
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="labels">Confirmar contraseña</label>
+                                    <input type="text" class="form-control" placeholder="Contraseña" name="Confirmar contraseña" value="">
+                                    <div class="invalid-feedback">
+                                        Confirme la contraseña
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Dato correcto
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label class="labels">Teléfono</label>
-                                    <input type="text" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                                    <input type="tel" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                                    <div class="invalid-feedback">
+                                        Introduzca un número de teléfono válido
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Dato correcto
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
@@ -108,6 +127,5 @@
             // Cargamos el pie
             require_once "../vista/template/footer.php";
         ?>
-        <!-- <script type="module" src="/Aplicacion/js/seccionesCliente.js"></script> -->
     </body>
 </html>

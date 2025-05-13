@@ -3,7 +3,7 @@
     <div class="col">
         <nav class="navbar bg-primary col-4 ms-5 my-2 mb-4">
             <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="#">Datos personales</a>
+                <a class="navbar-brand mb-0 h1 link-light" href="http://localhost/proyecto/public/perfilCliente.php">Datos personales</a>
             </div>
             <div class="container-fluid py-2">
                 <a class="navbar-brand mb-0 h1 link-light" href="#">Nueva reserva</a>

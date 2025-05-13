@@ -19,7 +19,7 @@ class Crud {
     }
 
     function actualizar($tabla, $valores, $condicion) {
-        $consulta = "update " . $tabla . " set " . $valores . " where " . $condicion;
+        $consulta = "update " . $tabla . " set " . $valores . " " . $condicion;
         try {
             $this->base->ConsultaSimple($consulta);
         } catch (PDOException $ex) {
