@@ -1,0 +1,75 @@
+<?php
+    session_start();
+
+    use Clases\DB;
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+
+    function error($mensaje) {
+        $_SESSION['error'] = $mensaje;
+        header('Location: perfilCliente.php');
+        die();
+    }
+
+    $crud = new Crud(new DB("proyecto"));
+
+    // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
+    if (empty($_SESSION["cliente"])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
+    // Si pulsamos el botón de "Enviar"
+    if (isset($_POST['Enviar'])) {
+
+        $fecha = date('Y-m-d', time());
+
+        //$cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"");
+        // Añadimos la nueva queja/sugerencia al final del array de quejas/sugerencias
+        //$cliente->quejas[] = ["descripcion" => $_POST['Queja'], "fecha" => date('Y-m-d h:i:s a', time())];
+
+        // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
+        $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$_POST[Queja]\", \"$_SESSION[cliente]\"");
+
+        // Ventana que indica que el perfil se ha actualizado correctamente
+        echo "<dialog open>
+              <p>La queja o sugerencia se ha realizado correctamente</p>
+            <button onclick=\"this.parentElement.close()\">OK</button>
+        </dialog>";
+    }
+
+    // Cargamos la cabecera
+    require_once "../vista/template/header.php";
+?>
+<!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- La barra de navegación será la primera columna -->
+            <?php require_once "../vista/template/nav.php"; ?>
+
+            <!-- El contenido principal de la página será la segunda columna -->
+            <div class="col d-flex align-items-center">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Quejas y sugerencias</h4>
+                        </div>
+                        <div>
+                            <div>
+                                <label class="labels">Queja o sugerencia</label>
+                                <textarea class="form-control" placeholder="" name="Queja" value="" rows="5" cols="100"></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button></div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <?php
+        // Cargamos el pie
+        require_once "../vista/template/footer.php";
+    ?>
+    </body>
+</html>
