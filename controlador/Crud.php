@@ -28,7 +28,7 @@ class Crud {
     }
 
     function eliminar($tabla, $condicion) {
-        $consulta = "delete from " . $tabla . " where " . $condicion;
+        $consulta = "delete from " . $tabla . " " . $condicion;
         
         try {
             $this->base->ConsultaSimple($consulta);

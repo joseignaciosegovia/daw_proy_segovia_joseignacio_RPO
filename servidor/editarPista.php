@@ -25,13 +25,27 @@
         $crud = new Crud(new DB("proyecto"));
         $crud->actualizar("pistas", $valores, $condicion);
 
-        // Ventana que indica que el perfil se ha actualizado correctamente
+        // Ventana que indica que la pista se ha actualizado correctamente
         echo "<dialog open>
             <p>La pista se ha actualizado correctamente</p>
             <button onclick=\"this.parentElement.close()\">OK</button>
         </dialog>";
 
         $_GET['pista'] = $_POST['Nombre'];
+    }
+
+    // Si pulsamos el botón de borrar
+    elseif (isset($_POST['Borrar'])) {
+        $crud = new Crud(new DB("proyecto"));
+        $crud->eliminar("pistas", "where nombre = \"$_GET[pista]\"");
+
+        // Ventana que indica que la pista se ha borrado correctamente
+        echo "<dialog open>
+            <p>La pista se ha borrado correctamente</p>
+            <button onclick=\"this.parentElement.close()\">OK</button>
+        </dialog>";
+
+        header("Location: intranet.php");
     }
 
     if(isset($_GET['pista'])) {
@@ -107,7 +121,8 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Borrar">Borrar pista</button></div>
         </div>
     </form>
     <a href="intranet.php"><button>Volver atrás</button></a>
