@@ -9,7 +9,7 @@
                 <a class="navbar-brand mb-0 h1 link-light" href="#">Nueva reserva</a>
             </div>
             <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="/proyecto/public/consultarReservas">Mis reservas</a>
+                <a class="navbar-brand mb-0 h1 link-light" href="http://localhost/proyecto/public/reservasCliente.php">Mis reservas</a>
             </div>
             <div class="container-fluid py-2">
                 <a class="navbar-brand mb-0 h1 link-light" href="#">Buzón de incidencias</a>
