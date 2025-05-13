@@ -52,6 +52,7 @@
                 echo "</br>";
             }
         ?>
+        <a href="intranet.php"><button>Volver atrás</button></a>
     </body>
 </html>
 <?php

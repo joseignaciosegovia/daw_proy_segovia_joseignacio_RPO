@@ -12,9 +12,7 @@
 
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
-
 ?>
-
         <div class="col">
             <h4>Escoger pista</h4>
             <div class="accordion accordion-flush" id="elegirPista">

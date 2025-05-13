@@ -26,7 +26,7 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $crud->listar("*", "reservas", " WHERE pista = \"$_GET[pista]\"");
+        $reservas = $crud->listar("*", "reservas", "where pista = \"$_GET[pista]\"");
         if($reservas == null){
             // NO IMPRIME EL MENSAJE, SINO QUE DIRECTAMENTE VA A intranet.php
             error("No hay ninguna reserva para la pista " . $_GET['pista']);
@@ -55,7 +55,6 @@
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Cliente</th>
-                <th>Estado</th>
             </thead>
             <tbody>
         <?php
@@ -63,17 +62,19 @@
             
             foreach($reservas as $reserva){
         ?>
-                <tr>
+            <tr>
                 <th><?php echo $cont ?></th>
                 <td><?php echo $reserva['fecha'] ?></td>
                 <td><?php echo $reserva['hora'] ?></td>
                 <td><?php echo $reserva['cliente'] ?></td>
-                <td><?php echo $reserva['estado'] ?></td>
             </tr>
         <?php 
                 $cont++;
             }
         ?>
+            </tbody>
+        </table>
+        <a href="intranet.php"><button>Volver atrás</button></a>
     </body>
 </html>
 

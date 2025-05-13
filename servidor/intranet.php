@@ -16,6 +16,7 @@
         header("Location: accesoAdministrador.php");
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
