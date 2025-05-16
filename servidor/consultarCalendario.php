@@ -45,14 +45,15 @@
     </head>
     <body>
         <h1>Calendario de la pista <?php echo "$_GET[pista]" ?></h1>
-        <?php 
-            // Recibe bien las fechas
-            foreach($calendario as $fecha){
-                echo "$fecha[fechaOcupada] $fecha[horaOcupada]";
-                echo "</br>";
-            }
-        ?>
+        <div id="calendario">
+            <?php echo "$_GET[pista]" ?>
+        </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
+
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="/proyecto/js/calendar.js"></script>
+        <script src="/proyecto/js/daypilot-all.min.js"></script>
     </body>
 </html>
 <?php

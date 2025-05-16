@@ -1,7 +1,4 @@
 #cabecera {
-    /*width: 100%;
-    display: flex;
-    align-items: center;*/
     background-color: #FFCC66;
 }
 
@@ -27,184 +24,12 @@ i {
 }
 
 h1 {
-    font-family: Arial; /* CAMBIAR FUENTE */
+    font-family: Arial; 
     margin-left: auto;
 }
 
-#iconosCabecera {
-    margin-left: auto;
-}
-
-#iconosCabecera a {
-    padding-right: 15px; /* MUEVE EL TÍTULO HACIA LA IZQUIERDA */
-}
-
-.btn-group {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-/* Eliminar bordes dobles */
-.btn-group button:not(:last-child) {
-    border-right: none; 
-}
-
-.btn-group button:hover {
-    /*background-color: #ccd1d1;*/
-    color: #839192;
-    text-decoration: underline;
-}
-
-#cesta, #usuario {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    /*right: -100%;*/
-    width: 360px;
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px;
-    color: white;
-    background-color: #000814;
-    box-shadow: -2px solid 4px hsl(0 4% 15% / 10%);
-    border: 1px solid red;
-    transition: 1.7s;
-}
-
-/* Secciones que incluyen los productos que se muestran en Novedades, Ofertas, Ordenadores y Componentes */
-.divProductos {
-    /* display: flex;*/
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-    gap: 1.5rem;
-    text-align: center;
-}
-
-/* Productos de la sección de Novedades, Ofertas, Ordenadores y Componentes */
-.productos {
-    position: relative;
-    transition: .5s ease-in-out;
-}
-
-.productos:hover{
-    padding: 10px;
-    border: 2px solid #4946fd;
-}
-
-/* Imágenes de los productos */
-.imagenProducto{
-    width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    margin-bottom: .5rem;
-}
-
-/* Icono carrito */
-.bi-cart-dash {
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-/* Sección carrito */
-.cesta{
-    position: fixed;
-    top: 0;
-    right: 0;
-    right: -100%;
-    width: 360px;
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px;
-    background-color: #000814;
-    box-shadow: -2px solid 4px hsl(0 4% 15% / 10%);
-    border: 1px solid #ff002b;
-    transition: 1.7s;
-}
-
-.cesta.active{
-    right: 0;
-    transition: .5s;
-}
-
-/* Títulos de las secciones de cesta y usuario */
-.cesta-titulo, .usuario-titulo {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 2rem;
-}
-
-.cesta-box{
-    display:grid;
-    grid-template-columns: 32% 50% 18%;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.imagen-cesta{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    padding: 10px;
-}
-
-.detail.box{
-    display: grid;
-    row-gap: .5rem;
-}
-
-.nombre-producto-cesta{
-    font-size: 1rem;
-    text-transform: uppercase;
-}
-
-.precio-cesta{
-    font-weight: 500;
-}
-
-/* Cantidad de un producto en la cesta */
-.cantidad-cesta{
-    border: 1px solid #fdfffc;
-    outline-color: red;
-    width: 1.4rem;
-    text-align: center;
-    font-size: 1rem;
-    /* Hacer más ancho el input */
-    width: 3rem;
-    background-color: #000814;
-    color: #fdfffc;
-}
-
-.eliminar-cesta{
-    font-size: 24px;
-    color: red;
-    cursor: pointer;
-}
-
-.total{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-    border-top: 1px solid #fdfffc;
-}
-
-.titulo-total{
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.precio-total{
-    margin-left: .5rem;
-}
-
-/* Diseño de los botones: 'Añadir productos', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
-.btn-comprar, .btn-trabajadores, .btn-usu, .btn-login, .btn-salir{
+/* Diseño de los botones: 'Cerrar sesión' */
+.btn-salir{
     display: flex;
     margin: 1.5rem auto 0 auto;
     padding: 12px 20px;
@@ -217,8 +42,8 @@ h1 {
     transition: .4s;
 }
 
-/* Ponemos el ratón encima de los botones: 'Comprar', 'Acceso a trabajadores', 'Crear usuario', 'Registrarse', 'Cerrar sesión' */
-.btn-comprar:hover, .btn-trabajadores:hover, .btn-usu:hover, .btn-login:hover, .btn-salir:hover{
+/* Ponemos el ratón encima de los botones: 'Cerrar sesión' */
+.btn-salir:hover{
     background-color: red;
     color: #fdfffc;
 }

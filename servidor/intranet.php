@@ -50,7 +50,7 @@
             <th>Precio de reserva</th>
             <th>Reservas</th>
             <th>Calendario</th>
-            <th>Editar</th>
+            <th>Editar pista</th>
         </thead>
         <tbody>
             <?php
@@ -78,7 +78,7 @@
     <form method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
         <input type="submit" class="btn-salir" name="salir" value="Cerrar sesión">
     </form>
-    </body>
+</body>
 </html>
 <?php
     // Mensaje de error cuando volvemos después de pinchar en algún botón (como cuando no hay reservas para la pista seleccionada)

@@ -52,6 +52,7 @@
     
     <div class="col" id="calendario">
 
+        <!-- CUANDO SE HAGA UNA RESERVA, HAY QUE ACTUALIZAR TAMBIÉN LA TABLA CALENDARIOS -->
     </div>
 
 <?php 
