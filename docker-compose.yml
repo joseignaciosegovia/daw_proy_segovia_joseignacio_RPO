@@ -1,0 +1,18 @@
+services:
+  miapp:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "14070:80"
+    container_name: bbdd-joseignacio
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=www.bbdd-joseignacio.dockergp.ip-ddns.com
+      - LETSENCRYPT_HOST=www.bbdd-joseignacio.dockergp.ip-ddns.com
+    networks:
+      - proxy-network
+
+  networks:
+    proxy-network:
+      external: true
