@@ -11,6 +11,9 @@ window.addEventListener('load', function() {
     case "enviarIncidencias":
       validarEnviarIncidencias(form);
       break;  
+    case "editarPista":
+      validarEditarPista(form);
+      break; 
   }
 });
 
@@ -503,7 +506,7 @@ function validacionPerfilCliente(form) {
   });
 }
 
-//
+// Validación del formulario para enviar incidencias/sugerencias
 function validarEnviarIncidencias(form) {
   // Deshabilitamos la forma declarativa de validación
   
@@ -607,6 +610,149 @@ function validarEnviarIncidencias(form) {
       showFeedBack(ncIncidencia, false, "Introduzca un mensaje válido");
     } else {
       showFeedBack(ncIncidencia, true);
+    }
+  });
+}
+
+// Validación del formulario para editar pistas
+function validarEditarPista(form) {
+  // Deshabilitamos la forma declarativa de validación
+  
+  form.setAttribute('novalidate', true);
+
+  // Validación al enviar el formulario
+
+  form.addEventListener('submit', function (event) {
+    let isValid = true;
+    let firstInvalidElement = null;
+
+    const ncPrecio = document.getElementById('precio');
+
+    if (!ncPrecio.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncPrecio, false);
+
+      firstInvalidElement = ncPrecio;
+    } else {
+      showFeedBack(ncPrecio, true);
+    }
+
+    const ncNombre = document.getElementById('nombre');
+
+    if (!ncNombre.checkValidity()) {
+      isValid = false;
+      if(ncNombre.validity.valueMissing) {
+        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+      }
+      else {
+        showFeedBack(ncNombre, false);
+      }
+
+      firstInvalidElement = ncNombre;
+    } else {
+      showFeedBack(ncNombre, true, "El nombre es correcto");
+    }
+
+    if (!isValid) {
+
+      // Indicamos que no se ha podido modificar la pista
+
+      mostrarModal("Error. La pista " + ncNombre.value + " no ha podido modificarse");
+
+      // Ponemos el foco en el primer elemento incorrecto
+
+      firstInvalidElement.focus();
+    } else {
+      const ncLocalizacion = document.getElementById('Localizacion');
+      const ncNombreOriginal = document.getElementById('nombreOriginal');
+
+      let datosAEnviar = JSON.stringify({ 
+        nombre: ncNombre.value, 
+        localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value), 
+        precio: ncPrecio.value,
+        nombreOriginal: ncNombreOriginal.value
+      });
+
+      // Realizamos el envío al servidor
+
+      const formData = new FormData();
+
+      // Al llamar "datos" al parámetro del "formData" que enviamos al servidor,
+      // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
+
+      formData.append("datos", datosAEnviar);
+
+      // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
+
+      fetch('editarPista.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+        mostrarModal("La pista ha sido modificada correctamente");
+        
+      }).catch(function (err) {
+        mostrarModal("Ha habido un error");
+      });
+      
+      // Disparamos el evento "reset" para resetear el formulario
+
+      form.dispatchEvent(new Event('reset'));
+    }
+
+    // Prevenimos el comportamiento por defecto y la propagación
+
+    event.preventDefault();
+    event.stopPropagation();
+
+  })
+
+  // Reset del formulario
+
+  form.addEventListener('reset', function (event) {
+    for (const div of this.querySelectorAll('div.valid-feedback, div.invalid-feedback')) {
+      div.classList.remove('d-block');
+      div.classList.add('d-none');
+    }
+
+    for (const input of this.querySelectorAll('input')) {
+      input.classList.remove('is-valid');
+      input.classList.remove('is-invalid');
+    }
+
+    // Reseteamos el formulario
+
+    form.reset();
+
+    // Ponemos el foco en el primer elemento
+
+    const ncNombre = document.getElementById('nombre');
+    ncNombre.focus();
+  })
+
+  const ncPrecio = document.getElementById('precio');
+  const ncNombre = document.getElementById('nombre');
+
+  // Validación en línea de cada "input"
+
+  ncPrecio.addEventListener('change', function (event) {
+    if (!ncPrecio.checkValidity()) {
+      showFeedBack(ncPrecio, false, "Introduzca un precio válido");
+    } else {
+      showFeedBack(ncPrecio, true);
+    }
+  });
+
+  ncNombre.addEventListener('change', function (event) {
+    if (!ncNombre.checkValidity()) {
+      if(ncNombre.validity.valueMissing) {
+        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+      }
+      else {
+        showFeedBack(ncNombre, false);
+      }
+    } else {
+      showFeedBack(ncNombre, true);
     }
   });
 }

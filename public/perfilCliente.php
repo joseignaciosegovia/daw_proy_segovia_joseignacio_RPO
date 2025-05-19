@@ -129,9 +129,8 @@
             </div>
         </div>
     </div>
-        <?php
-            // Cargamos el pie
-            require_once "../vista/template/footer.php";
-        ?>
-    </body>
-</html>
+    
+<?php
+    // Cargamos el pie
+    require_once "../vista/template/footer.php";
+?>

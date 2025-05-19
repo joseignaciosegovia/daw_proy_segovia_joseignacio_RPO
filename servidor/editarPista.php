@@ -8,6 +8,11 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
+    function añadirScripts(){
+?>
+        <script type="module" src="/proyecto/js/validacion.js"></script>
+<?php }
+
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
     if (empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");
@@ -21,21 +26,19 @@
     }
 
     // Si pulsamos el botón de actualizar
-    if (isset($_POST['Actualizar'])) {
-        $valores = "nombre = \"$_POST[Nombre]\", localizacion = \"$_POST[Localizacion]\", precioReserva = \"$_POST[Precio]\"";
-        $condicion = "where nombre = \"$_GET[pista]\"";
+    if (isset($_POST['datos'])) {
+        $datos = json_decode($_POST['datos']);
+
+        $localizacion = $datos->localizacion[0];
+
+        $valores = "nombre = \"$datos->nombre\", localizacion = \"$localizacion\", precioReserva = $datos->precio";
+        $condicion = "where nombre = \"$datos->nombreOriginal\"";
 
         // Actualizamos el perfil en la base de datos
         $crud = new Crud(new DB("proyecto"));
         $crud->actualizar("pistas", $valores, $condicion);
 
-        // Ventana que indica que la pista se ha actualizado correctamente
-        echo "<dialog open>
-            <p>La pista se ha actualizado correctamente</p>
-            <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
-
-        $_GET['pista'] = $_POST['Nombre'];
+        $_GET['pista'] = $datos->nombreOriginal;
     }
 
     // Si pulsamos el botón de borrar
@@ -66,7 +69,7 @@
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Pista</h4>
@@ -74,7 +77,7 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label class="labels">Nombre</label>
-                                <input type="text" class="form-control" name="Nombre" value="<?php echo $pista['nombre'] ?>">
+                                <input type="text" class="form-control" id="nombre" name="Nombre" value="<?php echo $pista['nombre'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un nombre
                                 </div>
@@ -103,7 +106,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" name="Precio" value="<?php echo $pista['precioReserva'] ?>">
+                                <input type="number" class="form-control" id="precio" name="Precio" value="<?php echo $pista['precioReserva'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un precio válido
                                 </div>
@@ -114,14 +117,15 @@
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Borrar">Borrar pista</button></div>
+                        <!-- Campo oculto para guardar el nombre de la pista antes de cambiarlo -->
+                        <input id="nombreOriginal" type="hidden" value="<?php echo "$pista[nombre]"?>">
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <a href="intranet.php"><button>Volver atrás</button></a>
-    </body>
-</html>
+
 <?php
     }
 
@@ -132,4 +136,6 @@
         unset($_SESSION['error']);
         echo "</div>";
     }
+
+    require_once "../vista/template/footer.php";
 ?>
