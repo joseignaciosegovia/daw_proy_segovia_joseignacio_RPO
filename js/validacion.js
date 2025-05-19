@@ -1,5 +1,14 @@
-// Muestra un mensaje de error o de validación correcta para el "input" recibido
+window.addEventListener('load', function() {
+  const form = document.forms[0];
 
+  switch(form.name) {
+    case "crearUsuario":
+      validacionCrearUsuario();
+      break;   
+  }
+});
+
+// Muestra un mensaje de error o de validación correcta para el "input" recibido
 function showFeedBack(input, valid, message) {
     const validClass = (valid) ? 'is-valid' : 'is-invalid';
     const messageDiv = (valid) ? input.parentElement.querySelector('div.valid-feedback') : input.parentElement.querySelector('div.invalid-feedback');
@@ -17,7 +26,6 @@ function showFeedBack(input, valid, message) {
   }
   
   // Validación en línea por defecto
-  
   function defaultCheckElement(event) {
     this.value = this.value.trim();
     if (!this.checkValidity()) {
@@ -27,9 +35,8 @@ function showFeedBack(input, valid, message) {
     }
   }
   
-  // Validación del formulario con "submit" en línea
-  
-  function validacionJS() {
+  // Validación del formulario para crear un usuario con "submit" en línea
+  function validacionCrearUsuario() {
     const form = document.forms.crearUsuario;
   
     // Deshabilitamos la forma declarativa de validación
@@ -308,4 +315,4 @@ function mostrarModal(titulo, texto) {
     });
   }
 
-export { validacionJS };
+export { validacionCrearUsuario as validacionJS };

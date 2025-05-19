@@ -17,6 +17,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Hoja de estilos -->
         <link rel="stylesheet" type="text/css" href="/proyecto/css/estilos.css">
+
+        <!-- SI HAY PÁGINAS QUE REQUIEREN SU PROPIA HOJA DE ESTILOS, SE INCLUIRÁ AQUÍ -->
+        <!-- <link rel="stylesheet" type="text/css" href=isset($estilos) ? $estilos : "/proyecto/css/estilos.css" > -->
+        
         <!-- Animanate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </head>
@@ -28,7 +32,7 @@
                         <a href="index.php"><img src="/proyecto/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
                     <div class="col-11">
-                        <h1><a href=<?= isset($home) ? $home : "/proyecto/index.php"?>>Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
+                        <h1><a href=<?= isset($home) ? $home : "/proyecto/index.php"?> >Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
                     </div>
                 </div>
             </div>

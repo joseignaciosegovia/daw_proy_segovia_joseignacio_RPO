@@ -28,7 +28,7 @@ h1 {
     margin-left: auto;
 }
 
-/* Diseño de los botones: 'Cerrar sesión' */
+/* Diseño del botón: 'Cerrar sesión' (tanto del cliente como del administrador) */
 .btn-salir{
     display: flex;
     margin: 1.5rem auto 0 auto;
@@ -42,7 +42,7 @@ h1 {
     transition: .4s;
 }
 
-/* Ponemos el ratón encima de los botones: 'Cerrar sesión' */
+/* Ponemos el ratón encima del botón: 'Cerrar sesión' (tanto del cliente como del administrador) */
 .btn-salir:hover{
     background-color: red;
     color: #fdfffc;

@@ -61,8 +61,9 @@
             <!-- Bootstrap -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
             <!-- JavaScript del proyecto -->
-            <script type="module" src="/proyecto/js/main.js"></script>
-            <script type="module" src="/proyecto/js/validacion.js"></script>
+            <?php if (function_exists('añadirScripts')){
+                añadirScripts();
+            }?>
             <script src="/proyecto/js/calendar.js"></script>
             <!-- Daypilot -->
             <script src="/proyecto/js/daypilot-all.min.js"></script>
