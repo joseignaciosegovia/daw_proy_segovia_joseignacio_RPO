@@ -42,11 +42,12 @@
     }
 
     // Si pulsamos el botón de borrar
-    elseif (isset($_POST['Borrar'])) {
+    elseif (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("pistas", "where nombre = \"$_GET[pista]\"");
+        $crud->eliminar("pistas", "where nombre = \"$_GET[Borrar]\"");
 
         // Ventana que indica que la pista se ha borrado correctamente
+        // NO SE MUESTRA
         echo "<dialog open>
             <p>La pista se ha borrado correctamente</p>
             <button onclick=\"this.parentElement.close()\">OK</button>
@@ -116,11 +117,11 @@
                             </div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Borrar">Borrar pista</button></div>
                         <!-- Campo oculto para guardar el nombre de la pista antes de cambiarlo -->
                         <input id="nombreOriginal" type="hidden" value="<?php echo "$pista[nombre]"?>">
                     </div>
                 </form>
+                <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-primary profile-button" name="Borrar">Borrar pista</button></a>
             </div>
         </div>
     </div>

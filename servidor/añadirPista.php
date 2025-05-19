@@ -8,6 +8,11 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
+    function añadirScripts(){
+?>
+        <script type="module" src="/proyecto/js/validacion.js"></script>
+<?php }
+
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
     if (empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");
@@ -23,20 +28,16 @@
     $crud = new Crud(new DB("proyecto"));
 
     // Si pulsamos el botón de crear
-    if (isset($_POST['Crear'])) {
-        $valores = "\"$_POST[Nombre]\", \"$_POST[Localizacion]\", \"$_POST[Precio]\"";
+    if (isset($_POST['datos'])) {
+        $datos = json_decode($_POST['datos']);
 
-        // Creamos la pista en la base de datos
+        $localizacion = $datos->localizacion[0];
+
+        $valores = "\"$datos->nombre\", \"$localizacion\", \"$datos->precio\"";
+
+        // Añadimos la pista en la base de datos
         
         $crud->insertar("pistas", $valores);
-
-        // Ventana que indica que la pista se ha añadido correctamente
-        echo "<dialog open>
-            <p>La pista se ha añadido correctamente</p>
-            <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
-
-        header("Location: intranet.php");
     }
 
 
@@ -52,7 +53,7 @@
 
                 <!-- El contenido principal de la página será la segunda columna -->
                 <div class="col d-flex align-items-center">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Crear pista</h4>
@@ -60,7 +61,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-6">
                                     <label class="labels">Nombre</label>
-                                    <input type="text" class="form-control" name="Nombre" value="">
+                                    <input type="text" id="nombre" class="form-control" name="Nombre" value="">
                                     <div class="invalid-feedback">
                                         Introduzca un nombre
                                     </div>
@@ -83,7 +84,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="labels">Precio de Reserva</label>
-                                    <input type="number" class="form-control" name="Precio" value="">
+                                    <input type="number" class="form-control" id="precio" name="Precio" value="">
                                     <div class="invalid-feedback">
                                         Introduzca un precio válido
                                     </div>
@@ -99,8 +100,6 @@
             </div>
         </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
-    </body>
-</html>
 <?php
     }
 
@@ -111,4 +110,6 @@
         unset($_SESSION['error']);
         echo "</div>";
     }
+
+    require_once "../vista/template/footer.php";
 ?>
