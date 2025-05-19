@@ -70,6 +70,7 @@
     <form method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
         <input type="submit" class="btn-salir" name="salir" value="Cerrar sesión">
     </form>
+    <a href="intranet.php"><button>Volver atrás</button></a>
 </body>
 </html>
 <?php

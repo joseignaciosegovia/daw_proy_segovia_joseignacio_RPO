@@ -25,9 +25,9 @@
             <div class="container-fluid" id="cabecera">
                 <div class="row d-flex align-items-center py-3">
                     <div class="col">
-                        <a href="index.php"><img src="/proyecto/imagenes/IconoPelota.png" alt="Logo de la página"></img></a>
+                        <a href="index.php"><img src="/proyecto/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
-                    <div class="col-sm-7 col-lg-11">
+                    <div class="col-11">
                         <h1><a href="/proyecto/index.php">Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
                     </div>
                 </div>

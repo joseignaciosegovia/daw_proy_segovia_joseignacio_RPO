@@ -7,6 +7,12 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
+    // Si hemos iniciado sesión como cliente, mostramos la página de resrevar pistas
+    if (!empty($_SESSION["cliente"])) {
+        header("Location: ./public/reservarPista.php");
+        exit();
+    }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location:index.php');
@@ -55,7 +61,7 @@
             error("El email está repetido");
         }
 
-        if($_POST['contraseña'] != $_POST['confirmarContraseña']){
+        if($datos->contraseña != $datos->confirmarContraseña){
             error("La contraseña tiene que coincidir");
         }
 
@@ -65,8 +71,17 @@
         $crud->insertar("clientes", "\"$cliente->email\", \"$cliente->contraseña\", \"$cliente->nombre\", $cliente->telefono");
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
+        $_SESSION['cliente'] = $email;
 
-        echo "$nombre";
+        // Ventana que indica que el perfil se ha actualizado correctamente
+?>
+
+        
+        <dialog open>
+              <p>El cliente se ha actualizado correctamente</p>
+            <button onclick="this.parentElement.close()">OK</button>
+        </dialog>
+<?php
 
         header('Location:public/reservarPista.php');
     } else {

@@ -42,36 +42,49 @@
     $pistas = $crud->listar("*", "pistas", "");
 
 ?>
-    <table class="table table-hover">
-        <thead>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Localización</th>
-            <th>Precio de reserva</th>
-            <th>Reservas</th>
-            <th>Calendario</th>
-            <th>Editar pista</th>
-        </thead>
-        <tbody>
-            <?php
-                $cont = 1;
-                foreach($pistas as $pista){
-            ?>
-            <tr>
-                <th><?php echo $cont ?></th>
-                <td><?php echo $pista['nombre'] ?></td>
-                <td><?php echo $pista['localizacion'] ?></td>
-                <td><?php echo $pista['precioReserva'] . "€" ?></td>
-                <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
-                <td><?php echo "<a href=\"consultarCalendario.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
-                <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>
-            </tr>
-                <?php 
-                    $cont++;
-                } 
-                ?>
-        </tbody>
-    </table>
+    <h1>Pistas del Polideportivo y la Ciudad Deportiva</h1>
+    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- La barra de navegación será la primera columna -->
+             <?php require_once "../vista/template/navGestor.php"; ?>
+
+            <!-- El contenido principal de la página será la segunda columna -->
+            <div class="col d-flex align-items-center">
+                <table class="table table-hover">
+                    <thead>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Localización</th>
+                        <th>Precio de reserva</th>
+                        <th>Reservas</th>
+                        <th>Calendario</th>
+                        <th>Editar pista</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $cont = 1;
+                            foreach($pistas as $pista){
+                        ?>
+                        <tr>
+                            <th><?php echo $cont ?></th>
+                            <td><?php echo $pista['nombre'] ?></td>
+                            <td><?php echo $pista['localizacion'] ?></td>
+                            <td><?php echo $pista['precioReserva'] . "€" ?></td>
+                            <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
+                            <td><?php echo "<a href=\"consultarCalendario.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
+                            <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>
+                        </tr>
+                            <?php 
+                                $cont++;
+                            } 
+                            ?>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
     <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
         <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
     </form>

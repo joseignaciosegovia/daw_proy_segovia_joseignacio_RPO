@@ -75,56 +75,67 @@
     $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
     
 ?>
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>">
-        <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right">Pista</h4>
-            </div>
-            <div class="row mt-2">
-                <div class="col-md-6">
-                    <label class="labels">Nombre</label>
-                    <input type="text" class="form-control" name="Nombre" value="<?php echo $pista['nombre'] ?>">
-                    <div class="invalid-feedback">
-                        Introduzca un nombre
-                    </div>
-                    <div class="valid-feedback">
-                        Dato correcto
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <label for="Localizacion">Localización</label>
-                    <select name="Localizacion" id="Localizacion">
-                        <?php
-                            $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
-                            foreach($localizaciones as $localizacion){
-                                echo "<option value=\"$localizacion[localizacion]\"";
+    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- La barra de navegación será la primera columna -->
+             <?php require_once "../vista/template/navGestor.php"; ?>
 
-                                if($pista['localizacion'] == $localizacion['localizacion']){
-                                    echo " selected";
-                                }
-                                
-                                echo ">$localizacion[localizacion]</option>";
-                            }
-                        ?>
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <label class="labels">Precio de Reserva</label>
-                    <input type="number" class="form-control" name="Precio" value="<?php echo $pista['precioReserva'] ?>">
-                    <div class="invalid-feedback">
-                        Introduzca un precio válido
+            <!-- El contenido principal de la página será la segunda columna -->
+            <div class="col d-flex align-items-center">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Pista</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label class="labels">Nombre</label>
+                                <input type="text" class="form-control" name="Nombre" value="<?php echo $pista['nombre'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label for="Localizacion">Localización</label>
+                                <select name="Localizacion" id="Localizacion">
+                                    <?php
+                                        $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                                        foreach($localizaciones as $localizacion){
+                                            echo "<option value=\"$localizacion[localizacion]\"";
+
+                                            if($pista['localizacion'] == $localizacion['localizacion']){
+                                                echo " selected";
+                                            }
+                                            
+                                            echo ">$localizacion[localizacion]</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Precio de Reserva</label>
+                                <input type="number" class="form-control" name="Precio" value="<?php echo $pista['precioReserva'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un precio válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Borrar">Borrar pista</button></div>
                     </div>
-                    <div class="valid-feedback">
-                        Dato correcto
-                    </div>
-                </div>
+                </form>
             </div>
-            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
-            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Borrar">Borrar pista</button></div>
         </div>
-    </form>
+    </div>
     <a href="intranet.php"><button>Volver atrás</button></a>
     </body>
 </html>

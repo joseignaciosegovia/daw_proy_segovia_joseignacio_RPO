@@ -49,31 +49,42 @@
     </head>
     <body>
         <h1>Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
-        <table class="table table-hover">
-            <thead>
-                <th>#</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Cliente</th>
-            </thead>
-            <tbody>
-        <?php
-            $cont = 1;
-            
-            foreach($reservas as $reserva){
-        ?>
-            <tr>
-                <th><?php echo $cont ?></th>
-                <td><?php echo $reserva['fecha'] ?></td>
-                <td><?php echo $reserva['hora'] ?></td>
-                <td><?php echo $reserva['cliente'] ?></td>
-            </tr>
-        <?php 
-                $cont++;
-            }
-        ?>
-            </tbody>
-        </table>
+        <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- La barra de navegación será la primera columna -->
+                <?php require_once "../vista/template/navGestor.php"; ?>
+
+                <!-- El contenido principal de la página será la segunda columna -->
+                <div class="col d-flex align-items-center">
+                    <table class="table table-hover">
+                        <thead>
+                            <th>#</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Cliente</th>
+                        </thead>
+                        <tbody>
+                    <?php
+                        $cont = 1;
+                        
+                        foreach($reservas as $reserva){
+                    ?>
+                        <tr>
+                            <th><?php echo $cont ?></th>
+                            <td><?php echo $reserva['fecha'] ?></td>
+                            <td><?php echo $reserva['hora'] ?></td>
+                            <td><?php echo $reserva['cliente'] ?></td>
+                        </tr>
+                    <?php 
+                            $cont++;
+                        }
+                    ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
     </body>
 </html>

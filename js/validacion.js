@@ -136,6 +136,7 @@ function showFeedBack(input, valid, message) {
           email: ncEmail.value, 
           nombre: ncNombre.value, 
           contraseña: ncContraseña.value, 
+          confirmarContraseña: ncConfirmar.value,
           telefono: ncTelefono.value
         });
   
