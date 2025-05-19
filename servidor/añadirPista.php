@@ -16,6 +16,8 @@
         header("Location: accesoAdministrador.php");
     }
 
+    require_once "../vista/template/header.php";
+
     $crud = new Crud(new DB("proyecto"));
 
     // Si pulsamos el botón de crear
@@ -40,22 +42,6 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Gestión de las pistas</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Animanate CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <link rel="stylesheet" type="text/css" href="../css/estilos.css">
-    </head>
-    <body>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">
