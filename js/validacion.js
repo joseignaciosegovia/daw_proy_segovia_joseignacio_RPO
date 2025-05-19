@@ -7,7 +7,10 @@ window.addEventListener('load', function() {
       break;
     case "perfilCliente":
       validacionPerfilCliente(form);
-      break;   
+      break; 
+    case "enviarIncidencias":
+      validarEnviarIncidencias(form);
+      break;  
   }
 });
 
@@ -287,130 +290,130 @@ function validacionCrearUsuario(form) {
 
 // Validación del formulario para modificar el perfil del cliente
 function validacionPerfilCliente(form) {
-// Deshabilitamos la forma declarativa de validación
+  // Deshabilitamos la forma declarativa de validación
   
-    form.setAttribute('novalidate', true);
-  
-    // Validación al enviar el formulario
-  
-    form.addEventListener('submit', function (event) {
-      let isValid = true;
-      let firstInvalidElement = null;
-  
-      const ncTelefono = document.getElementById('telefono');
-  
-      if (!ncTelefono.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncTelefono, false);
-  
-        firstInvalidElement = ncTelefono;
-      } else {
-        showFeedBack(ncTelefono, true);
-      }
-  
-      const ncConfirmar = document.getElementById('confirmarContraseña');
-      const ncContraseña = document.getElementById('contraseña');
-  
-      if (ncConfirmar.value !== ncContraseña.value){
-        isValid = false;
-        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
-        firstInvalidElement = ncConfirmar;
-      }
-      else if (!ncConfirmar.checkValidity()) {
-        isValid = false;
-        if(ncConfirmar.validity.valueMissing) {
-          showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
-        }
-        else {
-            showFeedBack(ncConfirmar, false);
-        }
-  
-        firstInvalidElement = ncConfirmar;
-      } else {
-        showFeedBack(ncConfirmar, true, "La confirmación de la contraseña es correcta");
-      }
-  
-      if (!ncContraseña.checkValidity()) {
-        isValid = false;
-        if(ncContraseña.validity.valueMissing) {
-          showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
-        }
-        else {
-          showFeedBack(ncContraseña, false);
-        }
-  
-        firstInvalidElement = ncContraseña;
-      } else {
-        showFeedBack(ncContraseña, true, "La contraseña es correcta");
-      }
-  
-      const ncNombre = document.getElementById('nombre');
-  
-      if (!ncNombre.checkValidity()) {
-        isValid = false;
-        if(ncNombre.validity.valueMissing) {
-          showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
-        }
-        else {
-          showFeedBack(ncNombre, false);
-        }
-  
-        firstInvalidElement = ncNombre;
-      } else {
-        showFeedBack(ncNombre, true, "El nombre es correcto");
-      }
-  
-      if (!isValid) {
-  
-        // Indicamos que no se ha podido modificar el usuario
-  
-        mostrarModal("Error. El usuario " + ncNombre.value + " no ha podido modificarse");
-  
-        // Ponemos el foco en el primer elemento incorrecto
-  
-        firstInvalidElement.focus();
-      } else {
+  form.setAttribute('novalidate', true);
 
-        let datosAEnviar = JSON.stringify({ 
-          nombre: ncNombre.value, 
-          contraseña: ncContraseña.value, 
-          confirmarContraseña: ncConfirmar.value,
-          telefono: ncTelefono.value
-        });
-  
-        // Realizamos el envío al servidor
-  
-        const formData = new FormData();
-  
-        // Al llamar "datos" al parámetro del "formData" que enviamos al servidor,
-        // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
-  
-        formData.append("datos", datosAEnviar);
-  
-        // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
-  
-        fetch('perfilCliente.php', {
-          method: 'post',
-          body: formData
-        }).then((response) => response.text())
-        .then(function(data) {
-          mostrarModal("El usuario ha sido modificado correctamente");
-          
-        }).catch(function (err) {
-          console.log("Ha habido un error");
-        });
-        
-        // Disparamos el evento "reset" para resetear el formulario
-  
-        form.dispatchEvent(new Event('reset'));
+  // Validación al enviar el formulario
+
+  form.addEventListener('submit', function (event) {
+    let isValid = true;
+    let firstInvalidElement = null;
+
+    const ncTelefono = document.getElementById('telefono');
+
+    if (!ncTelefono.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncTelefono, false);
+
+      firstInvalidElement = ncTelefono;
+    } else {
+      showFeedBack(ncTelefono, true);
+    }
+
+    const ncConfirmar = document.getElementById('confirmarContraseña');
+    const ncContraseña = document.getElementById('contraseña');
+
+    if (ncConfirmar.value !== ncContraseña.value){
+      isValid = false;
+      showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+      firstInvalidElement = ncConfirmar;
+    }
+    else if (!ncConfirmar.checkValidity()) {
+      isValid = false;
+      if(ncConfirmar.validity.valueMissing) {
+        showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
       }
-  
-      // Prevenimos el comportamiento por defecto y la propagación
-  
-      event.preventDefault();
-      event.stopPropagation();
-  
-    })
+      else {
+          showFeedBack(ncConfirmar, false);
+      }
+
+      firstInvalidElement = ncConfirmar;
+    } else {
+      showFeedBack(ncConfirmar, true, "La confirmación de la contraseña es correcta");
+    }
+
+    if (!ncContraseña.checkValidity()) {
+      isValid = false;
+      if(ncContraseña.validity.valueMissing) {
+        showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+      }
+      else {
+        showFeedBack(ncContraseña, false);
+      }
+
+      firstInvalidElement = ncContraseña;
+    } else {
+      showFeedBack(ncContraseña, true, "La contraseña es correcta");
+    }
+
+    const ncNombre = document.getElementById('nombre');
+
+    if (!ncNombre.checkValidity()) {
+      isValid = false;
+      if(ncNombre.validity.valueMissing) {
+        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+      }
+      else {
+        showFeedBack(ncNombre, false);
+      }
+
+      firstInvalidElement = ncNombre;
+    } else {
+      showFeedBack(ncNombre, true, "El nombre es correcto");
+    }
+
+    if (!isValid) {
+
+      // Indicamos que no se ha podido modificar el usuario
+
+      mostrarModal("Error. El usuario " + ncNombre.value + " no ha podido modificarse");
+
+      // Ponemos el foco en el primer elemento incorrecto
+
+      firstInvalidElement.focus();
+    } else {
+
+      let datosAEnviar = JSON.stringify({ 
+        nombre: ncNombre.value, 
+        contraseña: ncContraseña.value, 
+        confirmarContraseña: ncConfirmar.value,
+        telefono: ncTelefono.value
+      });
+
+      // Realizamos el envío al servidor
+
+      const formData = new FormData();
+
+      // Al llamar "datos" al parámetro del "formData" que enviamos al servidor,
+      // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
+
+      formData.append("datos", datosAEnviar);
+
+      // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
+
+      fetch('perfilCliente.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+        mostrarModal("El usuario ha sido modificado correctamente");
+        
+      }).catch(function (err) {
+        console.log("Ha habido un error");
+      });
+      
+      // Disparamos el evento "reset" para resetear el formulario
+
+      form.dispatchEvent(new Event('reset'));
+    }
+
+    // Prevenimos el comportamiento por defecto y la propagación
+
+    event.preventDefault();
+    event.stopPropagation();
+
+  })
 
   // Reset del formulario
 
@@ -500,6 +503,114 @@ function validacionPerfilCliente(form) {
   });
 }
 
+//
+function validarEnviarIncidencias(form) {
+  // Deshabilitamos la forma declarativa de validación
+  
+  form.setAttribute('novalidate', true);
+
+  // Validación al enviar el formulario
+
+  form.addEventListener('submit', function (event) {
+    let isValid = true;
+    let firstInvalidElement = null;
+
+    const ncIncidencia = document.getElementById('quejaIncidencia');
+
+    if (!ncIncidencia.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncIncidencia, false);
+
+      firstInvalidElement = ncIncidencia;
+    } else {
+      showFeedBack(ncIncidencia, true);
+    }
+
+    if (!isValid) {
+
+      // Indicamos que no se ha podido enviar la incidencia/queja
+
+      mostrarModal("Error. la incidencia no ha podido enviarse");
+
+      // Ponemos el foco en el primer elemento incorrecto
+
+      firstInvalidElement.focus();
+    } else {
+
+      let datosAEnviar = JSON.stringify({ 
+        contenido: ncIncidencia.value
+      });
+
+      // Realizamos el envío al servidor
+
+      const formData = new FormData();
+
+      // Al llamar "datos" al parámetro del "formData" que enviamos al servidor,
+      // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
+
+      formData.append("datos", datosAEnviar);
+
+      // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
+
+      fetch('incidenciasQuejas.php', {
+        method: 'post',
+        body: formData
+      }).then((response) => response.text())
+      .then(function(data) {
+        mostrarModal("La incidencia ha sido enviada correctamente");
+        
+      }).catch(function (err) {
+        mostrarModal("Ha habido un error");
+      });
+      
+      // Disparamos el evento "reset" para resetear el formulario
+
+      form.dispatchEvent(new Event('reset'));
+    }
+
+    // Prevenimos el comportamiento por defecto y la propagación
+
+    event.preventDefault();
+    event.stopPropagation();
+
+  })
+
+  // Reset del formulario
+
+  form.addEventListener('reset', function (event) {
+    for (const div of this.querySelectorAll('div.valid-feedback, div.invalid-feedback')) {
+      div.classList.remove('d-block');
+      div.classList.add('d-none');
+    }
+
+    for (const input of this.querySelectorAll('input')) {
+      input.classList.remove('is-valid');
+      input.classList.remove('is-invalid');
+    }
+
+    // Reseteamos el formulario
+
+    form.reset();
+
+    // Ponemos el foco en el primer elemento
+
+    const ncIncidencia = document.getElementById('quejaIncidencia');
+    ncIncidencia.focus();
+  })
+
+  // Validación en línea de cada "input"
+
+  const ncIncidencia = document.getElementById('quejaIncidencia');
+
+  ncIncidencia.addEventListener('change', function (event) {
+    if (!ncIncidencia.checkValidity()) {
+      showFeedBack(ncIncidencia, false, "Introduzca un mensaje válido");
+    } else {
+      showFeedBack(ncIncidencia, true);
+    }
+  });
+}
+
 function mostrarModal(titulo, texto) {
     // Obtenemos el contenedor principal del modal
   
@@ -514,7 +625,7 @@ function mostrarModal(titulo, texto) {
   
     const modalCuerpo = modalContenedor.getElementsByClassName('modal-body')[0];
     modalCuerpo.replaceChildren();
-    
+
     if(texto != null) {
       modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
     }

@@ -4,6 +4,11 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
+    function añadirScripts(){
+?>
+        <script type="module" src="/proyecto/js/validacion.js"></script>
+<?php }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: perfilCliente.php');
@@ -19,7 +24,9 @@
     }
 
     // Si pulsamos el botón de "Enviar"
-    if (isset($_POST['Enviar'])) {
+    if (isset($_POST['datos'])) {
+
+        $datos = json_decode($_POST['datos']);
 
         $fecha = date('Y-m-d', time());
 
@@ -28,7 +35,7 @@
         //$cliente->quejas[] = ["descripcion" => $_POST['Queja'], "fecha" => date('Y-m-d h:i:s a', time())];
 
         // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
-        $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$_POST[Queja]\", \"$_SESSION[cliente]\"");
+        $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$datos->contenido\", \"$_SESSION[cliente]\"");
 
         // Ventana que indica que el perfil se ha actualizado correctamente
         echo "<dialog open>
@@ -48,7 +55,7 @@
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Quejas y sugerencias</h4>
@@ -56,7 +63,13 @@
                         <div>
                             <div>
                                 <label class="labels">Queja o sugerencia</label>
-                                <textarea class="form-control" placeholder="" name="Queja" value="" rows="5" cols="100"></textarea>
+                                <textarea class="form-control" id="quejaIncidencia" placeholder="" name="Queja" value="" rows="5" cols="100" required></textarea>
+                                <div class="invalid-feedback">
+                                    Introduzca un mensaje
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button></div>
