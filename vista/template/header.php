@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Página de reservas de pistas online de pistas polideportivas en Moral de Calatrava">
         <!-- Titulo -->
-        <title>Reserva de pistas | Moral de Calatrava</title>
+        <title><?= isset($titulo) ? $titulo : "Reserva de pistas | Moral de Calatrava"?></title>
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="/proyecto/imagenes/Moral.png"/>
         <!-- Bootstrap -->
@@ -28,7 +28,7 @@
                         <a href="index.php"><img src="/proyecto/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
                     <div class="col-11">
-                        <h1><a href="/proyecto/index.php">Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
+                        <h1><a href=<?= isset($home) ? $home : "/proyecto/index.php"?>>Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
                     </div>
                 </div>
             </div>

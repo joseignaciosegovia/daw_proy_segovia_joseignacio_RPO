@@ -1,7 +1,11 @@
 <?php
     session_start();
 
+    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $home = "/proyecto/servidor/intranet.php";
+
     require_once "../controlador/Crud.php";
+    require_once "../vista/template/header.php";
     use Clases\DB;
 
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
@@ -15,8 +19,6 @@
         unset($_SESSION['administrador']);
         header("Location: accesoAdministrador.php");
     }
-
-    require_once "../vista/template/header.php";
 
     $crud = new Crud(new DB("proyecto"));
 

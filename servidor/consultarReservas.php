@@ -1,6 +1,9 @@
 <?php
     session_start();
 
+    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $home = "/proyecto/servidor/intranet.php";
+
     require_once "../controlador/Crud.php";
     require_once "../vista/template/header.php";
     use Clases\DB;
