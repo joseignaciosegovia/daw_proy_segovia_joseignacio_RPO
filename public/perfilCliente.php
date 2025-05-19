@@ -4,6 +4,11 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
+    function añadirScripts(){
+?>
+        <script type="module" src="/proyecto/js/validacion.js"></script>
+<?php }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: perfilCliente.php');
@@ -19,11 +24,18 @@
     }
 
     // Si pulsamos el botón de actualizar perfil
-    if (isset($_POST['Actualizar'])) {
+    if (isset($_POST['datos'])) {
+        $datos = json_decode($_POST['datos']);
+
+        if($datos->telefono == null)
+            $telefono =  0;
+        else
+            $telefono = $datos->telefono;
+
         $cliente = [
-            "nombre" => $_POST['Nombre'],
-            "contraseña" => password_hash($_POST['Contraseña'], PASSWORD_DEFAULT),
-            "telefono" => $_POST['Telefono']
+            "nombre" => $datos->nombre,
+            "contraseña" => password_hash($datos->contraseña, PASSWORD_DEFAULT),
+            "telefono" => $telefono
         ];
 
         $valores = "nombre = \"$cliente[nombre]\", telefono = $cliente[telefono], contraseña = \"$cliente[contraseña]\"";
@@ -31,12 +43,6 @@
 
         // Actualizamos el perfil en la base de datos
         $crud->actualizar("clientes", $valores, $condicion);
-
-        // Ventana que indica que el perfil se ha actualizado correctamente
-        echo "<dialog open>
-              <p>El perfil se ha actualizado correctamente</p>
-            <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
     }
 ?>
 
@@ -58,15 +64,15 @@
                 ?>
                 
                 <div class="col-md-5 border-right">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Perfil</h4>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label class="labels">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
                                     <div class="invalid-feedback">
                                         Introduzca un nombre
                                     </div>
@@ -78,7 +84,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label class="labels">Contraseña</label>
-                                    <input type="text" class="form-control" placeholder="Contraseña" name="Contraseña" value="">
+                                    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="">
                                     <div class="invalid-feedback">
                                         Introduzca una contraseña válida
                                     </div>
@@ -88,7 +94,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="labels">Confirmar contraseña</label>
-                                    <input type="text" class="form-control" placeholder="Contraseña" name="Confirmar contraseña" value="">
+                                    <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" name="Confirmar contraseña" value="">
                                     <div class="invalid-feedback">
                                         Confirme la contraseña
                                     </div>
@@ -98,7 +104,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="labels">Teléfono</label>
-                                    <input type="tel" class="form-control" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                                    <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
                                     <div class="invalid-feedback">
                                         Introduzca un número de teléfono válido
                                     </div>

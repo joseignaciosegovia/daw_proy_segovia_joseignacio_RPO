@@ -3,7 +3,10 @@ window.addEventListener('load', function() {
 
   switch(form.name) {
     case "crearUsuario":
-      validacionCrearUsuario();
+      validacionCrearUsuario(form);
+      break;
+    case "perfilCliente":
+      validacionPerfilCliente(form);
       break;   
   }
 });
@@ -23,22 +26,20 @@ function showFeedBack(input, valid, message) {
     if (message) {
       messageDiv.innerHTML = message;
     }
-  }
+}
   
-  // Validación en línea por defecto
-  function defaultCheckElement(event) {
+// Validación en línea por defecto
+function defaultCheckElement(event) {
     this.value = this.value.trim();
     if (!this.checkValidity()) {
       showFeedBack(this, false);
     } else {
       showFeedBack(this, true);
     }
-  }
+}
   
-  // Validación del formulario para crear un usuario con "submit" en línea
-  function validacionCrearUsuario() {
-    const form = document.forms.crearUsuario;
-  
+// Validación del formulario para crear un usuario con "submit" en línea
+function validacionCrearUsuario(form) {
     // Deshabilitamos la forma declarativa de validación
   
     form.setAttribute('novalidate', true);
@@ -163,7 +164,7 @@ function showFeedBack(input, valid, message) {
           body: formData
         }).then((response) => response.text())
         .then(function(data) {
-          mostrarModal("El usuario ", data + " ha sido creado correctamente");
+          mostrarModal("El usuario ha sido creado correctamente");
           
         }).catch(function (err) {
           console.log("Ha habido un error");
@@ -181,7 +182,7 @@ function showFeedBack(input, valid, message) {
   
     })
 
-    // Reset del formulario
+  // Reset del formulario
 
   form.addEventListener('reset', function (event) {
     for (const div of this.querySelectorAll('div.valid-feedback, div.invalid-feedback')) {
@@ -240,6 +241,10 @@ function showFeedBack(input, valid, message) {
     if (ncConfirmar.value !== ncContraseña.value){
         showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
     }
+    else {
+      showFeedBack(ncConfirmar, true);
+    }
+    
     if (!ncContraseña.checkValidity()) {
       if(ncContraseña.validity.valueMissing) {
         showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
@@ -280,12 +285,227 @@ function showFeedBack(input, valid, message) {
   
 }
 
+// Validación del formulario para modificar el perfil del cliente
+function validacionPerfilCliente(form) {
+// Deshabilitamos la forma declarativa de validación
+  
+    form.setAttribute('novalidate', true);
+  
+    // Validación al enviar el formulario
+  
+    form.addEventListener('submit', function (event) {
+      let isValid = true;
+      let firstInvalidElement = null;
+  
+      const ncTelefono = document.getElementById('telefono');
+  
+      if (!ncTelefono.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncTelefono, false);
+  
+        firstInvalidElement = ncTelefono;
+      } else {
+        showFeedBack(ncTelefono, true);
+      }
+  
+      const ncConfirmar = document.getElementById('confirmarContraseña');
+      const ncContraseña = document.getElementById('contraseña');
+  
+      if (ncConfirmar.value !== ncContraseña.value){
+        isValid = false;
+        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+        firstInvalidElement = ncConfirmar;
+      }
+      else if (!ncConfirmar.checkValidity()) {
+        isValid = false;
+        if(ncConfirmar.validity.valueMissing) {
+          showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
+        }
+        else {
+            showFeedBack(ncConfirmar, false);
+        }
+  
+        firstInvalidElement = ncConfirmar;
+      } else {
+        showFeedBack(ncConfirmar, true, "La confirmación de la contraseña es correcta");
+      }
+  
+      if (!ncContraseña.checkValidity()) {
+        isValid = false;
+        if(ncContraseña.validity.valueMissing) {
+          showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+        }
+        else {
+          showFeedBack(ncContraseña, false);
+        }
+  
+        firstInvalidElement = ncContraseña;
+      } else {
+        showFeedBack(ncContraseña, true, "La contraseña es correcta");
+      }
+  
+      const ncNombre = document.getElementById('nombre');
+  
+      if (!ncNombre.checkValidity()) {
+        isValid = false;
+        if(ncNombre.validity.valueMissing) {
+          showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+        }
+        else {
+          showFeedBack(ncNombre, false);
+        }
+  
+        firstInvalidElement = ncNombre;
+      } else {
+        showFeedBack(ncNombre, true, "El nombre es correcto");
+      }
+  
+      if (!isValid) {
+  
+        // Indicamos que no se ha podido modificar el usuario
+  
+        mostrarModal("Error. El usuario " + ncNombre.value + " no ha podido modificarse");
+  
+        // Ponemos el foco en el primer elemento incorrecto
+  
+        firstInvalidElement.focus();
+      } else {
+
+        let datosAEnviar = JSON.stringify({ 
+          nombre: ncNombre.value, 
+          contraseña: ncContraseña.value, 
+          confirmarContraseña: ncConfirmar.value,
+          telefono: ncTelefono.value
+        });
+  
+        // Realizamos el envío al servidor
+  
+        const formData = new FormData();
+  
+        // Al llamar "datos" al parámetro del "formData" que enviamos al servidor,
+        // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
+  
+        formData.append("datos", datosAEnviar);
+  
+        // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
+  
+        fetch('perfilCliente.php', {
+          method: 'post',
+          body: formData
+        }).then((response) => response.text())
+        .then(function(data) {
+          mostrarModal("El usuario ha sido modificado correctamente");
+          
+        }).catch(function (err) {
+          console.log("Ha habido un error");
+        });
+        
+        // Disparamos el evento "reset" para resetear el formulario
+  
+        form.dispatchEvent(new Event('reset'));
+      }
+  
+      // Prevenimos el comportamiento por defecto y la propagación
+  
+      event.preventDefault();
+      event.stopPropagation();
+  
+    })
+
+  // Reset del formulario
+
+  form.addEventListener('reset', function (event) {
+    for (const div of this.querySelectorAll('div.valid-feedback, div.invalid-feedback')) {
+      div.classList.remove('d-block');
+      div.classList.add('d-none');
+    }
+
+    for (const input of this.querySelectorAll('input')) {
+      input.classList.remove('is-valid');
+      input.classList.remove('is-invalid');
+    }
+
+    // Reseteamos el formulario
+
+    form.reset();
+
+    // Ponemos el foco en el primer elemento
+
+    const ncNombre = document.getElementById('nombre');
+    ncNombre.focus();
+  })
+
+    const ncTelefono = document.getElementById('telefono');
+    const ncConfirmar = document.getElementById('confirmarContraseña');
+    const ncContraseña = document.getElementById('contraseña');
+    const ncNombre = document.getElementById('nombre');
+
+  // Validación en línea de cada "input"
+
+  ncTelefono.addEventListener('change', function (event) {
+    if (!ncTelefono.checkValidity()) {
+      showFeedBack(ncTelefono, false, "Introduzca un teléfono válido");
+    } else {
+      showFeedBack(ncTelefono, true);
+    }
+  });
+
+  ncConfirmar.addEventListener('change', function (event) {
+    if (ncConfirmar.value !== ncContraseña.value){
+      showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+    }
+    else if (!ncConfirmar.checkValidity()) {
+      if(ncConfirmar.validity.valueMissing) {
+        showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
+      }
+      else {
+        showFeedBack(ncConfirmar, false);
+      }
+    } else {
+      showFeedBack(ncConfirmar, true);
+    }
+  });
+
+  ncContraseña.addEventListener('change', function (event) {
+    if (ncConfirmar.value !== ncContraseña.value){
+        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+    }
+    else {
+      showFeedBack(ncConfirmar, true);
+    }
+
+    if (!ncContraseña.checkValidity()) {
+      if(ncContraseña.validity.valueMissing) {
+        showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+      }
+      else {
+        showFeedBack(ncContraseña, false);
+      }
+    } else {
+      showFeedBack(ncContraseña, true);
+    }
+  });
+
+  ncNombre.addEventListener('change', function (event) {
+    if (!ncNombre.checkValidity()) {
+      if(ncNombre.validity.valueMissing) {
+        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+      }
+      else {
+        showFeedBack(ncNombre, false);
+      }
+    } else {
+      showFeedBack(ncNombre, true);
+    }
+  });
+}
+
 function mostrarModal(titulo, texto) {
     // Obtenemos el contenedor principal del modal
   
     const modalContenedor = document.getElementById('modal');
   
-    // Caambiamos el título del modal
+    // Cambiamos el título del modal
   
     const modalTitulo = document.getElementById('modalLabel');
     modalTitulo.innerText = titulo;
@@ -294,7 +514,10 @@ function mostrarModal(titulo, texto) {
   
     const modalCuerpo = modalContenedor.getElementsByClassName('modal-body')[0];
     modalCuerpo.replaceChildren();
-    modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
+    
+    if(texto != null) {
+      modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
+    }
     
     // Creamos un objeto "Modal" para mostrar el modal recién modificado
   
@@ -312,7 +535,9 @@ function mostrarModal(titulo, texto) {
       modal.hide();
   
       event.stopPropagation();
+
+      location.reload();
     });
-  }
+}
 
 export { validacionCrearUsuario as validacionJS };
