@@ -7,16 +7,15 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
+    // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['cliente']);
+    }
+
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
         header("Location: ../index.php");
         exit();
-    }
-
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
-    if(isset($_POST['salir'])) {
-        unset($_SESSION['cliente']);
-        header("Location: ../index.php");
     }
 
     $crud = new Crud(new DB("proyecto"));
@@ -66,11 +65,6 @@
 
         <!-- CUANDO SE HAGA UNA RESERVA, HAY QUE ACTUALIZAR TAMBIÉN LA TABLA CALENDARIOS -->
     </div>
-
-    <!-- Botón de cerrar sesión -->
-    <form method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
-        <input type="submit" class="btn-salir" name="salir" value="Cerrar sesión">
-    </form>
 
 <?php 
     require_once "../vista/template/footer.php";

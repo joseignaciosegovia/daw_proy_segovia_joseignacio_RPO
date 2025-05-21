@@ -8,16 +8,15 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
+    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['administrador']);
+    }
+
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
     if (empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");
         exit();
-    }
-
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
-    if(isset($_POST['salir'])) {
-        unset($_SESSION['administrador']);
-        header("Location: accesoAdministrador.php");
     }
 
     $crud = new Crud(new DB("proyecto"));
@@ -60,9 +59,6 @@
             </div>
         </div>
     </div>
-    <form method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
-        <input type="submit" class="btn-salir" name="salir" value="Cerrar sesión">
-    </form>
     <a href="intranet.php"><button>Volver atrás</button></a>
 </body>
 </html>

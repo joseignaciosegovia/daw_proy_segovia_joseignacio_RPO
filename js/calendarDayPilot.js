@@ -3,25 +3,23 @@ $(document).ready(function() {
     calendarioAdministrador();
 });
 
+// Función que muestra el calendario de la pista seleccionada para que el cliente reserve una pista
 function calendarioCliente() {
     // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
             cargarCalendario(pista.outerText);
         });
-        
     }
 }
 
+// Función que permite gestionar el calendario para modificar las fechas ocupadas
 function calendarioAdministrador(){
-    // Mostrar calendario para que el administrador pueda añadir las fechas ocupadas
-    const calendario = document.querySelector('#calendario');
-
+    
+    var calendario = document.querySelector('#calendario');
     if(calendario != null){
         cargarCalendario(calendario.outerText);
     }
-
-
 }
 
 // Función que muestra el calendario

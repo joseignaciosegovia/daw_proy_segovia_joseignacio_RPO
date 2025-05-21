@@ -60,11 +60,10 @@
             <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <!-- Bootstrap -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-            <!-- JavaScript del proyecto -->
-            <?php if (function_exists('añadirScripts')){
-                añadirScripts();
+            <!-- Cada página añadirá los scripts que necesite -->
+            <?php if (function_exists('añadirScriptsPie')){
+                añadirScriptsPie();
             }?>
-            <script src="/proyecto/js/calendar.js"></script>
             <!-- Daypilot -->
             <script src="/proyecto/js/daypilot-all.min.js"></script>
         </body>

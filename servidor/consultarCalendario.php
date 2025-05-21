@@ -8,22 +8,36 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
+    function añadirScriptsCabecera(){
+?>
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+
+        
+        
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+<?php }
+
+    function añadirScriptsPie(){
+?>
+        <script src="/proyecto/js/calendario.js"></script>
+<?php }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: intranet.php');
         die();
     }
 
+    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['administrador']);
+    }
+
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
     if (empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");
         exit();
-    }
-
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
-    if(isset($_POST['salir'])) {
-        unset($_SESSION['administrador']);
-        header("Location: accesoAdministrador.php");
     }
 
     // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de accesoAdministrador.php)
@@ -41,21 +55,33 @@
                 <?php require_once "../vista/template/navGestor.php"; ?>
 
                 <!-- El contenido principal de la página será la segunda columna -->
-                <div class="col d-flex align-items-center">
+                <div class="col d-flex align-items-center col-9">
                     <div id="calendario">
-                        <?php echo "$_GET[pista]" ?>
+                        
                     </div>
                 </div>
             </div>
         </div> 
+        <!-- Modal -->
+        <div class="modal" id="evento" tabindex="-1" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
 
-        <!-- JQuery -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script src="/proyecto/js/calendar.js"></script>
-        <script src="/proyecto/js/daypilot-all.min.js"></script>
-    </body>
-</html>
 <?php
     }
+    require_once "../vista/template/footer.php";
 ?>

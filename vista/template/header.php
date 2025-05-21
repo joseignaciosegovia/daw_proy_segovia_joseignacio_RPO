@@ -23,6 +23,11 @@
         
         <!-- Animanate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+        <!-- Cada página añadirá los scripts que necesite -->
+        <?php if (function_exists('añadirScriptsCabecera')){
+            añadirScriptsCabecera();
+        }?>
     </head>
     <body>
         <header>

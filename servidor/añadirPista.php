@@ -13,6 +13,11 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
+    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['administrador']);
+    }
+
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
     if (empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");

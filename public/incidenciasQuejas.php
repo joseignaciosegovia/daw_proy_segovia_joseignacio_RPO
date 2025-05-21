@@ -15,6 +15,11 @@
         die();
     }
 
+    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['cliente']);
+    }
+
     $crud = new Crud(new DB("proyecto"));
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
@@ -46,6 +51,9 @@
 
     // Cargamos la cabecera
     require_once "../vista/template/header.php";
+
+    $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
+    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
 ?>
 <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container-fluid">
