@@ -11,6 +11,7 @@
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
+        <script type="module" src="/proyecto/js/confirmacion.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
@@ -110,9 +111,10 @@
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
-                            <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-danger profile-button" name="Borrar">Borrar pista</button></a>
+                            <!-- <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button></a> -->
+                            <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
                         </div>
-                        <!-- Campo oculto para guardar el nombre de la pista antes de cambiarlo -->
+                        <!-- Campo oculto para guardar el nombre de la pista antes de actualizarlo -->
                         <input id="nombreOriginal" type="hidden" value="<?php echo "$pista[nombre]"?>">
                     </div>
                 </form>
