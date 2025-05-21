@@ -97,6 +97,9 @@ function validacionCrearUsuario(form) {
         if(ncContraseña.validity.valueMissing) {
           showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
         }
+        else if (ncContraseña.validitypatternMismatch) {
+          showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
+        }
         else {
           showFeedBack(ncContraseña, false);
         }
@@ -935,8 +938,11 @@ function mostrarModal(titulo, direccion, texto) {
       modal.hide();
   
       event.stopPropagation();
-      // Nos situamos en la dirección indicada
-      location.replace(direccion);
+
+      if(direccion != null) {
+        // Nos situamos en la dirección indicada
+        location.replace(direccion);
+      }
     });
 }
 

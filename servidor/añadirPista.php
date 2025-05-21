@@ -66,7 +66,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-6">
                                     <label class="labels">Nombre</label>
-                                    <input type="text" id="nombre" class="form-control" name="Nombre" value="">
+                                    <input type="text" id="nombre" class="form-control" name="Nombre" value="" required>
                                     <div class="invalid-feedback">
                                         Introduzca un nombre
                                     </div>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="labels">Precio de Reserva</label>
-                                    <input type="number" class="form-control" id="precio" name="Precio" value="">
+                                    <input type="number" class="form-control" id="precio" name="Precio" value="" required>
                                     <div class="invalid-feedback">
                                         Introduzca un precio válido
                                     </div>

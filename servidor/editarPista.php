@@ -71,7 +71,7 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label class="labels">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="Nombre" value="<?php echo $pista['nombre'] ?>">
+                                <input type="text" class="form-control" id="nombre" name="Nombre" value="<?php echo $pista['nombre'] ?>" required>
                                 <div class="invalid-feedback">
                                     Introduzca un nombre
                                 </div>

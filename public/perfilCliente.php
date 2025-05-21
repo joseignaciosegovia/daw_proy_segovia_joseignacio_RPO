@@ -80,7 +80,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-12">
                                     <label class="labels">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>">
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
                                     <div class="invalid-feedback">
                                         Introduzca un nombre
                                     </div>

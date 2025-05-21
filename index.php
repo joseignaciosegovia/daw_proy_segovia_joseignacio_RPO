@@ -127,9 +127,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" required>
+                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" pattern=".{8,}" required>
                         <div id="passwordHelpBlock" class="form-text">
-                            La contraseña debe cumplir los siguientes requisitos: 
+                            La contraseña debe tener al menos 8 caracteres 
                         </div>
                         <div class="invalid-feedback">
                             Introduzca una contraseña válida
@@ -145,7 +145,7 @@
                             Confirme la contraseña
                         </div>
                         <div class="valid-feedback">
-                            Dato correcto
+                            La contraseña coincide
                         </div>
                     </div>
                     <div class="mb-3">
