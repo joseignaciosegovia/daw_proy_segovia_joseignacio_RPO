@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('borrar').addEventListener('click', function(e) {
-    e.preventDefault();
-    pregunta()
-  });
+    if(document.getElementById('borrar') != null) {
+        document.getElementById('borrar').addEventListener('click', function(e) {
+            e.preventDefault();
+            pregunta("¿Seguro que quieres borrar esta pista?", "http://localhost/proyecto/servidor/editarPista.php?Borrar=" + document.getElementById('nombreOriginal').value)
+        });
+    }
 });
 
-function pregunta() {
-  if (confirm('¿Seguro que quieres borrar esta pista?')) {
-    location.replace("http://localhost/proyecto/servidor/editarPista.php?Borrar=" + document.getElementById('nombreOriginal').value);
+function pregunta(mensaje, direccion) {
+  if (confirm(mensaje)) {
+    location.replace(direccion);
   }
 }
