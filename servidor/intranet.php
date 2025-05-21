@@ -82,4 +82,6 @@
         unset($_SESSION['error']);
         echo "</div>";
     }
+
+    require_once "../vista/template/footer.php";
 ?>

@@ -64,7 +64,5 @@
             <?php if (function_exists('añadirScriptsPie')){
                 añadirScriptsPie();
             }?>
-            <!-- Daypilot -->
-            <script src="/proyecto/js/daypilot-all.min.js"></script>
         </body>
 </html>

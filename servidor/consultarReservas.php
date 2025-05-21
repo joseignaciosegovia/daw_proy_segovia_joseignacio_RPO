@@ -79,4 +79,6 @@
 
 <?php
     }
+
+    require_once "../vista/template/footer.php";
 ?>

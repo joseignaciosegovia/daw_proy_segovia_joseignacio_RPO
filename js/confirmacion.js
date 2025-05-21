@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function pregunta(mensaje, direccion) {
-  if (confirm(mensaje)) {
-    location.replace(direccion);
-  }
+    if (confirm(mensaje)) {
+        location.replace(direccion);
+    }
 }
