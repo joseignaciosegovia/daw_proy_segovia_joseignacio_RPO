@@ -7,7 +7,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
-    function añadirScripts(){
+    function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }

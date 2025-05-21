@@ -24,6 +24,7 @@
     $incidencias = $crud->listar("*", "sugerencias_incidencias", "");
 
 ?>
+    <h1 class="d-flex justify-content-center">Incidencias de los usuarios</h1>
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container-fluid">
         <div class="row">

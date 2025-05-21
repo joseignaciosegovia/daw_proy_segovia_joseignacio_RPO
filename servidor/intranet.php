@@ -60,15 +60,18 @@
                                 $cont++;
                             } 
                             ?>
+                        <tr>
+                            <td colspan="2">
+                                <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
+                                    <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
+                                </form>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                
             </div>
         </div>
     </div>
-    <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
-        <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
-    </form>
 </body>
 </html>
 <?php

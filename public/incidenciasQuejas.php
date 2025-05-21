@@ -4,7 +4,7 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
-    function añadirScripts(){
+    function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }

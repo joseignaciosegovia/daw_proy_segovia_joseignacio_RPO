@@ -8,7 +8,7 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
-    function añadirScripts(){
+    function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
@@ -37,7 +37,7 @@
         $crud = new Crud(new DB("proyecto"));
         $crud->actualizar("pistas", $valores, $condicion);
 
-        $_GET['pista'] = $datos->nombreOriginal;
+        $_GET['pista'] = $datos->nombre;
     }
 
     // Si pulsamos el botón de borrar
@@ -45,20 +45,13 @@
         $crud = new Crud(new DB("proyecto"));
         $crud->eliminar("pistas", "where nombre = \"$_GET[Borrar]\"");
 
-        // Ventana que indica que la pista se ha borrado correctamente
-        // NO SE MUESTRA
-        echo "<dialog open>
-            <p>La pista se ha borrado correctamente</p>
-            <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
-
         header("Location: intranet.php");
     }
 
     if(isset($_GET['pista'])) {
-    $crud = new Crud(new DB("proyecto"));
+        $crud = new Crud(new DB("proyecto"));
 
-    $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
+        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
     
 ?>
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
@@ -115,12 +108,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button></div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
+                            <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-danger profile-button" name="Borrar">Borrar pista</button></a>
+                        </div>
                         <!-- Campo oculto para guardar el nombre de la pista antes de cambiarlo -->
                         <input id="nombreOriginal" type="hidden" value="<?php echo "$pista[nombre]"?>">
                     </div>
                 </form>
-                <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-primary profile-button" name="Borrar">Borrar pista</button></a>
             </div>
         </div>
     </div>

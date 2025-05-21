@@ -173,8 +173,8 @@ function validacionCrearUsuario(form) {
           body: formData
         }).then((response) => response.text())
         .then(function(data) {
-          mostrarModal("El usuario ha sido creado correctamente");
-          
+          mostrarModal("El usuario ha sido creado correctamente", "http://localhost/proyecto/index.php");
+
         }).catch(function (err) {
           console.log("Ha habido un error");
         });
@@ -403,7 +403,7 @@ function validacionPerfilCliente(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("El usuario ha sido modificado correctamente");
+        mostrarModal("El usuario ha sido modificado correctamente", "http://localhost/proyecto/public/perfilCliente.php");
         
       }).catch(function (err) {
         console.log("Ha habido un error");
@@ -563,7 +563,7 @@ function validarEnviarIncidencias(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La incidencia ha sido enviada correctamente");
+        mostrarModal("La incidencia ha sido enviada correctamente", "http://localhost/proyecto/public/incidenciasQuejas.php");
         
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
@@ -692,8 +692,7 @@ function validarEditarPista(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La pista ha sido modificada correctamente");
-        
+        mostrarModal("La pista ha sido modificada correctamente", "http://localhost/proyecto/servidor/intranet.php");
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
       });
@@ -833,9 +832,7 @@ function validarAñadirPista(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La pista ha sido añadida correctamente");
-        // NO FUNCIONA
-        //location.assign("http://www.localhost/proyecto/servidor/intranet.php");
+        mostrarModal("La pista ha sido añadida correctamente", "http://localhost/proyecto/servidor/intranet.php");
         
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
@@ -903,7 +900,7 @@ function validarAñadirPista(form) {
   });
 }
 
-function mostrarModal(titulo, texto) {
+function mostrarModal(titulo, direccion, texto) {
     // Obtenemos el contenedor principal del modal
   
     const modalContenedor = document.getElementById('modal');
@@ -938,8 +935,8 @@ function mostrarModal(titulo, texto) {
       modal.hide();
   
       event.stopPropagation();
-
-      location.reload();
+      // Nos situamos en la dirección indicada
+      location.replace(direccion);
     });
 }
 

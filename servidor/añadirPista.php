@@ -8,7 +8,7 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
-    function añadirScripts(){
+    function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
@@ -43,8 +43,8 @@
         // Añadimos la pista en la base de datos
         
         $crud->insertar("pistas", $valores);
+        header("Location: intranet.php");
     }
-
 
     if(isset($_POST['Añadir'])) {
 
