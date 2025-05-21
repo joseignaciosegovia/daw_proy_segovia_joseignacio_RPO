@@ -92,7 +92,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label class="labels">Contraseña</label>
-                                    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="">
+                                    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="" pattern=".{8,}">
                                     <div class="invalid-feedback">
                                         Introduzca una contraseña válida
                                     </div>

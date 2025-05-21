@@ -97,7 +97,7 @@ function validacionCrearUsuario(form) {
         if(ncContraseña.validity.valueMissing) {
           showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
         }
-        else if (ncContraseña.validitypatternMismatch) {
+        else if (ncContraseña.validity.patternMismatch) {
           showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
         }
         else {
@@ -261,6 +261,9 @@ function validacionCrearUsuario(form) {
       if(ncContraseña.validity.valueMissing) {
         showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
       }
+      else if (ncContraseña.validity.patternMismatch) {
+        showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
+      }
       else {
         showFeedBack(ncContraseña, false);
       }
@@ -346,6 +349,9 @@ function validacionPerfilCliente(form) {
       isValid = false;
       if(ncContraseña.validity.valueMissing) {
         showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+      }
+      else if (ncContraseña.validity.patternMismatch) {
+        showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
       }
       else {
         showFeedBack(ncContraseña, false);
@@ -489,6 +495,9 @@ function validacionPerfilCliente(form) {
     if (!ncContraseña.checkValidity()) {
       if(ncContraseña.validity.valueMissing) {
         showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+      }
+      else if (ncContraseña.validity.patternMismatch) {
+        showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
       }
       else {
         showFeedBack(ncContraseña, false);
