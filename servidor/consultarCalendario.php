@@ -53,6 +53,7 @@
             </div>
         </div> 
         <div id="calendario">
+            <!-- Incluimos las fechas ocupadas de esta pista para que JavaScript pueda acceder a ellas -->
             <?php echo json_encode($calendario) ?>
         </div>
         <!-- Modal -->
@@ -83,6 +84,6 @@
         header('Location: intranet.php');
         die();
     }
-    
+
     require_once "../vista/template/footer.php";
 ?>

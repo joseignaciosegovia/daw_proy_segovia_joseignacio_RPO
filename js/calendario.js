@@ -26,18 +26,21 @@ function cargarCalendario(calendario){
             right: "dayGridMonth,timeGridWeek,listWeek"
         },
 
-        events: [
-            {
-                start: '',
-                end: ''
-            }
-            
-        ],
-
         dateClick:function(info) {
             document.getElementById('evento').style.display = 'block';
         }
     });
 
     calendar.render();
+
+    var events = new Array();
+
+    for(fecha of calendario) {
+        events.push({
+            start: fecha.fechaOcupada + "T" + fecha.horaOcupada,
+            end: ''
+        })
+    }
+
+    calendar.setOption('events', events);
 }
