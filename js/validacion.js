@@ -641,17 +641,81 @@ function validarEditarPista(form) {
     let isValid = true;
     let firstInvalidElement = null;
 
-    const ncPrecio = document.getElementById('precio');
+    //const ncLocalizacion = document.getElementById('Localizacion');
+    const ncPrecio = document.getElementsByName('Precio');
 
-    if (!ncPrecio.checkValidity()) {
-      isValid = false;
-      showFeedBack(ncPrecio, false);
+    for(const precio of ncPrecio) {
+      if (!precio.checkValidity()) {
+        isValid = false;
+        showFeedBack(precio, false);
 
-      firstInvalidElement = ncPrecio;
-    } else {
-      showFeedBack(ncPrecio, true);
+        firstInvalidElement = precio;
+      } else {
+        showFeedBack(precio, true);
+      }
+    }
+/*
+    if([...ncLocalizacion.selectedOptions].map((option) => option.value) == "Polideportivo") {
+      const ncPrecio = document.getElementById('precio');
+
+      if (!ncPrecio.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncPrecio, false);
+
+        firstInvalidElement = ncPrecio;
+      } else {
+        showFeedBack(ncPrecio, true);
+      }
     }
 
+    else {
+      const ncPrecio = new Array();
+      ncPrecio[0] = document.getElementById('precioAdultoNormal');
+
+      if (!ncPrecio.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncPrecio, false);
+
+        firstInvalidElement = ncPrecio;
+      } else {
+        showFeedBack(ncPrecio, true);
+      }
+
+      ncPrecio[1] = document.getElementById('precioAdultoConLuz');
+
+      if (!ncPrecio.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncPrecio, false);
+
+        firstInvalidElement = ncPrecio;
+      } else {
+        showFeedBack(ncPrecio, true);
+      }
+
+      ncPrecio[2] = document.getElementById('precioMenorNormal');
+
+      if (!ncPrecio.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncPrecio, false);
+
+        firstInvalidElement = ncPrecio;
+      } else {
+        showFeedBack(ncPrecio, true);
+      }
+
+      ncPrecio[3] = document.getElementById('precioMenorConLuz');
+
+      if (!ncPrecio.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncPrecio, false);
+
+        firstInvalidElement = ncPrecio;
+      } else {
+        showFeedBack(ncPrecio, true);
+      }
+      
+    }
+*/
     const ncNombre = document.getElementById('nombre');
 
     if (!ncNombre.checkValidity()) {
@@ -680,11 +744,21 @@ function validarEditarPista(form) {
     } else {
       const ncLocalizacion = document.getElementById('Localizacion');
       const ncNombreOriginal = document.getElementById('nombreOriginal');
+      let precios = new Array();
+      precios.length = ncPrecio.length;
+      let mapa = new Map();
+      let contador = 0;
+
+      for(const precio of ncPrecio) {
+        mapa.set(precio.id, precio.value);
+        precios[precio.id] = precio.value;
+        contador++;
+      }
 
       let datosAEnviar = JSON.stringify({ 
         nombre: ncNombre.value, 
-        localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value), 
-        precio: ncPrecio.value,
+        localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value)[0], 
+        precio: JSON.stringify(Object.fromEntries(mapa)),
         nombreOriginal: ncNombreOriginal.value
       });
 
@@ -744,18 +818,37 @@ function validarEditarPista(form) {
     ncNombre.focus();
   })
 
-  const ncPrecio = document.getElementById('precio');
+  //const ncLocalizacion = document.getElementById('Localizacion');
+  const ncPrecio = document.getElementsByName('Precio');
+  /*
+  var ncPrecio = "";
+
+  if([...ncLocalizacion.selectedOptions].map((option) => option.value) == "Polideportivo") {
+    ncPrecio = document.getElementById('precio');
+  }
+
+  else {
+    ncPrecio = new Array();
+    ncPrecio[0] = document.getElementById('precioAdultoNormal');
+    ncPrecio[1] = document.getElementById('precioAdultoConLuz');
+    ncPrecio[2] = document.getElementById('precioMenorNormal');
+    ncPrecio[3] = document.getElementById('precioMenorConLuz');
+  }
+*/
   const ncNombre = document.getElementById('nombre');
 
   // Validación en línea de cada "input"
 
-  ncPrecio.addEventListener('change', function (event) {
-    if (!ncPrecio.checkValidity()) {
-      showFeedBack(ncPrecio, false, "Introduzca un precio válido");
-    } else {
-      showFeedBack(ncPrecio, true);
-    }
-  });
+  for(const precio of ncPrecio){
+    precio.addEventListener('change', function (event) {
+      if (!precio.checkValidity()) {
+        showFeedBack(precio, false, "Introduzca un precio válido");
+      } else {
+        showFeedBack(precio, true);
+      }
+    });
+  }
+  
 
   ncNombre.addEventListener('change', function (event) {
     if (!ncNombre.checkValidity()) {

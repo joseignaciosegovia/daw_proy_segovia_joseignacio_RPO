@@ -37,7 +37,6 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Localización</th>
-                        <th>Precio de reserva</th>
                         <th>Reservas</th>
                         <th>Calendario</th>
                         <th>Editar pista</th>
@@ -51,7 +50,6 @@
                             <th><?php echo $cont ?></th>
                             <td><?php echo $pista['nombre'] ?></td>
                             <td><?php echo $pista['localizacion'] ?></td>
-                            <td><?php echo $pista['precioReserva'] . "€" ?></td>
                             <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
                             <td><?php echo "<a href=\"consultarCalendario.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
                             <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>

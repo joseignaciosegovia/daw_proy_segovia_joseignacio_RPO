@@ -29,9 +29,7 @@
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
-        $localizacion = $datos->localizacion[0];
-
-        $valores = "nombre = \"$datos->nombre\", localizacion = \"$localizacion\", precioReserva = $datos->precio";
+        $valores = "nombre = \"$datos->nombre\", localizacion = \"$datos->localizacion\", precioReserva = '$datos->precio'";        
         $condicion = "where nombre = \"$datos->nombreOriginal\"";
 
         // Actualizamos el perfil en la base de datos
@@ -99,14 +97,78 @@
                                 </select>
                             </div>
                             <div class="col-md-12">
+                                
+                            <?php
+                                $precios = json_decode($pista['precioReserva']);
+                                if($pista['localizacion'] == "Ciudad Deportiva"){
+                            ?>
+                                <label class="labels">Precios de Reserva</label>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th colspan="2">Adultos</th>
+                                        <th colspan="2">Menores de edad</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Normal</td>
+                                            <td>Con luz</td>
+                                            <td>Normal</td>
+                                            <td>Con luz</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            
+                                                <input type="number" class="form-control" id="adultoNormal" name="Precio" value="<?php echo $precios->adultoNormal?>">
+                                                <div class="invalid-feedback">
+                                                    Introduzca un precio válido
+                                                </div>
+                                                <div class="valid-feedback">
+                                                    Dato correcto
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" id="adultoConLuz" name="Precio" value="<?php echo $precios->adultoConLuz?>">
+                                                <div class="invalid-feedback">
+                                                    Introduzca un precio válido
+                                                </div>
+                                                <div class="valid-feedback">
+                                                    Dato correcto
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" id="menorNormal" name="Precio" value="<?php echo $precios->menorNormal?>">
+                                                <div class="invalid-feedback">
+                                                    Introduzca un precio válido
+                                                </div>
+                                                <div class="valid-feedback">
+                                                    Dato correcto
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" id="menorConLuz" name="Precio" value="<?php echo $precios->menorConLuz?>">
+                                                <div class="invalid-feedback">
+                                                    Introduzca un precio válido
+                                                </div>
+                                                <div class="valid-feedback">
+                                                    Dato correcto
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <?php
+                                }
+                                else {
+                            ?>
                                 <label class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" id="precio" name="Precio" value="<?php echo $pista['precioReserva'] ?>">
+                                <input type="number" class="form-control" id="precioUnico" name="Precio" value="<?php echo $precios->precioUnico ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un precio válido
                                 </div>
                                 <div class="valid-feedback">
                                     Dato correcto
                                 </div>
+                            <?php } ?>
                             </div>
                         </div>
                         <div class="mt-5 text-center">
