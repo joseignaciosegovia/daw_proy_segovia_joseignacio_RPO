@@ -12,10 +12,10 @@
     }
 
     // Si ya hemos iniciado sesión como administrador, dirigimos a la página de gestión
-    /*if (!empty($_SESSION["administrador"])) {
+    if (!empty($_SESSION["administrador"])) {
         header("Location: intranet.php");
         exit();
-    }*/
+    }
 
 ?>
 <!DOCTYPE html>

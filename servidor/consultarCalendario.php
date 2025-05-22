@@ -12,14 +12,11 @@
 ?>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
-
-        
-        
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
 <?php }
 
     function añadirScriptsPie(){
 ?>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
         <script src="/proyecto/js/calendario.js"></script>
 <?php }
 
@@ -53,22 +50,20 @@
             <div class="row">
                 <!-- La barra de navegación será la primera columna -->
                 <?php require_once "../vista/template/navGestor.php"; ?>
-
-                <!-- El contenido principal de la página será la segunda columna -->
-                <div class="col d-flex align-items-center col-9">
-                    <div id="calendario">
-                        
-                    </div>
-                </div>
             </div>
         </div> 
+        <div id="calendario">
+            <?php echo json_encode($calendario) ?>
+        </div>
         <!-- Modal -->
-        <div class="modal" id="evento" tabindex="-1" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog">
+        <div class="modal fade" id="evento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         ...
@@ -83,5 +78,11 @@
 
 <?php
     }
+
+    else {
+        header('Location: intranet.php');
+        die();
+    }
+    
     require_once "../vista/template/footer.php";
 ?>

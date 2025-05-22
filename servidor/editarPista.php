@@ -188,6 +188,11 @@
 <?php
     }
 
+    else {
+        header('Location: intranet.php');
+        die();
+    }
+
     // Mensaje de error cuando volvemos después de pinchar en algún botón (como cuando no hay reservas para la pista seleccionada)
     if (isset($_SESSION['error'])) {
         echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";

@@ -654,68 +654,7 @@ function validarEditarPista(form) {
         showFeedBack(precio, true);
       }
     }
-/*
-    if([...ncLocalizacion.selectedOptions].map((option) => option.value) == "Polideportivo") {
-      const ncPrecio = document.getElementById('precio');
-
-      if (!ncPrecio.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncPrecio, false);
-
-        firstInvalidElement = ncPrecio;
-      } else {
-        showFeedBack(ncPrecio, true);
-      }
-    }
-
-    else {
-      const ncPrecio = new Array();
-      ncPrecio[0] = document.getElementById('precioAdultoNormal');
-
-      if (!ncPrecio.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncPrecio, false);
-
-        firstInvalidElement = ncPrecio;
-      } else {
-        showFeedBack(ncPrecio, true);
-      }
-
-      ncPrecio[1] = document.getElementById('precioAdultoConLuz');
-
-      if (!ncPrecio.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncPrecio, false);
-
-        firstInvalidElement = ncPrecio;
-      } else {
-        showFeedBack(ncPrecio, true);
-      }
-
-      ncPrecio[2] = document.getElementById('precioMenorNormal');
-
-      if (!ncPrecio.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncPrecio, false);
-
-        firstInvalidElement = ncPrecio;
-      } else {
-        showFeedBack(ncPrecio, true);
-      }
-
-      ncPrecio[3] = document.getElementById('precioMenorConLuz');
-
-      if (!ncPrecio.checkValidity()) {
-        isValid = false;
-        showFeedBack(ncPrecio, false);
-
-        firstInvalidElement = ncPrecio;
-      } else {
-        showFeedBack(ncPrecio, true);
-      }
-      
-    }
-*/
+    
     const ncNombre = document.getElementById('nombre');
 
     if (!ncNombre.checkValidity()) {
@@ -818,23 +757,7 @@ function validarEditarPista(form) {
     ncNombre.focus();
   })
 
-  //const ncLocalizacion = document.getElementById('Localizacion');
   const ncPrecio = document.getElementsByName('Precio');
-  /*
-  var ncPrecio = "";
-
-  if([...ncLocalizacion.selectedOptions].map((option) => option.value) == "Polideportivo") {
-    ncPrecio = document.getElementById('precio');
-  }
-
-  else {
-    ncPrecio = new Array();
-    ncPrecio[0] = document.getElementById('precioAdultoNormal');
-    ncPrecio[1] = document.getElementById('precioAdultoConLuz');
-    ncPrecio[2] = document.getElementById('precioMenorNormal');
-    ncPrecio[3] = document.getElementById('precioMenorConLuz');
-  }
-*/
   const ncNombre = document.getElementById('nombre');
 
   // Validación en línea de cada "input"

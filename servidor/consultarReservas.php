@@ -80,5 +80,10 @@
 <?php
     }
 
+    else {
+        header('Location: intranet.php');
+        die();
+    }
+
     require_once "../vista/template/footer.php";
 ?>
