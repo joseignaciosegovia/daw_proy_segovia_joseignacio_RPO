@@ -15,10 +15,12 @@
     if (isset($_POST['datos'])) {
         $datos = json_decode(($_POST['datos']));
 
-        $pista = $datos['pista'];
-        $fecha = explode('T', $datos['fecha']);
+        $pista = $datos->pista;
+        $fecha = explode('T', $datos->fecha);
+        $hora = explode('+', $fecha[1])[0];
 
         $crud = new Crud(new DB("proyecto"));
+        $crud->insertar("calendarios", "\"$fecha[0]\", \"$hora\", \"$pista\"");
 
     }
 

@@ -33,9 +33,8 @@ function cargarCalendario(calendario){
         // Al pinchar en el calendario, mostraremos un modal para crear un evento (NO FUNCIONA)
         dateClick:function(info) {
             const modal = document.getElementById('evento');
-            modal.style.display = 'block';
 
-            
+            // BORRAR CUERPO DEL MODAL PARA QUE NO SE QUEDE GUARDADO EL MENSAJE ANTERIOR
 
             $(modal.getElementsByClassName('modal-body')).append(`
                 Añadir horario ocupado en la fecha ${info.dateStr}
@@ -100,7 +99,7 @@ function confirmarFecha(fecha, pista) {
             body: formData
         }).then ((response) => response.json()
         ).then(function (data) {
-
+            location.reload();
         }).catch(function (err) {
             console.log("Ha habido un error");
         });
