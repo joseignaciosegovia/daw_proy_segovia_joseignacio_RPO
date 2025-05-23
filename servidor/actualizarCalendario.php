@@ -16,7 +16,7 @@
         $datos = json_decode(($_POST['datos']));
 
         $crud = new Crud(new DB("proyecto"));
-        $crud->insertar("calendarios", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\"");
+        $crud->insertar("calendarios", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\", \"$datos->informacion\"");
 
         echo "Calendario actualizado correctamente";
 

@@ -38,7 +38,7 @@ function cargarCalendario(calendario){
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
-    
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
 
@@ -50,7 +50,7 @@ function cargarCalendario(calendario){
             right: "dayGridMonth,timeGridWeek,listWeek"
         },
 
-        // Al pinchar en el calendario, mostraremos un modal para crear un evento (NO FUNCIONA)
+        // Al pinchar en el calendario, mostraremos un modal para crear un evento
         dateClick: function(info) {
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
 
@@ -62,9 +62,14 @@ function cargarCalendario(calendario){
 
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
+
+            const titulo = document.getElementsByClassName('modal-title')[0];
+            titulo.innerHTML = "Horario reservado el " + fecha + " a las " + hora;
             // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
             modalCuerpo.insertAdjacentHTML('afterbegin', `
-                Añadir horario ocupado en la fecha ${fecha} a las ${hora}
+                
+                <label for="informacion">Indique la información sobre el horario (quién lo ha ocupado)</label>
+                <textarea id="informacion" rows="5" cols="50"></textarea>
             `);
             
             const modal = new bootstrap.Modal('#evento');
@@ -84,6 +89,7 @@ function cargarCalendario(calendario){
     // Rellenamos el array de eventos con las fechas ocupadas para la pista
     for(fecha of calendario) {
         events.push({
+            title: fecha.informacion,
             start: fecha.fechaOcupada + "T" + fecha.horaOcupada,
             end: ''
         })
@@ -109,11 +115,14 @@ function cerrarModal(modal) {
 function confirmarFecha(fecha, hora, pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
+
+        const informacion = document.getElementById("informacion").value;
   
-        let datosAEnviar = JSON.stringify({ 
-            pista: pista, 
+        let datosAEnviar = JSON.stringify({  
             fecha: fecha,
-            hora: hora
+            hora: hora, 
+            pista: pista,
+            informacion: informacion
         });
 
         const formData = new FormData();
