@@ -52,18 +52,26 @@ function cargarCalendario(calendario){
         dateClick:function(info) {
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
 
+            const fechaHora = info.dateStr;
+            const indiceInicio = fechaHora.indexOf('T');
+            const indiceFin= fechaHora.indexOf('+');
+            const fecha = fechaHora.substring(0, indiceInicio);
+            const hora = fechaHora.substring(indiceInicio + 1, indiceFin);
+
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
             // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
             modalCuerpo.insertAdjacentHTML('afterbegin', `
-                Añadir horario ocupado en la fecha ${info.dateStr}
+                Añadir horario ocupado en la fecha ${fecha} a la hora ${hora}
             `);
             
             const modal = new bootstrap.Modal('#evento');
             modal.show();
 
-            cerrarModal();
-            confirmarFecha(info.dateStr, pista);
+            cerrarModal(modal);
+            confirmarFecha(fecha, hora, pista);
+
+            quitarFoco();
         }
     });
 
@@ -83,29 +91,27 @@ function cargarCalendario(calendario){
     calendar.setOption('events', events);
 }
 
-function cerrarModal() {
+function cerrarModal(modal) {
     const botonCerrar = $('.modal-footer .btn-secondary');
     $(botonCerrar[0]).on('click', function(event) {
-  
-      // Obtenemos el modal y lo ocultamos
-  
-      const modal = new bootstrap.Modal('#evento');
-      modal.hide();
 
-      quitarFoco();
+        quitarFoco();
   
-      //event.stopPropagation();
+        // Ocultamos el modal
+        modal.hide();
+  
+        event.stopPropagation();
     });
 }
 
-function confirmarFecha(fecha, pista) {
+function confirmarFecha(fecha, hora, pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
   
-        // LOS DATOS DEBEN TENER EL FORMATO ADECUADO
         let datosAEnviar = JSON.stringify({ 
             pista: pista, 
-            fecha: fecha
+            fecha: fecha,
+            hora: hora
         });
 
         const formData = new FormData();
