@@ -5,7 +5,7 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
-    // Si se obtiene la variable "datos" (pulsando el botón "Confirmar" del modal de consultarCalendario.php o al hacer una reserva)
+    // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva)
     if (isset($_POST['datos'])) {
         $datos = json_decode(($_POST['datos']));
 
@@ -28,6 +28,5 @@
         // Si no, vamos al inicio
         else {
             header("Location: ../public/reservarPista.php");
-        }
-        
+        }    
     }

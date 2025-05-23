@@ -64,10 +64,13 @@ function cargarCalendario(pista){
 
     // Rellenamos el array de eventos con las fechas ocupadas para la pista
     for(fecha of calendario) {
-        events.push({
-            start: fecha.fecha + "T" + fecha.hora,
-            end: ''
-        })
+        if(fecha.pista == pista && fecha.cliente == cliente) {
+            events.push({
+                start: fecha.fecha + "T" + fecha.hora,
+                end: ''
+            })
+        }
+        
     }
 
     // Indicamos los eventos para el calendario
@@ -128,12 +131,22 @@ function confirmarFecha(fecha, hora, pista, cliente) {
 
         formData.append("datos", datosAEnviar);
 
+        const p = document.createElement('p');
+
+        p.append(`${datosAEnviar}`);
+
+        p.hidden = true;
+        p.id = "datos";
+
+        document.getElementsByTagName('footer')[0].append(p);
+
         fetch('../servidor/actualizarCalendario.php', {
             method: 'post',
             body: formData
         }).then ((response) => response.text()
-        ).then(function (data) {
-            location.reload();
+        ).then(function (datos) {
+            const direccion = "http://localhost/proyecto/public/detallesReserva.php?datos=" + document.getElementById("datos").innerText;
+            location.replace(direccion);
 
         }).catch(function (err) {
             console.log("Ha habido un error");
