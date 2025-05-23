@@ -929,46 +929,67 @@ function validarAñadirPista(form) {
 }
 
 function mostrarModal(titulo, direccion, texto) {
-    // Obtenemos el contenedor principal del modal
-  
-    const modalContenedor = document.getElementById('modal');
-  
-    // Cambiamos el título del modal
-  
-    const modalTitulo = document.getElementById('modalLabel');
-    modalTitulo.innerText = titulo;
-  
-    // Cambiamos el cuerpo del modal
-  
-    const modalCuerpo = modalContenedor.getElementsByClassName('modal-body')[0];
-    modalCuerpo.replaceChildren();
+  // Creamos el modal a continuación del pie
+  const footer = document.getElementsByTagName('footer')[0];
+  $(footer).append(`
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+  `);
 
-    if(texto != null) {
-      modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
-    }
-    
-    // Creamos un objeto "Modal" para mostrar el modal recién modificado
+  // Obtenemos el contenedor principal del modal
+
+  const modalContenedor = document.getElementById('modal');
+
+  // Cambiamos el título del modal
+
+  const modalTitulo = document.getElementById('modalLabel');
+  modalTitulo.innerText = titulo;
+
+  // Cambiamos el cuerpo del modal
+
+  const modalCuerpo = modalContenedor.getElementsByClassName('modal-body')[0];
+  modalCuerpo.replaceChildren();
+
+  if(texto != null) {
+    modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
+  }
   
+  // Creamos un objeto "Modal" para mostrar el modal recién modificado
+
+  const modal = new bootstrap.Modal('#modal');
+  modal.show();
+
+  // Cuando pulsamos el botón "Close" hay que cerrar el modal
+
+  const botonCerrar = $('.modal-footer .btn-secondary');
+  $(botonCerrar[0]).on('click', function(event) {
+
+    // Obtenemos el modal y lo ocultamos
+
     const modal = new bootstrap.Modal('#modal');
-    modal.show();
-  
-    // Cuando pulsamos el botón "Close" hay que cerrar el modal
-  
-    const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
-  
-      // Obtenemos el modal y lo ocultamos
-  
-      const modal = new bootstrap.Modal('#modal');
-      modal.hide();
-  
-      event.stopPropagation();
+    modal.hide();
 
-      if(direccion != null) {
-        // Nos situamos en la dirección indicada
-        location.replace(direccion);
-      }
-    });
+    event.stopPropagation();
+
+    if(direccion != null) {
+      // Nos situamos en la dirección indicada
+      location.replace(direccion);
+    }
+  });
 }
 
 export { validacionCrearUsuario as validacionJS };

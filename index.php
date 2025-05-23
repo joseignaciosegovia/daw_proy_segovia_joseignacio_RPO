@@ -117,7 +117,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" placeholder="Correo electrónico" required>
+                        <input type="email" class="form-control" id="email" placeholder="Correo electrónico" autocomplete="off" required>
                         <div class="invalid-feedback">
                             Introduzca un correo electrónico válido
                         </div>
