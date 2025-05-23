@@ -58,26 +58,8 @@
             <!-- Incluimos las fechas ocupadas de esta pista para que JavaScript pueda acceder a ellas -->
             <?php echo json_encode($reservasYPista) ?>
         </div>
-        <!-- Modal a mostrar cuando se pinche en el calendario -->
-        <div class="modal" id="evento" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Añadir fecha ocupada</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
-                </div>
-                </div>
-            </div>
-        </div>
+        
         <a href="intranet.php"><button>Volver atrás</button></a>
-
 <?php
     }
 

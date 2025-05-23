@@ -7,6 +7,12 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
+    function añadirScriptsPie(){
+?>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+        <script src="/proyecto/js/calendarioCliente.js"></script>
+<?php }
+
     // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
@@ -23,6 +29,10 @@
 
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
+
+    // Guardamos las fechas ocupadas
+    $reservasYCliente = $crud->listar("*", "reservas", "");
+    $reservasYCliente[] = $_SESSION['cliente'];
 ?>
         <div class="col">
             <h4>Escoger pista</h4>
@@ -62,8 +72,8 @@
     </div>
     
     <div class="col" id="calendario">
-
-        <!-- CUANDO SE HAGA UNA RESERVA, HAY QUE ACTUALIZAR TAMBIÉN LA TABLA CALENDARIOS -->
+        <!-- Incluimos las fechas ocupadas y el cliente para que JavaScript pueda acceder a ellas -->
+        <?php echo json_encode($reservasYCliente) ?>
     </div>
 
 <?php 

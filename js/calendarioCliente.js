@@ -1,14 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    cargarCalendario();
+    // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
+    for (const pista of document.querySelectorAll('.accordion-body')) {
+        $(pista).on('click', async function(){
+            cargarCalendario(pista.outerText);
+        });
+    }
 });
 
 // Función que muestra el calendario
-function cargarCalendario(){
+function cargarCalendario(pista){
 
     var calendario = JSON.parse(document.getElementById('calendario').outerText);
 
-    // Sacamos la pista del array que contenía el calendario y el nombre de la pista
-    const pista = calendario.pop();
+    // Sacamos el cliente del array que contenía el calendario y el email del cliente
+    const cliente = calendario.pop();
 
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
@@ -39,21 +44,17 @@ function cargarCalendario(){
 
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
-
-            const titulo = document.getElementsByClassName('modal-title')[0];
-            titulo.innerHTML = "Horario reservado el " + fecha + " a las " + hora;
+            
             // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
             modalCuerpo.insertAdjacentHTML('afterbegin', `
-                
-                <label for="informacion">Indique la información sobre el horario (quién lo ha ocupado)</label>
-                <textarea id="informacion" rows="5" cols="50"></textarea>
+                Añadir una reserva el ${fecha} a las ${hora}
             `);
             
             const modal = new bootstrap.Modal('#evento');
             modal.show();
 
             cerrarModal(modal);
-            confirmarFecha(fecha, hora, pista);
+            confirmarFecha(fecha, hora, pista, cliente);
         }
     });
 
@@ -64,7 +65,6 @@ function cargarCalendario(){
     // Rellenamos el array de eventos con las fechas ocupadas para la pista
     for(fecha of calendario) {
         events.push({
-            title: fecha.informacion,
             start: fecha.fecha + "T" + fecha.hora,
             end: ''
         })
@@ -82,7 +82,7 @@ function crearModal() {
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Añadir fecha ocupada</h5>
+                    <h5 class="modal-title">Añadir reserva</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -109,17 +109,16 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarFecha(fecha, hora, pista) {
+function confirmarFecha(fecha, hora, pista, cliente) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
-
-        const informacion = document.getElementById("informacion").value;
   
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             hora: hora, 
             pista: pista,
-            informacion: informacion
+            cliente: cliente,
+            informacion: "Reserva realizada por un cliente"
         });
 
         const formData = new FormData();
@@ -129,7 +128,7 @@ function confirmarFecha(fecha, hora, pista) {
 
         formData.append("datos", datosAEnviar);
 
-        fetch('actualizarCalendario.php', {
+        fetch('../servidor/actualizarCalendario.php', {
             method: 'post',
             body: formData
         }).then ((response) => response.text()
