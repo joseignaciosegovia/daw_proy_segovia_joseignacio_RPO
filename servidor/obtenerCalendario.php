@@ -8,7 +8,7 @@
 
         // CONTEMPLAR LA OPCIÓN DE QUE NO HAYA NINGUNA FECHA OCUPADA PARA ESA PISTA
 
-        $calendario = json_encode($crud->listar("*", "calendarios", "where pista = \"$_GET[pista]\""));
+        $calendario = json_encode($crud->listar("*", "reservas", "where pista = \"$_GET[pista]\""));
         echo $calendario;
     }
 ?>

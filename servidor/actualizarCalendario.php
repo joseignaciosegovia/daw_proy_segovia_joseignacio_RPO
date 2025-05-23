@@ -5,24 +5,29 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
-    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
-    if (empty($_SESSION["administrador"])) {
-        header("Location: accesoAdministrador.php");
-        exit();
-    }
-
-    // Si se obtiene la variable "datos" (pulsando el botón "Confirmar" del modal de consultarCalendario.php)
+    // Si se obtiene la variable "datos" (pulsando el botón "Confirmar" del modal de consultarCalendario.php o al hacer una reserva)
     if (isset($_POST['datos'])) {
         $datos = json_decode(($_POST['datos']));
 
         $crud = new Crud(new DB("proyecto"));
-        $crud->insertar("calendarios", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\", \"$datos->informacion\"");
-
-        echo "Calendario actualizado correctamente";
-
+        if($datos->cliente == null) {
+            $crud->insertar("reservas", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\", null, \"$datos->informacion\"");
+        }
+        else {
+            $crud->insertar("reservas", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\", \"$datos->cliente\", \"$datos->informacion\"");
+        }
     }
 
-    // Si hemos llegado aquí por otros medios (como escribiendo la dirección directamente), redirigimos a la página principal del administrador
+    // Si hemos llegado aquí por otros medios (como escribiendo la dirección directamente)
     else {
-        header("Location: intranet.php");
+        // Si hemos iniciado sesión como administrador, redirigimos a la página principal del administrador
+        if (!empty($_SESSION["administrador"])) {
+            header("Location: intranet.php");
+            exit();
+        }
+        // Si no, vamos al inicio
+        else {
+            header("Location: ../public/reservarPista.php");
+        }
+        
     }

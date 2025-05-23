@@ -17,7 +17,7 @@
     function añadirScriptsPie(){
 ?>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script src="/proyecto/js/calendario.js"></script>
+        <script src="/proyecto/js/calendarioAdministrador.js"></script>
 <?php }
 
     function error($mensaje) {
@@ -42,8 +42,8 @@
         $crud = new Crud(new DB("proyecto"));
 
         // Guardamos las fechas ocupadas y el nombre de la pista
-        $calendarioYPista = $crud->listar("*", "calendarios", " WHERE pista = \"$_GET[pista]\"");
-        $calendarioYPista[] = $_GET['pista'];
+        $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = \"$_GET[pista]\"");
+        $reservasYPista[] = $_GET['pista'];
 ?>
 
         <h1>Calendario de la pista <?php echo "$_GET[pista]" ?></h1>
@@ -56,7 +56,7 @@
         </div> 
         <div id="calendario">
             <!-- Incluimos las fechas ocupadas de esta pista para que JavaScript pueda acceder a ellas -->
-            <?php echo json_encode($calendarioYPista) ?>
+            <?php echo json_encode($reservasYPista) ?>
         </div>
         <!-- Modal a mostrar cuando se pinche en el calendario -->
         <div class="modal" id="evento" tabindex="-1">
