@@ -23,7 +23,7 @@ function quitarFoco() {
 // Función que permite gestionar el calendario para modificar las fechas ocupadas
 function calendarioAdministrador(){
     
-    var calendario = document.querySelector('#calendario');
+    var calendario = document.getElementById('calendario');
     if(calendario != null){
         cargarCalendario(JSON.parse(calendario.outerText));
     }
@@ -36,7 +36,9 @@ function cargarCalendario(calendario){
     const pista = calendario.pop();
 
     var calendarEl = document.getElementById('calendario');
-    // BORRAR CONTENIDO DEL DIV PARA NO MOSTRAR EL CALENDARIO DE LA PISTA, QUE ESTÁ EN EL DIV PARA PODER ACCEDER A ÉL DESDE JAVASCRIPT
+    // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
+    calendarEl.replaceChildren();
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
 
