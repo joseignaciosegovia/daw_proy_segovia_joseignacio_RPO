@@ -49,7 +49,7 @@ function cargarCalendario(calendario){
         },
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento (NO FUNCIONA)
-        dateClick:function(info) {
+        dateClick: function(info) {
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
 
             const fechaHora = info.dateStr;
@@ -62,7 +62,7 @@ function cargarCalendario(calendario){
             modalCuerpo.replaceChildren();
             // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
             modalCuerpo.insertAdjacentHTML('afterbegin', `
-                Añadir horario ocupado en la fecha ${fecha} a la hora ${hora}
+                Añadir horario ocupado en la fecha ${fecha} a las ${hora}
             `);
             
             const modal = new bootstrap.Modal('#evento');
@@ -124,7 +124,7 @@ function confirmarFecha(fecha, hora, pista) {
         fetch('actualizarCalendario.php', {
             method: 'post',
             body: formData
-        }).then ((response) => response.json()
+        }).then ((response) => response.text()
         ).then(function (data) {
             location.reload();
         }).catch(function (err) {

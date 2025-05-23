@@ -18,6 +18,8 @@
         $crud = new Crud(new DB("proyecto"));
         $crud->insertar("calendarios", "\"$datos->fecha\", \"$datos->hora\", \"$datos->pista\"");
 
+        echo "Calendario actualizado correctamente";
+
     }
 
     // Si hemos llegado aquí por otros medios (como escribiendo la dirección directamente), redirigimos a la página principal del administrador
