@@ -18,6 +18,13 @@
         }
     }
 
+    // Si el cliente cancela una reserva
+    if(isset($_POST['Cancelar'])) {
+        $crud = new Crud(new DB("proyecto"));
+        $crud->eliminar("reservas", "where fecha = \"$_POST[fecha]\" and hora = \"$_POST[hora]\" and pista = \"$_POST[pista]\"");
+        header("Location: ../public/reservasCliente.php");
+    }
+
     // Si hemos llegado aquí por otros medios (como escribiendo la dirección directamente)
     else {
         // Si hemos iniciado sesión como administrador, redirigimos a la página principal del administrador

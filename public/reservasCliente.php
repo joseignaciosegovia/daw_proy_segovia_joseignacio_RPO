@@ -38,6 +38,7 @@
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
+                <h4>Lista de reservas</h4>
                 <?php
                     $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\"");
                     if($reservas != null){
@@ -48,6 +49,7 @@
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Hora</th>
                                     <th scope="col">Pista</th>
+                                    <th scope="col">Cancelar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,6 +59,12 @@
                                             echo "<td>$reserva[fecha]</td>";
                                             echo "<td>$reserva[hora]</td>";
                                             echo "<td>$reserva[pista]</td>";
+                                            echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
+                                            echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
+                                            echo "<input name=\"hora\" type=\"hidden\" value=\"$reserva[hora]\">";
+                                            echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
+                                            echo "<td><input type=\"submit\" value=\"Borrar\" name=\"Cancelar\"></td>";
+                                            echo "</form>";
                                         echo "</tr>";
                                     }
                                 ?>

@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
     // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
-
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
-
-            // SEGURAMENTE TENGA QUE HACER UN FETCH CADA VEZ QUE PINCHO EN UNA PISTA PARA PODER ACTUALIZAR EL CALENDARIO
 
             cargarCalendario(pista.outerText);
         });
@@ -15,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function cargarCalendario(pista){
 
     // Obtenemos el email del cliente del párrafo
-    const cliente = document.getElementById('cliente');
+    const cliente = document.getElementById('cliente').outerText;
 
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido

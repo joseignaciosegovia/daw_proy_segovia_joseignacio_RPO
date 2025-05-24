@@ -24,6 +24,7 @@
         exit();
     }
 
+    // Si hemos recibido los datos de la reserva
     if(isset($_GET['datos'])){
         require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
 
@@ -54,6 +55,11 @@
     </div>
 
 <?php 
+    }
+
+    // Si hemos accedido a esta página de otra forma (como introduciendo la dirección), nos vamos a la página de inicio del usuario
+    else {
+        header("Location: reservarPista.php");
     }
 
     require_once "../vista/template/footer.php";
