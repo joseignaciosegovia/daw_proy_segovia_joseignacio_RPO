@@ -4,6 +4,11 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
+    function añadirScriptsPie(){
+?>
+        <script src="/proyecto/js/cancelarReserva.js"></script>
+<?php }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: perfilCliente.php');
@@ -49,7 +54,7 @@
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Hora</th>
                                     <th scope="col">Pista</th>
-                                    <th scope="col">Cancelar</th>
+                                    <th scope="col">Cancelar reserva</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +68,8 @@
                                             echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
                                             echo "<input name=\"hora\" type=\"hidden\" value=\"$reserva[hora]\">";
                                             echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
-                                            echo "<td><input type=\"submit\" value=\"Borrar\" name=\"Cancelar\"></td>";
+                                            //echo "<td><input type=\"submit\" value=\"Cancelar\" name=\"Cancelar\"></td>";
+                                            echo "<td><i class=\"bi bi-x-circle\"></i></td>";
                                             echo "</form>";
                                         echo "</tr>";
                                     }

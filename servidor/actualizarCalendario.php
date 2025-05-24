@@ -19,9 +19,10 @@
     }
 
     // Si el cliente cancela una reserva
-    if(isset($_POST['Cancelar'])) {
+    if(isset($_POST['cancelar'])) {
+        $reserva = json_decode($_POST['cancelar']);
         $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("reservas", "where fecha = \"$_POST[fecha]\" and hora = \"$_POST[hora]\" and pista = \"$_POST[pista]\"");
+        $crud->eliminar("reservas", "where fecha = \"$reserva->fecha\" and hora = \"$reserva->hora\" and pista = \"$reserva->pista\"");
         header("Location: ../public/reservasCliente.php");
     }
 

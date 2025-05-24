@@ -45,7 +45,7 @@ async function cargarCalendario(pista){
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
             
-            // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
+            // Mostramos el mensaje indicando que se va a añadir un horario ocupado
             modalCuerpo.insertAdjacentHTML('afterbegin', `
                 Añadir una reserva el ${fecha} a las ${hora}
             `);
