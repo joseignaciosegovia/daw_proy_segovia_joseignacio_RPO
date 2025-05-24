@@ -1,19 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
+
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
+
+            // SEGURAMENTE TENGA QUE HACER UN FETCH CADA VEZ QUE PINCHO EN UNA PISTA PARA PODER ACTUALIZAR EL CALENDARIO
+
             cargarCalendario(pista.outerText);
         });
     }
 });
 
 // Función que muestra el calendario
-function cargarCalendario(pista){
+async function cargarCalendario(pista){
 
-    var calendario = JSON.parse(document.getElementById('calendario').outerText);
-
-    // Sacamos el cliente del array que contenía el calendario y el email del cliente
-    const cliente = calendario.pop();
+    // Obtenemos el email del cliente del párrafo
+    const cliente = document.getElementById('cliente');
 
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
@@ -62,16 +64,28 @@ function cargarCalendario(pista){
 
     var events = new Array();
 
-    // Rellenamos el array de eventos con las fechas ocupadas para la pista
-    for(fecha of calendario) {
-        if(fecha.pista == pista && fecha.cliente == cliente) {
-            events.push({
-                start: fecha.fecha + "T" + fecha.hora,
-                end: ''
-            })
-        }
+    let url = new URL('http://localhost/proyecto/servidor/obtenerCalendario.php');
+    let parametro = {pista: pista};
+    url.search = new URLSearchParams(parametro).toString();
+
+    // Obtenemos las fechas ocupadas de esta pista
+
+    await fetch(url, {
+        method: 'get'
+    }).then ((response) => response.json()
+    ).then(function (reservas) {
         
-    }
+        for(const reserva of reservas){
+            // Rellenamos los horarios ocupados
+            // CORREGIR LA HORA DE end
+            events.push({
+                start: reserva.fecha + "T" + reserva.hora,
+                end: ''
+            });
+        }
+    }).catch(function (err) {
+        console.log("Ha habido un error");
+    });
 
     // Indicamos los eventos para el calendario
     calendar.setOption('events', events);

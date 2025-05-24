@@ -29,10 +29,6 @@
 
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
-
-    // Guardamos las fechas ocupadas
-    $reservasYCliente = $crud->listar("*", "reservas", "");
-    $reservasYCliente[] = $_SESSION['cliente'];
 ?>
         <div class="col">
             <h4>Escoger pista</h4>
@@ -72,9 +68,10 @@
     </div>
     
     <div class="col" id="calendario">
-        <!-- Incluimos las fechas ocupadas y el cliente para que JavaScript pueda acceder a ellas -->
-        <?php echo json_encode($reservasYCliente) ?>
+        
     </div>
+    <!-- Incluimos el email del cliente para que JavaScript pueda identificarle -->
+    <p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
 
 <?php 
     require_once "../vista/template/footer.php";
