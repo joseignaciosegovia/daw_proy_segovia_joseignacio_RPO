@@ -16,6 +16,10 @@ async function cargarCalendario(pista){
     const cliente = document.getElementById('cliente').outerText;
 
     var calendarEl = document.getElementById('calendario');
+    // Indicamos la pista antes del calendario
+    var tituloPista = document.getElementById('tituloPista');
+    tituloPista.innerHTML = "Pista: " + pista;
+    calendarEl.before(tituloPista);
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
 

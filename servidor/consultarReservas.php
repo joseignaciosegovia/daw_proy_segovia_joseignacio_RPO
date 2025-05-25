@@ -51,18 +51,26 @@
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Cliente</th>
+                            <th>Información</th>
                         </thead>
                         <tbody>
                     <?php
                         $cont = 1;
                         
                         foreach($reservas as $reserva){
+                            if($reserva['cliente'] == null) {
+                                $cliente = "-";
+                            }
+                            else {
+                                $cliente = $reserva['cliente'];
+                            }
                     ?>
                         <tr>
                             <th><?php echo $cont ?></th>
                             <td><?php echo $reserva['fecha'] ?></td>
                             <td><?php echo $reserva['hora'] ?></td>
-                            <td><?php echo $reserva['cliente'] ?></td>
+                            <td><?php echo $cliente ?></td>
+                            <td><?php echo $reserva['informacion'] ?></td>
                         </tr>
                     <?php 
                             $cont++;

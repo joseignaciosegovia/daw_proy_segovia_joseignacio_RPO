@@ -65,6 +65,7 @@
             </div>    
         </div>
     <!-- Cerramos la sección principal, creada en nav.php -->
+    <h4 id="tituloPista"></h4>
     </div>
     
     <div class="col" id="calendario">
