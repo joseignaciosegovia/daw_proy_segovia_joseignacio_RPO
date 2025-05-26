@@ -52,7 +52,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Fecha</th>
-                                    <th scope="col">Hora</th>
+                                    <th scope="col">Hora de inicio</th>
+                                    <th scope="col">Hora de finalización</th>
                                     <th scope="col">Pista</th>
                                     <th scope="col">Cancelar reserva</th>
                                 </tr>
@@ -63,11 +64,12 @@
                                     foreach($reservas as $reserva){
                                         echo "<tr>";
                                             echo "<td>$reserva[fecha]</td>";
-                                            echo "<td>$reserva[hora]</td>";
+                                            echo "<td>$reserva[horaInicio]</td>";
+                                            echo "<td>$reserva[horaFin]</td>";
                                             echo "<td>$reserva[pista]</td>";
                                             echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
                                             echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
-                                            echo "<input name=\"hora\" type=\"hidden\" value=\"$reserva[hora]\">";
+                                            echo "<input name=\"horaInicio\" type=\"hidden\" value=\"$reserva[horaInicio]\">";
                                             echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
                                             $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['hora'])[0] * 60* 60);
                                             // Si todavía no ha pasado la fecha se permite cancelar la reserva

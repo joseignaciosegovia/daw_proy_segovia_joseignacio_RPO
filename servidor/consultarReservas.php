@@ -49,7 +49,8 @@
                         <thead>
                             <th>#</th>
                             <th>Fecha</th>
-                            <th>Hora</th>
+                            <th>Hora de inicio</th>
+                            <th>Hora de Fin</th>
                             <th>Cliente</th>
                             <th>Información</th>
                         </thead>
@@ -68,7 +69,8 @@
                         <tr>
                             <th><?php echo $cont ?></th>
                             <td><?php echo $reserva['fecha'] ?></td>
-                            <td><?php echo $reserva['hora'] ?></td>
+                            <td><?php echo $reserva['horaInicio'] ?></td>
+                            <td><?php echo $reserva['horaFin'] ?></td>
                             <td><?php echo $cliente ?></td>
                             <td><?php echo $reserva['informacion'] ?></td>
                         </tr>

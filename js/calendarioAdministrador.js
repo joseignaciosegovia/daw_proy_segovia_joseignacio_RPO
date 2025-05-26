@@ -26,47 +26,76 @@ function cargarCalendario(){
             center: "title",
             right: "dayGridMonth,timeGridWeek,listWeek"
         },
+        dayMaxEvents: true, 
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento
         dateClick: function(info) {
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
 
-            const fechaHora = info.dateStr;
-            const indiceInicio = fechaHora.indexOf('T');
-            const indiceFin= fechaHora.indexOf('+');
-            const fecha = fechaHora.substring(0, indiceInicio);
-            const hora = fechaHora.substring(indiceInicio + 1, indiceFin);
+            const fechaCompleta = info.date;
+            
+            const fecha = info.dateStr.substring(0, info.dateStr.indexOf('T'));
+            const horaInicio = fechaCompleta.getHours() + ":00:00";
 
+            const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
+            const horaReserva = fechaCompleta.getTime() / 1000 / 60 / 60;
+
+            const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-primary')[0];
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
 
-            const titulo = document.getElementsByClassName('modal-title')[0];
-            titulo.innerHTML = "Horario reservado el " + fecha + " a las " + hora;
-            // Mostramos el mensaje indicando que se va a añadir un horario ocupado (CORREGIR FORMATO FECHA)
-            modalCuerpo.insertAdjacentHTML('afterbegin', `
-                
-                <label for="informacion">Indique la información sobre el horario (quién lo ha ocupado)</label>
-                <textarea id="informacion" rows="5" cols="50"></textarea>
-            `);
-            
+            // Si se intenta hacer una reserva de una fecha que ya ha pasado
+            if(horaActual > horaReserva) {
+                document.getElementsByClassName('modal-title')[0].innerHTML = "No se puede añadir la reserva";
+                // Mostramos el mensaje indicando que no se puede añadir una reserva en un horario pasado
+                modalCuerpo.insertAdjacentHTML('afterbegin', `
+                    No se puede hacer una reserva de una fecha pasada
+                `);
+
+                modalBotonConfirmar.hidden = true;
+            }
+
+            else {
+                document.getElementsByClassName('modal-title')[0].innerHTML = "Horario reservado el " + fecha + " a las " + horaInicio;
+                modalBotonConfirmar.hidden = false;
+                // Mostramos el mensaje indicando que se va a añadir un horario ocupado
+                modalCuerpo.insertAdjacentHTML('afterbegin', `
+                    <label for="horaFin">Indique la hora de fin</label>
+                    <input type="time" id="horaFin" name="horaFin">
+                    <label for="informacion">Información sobre la reserva</label>
+                    <textarea id="informacion" rows="5" cols="50"></textarea>
+                `);
+                confirmarFecha(fecha, horaInicio, pista);
+            }
+
             const modal = new bootstrap.Modal('#evento');
             modal.show();
 
             cerrarModal(modal);
-            confirmarFecha(fecha, hora, pista);
+            
         }
     });
 
     calendar.render();
 
     var events = new Array();
+    var editable;
 
     // Rellenamos el array de eventos con las fechas ocupadas para la pista
     for(fecha of calendario) {
+        // El administrador solo podrá modificar un horario ocupado que no haya sido fruto de una reserva de un cliente
+        if(fecha.informacion == "Reserva realizada por un cliente") {
+            editable = false;
+        }
+        else {
+            editable = true;
+        }
+
         events.push({
             title: fecha.informacion,
-            start: fecha.fecha + "T" + fecha.hora,
-            end: ''
+            start: fecha.fecha + "T" + fecha.horaInicio,
+            end: fecha.fecha + "T" + fecha.horaFin,
+            editable: editable
         })
     }
 
@@ -109,7 +138,7 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarFecha(fecha, hora, pista) {
+function confirmarFecha(fecha, horaInicio, pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
 
@@ -117,7 +146,8 @@ function confirmarFecha(fecha, hora, pista) {
   
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
-            hora: hora, 
+            horaInicio: horaInicio, 
+            horaFin: document.getElementById("horaFin").value,
             pista: pista,
             informacion: informacion
         });

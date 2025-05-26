@@ -38,23 +38,22 @@ async function cargarCalendario(pista){
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento
         dateClick: function(info) {
-            const fechaHora = info.dateStr;
-            const indiceInicio = fechaHora.indexOf('T');
-            const indiceFin= fechaHora.indexOf('+');
-            const fecha = fechaHora.substring(0, indiceInicio);
-            const hora = fechaHora.substring(indiceInicio + 1, indiceFin);
+            const fechaCompleta = info.date;
+            
+            const fecha = info.dateStr.substring(0, info.dateStr.indexOf('T'));
+            const horaInicio = fechaCompleta.getHours() + ":00:00";
+            const horaFin = (fechaCompleta.getHours() +1) + ":00:00";
 
             const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
-            // La hora actual teniendo en cuenta la diferencia de franja horaria
-            const horaReserva = (Date.parse(fecha) / 1000 / 60 / 60) + (Number(hora.split(":")[0])) + (new Date().getTimezoneOffset() / 60);
+            const horaReserva = fechaCompleta.getTime() / 1000 / 60 / 60;
             
             const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-primary')[0];
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
 
+            // Si se intenta hacer una reserva de una fecha que ya ha pasado
             if(horaActual > horaReserva) {
-
                 document.getElementsByClassName('modal-title')[0].innerHTML = "No se puede añadir la reserva";
                 // Mostramos el mensaje indicando que no se puede añadir una reserva en un horario pasado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
@@ -69,10 +68,10 @@ async function cargarCalendario(pista){
                 modalBotonConfirmar.hidden = false;
                 // Mostramos el mensaje indicando que se va a añadir un horario ocupado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
-                    Añadir una reserva el ${fecha} a las ${hora}
+                    Añadir una reserva el ${fecha} a las ${horaInicio}
                 `);
 
-                confirmarFecha(fecha, hora, pista, cliente);
+                confirmarFecha(fecha, horaInicio, horaFin, pista, cliente);
             }
             
             const modal = new bootstrap.Modal('#evento');
@@ -101,8 +100,10 @@ async function cargarCalendario(pista){
             // Rellenamos los horarios ocupados
             // CORREGIR LA HORA DE end
             events.push({
-                start: reserva.fecha + "T" + reserva.hora,
-                end: ''
+                start: reserva.fecha + "T" + reserva.horaInicio,
+                end: reserva.fecha + "T" + reserva.horaFin,
+                backgroundColor: "red",
+                borderColor: "red"
             });
         }
     }).catch(function (err) {
@@ -148,14 +149,15 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarFecha(fecha, hora, pista, cliente) {
+function confirmarFecha(fecha, horaInicio, horaFin, pista, cliente) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
   
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
-            hora: hora, 
+            horaInicio: horaInicio, 
             pista: pista,
+            horaFin, horaFin,
             cliente: cliente,
             informacion: "Reserva realizada por un cliente"
         });
