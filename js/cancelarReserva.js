@@ -21,8 +21,32 @@ function cancelarReserva(icono) {
         Eliminar reserva
     `);
 
+    const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
+    // La hora actual teniendo en cuenta la diferencia de franja horaria
+    const horaReserva = (Date.parse(fecha) / 1000 / 60 / 60) + (Number(hora.split(":")[0])) + (new Date().getTimezoneOffset() / 60);
+
     // Mostramos el mensaje indicando que se va a eliminar una reserva
     const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+    // Borramos el cuerpo del modal para que no muestre el mensaje anterior
+    modalCuerpo.replaceChildren();
+
+    var devolverDinero;
+
+    // Si quedan más de 12 horas hasta la hora de la reserva, se devuelve el dinero
+    if(horaReserva >= (horaActual+12)) {
+        modalCuerpo.insertAdjacentHTML('afterbegin', `
+            Se devolverá el dinero
+        `);
+        devolverDinero = true;
+    }
+
+    else {
+        modalCuerpo.insertAdjacentHTML('afterbegin', `
+           No se devolverá el dinero porque quedan menos de 12 horas 
+        `);
+        devolverDinero = false;
+    }
+
     modalCuerpo.insertAdjacentHTML('afterbegin', `
         ¿Desea eliminar la reserva del ${fecha} a las ${hora} en la pista ${pista}?
     `);

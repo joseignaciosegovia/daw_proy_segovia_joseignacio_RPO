@@ -33,7 +33,7 @@
             header("Location: intranet.php");
             exit();
         }
-        // Si no, vamos al inicio
+        // Si no, vamos al inicio del cliente
         else {
             header("Location: ../public/reservarPista.php");
         }    

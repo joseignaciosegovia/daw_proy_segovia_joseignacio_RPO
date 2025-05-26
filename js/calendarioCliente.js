@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Función que muestra el calendario
 async function cargarCalendario(pista){
 
+    crearModal();
     // Obtenemos el email del cliente del párrafo
     const cliente = document.getElementById('cliente').outerText;
 
@@ -23,8 +24,6 @@ async function cargarCalendario(pista){
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
 
-    crearModal();
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
 
@@ -33,32 +32,53 @@ async function cargarCalendario(pista){
         headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,listWeek"
+            right: "dayGridMonth,timeGridWeek"
         },
+        dayMaxEvents: true, 
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento
         dateClick: function(info) {
-            const modalCuerpo = document.getElementsByClassName('modal-body')[0];
-
             const fechaHora = info.dateStr;
             const indiceInicio = fechaHora.indexOf('T');
             const indiceFin= fechaHora.indexOf('+');
             const fecha = fechaHora.substring(0, indiceInicio);
             const hora = fechaHora.substring(indiceInicio + 1, indiceFin);
 
+            const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
+            // La hora actual teniendo en cuenta la diferencia de franja horaria
+            const horaReserva = (Date.parse(fecha) / 1000 / 60 / 60) + (Number(hora.split(":")[0])) + (new Date().getTimezoneOffset() / 60);
+            
+            const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-primary')[0];
+            const modalCuerpo = document.getElementsByClassName('modal-body')[0];
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
-            
-            // Mostramos el mensaje indicando que se va a añadir un horario ocupado
-            modalCuerpo.insertAdjacentHTML('afterbegin', `
-                Añadir una reserva el ${fecha} a las ${hora}
-            `);
+
+            if(horaActual > horaReserva) {
+
+                document.getElementsByClassName('modal-title')[0].innerHTML = "No se puede añadir la reserva";
+                // Mostramos el mensaje indicando que no se puede añadir una reserva en un horario pasado
+                modalCuerpo.insertAdjacentHTML('afterbegin', `
+                    No se puede hacer una reserva de una fecha pasada
+                `);
+
+                modalBotonConfirmar.hidden = true;
+            }
+
+            else {
+                document.getElementsByClassName('modal-title')[0].innerHTML = "Añadir reserva";
+                modalBotonConfirmar.hidden = false;
+                // Mostramos el mensaje indicando que se va a añadir un horario ocupado
+                modalCuerpo.insertAdjacentHTML('afterbegin', `
+                    Añadir una reserva el ${fecha} a las ${hora}
+                `);
+
+                confirmarFecha(fecha, hora, pista, cliente);
+            }
             
             const modal = new bootstrap.Modal('#evento');
             modal.show();
 
             cerrarModal(modal);
-            confirmarFecha(fecha, hora, pista, cliente);
         }
     });
 
@@ -101,7 +121,7 @@ function crearModal() {
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Añadir reserva</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

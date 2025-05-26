@@ -59,6 +59,7 @@
                             </thead>
                             <tbody>
                                 <?php
+                                    $horaActual = strtotime("now"); 
                                     foreach($reservas as $reserva){
                                         echo "<tr>";
                                             echo "<td>$reserva[fecha]</td>";
@@ -68,8 +69,14 @@
                                             echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
                                             echo "<input name=\"hora\" type=\"hidden\" value=\"$reserva[hora]\">";
                                             echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
-                                            //echo "<td><input type=\"submit\" value=\"Cancelar\" name=\"Cancelar\"></td>";
-                                            echo "<td><i class=\"bi bi-x-circle\"></i></td>";
+                                            $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['hora'])[0] * 60* 60);
+                                            // Si todavía no ha pasado la fecha se permite cancelar la reserva
+                                            if($horaReserva > $horaActual) {
+                                                echo "<td><i class=\"bi bi-x-circle\"></i></td>";
+                                            }
+                                            else {
+                                                echo "<td>Fecha pasada</td>";
+                                            }
                                             echo "</form>";
                                         echo "</tr>";
                                     }
