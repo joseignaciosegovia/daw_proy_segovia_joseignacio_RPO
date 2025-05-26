@@ -39,14 +39,16 @@
                     <th>Pista</th>
                     <th>Precio</th>
                     <th>Fecha</th>
-                    <th>Hora</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de fin</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td><?php echo $datos->pista ?></td>
                         <td><?php echo $datos->pista ?></td>
                         <td><?php echo $datos->fecha ?></td>
-                        <td><?php echo $datos->hora ?></td>
+                        <td><?php echo $datos->horaInicio ?></td>
+                        <td><?php echo $datos->horaFin ?></td>
                     </tr>
                 </tbody>
             </table>

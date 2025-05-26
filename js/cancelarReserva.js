@@ -13,8 +13,8 @@ function cancelarReserva(icono) {
     crearModal();
 
     const fecha = icono.parentNode.parentNode.childNodes[0].textContent;
-    const hora = icono.parentNode.parentNode.childNodes[1].textContent;
-    const pista = icono.parentNode.parentNode.childNodes[2].textContent;
+    const horaInicio = icono.parentNode.parentNode.childNodes[1].textContent;
+    const pista = icono.parentNode.parentNode.childNodes[3].textContent;
 
     const modalTitulo = document.getElementsByClassName('modal-title')[0];
     modalTitulo.insertAdjacentHTML('afterbegin', `
@@ -23,7 +23,7 @@ function cancelarReserva(icono) {
 
     const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
     // La hora actual teniendo en cuenta la diferencia de franja horaria
-    const horaReserva = (Date.parse(fecha) / 1000 / 60 / 60) + (Number(hora.split(":")[0])) + (new Date().getTimezoneOffset() / 60);
+    const horaReserva = (Date.parse(fecha) / 1000 / 60 / 60) + (Number(horaInicio.split(":")[0])) + (new Date().getTimezoneOffset() / 60);
 
     // Mostramos el mensaje indicando que se va a eliminar una reserva
     const modalCuerpo = document.getElementsByClassName('modal-body')[0];
@@ -48,14 +48,14 @@ function cancelarReserva(icono) {
     }
 
     modalCuerpo.insertAdjacentHTML('afterbegin', `
-        ¿Desea eliminar la reserva del ${fecha} a las ${hora} en la pista ${pista}?
+        ¿Desea eliminar la reserva del ${fecha} a las ${horaInicio} en la pista ${pista}?
     `);
 
     const modal = new bootstrap.Modal('#modal');
     modal.show();
 
     cerrarModal(modal);
-    confirmarCancelacion(fecha, hora, pista);
+    confirmarCancelacion(fecha, horaInicio, pista);
 }
 
 function crearModal() {
@@ -93,12 +93,12 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarCancelacion(fecha, hora, pista) {
+function confirmarCancelacion(fecha, horaInicio, pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
-            hora: hora, 
+            horaInicio: horaInicio, 
             pista: pista
         });
 

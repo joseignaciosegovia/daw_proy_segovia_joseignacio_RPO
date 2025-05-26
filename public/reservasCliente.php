@@ -32,7 +32,7 @@
     require_once "../vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
+    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Lista de reservas de $cliente[nombre]</h2>";
 ?>
 
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
@@ -43,7 +43,6 @@
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
-                <h4>Lista de reservas</h4>
                 <?php
                     $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\"");
                     if($reservas != null){
@@ -71,7 +70,7 @@
                                             echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
                                             echo "<input name=\"horaInicio\" type=\"hidden\" value=\"$reserva[horaInicio]\">";
                                             echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
-                                            $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['hora'])[0] * 60* 60);
+                                            $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
                                             // Si todavía no ha pasado la fecha se permite cancelar la reserva
                                             if($horaReserva > $horaActual) {
                                                 echo "<td><i class=\"bi bi-x-circle\"></i></td>";
