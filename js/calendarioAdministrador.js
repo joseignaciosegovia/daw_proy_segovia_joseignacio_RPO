@@ -37,7 +37,7 @@ function cargarCalendario(){
         allDaySlot: false,
 
         // No mostrar sábados y domingos
-        hiddenDays: [ 6, 0 ],
+        hiddenDays: [6, 0],
 
         slotMinTime: "08:00:00",
 
@@ -50,7 +50,7 @@ function cargarCalendario(){
             const fechaCompleta = info.date;
             
             const fecha = info.dateStr.substring(0, info.dateStr.indexOf('T'));
-            const horaInicio = fechaCompleta.getHours() + ":00:00";
+            const horaInicio = info.dateStr.substring(info.dateStr.indexOf('T') +1, info.dateStr.indexOf('+'));
 
             const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
             const horaReserva = fechaCompleta.getTime() / 1000 / 60 / 60;
@@ -58,6 +58,8 @@ function cargarCalendario(){
             const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-primary')[0];
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
+
+            const modal = new bootstrap.Modal('#evento');
 
             // Si se intenta hacer una reserva de una fecha que ya ha pasado
             if(horaActual > horaReserva) {
@@ -68,6 +70,7 @@ function cargarCalendario(){
                 `);
 
                 modalBotonConfirmar.hidden = true;
+                modal.show();
             }
 
             else {
@@ -80,11 +83,12 @@ function cargarCalendario(){
                     <label for="informacion">Información sobre la reserva</label>
                     <textarea id="informacion" rows="5" cols="50"></textarea>
                 `);
-                confirmarFecha(fecha, horaInicio, pista);
+                modal.show();
+                
+                confirmarFecha(fecha, horaInicio, pista, calendar, modal);
             }
-
-            const modal = new bootstrap.Modal('#evento');
-            modal.show();
+            
+            
 
             cerrarModal(modal);
             
@@ -153,12 +157,12 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarFecha(fecha, horaInicio, pista) {
+function confirmarFecha(fecha, horaInicio, pista, calendar, modal) {
     const botonConfirmar = $('.modal-footer .btn-primary');
-    $(botonConfirmar[0]).on('click', function(event) {
+    $(botonConfirmar[0]).on('click', async function(event) {
 
         const informacion = document.getElementById("informacion").value;
-  
+
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             horaInicio: horaInicio, 
@@ -174,17 +178,30 @@ function confirmarFecha(fecha, horaInicio, pista) {
 
         formData.append("datos", datosAEnviar);
 
-        fetch('actualizarCalendario.php', {
+        await fetch('actualizarCalendario.php', {
             method: 'post',
             body: formData
         }).then ((response) => response.text()
         ).then(function (data) {
-            location.reload();
+            // Ocultamos el modal
+            modal.hide();
+            
+            // EN EL SEGUNDO EVENTO SE QUEDA GUARDADA LA FECHA DE INICIO DEL PRIMERO
+            var eventos = calendar.getEvents();
+            var evento = {
+                title: informacion,
+                start: fecha + "T" + horaInicio,
+                end: fecha + "T" + document.getElementById("horaFin").value + ":00",
+                editable: true
+            }
+            calendar.addEvent(evento);
 
+            eventos = calendar.getEvents();
+
+            calendar.refetchEvents();
+            calendar.render();
         }).catch(function (err) {
             console.log("Ha habido un error");
         });
-  
-        event.stopPropagation();
     });
 }
