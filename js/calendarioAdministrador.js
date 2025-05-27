@@ -1,3 +1,6 @@
+// Hay que importar "esLocale" para arreglar un bug con el idioma
+import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     cargarCalendario();
 });
@@ -19,14 +22,26 @@ function cargarCalendario(){
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
 
-        locale: "es",
+        firstDay: 1,
 
         headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,listWeek"
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
         },
+        
+        locale: esLocale,
+
         dayMaxEvents: true, 
+
+        allDaySlot: false,
+
+        // No mostrar sábados y domingos
+        hiddenDays: [ 6, 0 ],
+
+        slotMinTime: "08:00:00",
+
+        slotMaxTime: "22:00:00",
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento
         dateClick: function(info) {
@@ -82,7 +97,7 @@ function cargarCalendario(){
     var editable;
 
     // Rellenamos el array de eventos con las fechas ocupadas para la pista
-    for(fecha of calendario) {
+    for(let fecha of calendario) {
         // El administrador solo podrá modificar un horario ocupado que no haya sido fruto de una reserva de un cliente
         if(fecha.informacion == "Reserva realizada por un cliente") {
             editable = false;

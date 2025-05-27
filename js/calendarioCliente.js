@@ -1,3 +1,6 @@
+// Hay que importar "esLocale" para arreglar un bug con el idioma
+import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
@@ -27,12 +30,26 @@ async function cargarCalendario(pista){
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
 
-        locale: "es",
+        firstDay: 1,
+
+        locale: esLocale,
+
+        // Solo se muestran horas enteras
+        slotDuration: "01:00:00",
+
+        // No mostrar sábados y domingos
+        hiddenDays: [ 6, 0 ],
+
+        slotMinTime: "08:00:00",
+
+        slotMaxTime: "22:00:00",
+
+        allDaySlot: false,
 
         headerToolbar: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek"
+            right: "dayGridMonth,timeGridWeek,timeGridDay"
         },
         dayMaxEvents: true, 
 

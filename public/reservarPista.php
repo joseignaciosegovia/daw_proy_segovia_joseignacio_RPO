@@ -10,7 +10,7 @@
     function añadirScriptsPie(){
 ?>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script src="/proyecto/js/calendarioCliente.js"></script>
+        <script type="module" src="/proyecto/js/calendarioCliente.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
