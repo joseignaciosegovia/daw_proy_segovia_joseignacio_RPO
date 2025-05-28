@@ -8,6 +8,11 @@
     require_once "../vista/template/header.php";
     use Clases\DB;
 
+    function añadirScriptsPie(){
+?>
+        <script type="module" src="/proyecto/js/editarReserva.js"></script>
+<?php }
+
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: intranet.php');
@@ -53,6 +58,7 @@
                             <th>Hora de Fin</th>
                             <th>Cliente</th>
                             <th>Información</th>
+                            <th>Editar</th>
                         </thead>
                         <tbody>
                     <?php
@@ -67,12 +73,18 @@
                             }
                     ?>
                         <tr>
-                            <th><?php echo $cont ?></th>
+                            <td hidden><?php echo $_GET['pista'] ?></td>
+                            <td><?php echo $cont ?></td>
                             <td><?php echo $reserva['fecha'] ?></td>
                             <td><?php echo $reserva['horaInicio'] ?></td>
                             <td><?php echo $reserva['horaFin'] ?></td>
                             <td><?php echo $cliente ?></td>
                             <td><?php echo $reserva['informacion'] ?></td>
+                            <?php
+                                if($cliente == "-") {
+                                    echo "<td><button class=\"editarPista\">Editar</button></td>";
+                                }
+                            ?>
                         </tr>
                     <?php 
                             $cont++;

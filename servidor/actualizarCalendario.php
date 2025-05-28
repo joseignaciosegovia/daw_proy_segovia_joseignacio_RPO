@@ -18,6 +18,13 @@
         }
     }
 
+    // Si el administrador edita una reserva
+    if(isset($_POST['editar'])) {
+        $editar = json_decode(($_POST['editar']));
+        $crud = new Crud(new DB("proyecto"));
+        $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where fecha = \"$editar->fechaOriginal\" and horaInicio = \"$editar->horaInicioOriginal\" and horaFin = \"$editar->horaFinOriginal\"");
+    }
+
     // Si el cliente cancela una reserva
     if(isset($_POST['cancelar'])) {
         $reserva = json_decode($_POST['cancelar']);
