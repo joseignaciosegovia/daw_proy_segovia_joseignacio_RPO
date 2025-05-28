@@ -32,16 +32,22 @@ function editarReserva(botonEditar) {
             <input type="time" hidden id="horaInicioOriginal" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
             <label for="horaFin">Hora de fin</label>
             <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
-            <input type="time" hidden id="horaFinOriginal" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
+            <input type="text" hidden id="pista" value=${botonEditar.parentNode.parentNode.childNodes[1].outerText}>
             <label for="informacion">Información de la reserva</label>
             <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[13].outerText}>
         </form>
     `);
 
+    const modalPie = document.getElementsByClassName('modal-footer')[0];
+    modalPie.insertAdjacentHTML('afterbegin', `
+        <button type="button" class="btn btn-danger">Borrar</button>
+    `);
+
     const modal = new bootstrap.Modal('#modal');
     modal.show();
 
-    confirmarEdicion(modal);
+    actualizarReserva();
+    borrarReserva();
 }
 
 function crearModal() {
@@ -79,35 +85,53 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarEdicion(modal) {
-    const botonConfirmar = $('.modal-footer .btn-primary');
-    $(botonConfirmar[0]).on('click', async function(event) {
+async function actualizarCalendario(datosAEnviar, boton) {
+    const formData = new FormData();
+
+    formData.append(boton, datosAEnviar);
+
+    await fetch('actualizarCalendario.php', {
+        method: 'post',
+        body: formData
+    }).then ((response) => response.text()
+    ).then(function (data) {
+        location.reload();
+    }).catch(function (err) {
+        console.log("Ha habido un error");
+    });
+}
+
+// Se modifica una reserva
+function actualizarReserva() {
+    const botonEditar = document.querySelectorAll('.modal-footer .btn-primary')[0];
+    $(botonEditar).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: document.getElementById("fecha").value,
             fechaOriginal: document.getElementById("fechaOriginal").value,
             horaInicio: document.getElementById("horaInicio").value + ":00", 
             horaInicioOriginal: document.getElementById("horaInicioOriginal").value, 
             horaFin: document.getElementById("horaFin").value + ":00",
-            horaFinOriginal: document.getElementById("horaFinOriginal").value,
+            pista: document.getElementById("pista").value,
             informacion: document.getElementById("informacion").value
         });
 
-        const formData = new FormData();
+        actualizarCalendario(datosAEnviar, botonEditar.outerText);
 
-        // Al llamar "editar" al parámetro del "formData" que enviamos al servidor,
-        // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['editar']"
+        event.stopPropagation();
+    });
+}
 
-        formData.append("editar", datosAEnviar);
-
-        await fetch('actualizarCalendario.php', {
-            method: 'post',
-            body: formData
-        }).then ((response) => response.text()
-        ).then(function (data) {
-            location.reload();
-        }).catch(function (err) {
-            console.log("Ha habido un error");
+// Se borra una reserva
+function borrarReserva() {
+    const botonBorrar = document.querySelectorAll('.modal-footer .btn-danger')[0];
+    $(botonBorrar).on('click', function(event) {
+        let datosAEnviar = JSON.stringify({  
+            fecha: document.getElementById("fechaOriginal").value,
+            horaInicio: document.getElementById("horaInicioOriginal").value, 
+            pista: document.getElementById("pista").value,
         });
+
+        actualizarCalendario(datosAEnviar, botonBorrar.outerText);
 
         event.stopPropagation();
     });
