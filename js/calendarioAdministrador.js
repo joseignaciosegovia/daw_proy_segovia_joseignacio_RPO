@@ -16,6 +16,7 @@ function cargarCalendario(){
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
+    calendarEl.hidden = false;
 
     crearModal();
 
@@ -79,17 +80,17 @@ function cargarCalendario(){
                 // Mostramos el mensaje indicando que se va a añadir un horario ocupado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
                     <label for="horaFin">Indique la hora de fin</label>
+                    <input type="text" hidden id="fecha" value=${fecha}>
+                    <input type="text" hidden id="horaInicio" value="${horaInicio}">
                     <input type="time" id="horaFin" name="horaFin">
                     <label for="informacion">Información sobre la reserva</label>
                     <textarea id="informacion" rows="5" cols="50"></textarea>
                 `);
                 modal.show();
                 
-                confirmarFecha(fecha, horaInicio, pista, calendar, modal);
+                confirmarFecha(pista, calendar, modal);
             }
             
-            
-
             cerrarModal(modal);
             
         }
@@ -157,16 +158,19 @@ function cerrarModal(modal) {
     });
 }
 
-function confirmarFecha(fecha, horaInicio, pista, calendar, modal) {
+function confirmarFecha(pista, calendar, modal) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', async function(event) {
 
         const informacion = document.getElementById("informacion").value;
+        const fecha = document.getElementById("fecha").value;
+        const horaInicio = document.getElementById("horaInicio").value;
+        const horaFin = document.getElementById("horaFin").value + ":00";
 
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             horaInicio: horaInicio, 
-            horaFin: document.getElementById("horaFin").value,
+            horaFin: horaFin,
             pista: pista,
             informacion: informacion
         });
@@ -183,25 +187,11 @@ function confirmarFecha(fecha, horaInicio, pista, calendar, modal) {
             body: formData
         }).then ((response) => response.text()
         ).then(function (data) {
-            // Ocultamos el modal
-            modal.hide();
-            
-            // EN EL SEGUNDO EVENTO SE QUEDA GUARDADA LA FECHA DE INICIO DEL PRIMERO
-            var eventos = calendar.getEvents();
-            var evento = {
-                title: informacion,
-                start: fecha + "T" + horaInicio,
-                end: fecha + "T" + document.getElementById("horaFin").value + ":00",
-                editable: true
-            }
-            calendar.addEvent(evento);
-
-            eventos = calendar.getEvents();
-
-            calendar.refetchEvents();
-            calendar.render();
+            location.reload();
         }).catch(function (err) {
             console.log("Ha habido un error");
         });
+
+        event.stopPropagation();
     });
 }

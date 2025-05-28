@@ -54,7 +54,7 @@
                 <?php require_once "../vista/template/navGestor.php"; ?>
             </div>
         </div> 
-        <div id="calendario">
+        <div id="calendario" hidden>
             <!-- Incluimos las fechas ocupadas de esta pista para que JavaScript pueda acceder a ellas -->
             <?php echo json_encode($reservasYPista) ?>
         </div>

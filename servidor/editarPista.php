@@ -57,26 +57,14 @@
     <div class="container-fluid">
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
-             <?php require_once "../vista/template/navGestor.php"; ?>
+            <?php require_once "../vista/template/navGestor.php"; ?>
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Pista</h4>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="Nombre" value="<?php echo $pista['nombre'] ?>" required>
-                                <div class="invalid-feedback">
-                                    Introduzca un nombre
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
+                            <h4 class="text-right">Pista: <?php echo "$_GET[pista]" ?></h4>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -117,7 +105,6 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                            
                                                 <input type="number" class="form-control" id="adultoNormal" name="Precio" value="<?php echo $precios->adultoNormal?>">
                                                 <div class="invalid-feedback">
                                                     Introduzca un precio válido
