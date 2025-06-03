@@ -1,10 +1,8 @@
 <?php
     session_start();
 
-    use Clases\Cliente;
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
     function añadirScriptsCabecera(){
@@ -62,10 +60,7 @@
             error("La contraseña tiene que coincidir");
         }
 
-        //$cliente = new Cliente($email, password_hash($_POST['contraseña'], PASSWORD_DEFAULT), $nombre, $telefono);
-        $cliente = new Cliente($email, password_hash($datos->contraseña, PASSWORD_DEFAULT), $nombre, $telefono);
-
-        $crud->insertar("clientes", "\"$cliente->email\", \"$cliente->contraseña\", \"$cliente->nombre\", $cliente->telefono");
+        $crud->insertar("clientes", "\"$email\", \"$datos->contraseña\", \"$nombre\", $telefono");
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;
