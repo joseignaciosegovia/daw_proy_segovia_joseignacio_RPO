@@ -3,37 +3,25 @@
                     <div class="row">
                         <h2>Información de interés</h2>
                     </div>
-                    <div class="row" id="telefonos">
-                        <div class="col">
-                            <p>TELÉFONOS:</p>
+                    <div class="row">
+                        <div class="col" id="telefonos">
+                            <h5>Teléfonos:</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2">Ciudad deportiva: 656 539 016</li>
+                                <li class="nav-item mb-2">Polideportivo: 926 319 495</li>
+                            </ul>
                         </div>
-                        <div class="col">
-                            <p>CORREOS ELECTRÓNICOS:</p>
+                        <div class="col" id="correosElectronicos">
+                            <h5>Correos electrónicos:</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item mb-2">Ciudad deportiva: Ciudaddeportivamoral@gmail.com</li>
+                            </ul>
                         </div>
-                        <div class="col">
-                            <p>PÁGINAS WEB:</p>
-                        </div>
-                    </div>
-                    <div class="row" id="correosElectronicos">
-                        <div class="col">
-                            <p>Ciudad deportiva: 656 539 016</p>
-                        </div>
-                        <div class="col">
-                            <p>Ciudad deportiva: Ciudaddeportivamoral@gmail.com</p>
-                        </div>
-                        <div class="col">
-                            <a href="https://www.moraldecalatrava.org/web1/ciudad-deportiva-moral-de-calatrava/" target="_blank">Ciudad Deportiva</a>
-                        </div>
-                    </div>
-                    <div class="row" id="paginaWeb">
-                        <div class="col">
-                            <p>Polideportivo: 926 319 495</p>
-                        </div>
-                        <div class="col">
-                            
-                        </div>
-                        <div class="col">
-                            
+                        <div class="col" id="paginaWeb">
+                            <h5>Páginas web:</h5>
+                            <ul class="nav flex-column">
+                                <li><a href="https://www.moraldecalatrava.org/web1/ciudad-deportiva-moral-de-calatrava/" target="_blank">Ciudad Deportiva</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
