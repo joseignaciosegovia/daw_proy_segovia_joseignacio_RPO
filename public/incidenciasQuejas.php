@@ -59,7 +59,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
-            <?php require_once "../vista/template/nav.php"; ?>
+            <?php require_once "../vista/template/navCliente.php"; ?>
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">

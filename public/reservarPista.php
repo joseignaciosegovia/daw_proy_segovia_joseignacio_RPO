@@ -28,9 +28,9 @@
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
 
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
 ?>
-        <div class="col">
+        <div class="col-8 col-sm-6">
             <h4>Escoger pista</h4>
             <div class="accordion accordion-flush" id="elegirPista">
                 <?php
@@ -60,11 +60,11 @@
                         $contador++;
                     }
                 ?>
-                        </div>
+                    </div>
                 </div>
             </div>    
         </div>
-    <!-- Cerramos la sección principal, creada en nav.php -->
+    <!-- Cerramos la sección principal, creada en navCliente.php -->
     <h4 id="tituloPista"></h4>
     </div>
     

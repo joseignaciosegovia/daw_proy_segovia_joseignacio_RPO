@@ -1,7 +1,7 @@
 <!-- La barra de navegación será una columna dentro del contenido principal de la página -->
 <div class="row" id="seccionPrincipal">
-    <div class="col">
-        <nav class="navbar bg-primary col-4 ms-5 my-2 mb-4">
+    <div class="col-8 col-sm-6">
+        <nav class="navbar bg-primary col-12 col-sm-9 col-lg-5 ms-5 my-2 mb-4">
             <div class="container-fluid py-2">
                 <a class="navbar-brand mb-0 h1 link-light" href="http://localhost/proyecto/public/perfilCliente.php">Datos personales</a>
             </div>

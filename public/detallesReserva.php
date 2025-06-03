@@ -26,7 +26,7 @@
 
     // Si hemos recibido los datos de la reserva
     if(isset($_GET['datos'])){
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/nav.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
 
         $datos = $datos = json_decode(($_GET['datos']));
 ?>
