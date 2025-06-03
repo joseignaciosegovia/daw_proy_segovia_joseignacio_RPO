@@ -54,15 +54,10 @@
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
+    require_once "../vista/template/navCliente.php";
 ?>
-<!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- La barra de navegación será la primera columna -->
-            <?php require_once "../vista/template/navCliente.php"; ?>
-
             <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col d-flex align-items-center">
+            <div class="col-12 col-md-6 d-flex align-items-center">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -82,8 +77,7 @@
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button></div>
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
