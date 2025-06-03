@@ -64,8 +64,8 @@
                 </div>
             </div>    
         </div>
-    <!-- Cerramos la sección principal, creada en navCliente.php -->
-    <h4 id="tituloPista"></h4>
+        <!-- Cerramos la sección principal, creada en navCliente.php -->
+        <h3 id="tituloPista" class="d-flex justify-content-center"></h3>
     </div>
     
     <div class="col" id="calendario">
