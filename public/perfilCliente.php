@@ -57,86 +57,82 @@
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
+    require_once "../vista/template/navCliente.php";
 ?>
 
-    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- La barra de navegación será la primera columna -->
-            <?php require_once "../vista/template/navCliente.php"; ?>
-
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col d-flex align-items-center">
-                <?php
-                    $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-                ?>
-                
-                <div class="col-md-5 border-right">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente">
-                        <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Perfil</h4>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-md-12">
-                                    <label class="labels">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
-                                    <div class="invalid-feedback">
-                                        Introduzca un nombre
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <label class="labels">Contraseña</label>
-                                    <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="" pattern=".{8,}">
-                                    <div class="invalid-feedback">
-                                        Introduzca una contraseña válida
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="labels">Confirmar contraseña</label>
-                                    <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" name="Confirmar contraseña" value="">
-                                    <div class="invalid-feedback">
-                                        Confirme la contraseña
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="labels">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
-                                    <div class="invalid-feedback">
-                                        Introduzca un número de teléfono válido
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
+    <!-- El contenido principal de la página será la segunda columna -->
+    <div class="col-8 col-sm-6 d-flex align-items-center">
+        <?php
+            $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
+        ?>
+        
+        
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Perfil</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12 col-lg-7">
+                        <label class="labels">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
+                        <div class="invalid-feedback">
+                            Introduzca un nombre
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
                         </div>
                     </div>
-                    <?php
-                        // Si hay algún error lo mostramos aquí
-                        if (isset($_SESSION['error'])) {
-                            echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-                            echo $_SESSION['error'];
-                            unset($_SESSION['error']);
-                            echo "</div>";
-                        }
-                    ?>
-                </form>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 col-lg-7">
+                        <label class="labels">Contraseña</label>
+                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="" pattern=".{8,}">
+                        <div class="invalid-feedback">
+                            Introduzca una contraseña válida
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-7">
+                        <label class="labels">Confirmar contraseña</label>
+                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" name="Confirmar contraseña" value="">
+                        <div class="invalid-feedback">
+                            Confirme la contraseña
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
+                            <label class="labels">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                            <div class="invalid-feedback">
+                                Introduzca un número de teléfono válido
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
             </div>
-        </div>
+<?php
+            // Si hay algún error lo mostramos aquí
+            if (isset($_SESSION['error'])) {
+                echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                echo "</div>";
+            }
+?>
+        </form>
     </div>
+</div>
     
 <?php
     // Cargamos el pie
