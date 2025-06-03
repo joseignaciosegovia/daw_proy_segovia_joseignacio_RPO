@@ -60,7 +60,7 @@
             <?php require_once "../vista/template/navGestor.php"; ?>
 
             <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col d-flex align-items-center">
+            <div class="col-12 col-lg-8 d-flex align-items-center">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">

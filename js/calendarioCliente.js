@@ -112,17 +112,18 @@ async function cargarCalendario(pista){
         method: 'get'
     }).then ((response) => response.json()
     ).then(function (reservas) {
-        
-        for(const reserva of reservas){
-            // Rellenamos los horarios ocupados
-            // CORREGIR LA HORA DE end
-            events.push({
-                start: reserva.fecha + "T" + reserva.horaInicio,
-                end: reserva.fecha + "T" + reserva.horaFin,
-                backgroundColor: "red",
-                borderColor: "red"
-            });
+        if(reservas != null) {
+            for(const reserva of reservas){
+                // Rellenamos los horarios ocupados
+                events.push({
+                    start: reserva.fecha + "T" + reserva.horaInicio,
+                    end: reserva.fecha + "T" + reserva.horaFin,
+                    backgroundColor: "red",
+                    borderColor: "red"
+                });
+            }
         }
+        
     }).catch(function (err) {
         console.log("Ha habido un error");
     });
