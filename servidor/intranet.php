@@ -28,11 +28,11 @@
     <div class="container-fluid">
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
-             <?php require_once "../vista/template/navGestor.php"; ?>
+            <?php require_once "../vista/template/navGestor.php"; ?>
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col d-flex align-items-center">
-                <table class="table table-hover">
+                <table class="table table-striped table-hover">
                     <thead>
                         <th>#</th>
                         <th>Nombre</th>

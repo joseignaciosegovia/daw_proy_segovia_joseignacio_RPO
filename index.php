@@ -43,16 +43,8 @@
 
         // Recogemos los datos del formulario
         // Trimamos las cadenas
-        //$nombre = trim($_POST['nombre']);
-        //$email = trim($_POST['email']);
-
         $nombre = trim($datos->nombre);
         $email = trim($datos->email);
-
-        /*if($_POST['telefono'] == null)
-            $telefono =  0;
-        else
-            $telefono = $_POST['telefono'];*/
 
         if($datos->telefono == null)
             $telefono =  0;
@@ -78,12 +70,11 @@
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;
 
-        // Ventana que indica que el perfil se ha actualizado correctamente
+        // Ventana que indica que el usuario se ha creado correctamente
 ?>
 
-        
         <dialog open>
-              <p>El cliente se ha actualizado correctamente</p>
+            <p>El usuario se ha creado correctamente</p>
             <button onclick="this.parentElement.close()">OK</button>
         </dialog>
 <?php

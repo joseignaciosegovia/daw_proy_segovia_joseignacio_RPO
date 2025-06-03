@@ -50,7 +50,7 @@
 
                 <!-- El contenido principal de la página será la segunda columna -->
                 <div class="col d-flex align-items-center">
-                    <table class="table table-hover">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <th>#</th>
                             <th>Fecha</th>
@@ -83,6 +83,9 @@
                             <?php
                                 if($cliente == "-") {
                                     echo "<td><button class=\"editarPista\">Editar</button></td>";
+                                }
+                                else {
+                                    echo "<td>-</td>";
                                 }
                             ?>
                         </tr>

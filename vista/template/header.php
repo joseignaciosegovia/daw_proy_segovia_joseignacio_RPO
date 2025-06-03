@@ -36,8 +36,8 @@
                     <div class="col">
                         <a href="index.php"><img src="/proyecto/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
-                    <div class="col-11">
-                        <h1><a href=<?= isset($home) ? $home : "/proyecto/index.php"?> >Polideportivo y Palacio de Deportes de Moral de Calatrava</a></h1>
+                    <div class="col-9 col-sm-10 col-lg-11 fs-1">
+                        <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/proyecto/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>
                     </div>
                 </div>
             </div>
