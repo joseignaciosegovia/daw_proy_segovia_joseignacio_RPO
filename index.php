@@ -85,13 +85,13 @@
 
     <div class="container-fluid my-3">
         <div class="row column-gap-3">
-            <div class="col pt-4" id="informacionPrincipal">
+            <div class="col-12 col-md-5 pt-4" id="informacionPrincipal">
                 <div class="row px-4">
                     <h2>Reservar pistas del polideportivo y de la Ciudad Deportiva</h2>
                     <p>En esta página podrás registrarte para reservar las pistas del polideportivo y de la Ciudad Deportiva de Moral de Calatrava</p>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
                 <h2 class="d-flex justify-content-center">Registrarse</h2>
                 <a class="btn btn-secondary my-2 d-flex justify-content-center" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
                 
@@ -152,15 +152,13 @@
                     <div class="mb-3 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary form-floating" name="crear">Crear Usuario</button>
                     </div>
-                    
                 </form>
             </div>
         </div>
     </div>
-    
 
-    <?php
-        // Cargamos el pie
-        require_once "vista/template/footer.php";
-    }
-    ?>
+<?php
+    // Cargamos el pie
+    require_once "vista/template/footer.php";
+}
+?>
