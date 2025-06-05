@@ -60,7 +60,9 @@
             error("La contraseña tiene que coincidir");
         }
 
-        $crud->insertar("clientes", "\"$email\", \"$datos->contraseña\", \"$nombre\", $telefono");
+        $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
+
+        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", $telefono");
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;

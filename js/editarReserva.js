@@ -1,3 +1,5 @@
+import {crearModal} from "./modal.js"
+
 document.addEventListener('DOMContentLoaded', function() {
 
     // Recorremos todos los botones de "Editar"
@@ -27,7 +29,7 @@ function editarReserva(botonEditar) {
             <label for="fecha">Fecha</label>
             <input type="date" id="fecha" value=${botonEditar.parentNode.parentNode.childNodes[5].outerText}>
             <input type="date" hidden id="fechaOriginal" value=${botonEditar.parentNode.parentNode.childNodes[5].outerText}>
-            <label for="horaInicio"Hora de inicio</label>
+            <label for="horaInicio">Hora de inicio</label>
             <input type="time" id="horaInicio" min="08:00" max="22:00" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
             <input type="time" hidden id="horaInicioOriginal" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
             <label for="horaFin">Hora de fin</label>
@@ -38,51 +40,19 @@ function editarReserva(botonEditar) {
         </form>
     `);
 
-    const modalPie = document.getElementsByClassName('modal-footer')[0];
-    modalPie.insertAdjacentHTML('afterbegin', `
-        <button type="button" class="btn btn-danger">Borrar</button>
-    `);
+    // Solo creamos el botón de Borrar la primera vez que pulsamos en Editar
+    if(document.getElementsByClassName('btn-danger')[0] == null) {
+        const modalPie = document.getElementsByClassName('modal-footer')[0];
+        modalPie.insertAdjacentHTML('afterbegin', `
+            <button type="button" class="btn btn-danger">Borrar</button>
+        `);
+    }
 
     const modal = new bootstrap.Modal('#modal');
     modal.show();
 
     actualizarReserva();
     borrarReserva();
-}
-
-function crearModal() {
-    // Creamos el modal a continuación del pie
-    const footer = document.getElementsByTagName('footer')[0];
-    $(footer).append(`
-        <div class="modal" id="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-    `);
-}
-
-function cerrarModal(modal) {
-    const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
-  
-        // Ocultamos el modal
-        modal.hide();
-  
-        event.stopPropagation();
-    });
 }
 
 async function actualizarCalendario(datosAEnviar, boton) {

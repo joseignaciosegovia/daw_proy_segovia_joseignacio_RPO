@@ -1,5 +1,6 @@
 // Hay que importar "esLocale" para arreglar un bug con el idioma
 import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
+import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     cargarCalendario();
@@ -60,7 +61,7 @@ function cargarCalendario(){
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
 
-            const modal = new bootstrap.Modal('#evento');
+            const modal = new bootstrap.Modal('#modal');
 
             // Si se intenta hacer una reserva de una fecha que ya ha pasado
             if(horaActual > horaReserva) {
@@ -82,7 +83,7 @@ function cargarCalendario(){
                     <label for="horaFin">Indique la hora de fin</label>
                     <input type="text" hidden id="fecha" value=${fecha}>
                     <input type="text" hidden id="horaInicio" value="${horaInicio}">
-                    <input type="time" id="horaFin" name="horaFin">
+                    <input type="time" id="horaFin" name="horaFin"></br></br>
                     <label for="informacion">Información sobre la reserva</label>
                     <textarea id="informacion" rows="5" cols="50"></textarea>
                 `);
@@ -121,41 +122,6 @@ function cargarCalendario(){
 
     // Indicamos los eventos para el calendario
     calendar.setOption('events', events);
-}
-
-function crearModal() {
-    // Creamos el modal a continuación del pie
-    const footer = document.getElementsByTagName('footer')[0];
-    $(footer).append(`
-        <div class="modal" id="evento" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Añadir fecha ocupada</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-    `);
-}
-
-function cerrarModal(modal) {
-    const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
-  
-        // Ocultamos el modal
-        modal.hide();
-  
-        event.stopPropagation();
-    });
 }
 
 function confirmarFecha(pista, calendar, modal) {

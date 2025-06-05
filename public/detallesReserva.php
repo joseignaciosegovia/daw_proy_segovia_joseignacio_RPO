@@ -4,14 +4,7 @@
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Cliente.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
-
-    function añadirScriptsPie(){
-?>
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script src="/proyecto/js/calendarioCliente.js"></script>
-<?php }
 
     // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
     if(isset($_GET['salir'])) {

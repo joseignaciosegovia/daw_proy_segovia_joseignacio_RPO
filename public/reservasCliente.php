@@ -6,7 +6,7 @@
 
     function añadirScriptsPie(){
 ?>
-        <script src="/proyecto/js/cancelarReserva.js"></script>
+        <script type="module" src="/proyecto/js/cancelarReserva.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión

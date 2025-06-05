@@ -1,3 +1,5 @@
+import {crearModal} from "./modal.js"
+
 window.addEventListener('load', function() {
   const form = document.forms[0];
 
@@ -929,26 +931,7 @@ function validarAñadirPista(form) {
 }
 
 function mostrarModal(titulo, direccion, texto) {
-  // Creamos el modal a continuación del pie
-  const footer = document.getElementsByTagName('footer')[0];
-  $(footer).append(`
-    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>  
-  `);
+  crearModal();
 
   // Obtenemos el contenedor principal del modal
 
@@ -956,7 +939,7 @@ function mostrarModal(titulo, direccion, texto) {
 
   // Cambiamos el título del modal
 
-  const modalTitulo = document.getElementById('modalLabel');
+  const modalTitulo = document.getElementsByClassName('modal-title')[0];
   modalTitulo.innerText = titulo;
 
   // Cambiamos el cuerpo del modal
@@ -971,12 +954,16 @@ function mostrarModal(titulo, direccion, texto) {
   // Creamos un objeto "Modal" para mostrar el modal recién modificado
 
   const modal = new bootstrap.Modal('#modal');
+
+  $('.modal-footer .btn-primary')[0].remove();
+  const botonCerrar = $('.modal-footer .btn-secondary')[0];
+  botonCerrar.innerHTML = "Cerrar";
+
   modal.show();
 
   // Cuando pulsamos el botón "Close" hay que cerrar el modal
 
-  const botonCerrar = $('.modal-footer .btn-secondary');
-  $(botonCerrar[0]).on('click', function(event) {
+  $(botonCerrar).on('click', function(event) {
 
     // Obtenemos el modal y lo ocultamos
 

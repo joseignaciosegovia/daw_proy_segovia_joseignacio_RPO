@@ -1,5 +1,6 @@
 // Hay que importar "esLocale" para arreglar un bug con el idioma
 import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
+import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -91,7 +92,7 @@ async function cargarCalendario(pista){
                 confirmarFecha(fecha, horaInicio, horaFin, pista, cliente);
             }
             
-            const modal = new bootstrap.Modal('#evento');
+            const modal = new bootstrap.Modal('#modal');
             modal.show();
 
             cerrarModal(modal);
@@ -131,41 +132,6 @@ async function cargarCalendario(pista){
 
     // Indicamos los eventos del calendario
     calendar.setOption('events', events);
-}
-
-function crearModal() {
-    // Creamos el modal a continuación del pie
-    const footer = document.getElementsByTagName('footer')[0];
-    $(footer).append(`
-        <div class="modal" id="evento" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
-                </div>
-                </div>
-            </div>
-        </div>
-    `);
-}
-
-function cerrarModal(modal) {
-    const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
-  
-        // Ocultamos el modal
-        modal.hide();
-  
-        event.stopPropagation();
-    });
 }
 
 function confirmarFecha(fecha, horaInicio, horaFin, pista, cliente) {
