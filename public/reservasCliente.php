@@ -23,11 +23,11 @@
     }
 
     // Cargamos la cabecera
-    require_once "../vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Lista de reservas de $cliente[nombre]</h2>";
-    require_once "../vista/template/navCliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
 ?>
 
     <!-- El contenido principal de la página será la segunda columna -->
@@ -82,7 +82,7 @@
 
     <?php
         // Cargamos el pie
-        require_once "../vista/template/footer.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
     ?>
     </body>
 </html>

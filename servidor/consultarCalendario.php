@@ -4,8 +4,8 @@
     $titulo = "Gestión de pistas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
     
-    require_once "../controlador/Crud.php";
-    require_once "../vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
     function añadirScriptsCabecera(){
@@ -45,7 +45,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- La barra de navegación será la primera columna -->
-                <?php require_once "../vista/template/navGestor.php"; ?>
+                <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
             </div>
         </div> 
         <div id="calendario" hidden>
@@ -62,5 +62,5 @@
         die();
     }
 
-    require_once "../vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
 ?>

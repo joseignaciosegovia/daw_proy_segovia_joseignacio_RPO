@@ -1,8 +1,8 @@
 <?php
     session_start();
     
-    require_once "../controlador/Crud.php";
-    require_once "../vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
     // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva)

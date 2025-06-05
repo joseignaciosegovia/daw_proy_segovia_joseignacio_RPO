@@ -2,8 +2,8 @@
     session_start();
 
     use Clases\DB;
-    require_once "../controlador/Crud.php";
-    require_once "../modelo/Conexion.inc.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
 
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;

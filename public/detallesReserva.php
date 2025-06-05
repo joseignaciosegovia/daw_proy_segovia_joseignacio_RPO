@@ -56,5 +56,5 @@
         header("Location: reservarPista.php");
     }
 
-    require_once "../vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
 ?>

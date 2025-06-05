@@ -74,5 +74,5 @@
     <p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
 
 <?php 
-    require_once "../vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
 ?>
