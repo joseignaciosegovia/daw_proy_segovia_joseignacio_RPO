@@ -29,10 +29,6 @@
 
         $fecha = date('Y-m-d', time());
 
-        //$cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"");
-        // Añadimos la nueva queja/sugerencia al final del array de quejas/sugerencias
-        //$cliente->quejas[] = ["descripcion" => $_POST['Queja'], "fecha" => date('Y-m-d h:i:s a', time())];
-
         // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
         $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$datos->contenido\", \"$_SESSION[cliente]\"");
 

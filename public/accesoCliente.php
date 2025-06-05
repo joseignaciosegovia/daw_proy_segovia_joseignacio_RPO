@@ -101,8 +101,6 @@
 
             $_SESSION['cliente'] = $nombre;
 
-            // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
-
             header('Location: reservarPista.php');
         } else {
             ?>
