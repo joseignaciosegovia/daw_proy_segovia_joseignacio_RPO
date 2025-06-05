@@ -32,33 +32,33 @@
         <div class="col-8 col-sm-6">
             <h4>Escoger pista</h4>
             <div class="accordion accordion-flush" id="elegirPista">
-                <?php
-                    $contador = 0;
-                    $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
-                    foreach($localizaciones as $localizacion){
-                ?>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
-                                    <?php echo "$localizacion[localizacion]"; ?>
-                                </button>
-                            </h2>
-                            <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
-                                <?php
-                                    $pistas = $crud->listar("nombre", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
-                                    foreach($pistas as $pista){
-                                ?>
-                                        <div class="accordion-body">
-                                            <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
-                                        </div>
-                                <?php
-                                    }
-                                ?>
+<?php
+                $contador = 0;
+                $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                foreach($localizaciones as $localizacion){
+?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
+                                <?php echo "$localizacion[localizacion]"; ?>
+                            </button>
+                        </h2>
+                        <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
+<?php
+                        $pistas = $crud->listar("nombre", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
+                        foreach($pistas as $pista){
+?>
+                            <div class="accordion-body">
+                                <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
                             </div>
-                <?php
+<?php
+                }
+?>
+                        </div>
+<?php
                         $contador++;
                     }
-                ?>
+?>
                     </div>
                 </div>
             </div>    

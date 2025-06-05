@@ -112,6 +112,7 @@ async function cargarCalendario(pista){
         method: 'get'
     }).then ((response) => response.json()
     ).then(function (reservas) {
+        // Si hay fechas ocupadas para esta pista, las añadimos como eventos del calendario
         if(reservas != null) {
             for(const reserva of reservas){
                 // Rellenamos los horarios ocupados
@@ -128,7 +129,7 @@ async function cargarCalendario(pista){
         console.log("Ha habido un error");
     });
 
-    // Indicamos los eventos para el calendario
+    // Indicamos los eventos del calendario
     calendar.setOption('events', events);
 }
 

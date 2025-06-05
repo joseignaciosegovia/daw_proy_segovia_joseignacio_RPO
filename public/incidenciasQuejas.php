@@ -9,12 +9,6 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    function error($mensaje) {
-        $_SESSION['error'] = $mensaje;
-        header('Location: perfilCliente.php');
-        die();
-    }
-
     // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);

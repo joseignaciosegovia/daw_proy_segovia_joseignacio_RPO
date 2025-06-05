@@ -73,13 +73,5 @@
 </body>
 </html>
 <?php
-    // Mensaje de error cuando volvemos después de pinchar en algún botón (como cuando no hay reservas para la pista seleccionada)
-    if (isset($_SESSION['error'])) {
-        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-        echo "</div>";
-    }
-
     require_once "../vista/template/footer.php";
 ?>

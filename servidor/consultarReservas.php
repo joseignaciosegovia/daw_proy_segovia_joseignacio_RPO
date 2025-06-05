@@ -103,6 +103,12 @@
 </html>
 
 <?php
+        if (isset($_SESSION['error'])) {
+            echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+            echo $_SESSION['error'];
+            unset($_SESSION['error']);
+            echo "</div>";
+        }
     }
 
     else {

@@ -9,12 +9,6 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    function error($mensaje) {
-        $_SESSION['error'] = $mensaje;
-        header('Location: perfilCliente.php');
-        die();
-    }
-
     // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
@@ -121,15 +115,6 @@
                 </div>
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
             </div>
-<?php
-            // Si hay algún error lo mostramos aquí
-            if (isset($_SESSION['error'])) {
-                echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-                echo "</div>";
-            }
-?>
         </form>
     </div>
 </div>
