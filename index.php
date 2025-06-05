@@ -5,21 +5,22 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
+    // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    // Si hemos iniciado sesión como cliente, mostramos la página de resrevar pistas
-    if (!empty($_SESSION["cliente"])) {
-        header("Location: ./public/reservarPista.php");
-        exit();
-    }
-
+    // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
-        $_SESSION['error'] = $mensaje;
-        header('Location:index.php');
-        die();
+        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+        echo $mensaje;
+        echo "</div>";
+        echo "<script>alert($mensaje)</script>";
+
+        //header('Location:' . $_SERVER['PHP_SELF']);
+        header('Location: ./servidor/accesoAdministrador.php');
+        exit();
     }
 
     function nombreNoVacio(&$nombre) {
@@ -31,7 +32,13 @@
         // Ponemos la primera letra de cada palabra en mayúsculas
         $nombre = ucwords($nombre); 
     }
-    
+
+    // Si hemos iniciado sesión como cliente, mostramos la página de reservar pistas
+    if (!empty($_SESSION["cliente"])) {
+        header("Location: ./public/reservarPista.php");
+        exit();
+    }
+
     // Si pulsamos el botón "Crear Usuario"
     if (isset($_POST['datos'])) {
 
@@ -155,6 +162,7 @@
     </div>
 
 <?php
+
     // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
 }

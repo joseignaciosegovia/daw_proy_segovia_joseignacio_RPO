@@ -8,11 +8,13 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
+    // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/editarReserva.js"></script>
 <?php }
 
+    // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y redirige a la página principal
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: intranet.php');

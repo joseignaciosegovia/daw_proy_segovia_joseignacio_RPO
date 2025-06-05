@@ -4,6 +4,7 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
 
+    // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/cancelarReserva.js"></script>

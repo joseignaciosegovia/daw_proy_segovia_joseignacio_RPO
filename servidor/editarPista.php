@@ -8,6 +8,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
+    // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/proyecto/js/validacion.js"></script>
