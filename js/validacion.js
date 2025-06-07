@@ -57,7 +57,7 @@ function validacionCrearUsuario(form) {
   
     // Validación al enviar el formulario
   
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
       let isValid = true;
       let firstInvalidElement = null;
   
@@ -172,17 +172,32 @@ function validacionCrearUsuario(form) {
         formData.append("datos", datosAEnviar);
   
         // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
-  
+  /*
         fetch('index.php', {
           method: 'post',
           body: formData
         }).then((response) => response.text())
         .then(function(data) {
-          mostrarModal("El usuario ha sido creado correctamente", "http://localhost/proyecto/index.php");
-
+          mostrarModal("El usuario ha sido creado correctamente", "http://localhost/proyecto/public/reservarPista.php");
+          
         }).catch(function (err) {
           console.log("Ha habido un error");
         });
+    */
+        try {
+          const response = await fetch('index.php', {
+            method: "POST",
+            body: formData
+          });
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+
+          const json = await response.json();
+          console.log(json);
+        } catch (error) {
+          console.error(error.message);
+        }
         
         // Disparamos el evento "reset" para resetear el formulario
   

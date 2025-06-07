@@ -13,14 +13,9 @@
 
     // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
-        echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-        echo $mensaje;
-        echo "</div>";
-        echo "<script>alert($mensaje)</script>";
-
-        //header('Location:' . $_SERVER['PHP_SELF']);
-        header('Location: ./servidor/accesoAdministrador.php');
-        exit();
+        $_SESSION['error'] = $mensaje;
+        header('Location: index.php');
+        die();
     }
 
     function nombreNoVacio(&$nombre) {
@@ -74,17 +69,14 @@
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;
 
-        // Ventana que indica que el usuario se ha creado correctamente
-?>
-
-        <dialog open>
-            <p>El usuario se ha creado correctamente</p>
-            <button onclick="this.parentElement.close()">OK</button>
-        </dialog>
-<?php
-
-        header('Location:public/reservarPista.php');
+        //header('Location:public/reservarPista.php');
     } else {
+        if (isset($_SESSION['error'])) {
+            echo "<div class='mt-3 text-danger font-weight-bold text-lg d-flex justify-content-center'>";
+            echo $_SESSION['error'];
+            echo "</div>";
+            unset($_SESSION['error']);
+        }
 ?>
 
     <div class="container-fluid my-3">
@@ -160,7 +152,6 @@
             </div>
         </div>
     </div>
-
 <?php
 
     // Cargamos el pie

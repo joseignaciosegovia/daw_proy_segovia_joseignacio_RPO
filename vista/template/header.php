@@ -17,13 +17,8 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Hoja de estilos -->
         <link rel="stylesheet" type="text/css" href="/proyecto/css/estilos.css">
-
-        <!-- SI HAY PÁGINAS QUE REQUIEREN SU PROPIA HOJA DE ESTILOS, SE INCLUIRÁ AQUÍ -->
-        <!-- <link rel="stylesheet" type="text/css" href=isset($estilos) ? $estilos : "/proyecto/css/estilos.css" > -->
-        
         <!-- Animanate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
         <!-- Cada página añadirá los scripts que necesite -->
         <?php if (function_exists('añadirScriptsCabecera')){
             añadirScriptsCabecera();
