@@ -16,7 +16,7 @@
         exit();
     }
 
-    // Si hemos recibido los datos de la reserva
+    // Si hemos recibido los datos de la reserva desde calendarioCliente.js
     if(isset($_GET['datos'])){
         require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
 
@@ -51,7 +51,7 @@
         require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
     }
 
-    // Si hemos accedido a esta página de otra forma (por ejemplo, escribiendo la dirección), redirigimos a la página de inicio del usuario
+    // Si hemos accedido a esta página de otra forma (por ejemplo, escribiendo la dirección), redirigimos a la página de inicio del cliente
     else {
         header("Location: reservarPista.php");
     }

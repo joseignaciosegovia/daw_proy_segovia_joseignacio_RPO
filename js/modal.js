@@ -1,3 +1,4 @@
+// Función que crea un modal
 function crearModal() {
     const footer = document.getElementsByTagName('footer')[0];
     $(footer).append(`
@@ -21,6 +22,7 @@ function crearModal() {
     `);
 }
 
+// Función que oculta el modal recibido al pulsar en el botón de cerrar
 function cerrarModal(modal) {
     const botonCerrar = $('.modal-footer .btn-secondary');
     $(botonCerrar[0]).on('click', function(event) {

@@ -13,7 +13,7 @@ function cargarCalendario(){
 
     // Sacamos la pista del array que contenía el calendario y el nombre de la pista
     const pista = calendario.pop();
-
+    // Guardamos en una variable el div en el que incluiremos el calendario
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
@@ -31,21 +31,21 @@ function cargarCalendario(){
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
         },
-        
+        // Ponemos el calendario en español
         locale: esLocale,
 
         dayMaxEvents: true, 
 
         allDaySlot: false,
 
-        // No mostrar sábados y domingos
+        // No mostramos sábados y domingos
         hiddenDays: [6, 0],
 
         slotMinTime: "08:00:00",
 
         slotMaxTime: "22:00:00",
 
-        // Al pinchar en el calendario, mostraremos un modal para crear un evento
+        // Al pinchar en el calendario, mostraremos un modal para añadir un horario ocupado
         dateClick: function(info) {
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
 
@@ -70,13 +70,14 @@ function cargarCalendario(){
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
                     No se puede hacer una reserva de una fecha pasada
                 `);
-
+                // Ocultamos el botón de confirmar reserva (porque no se va a poder hacer una)
                 modalBotonConfirmar.hidden = true;
                 modal.show();
             }
 
             else {
-                document.getElementsByClassName('modal-title')[0].innerHTML = "Horario reservado el " + fecha + " a las " + horaInicio;
+                document.getElementsByClassName('modal-title')[0].innerHTML = "Reservar horario el " + fecha + " a las " + horaInicio;
+                // Mostramos el botón de confirmar reserva
                 modalBotonConfirmar.hidden = false;
                 // Mostramos el mensaje indicando que se va a añadir un horario ocupado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
@@ -120,12 +121,14 @@ function cargarCalendario(){
         })
     }
 
-    // Indicamos los eventos para el calendario
+    // Añadimos los eventos en el calendario
     calendar.setOption('events', events);
 }
 
-function confirmarFecha(pista, calendar, modal) {
+// Función que define lo que pasará cuando se confirme una reserva
+function confirmarFecha(pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
+    // Comportamiento del botón de Confirmar
     $(botonConfirmar[0]).on('click', async function(event) {
 
         const informacion = document.getElementById("informacion").value;
@@ -153,6 +156,7 @@ function confirmarFecha(pista, calendar, modal) {
             body: formData
         }).then ((response) => response.text()
         ).then(function (data) {
+            // Actualizamos la página para mostrar el calendario con el nuevo horario añadido
             location.reload();
         }).catch(function (err) {
             console.log("Ha habido un error");

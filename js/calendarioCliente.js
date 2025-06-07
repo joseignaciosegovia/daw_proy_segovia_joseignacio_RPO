@@ -4,7 +4,7 @@ import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Mostrar el calendario para el cliente cada vez que pinche en una pista para reservarla
+    // Mostramos el calendario para el cliente cada vez que pinche en una pista para reservarla
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
 
@@ -15,13 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función que muestra el calendario
 async function cargarCalendario(pista){
-
     crearModal();
-    // Obtenemos el email del cliente del párrafo
+    // Obtenemos el email del cliente
     const cliente = document.getElementById('cliente').outerText;
 
     var calendarEl = document.getElementById('calendario');
-    // Indicamos la pista antes del calendario
+    // Indicamos la pista antes de mostrar el calendario
     var tituloPista = document.getElementById('tituloPista');
     tituloPista.innerHTML = "Pista: " + pista;
     calendarEl.before(tituloPista);
@@ -32,7 +31,7 @@ async function cargarCalendario(pista){
         initialView: 'timeGridWeek',
 
         firstDay: 1,
-
+        // Ponemos el calendario en español
         locale: esLocale,
 
         // Solo se muestran horas enteras
@@ -130,7 +129,7 @@ async function cargarCalendario(pista){
         console.log("Ha habido un error");
     });
 
-    // Indicamos los eventos del calendario
+    // Añadimos los eventos en el calendario
     calendar.setOption('events', events);
 }
 
@@ -154,13 +153,11 @@ function confirmarFecha(fecha, horaInicio, horaFin, pista, cliente) {
 
         formData.append("datos", datosAEnviar);
 
+        // Creamos un párrafo en el que guardamos los datos para poder enviarlos a detallesReserva.php
         const p = document.createElement('p');
-
         p.append(`${datosAEnviar}`);
-
         p.hidden = true;
         p.id = "datos";
-
         document.getElementsByTagName('footer')[0].append(p);
 
         fetch('../servidor/actualizarCalendario.php', {
@@ -168,6 +165,7 @@ function confirmarFecha(fecha, horaInicio, horaFin, pista, cliente) {
             body: formData
         }).then ((response) => response.text()
         ).then(function (datos) {
+            // Después de actualizar el calendario, accedemos a detallesReserva para que el cliente vea los detalles de la reserva
             const direccion = "http://localhost/proyecto/public/detallesReserva.php?datos=" + document.getElementById("datos").innerText;
             location.replace(direccion);
 

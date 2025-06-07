@@ -1,8 +1,10 @@
 import {crearModal} from "./modal.js"
 
 window.addEventListener('load', function() {
+  // Obtenemos un formulario
   const form = document.forms[0];
 
+  // En función del nombre del formulario, invocamos una de las funciones de validación
   switch(form.name) {
     case "crearUsuario":
       validacionCrearUsuario(form);
@@ -49,7 +51,7 @@ function defaultCheckElement(event) {
     }
 }
   
-// Validación del formulario para crear un usuario con "submit" en línea
+// Validación del formulario para crear un usuario
 function validacionCrearUsuario(form) {
     // Deshabilitamos la forma declarativa de validación
   
@@ -943,29 +945,27 @@ function validarAñadirPista(form) {
   });
 }
 
+// Función que muestra un modal
 function mostrarModal(titulo, direccion, texto) {
   crearModal();
 
   // Obtenemos el contenedor principal del modal
-
   const modalContenedor = document.getElementById('modal');
 
   // Cambiamos el título del modal
-
   const modalTitulo = document.getElementsByClassName('modal-title')[0];
   modalTitulo.innerText = titulo;
 
   // Cambiamos el cuerpo del modal
-
   const modalCuerpo = modalContenedor.getElementsByClassName('modal-body')[0];
   modalCuerpo.replaceChildren();
 
+  // Si se ha enviado un texto, se muestra en el cuerpo del modal
   if(texto != null) {
     modalCuerpo.insertAdjacentHTML('afterbegin', `<div class="p-3">${texto}</div>`);
   }
   
   // Creamos un objeto "Modal" para mostrar el modal recién modificado
-
   const modal = new bootstrap.Modal('#modal');
 
   $('.modal-footer .btn-primary')[0].remove();
@@ -975,16 +975,15 @@ function mostrarModal(titulo, direccion, texto) {
   modal.show();
 
   // Cuando pulsamos el botón "Close" hay que cerrar el modal
-
   $(botonCerrar).on('click', function(event) {
 
     // Obtenemos el modal y lo ocultamos
-
     const modal = new bootstrap.Modal('#modal');
     modal.hide();
 
     event.stopPropagation();
 
+    // Si se ha enviado una URL, accedemos a dicha página
     if(direccion != null) {
       // Nos situamos en la dirección indicada
       location.replace(direccion);

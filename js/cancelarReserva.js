@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Función para cancelar una reserva
 function cancelarReserva(icono) {
     crearModal();
-
+    // Obtenemos la información de la reserva que vamos a cancelar
     const fecha = icono.parentNode.parentNode.childNodes[0].textContent;
     const horaInicio = icono.parentNode.parentNode.childNodes[1].textContent;
     const pista = icono.parentNode.parentNode.childNodes[3].textContent;
@@ -60,8 +61,10 @@ function cancelarReserva(icono) {
     confirmarCancelacion(fecha, horaInicio, pista);
 }
 
+// Función que define el comportamiento del botón de confirmar la cancelación
 function confirmarCancelacion(fecha, horaInicio, pista) {
     const botonConfirmar = $('.modal-footer .btn-primary');
+    // Pinchamos en el botón de Confirmar
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
@@ -81,6 +84,7 @@ function confirmarCancelacion(fecha, horaInicio, pista) {
             body: formData
         }).then ((response) => response.text()
         ).then(function (datos) {
+            // Después de actualizar el calendario nos dirigimos a reservasCliente.php para que el cliente vea sus reservas
             const direccion = "http://localhost/proyecto/public/reservasCliente.php";
             location.replace(direccion);
 

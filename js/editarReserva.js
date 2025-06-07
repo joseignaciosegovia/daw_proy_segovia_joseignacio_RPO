@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Función para editar una reserva
 function editarReserva(botonEditar) {
     crearModal();
 
@@ -55,8 +56,12 @@ function editarReserva(botonEditar) {
     borrarReserva();
 }
 
+// Función que se invocará al pinchar en el botón de Editar o Borrar una reserva 
 async function actualizarCalendario(datosAEnviar, boton) {
     const formData = new FormData();
+
+    // El parámetro del "formData" que enviamos al servidor tendrá el nombre del botón desde el que se ha invocado esta función,
+    // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['Borrar']" o "$_POST['Confirmar']"
 
     formData.append(boton, datosAEnviar);
 
@@ -65,6 +70,7 @@ async function actualizarCalendario(datosAEnviar, boton) {
         body: formData
     }).then ((response) => response.text()
     ).then(function (data) {
+        // Tras borar o editar una reserva, actualizamos la página para ver los cambios
         location.reload();
     }).catch(function (err) {
         console.log("Ha habido un error");
@@ -75,6 +81,7 @@ async function actualizarCalendario(datosAEnviar, boton) {
 function actualizarReserva() {
     const botonEditar = document.querySelectorAll('.modal-footer .btn-primary')[0];
     $(botonEditar).on('click', function(event) {
+        // Datos necesarios para modificar una reserva
         let datosAEnviar = JSON.stringify({  
             fecha: document.getElementById("fecha").value,
             fechaOriginal: document.getElementById("fechaOriginal").value,
@@ -95,6 +102,7 @@ function actualizarReserva() {
 function borrarReserva() {
     const botonBorrar = document.querySelectorAll('.modal-footer .btn-danger')[0];
     $(botonBorrar).on('click', function(event) {
+        // Datos necesarios para borrar una reserva
         let datosAEnviar = JSON.stringify({  
             fecha: document.getElementById("fechaOriginal").value,
             horaInicio: document.getElementById("horaInicioOriginal").value, 
