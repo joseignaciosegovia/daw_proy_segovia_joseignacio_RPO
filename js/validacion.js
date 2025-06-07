@@ -684,20 +684,33 @@ function validarEditarPista(form) {
     } else {
       const ncLocalizacion = document.getElementById('Localizacion');
       const ncNombreOriginal = document.getElementById('nombreOriginal');
-      let precios = new Array();
-      precios.length = ncPrecio.length;
-      let mapa = new Map();
-      let contador = 0;
+      
+      let precio;
 
-      for(const precio of ncPrecio) {
-        mapa.set(precio.id, precio.value);
-        precios[precio.id] = precio.value;
-        contador++;
+      // Si hay varios precios
+      if(ncPrecio.legnth != null) {
+        let precios = new Array();
+        precios.length = ncPrecio.length;
+        let mapa = new Map();
+        let contador = 0;
+
+        for(const precio of ncPrecio) {
+          mapa.set(precio.id, precio.value);
+          precios[precio.id] = precio.value;
+          contador++;
+        }
+
+        precio = JSON.stringify(Object.fromEntries(mapa));
+      }
+
+      // Si solo hay un precio
+      else {
+        precio = ncPrecio[0].value;
       }
 
       let datosAEnviar = JSON.stringify({ 
         localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value)[0], 
-        precio: JSON.stringify(Object.fromEntries(mapa)),
+        precio: precio,
         nombreOriginal: ncNombreOriginal.value
       });
 
@@ -819,6 +832,7 @@ function validarAñadirPista(form) {
       const ncLocalizacion = document.getElementById('Localizacion');
       let precio;
 
+      // Si hay varios precios
       if(ncPrecio.legnth != null) {
         let precios = new Array();
         precios.length = ncPrecio.length;
@@ -834,6 +848,7 @@ function validarAñadirPista(form) {
         precio = JSON.stringify(Object.fromEntries(mapa));
       }
 
+      // Si solo hay un precio
       else {
         precio = ncPrecio.value;
       }

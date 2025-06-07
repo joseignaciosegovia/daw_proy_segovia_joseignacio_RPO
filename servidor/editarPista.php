@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -44,13 +46,13 @@
     elseif (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
         $crud->eliminar("pistas", "where nombre = \"$_GET[Borrar]\"");
-
+        // En confirmacion.js está el mensaje para confirmar el borrado
         header("Location: intranet.php");
     }
 
+    // Si se obtiene la variable "pista" (pulsando el botón "Editar" de intranet.php)
     if(isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
-
         $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
     
 ?>
@@ -72,10 +74,12 @@
                                 <label for="Localizacion">Localización</label>
                                 <select name="Localizacion" id="Localizacion">
                                     <?php
+                                        // Obtenemos y recorremos las localizaciones
                                         $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
                                         foreach($localizaciones as $localizacion){
+                                            // Añadimos cada localización al select
                                             echo "<option value=\"$localizacion[localizacion]\"";
-
+                                            // La opción indicada por defecto será la localización de la pista
                                             if($pista['localizacion'] == $localizacion['localizacion']){
                                                 echo " selected";
                                             }
@@ -89,7 +93,7 @@
                                 
                             <?php
                                 $precios = json_decode($pista['precioReserva']);
-                                // Si la localización de la pista es "Ciudad Deportiva", mostramos los distintos precios
+                                // Si la localización de la pista es "Ciudad Deportiva", mostramos los distintos precios en una tabla
                                 if($pista['localizacion'] == "Ciudad Deportiva"){
                             ?>
                                 <label class="labels">Precios de Reserva</label>
@@ -176,7 +180,7 @@
 
 <?php
     }
-
+    // Si no hemos llegado a esta página a través del botón "Editar" de intranet.php, volvemos a dicha página
     else {
         header('Location: intranet.php');
         die();

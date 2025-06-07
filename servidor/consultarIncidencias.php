@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";

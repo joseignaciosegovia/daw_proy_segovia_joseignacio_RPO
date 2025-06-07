@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -32,15 +34,11 @@
         exit();
     }
 
-    // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de accesoAdministrador.php)
+    // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de intranet.php)
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
         $reservas = $crud->listar("*", "reservas", "where pista = \"$_GET[pista]\"");
-        if($reservas == null){
-            // NO IMPRIME EL MENSAJE, SINO QUE DIRECTAMENTE VA A intranet.php
-            error("No hay ninguna reserva para la pista " . $_GET['pista']);
-        }
 ?>
 
         <h1>Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
@@ -48,10 +46,17 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- La barra de navegación será la primera columna -->
-                <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
-
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
                 <!-- El contenido principal de la página será la segunda columna -->
                 <div class="col-12 col-lg-8 d-flex align-items-center">
+            <?php
+                // Si no hay reservas en esta pista
+                if($reservas == null){
+                    echo "<h2 class=\"d-flex justify-content-center\">No hay reservas en esta pista</h2>";
+                }
+                // Si hay reservas, creamos una tabla y las mostramos
+                else {
+            ?>
                     <table class="table table-striped table-hover">
                         <thead>
                             <th>#</th>
@@ -66,6 +71,7 @@
                     <?php
                         $cont = 1;
                         
+                        // Recorremos las reservas y las añadimos a la tabla
                         foreach($reservas as $reserva){
                             if($reserva['cliente'] == null) {
                                 $cliente = "-";
@@ -83,6 +89,7 @@
                             <td><?php echo $cliente ?></td>
                             <td><?php echo $reserva['informacion'] ?></td>
                             <?php
+                                // Si una reserva ha sido añadida a mano por el administrador, desde aquí podrá modificarla
                                 if($cliente == "-") {
                                     echo "<td><button class=\"editarPista\">Editar</button></td>";
                                 }
@@ -99,18 +106,13 @@
                     </table>
                 </div>
             </div>
+            <?php } ?>
         </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
     </body>
 </html>
 
 <?php
-        if (isset($_SESSION['error'])) {
-            echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
-            echo $_SESSION['error'];
-            unset($_SESSION['error']);
-            echo "</div>";
-        }
     }
 
     else {

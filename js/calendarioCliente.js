@@ -4,7 +4,7 @@ import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Mostrar calendario para el cliente cada vez que pinche en una pista para reservarla
+    // Mostrar el calendario para el cliente cada vez que pinche en una pista para reservarla
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
 

@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
     $home = "/proyecto/servidor/intranet.php";
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -49,7 +51,8 @@
                 <!-- La barra de navegación será la primera columna -->
                 <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
             </div>
-        </div> 
+        </div>
+        <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
         <div id="calendario" hidden>
             <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
             <?php echo json_encode($reservasYPista) ?>

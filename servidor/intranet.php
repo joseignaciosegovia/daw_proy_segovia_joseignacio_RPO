@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -44,6 +46,7 @@
                     <tbody>
                         <?php
                             $cont = 1;
+                            // Recorremos las pistas y las añadimos a la tabla
                             foreach($pistas as $pista){
                         ?>
                         <tr>
@@ -51,7 +54,7 @@
                             <td><?php echo $pista['nombre'] ?></td>
                             <td><?php echo $pista['localizacion'] ?></td>
                             <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
-                            <td><?php echo "<a href=\"consultarCalendario.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
+                            <td><?php echo "<a href=\"calendarioPista.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
                             <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>
                         </tr>
                             <?php 
