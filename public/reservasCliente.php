@@ -10,12 +10,10 @@
         <script type="module" src="/proyecto/js/cancelarReserva.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
     }
-
-    $crud = new Crud(new DB("proyecto"));
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
@@ -23,6 +21,7 @@
         exit();
     }
 
+    $crud = new Crud(new DB("proyecto"));
     // Cargamos la cabecera
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
@@ -50,6 +49,7 @@
                     <tbody>
                         <?php
                             $horaActual = strtotime("now"); 
+                            // Recorremos las reservas y las mostramos
                             foreach($reservas as $reserva){
                                 echo "<tr>";
                                     echo "<td>$reserva[fecha]</td>";
@@ -57,11 +57,12 @@
                                     echo "<td>$reserva[horaFin]</td>";
                                     echo "<td>$reserva[pista]</td>";
                                     echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
+                                    // Los campos ocultos guardan información que será utilizada por JavaScript
                                     echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
                                     echo "<input name=\"horaInicio\" type=\"hidden\" value=\"$reserva[horaInicio]\">";
                                     echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
                                     $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
-                                    // Si todavía no ha pasado la fecha se permite cancelar la reserva
+                                    // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
                                     if($horaReserva > $horaActual) {
                                         echo "<td><i class=\"bi bi-x-circle\"></i></td>";
                                     }
@@ -78,7 +79,6 @@
             }
         ?>
     </div>
-</div>
 </div>
 
     <?php

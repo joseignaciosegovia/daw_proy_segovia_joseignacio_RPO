@@ -13,7 +13,7 @@
         <script type="module" src="/proyecto/js/calendarioCliente.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
     }
@@ -33,11 +33,12 @@
         <div class="col-8 col-sm-6">
             <h4>Escoger pista</h4>
             <div class="accordion accordion-flush" id="elegirPista">
-<?php
+            <?php
                 $contador = 0;
+                // Obtenemos todas las localizaciones y las añadimos al acordeón
                 $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
                 foreach($localizaciones as $localizacion){
-?>
+            ?>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
@@ -45,21 +46,22 @@
                             </button>
                         </h2>
                         <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
-<?php
+                    <?php
+                        // Para cada localización, añadimos las pistas al acordeón
                         $pistas = $crud->listar("nombre", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
                         foreach($pistas as $pista){
-?>
+                    ?>
                             <div class="accordion-body">
                                 <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
                             </div>
-<?php
-                }
-?>
+                    <?php
+                        }
+                    ?>
                         </div>
-<?php
-                        $contador++;
-                    }
-?>
+            <?php
+                    $contador++;
+                }
+            ?>
                     </div>
                 </div>
             </div>    

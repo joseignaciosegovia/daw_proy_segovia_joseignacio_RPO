@@ -2,11 +2,10 @@
 
     session_start();
 
-    use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página principal
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
     }
@@ -21,7 +20,7 @@
     if(isset($_GET['datos'])){
         require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
 
-        $datos = $datos = json_decode(($_GET['datos']));
+        $datosReserva = json_decode(($_GET['datos']));
 ?>
 
     <div class="col">
@@ -37,11 +36,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $datos->pista ?></td>
-                        <td><?php echo $datos->pista ?></td>
-                        <td><?php echo $datos->fecha ?></td>
-                        <td><?php echo $datos->horaInicio ?></td>
-                        <td><?php echo $datos->horaFin ?></td>
+                        <td><?php echo $datosReserva->pista ?></td>
+                        <td><?php echo $datosReserva->pista ?></td>
+                        <td><?php echo $datosReserva->fecha ?></td>
+                        <td><?php echo $datosReserva->horaInicio ?></td>
+                        <td><?php echo $datosReserva->horaFin ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,12 +48,11 @@
     </div>
 
 <?php 
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
     }
 
-    // Si hemos accedido a esta página de otra forma (como introduciendo la dirección), nos vamos a la página de inicio del usuario
+    // Si hemos accedido a esta página de otra forma (por ejemplo, escribiendo la dirección), redirigimos a la página de inicio del usuario
     else {
         header("Location: reservarPista.php");
     }
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
 ?>

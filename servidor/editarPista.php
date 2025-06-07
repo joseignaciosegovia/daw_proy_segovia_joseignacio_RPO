@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -15,7 +15,7 @@
         <script type="module" src="/proyecto/js/confirmacion.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
     }
@@ -30,7 +30,7 @@
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
-        $valores = "nombre = \"$datos->nombre\", localizacion = \"$datos->localizacion\", precioReserva = '$datos->precio'";        
+        $valores = "localizacion = \"$datos->localizacion\", precioReserva = '$datos->precio'";        
         $condicion = "where nombre = \"$datos->nombreOriginal\"";
 
         // Actualizamos el perfil en la base de datos
@@ -85,10 +85,11 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-3">
                                 
                             <?php
                                 $precios = json_decode($pista['precioReserva']);
+                                // Si la localización de la pista es "Ciudad Deportiva", mostramos los distintos precios
                                 if($pista['localizacion'] == "Ciudad Deportiva"){
                             ?>
                                 <label class="labels">Precios de Reserva</label>
@@ -146,10 +147,11 @@
                                 </table>
                             <?php
                                 }
+                                // Si la localización de la pista no es "Ciudad Deportiva", mostramos solo un precio
                                 else {
                             ?>
                                 <label class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" id="precioUnico" name="Precio" value="<?php echo $precios->precioUnico ?>">
+                                <input type="number" class="form-control" id="precioUnico" name="Precio" value="<?php echo $precios ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un precio válido
                                 </div>
@@ -161,7 +163,6 @@
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
-                            <!-- <a href="editarPista.php?Borrar=<?php echo "$pista[nombre]"?>"><button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button></a> -->
                             <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
                         </div>
                         <!-- Campo oculto para guardar el nombre de la pista antes de actualizarlo -->

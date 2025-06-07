@@ -12,7 +12,7 @@
         die();
     }
 
-    // Si ya hemos iniciado sesión como administrador, dirigimos a la página de gestión
+    // Si ya hemos iniciado sesión como administrador, redirigimos a la página de gestión
     if (!empty($_SESSION["administrador"])) {
         header("Location: intranet.php");
         exit();
@@ -25,16 +25,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!--Fontawesome CDN-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <title>Acceso a la gestión</title>
     </head>
 
     <body style="background:silver;">
     <?php
+        // Si pulsamos el botón de "Acceder
         if (isset($_POST['login'])) {
             $nombre = trim($_POST['usuario']);
             $contraseña = trim($_POST['pass']);
@@ -47,19 +46,14 @@
             // Si no existe, mostramos el error y actualizamos la página
             if ($administrador == null) {
                 unset($_POST['login']);
-                
                 error("Credenciales Inválidas");
             }
 
             // Si el acceso es correcto
-
             $_SESSION['administrador'] = $nombre;
-
-            // MOSTRAR UN MENSAJE DE LOGEO CORRECTO Y QUE EL USUARIO PUEDA ACCEDER A SU INFORMACIÓN
-
             header('Location: intranet.php');
         } else {
-            ?>
+    ?>
             <div class="container mt-5">
                 <div class="d-flex justify-content-center h-100">
                     <div class="card">
@@ -73,7 +67,6 @@
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
-
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
@@ -82,18 +75,20 @@
                                     <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Login" class="btn float-right btn-success" name='login'>
+                                    <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             <?php
+                // Si ha habido algún error, lo mostramos antes que la información principal de la página
                 if (isset($_SESSION['error'])) {
-                    echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                    echo "<div class='mt-3 text-danger font-weight-bold text-lg d-flex justify-content-center'>";
                     echo $_SESSION['error'];
-                    unset($_SESSION['error']);
                     echo "</div>";
+                    // Borramos la variable para no volver a mostrar el error
+                    unset($_SESSION['error']);
                 }
             ?>
         </div>

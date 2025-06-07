@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -14,7 +14,7 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
     }
@@ -25,24 +25,16 @@
         exit();
     }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
-    if(isset($_POST['salir'])) {
-        unset($_SESSION['administrador']);
-        header("Location: accesoAdministrador.php");
-    }
-
     $crud = new Crud(new DB("proyecto"));
 
-    // Si pulsamos el botón de crear
+    // Si pulsamos el botón de crear pista
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
         $localizacion = $datos->localizacion[0];
-
         $valores = "\"$datos->nombre\", \"$localizacion\", \"$datos->precio\"";
 
         // Añadimos la pista en la base de datos
-        
         $crud->insertar("pistas", $valores);
         header("Location: intranet.php");
     }
@@ -50,7 +42,6 @@
     if(isset($_POST['Añadir'])) {
 
 ?>
-
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">
@@ -82,13 +73,14 @@
                                     <select name="Localizacion" id="Localizacion">
                                         <?php
                                             $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                                            // Añadimos las localizaciones a las opciones del select
                                             foreach($localizaciones as $localizacion){
                                                 echo "<option value=\"$localizacion[localizacion]\">$localizacion[localizacion]</option>";
                                             }
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <label class="labels">Precio de Reserva</label>
                                     <input type="number" class="form-control" id="precio" name="Precio" value="" required>
                                     <div class="invalid-feedback">
@@ -106,6 +98,7 @@
             </div>
         </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
+    </div>
 <?php
     }
 

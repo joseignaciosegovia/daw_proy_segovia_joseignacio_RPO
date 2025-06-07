@@ -5,7 +5,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
 
-    // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
+    // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location:accesoCliente.php');
@@ -25,16 +25,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!--Fontawesome CDN-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <title>Login</title>
     </head>
 
     <body style="background:silver;">
     <?php
+        // Si pulsamos en el botón "Acceder"
         if (isset($_POST['login'])) {
             $nombre = trim($_POST['usuario']);
             $contraseña = trim($_POST['pass']);
@@ -135,11 +134,13 @@
                     </div>
                 </div>
             <?php
+                // Si ha habido algún error, lo mostramos antes que la información principal de la página
                 if (isset($_SESSION['error'])) {
                     echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
                     echo $_SESSION['error'];
-                    unset($_SESSION['error']);
                     echo "</div>";
+                    // Borramos la variable para no volver a mostrar el error
+                    unset($_SESSION['error']);
                 }
             ?>
         </div>

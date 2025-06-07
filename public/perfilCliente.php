@@ -10,12 +10,28 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
     }
 
-    $crud = new Crud(new DB("proyecto"));
+    // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
+    function error($mensaje) {
+        $_SESSION['error'] = $mensaje;
+        header('Location: index.php');
+        die();
+    }
+
+    // Función que comprueba si la cadena recibida está vacía
+    function nombreNoVacio(&$nombre) {
+        // Si el nombre del usuario está vacío, mostramos un error
+        if (strlen($nombre) == 0) {
+            error("Error el Nombre no puede estar en blanco");
+        }
+
+        // Ponemos la primera letra de cada palabra en mayúsculas
+        $nombre = ucwords($nombre); 
+    }
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
@@ -23,22 +39,26 @@
         exit();
     }
 
+    $crud = new Crud(new DB("proyecto"));
+
     // Si pulsamos el botón de actualizar perfil
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
+
+        // Trimamos el nombre
+        $nombre = ucwords($datos->nombre);
 
         if($datos->telefono == null)
             $telefono =  0;
         else
             $telefono = $datos->telefono;
 
-        $cliente = [
-            "nombre" => $datos->nombre,
-            "contraseña" => password_hash($datos->contraseña, PASSWORD_DEFAULT),
-            "telefono" => $telefono
-        ];
+        // Comprobamos si el nombre del usuario está vacío
+        nombreNoVacio($nombre);
 
-        $valores = "nombre = \"$cliente[nombre]\", telefono = $cliente[telefono], contraseña = \"$cliente[contraseña]\"";
+        $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
+
+        $valores = "nombre = \"$nombre\", telefono = $telefono, contraseña = \"$contraseña\"";
         $condicion = "where email = \"$_SESSION[cliente]\"";
 
         // Actualizamos el perfil en la base de datos
@@ -53,6 +73,15 @@
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
+
+    // Si ha habido algún error, lo mostramos antes que la información principal de la página
+    if (isset($_SESSION['error'])) {
+        echo "<div class='mt-3 text-danger font-weight-bold text-lg d-flex justify-content-center'>";
+        echo $_SESSION['error'];
+        echo "</div>";
+        // Borramos la variable para no volver a mostrar el error
+        unset($_SESSION['error']);
+    }
 ?>
 
     <!-- El contenido principal de la página será la segunda columna -->

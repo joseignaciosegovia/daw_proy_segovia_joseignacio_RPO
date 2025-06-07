@@ -1,14 +1,14 @@
 <?php
     session_start();
 
-    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
     }
@@ -20,7 +20,6 @@
     }
 
     $crud = new Crud(new DB("proyecto"));
-
     $incidencias = $crud->listar("*", "sugerencias_incidencias", "");
 
 ?>
@@ -41,20 +40,21 @@
                             <th>Usuario</th>
                         </thead>
                         <tbody>
-            <?php
+                        <?php
                             $cont = 1;
+                            // Recorremos y mostramos las incidencias
                             foreach($incidencias as $incidencia){
-                                ?>
+                        ?>
                             <tr>
                                 <th><?php echo $cont ?></th>
                                 <td><?php echo $incidencia['fecha'] ?></td>
                                 <td><?php echo $incidencia['contenido'] ?></td>
                                 <td><?php echo $incidencia['cliente'] ?></td>
                             </tr>
-                            <?php 
+                        <?php 
                                 $cont++;
                             } 
-                            ?>
+                        ?>
                     </tbody>
                 </table>
             </div>

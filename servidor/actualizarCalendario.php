@@ -5,11 +5,12 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
-    // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva)
+    // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva
     if (isset($_POST['datos'])) {
         $datos = json_decode(($_POST['datos']));
 
         $crud = new Crud(new DB("proyecto"));
+        // Si la reserva no tiene cliente
         if($datos->cliente == null) {
             $crud->insertar("reservas", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->pista\", null, \"$datos->informacion\", \"$datos->horaFin\"");
         }
@@ -40,7 +41,7 @@
         header("Location: ../public/reservasCliente.php");
     }
 
-    // Si hemos llegado aquí por otros medios (como escribiendo la dirección directamente)
+    // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
     else {
         // Si hemos iniciado sesión como administrador, redirigimos a la página principal del administrador
         if (!empty($_SESSION["administrador"])) {

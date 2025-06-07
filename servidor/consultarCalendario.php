@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
@@ -22,7 +22,7 @@
         <script type="module" src="/proyecto/js/calendarioAdministrador.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
     }
@@ -51,10 +51,9 @@
             </div>
         </div> 
         <div id="calendario" hidden>
-            <!-- Incluimos las fechas ocupadas de esta pista para que JavaScript pueda acceder a ellas -->
+            <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
             <?php echo json_encode($reservasYPista) ?>
         </div>
-        
         <a href="intranet.php"><button>Volver atrás</button></a>
 <?php
     }

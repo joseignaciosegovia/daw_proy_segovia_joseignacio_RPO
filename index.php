@@ -11,15 +11,16 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
+    // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: index.php');
         die();
     }
 
+    // Función que comprueba si la cadena recibida está vacía
     function nombreNoVacio(&$nombre) {
-        // Comprobamos que el nombre no esté vacío
+        // Si el nombre del usuario está vacío, mostramos un error
         if (strlen($nombre) == 0) {
             error("Error el Nombre no puede estar en blanco");
         }
@@ -36,12 +37,10 @@
 
     // Si pulsamos el botón "Crear Usuario"
     if (isset($_POST['datos'])) {
-
+        // Recibimos los datos de JavaScript después de hacer la validación del submit
         $datos = json_decode($_POST['datos']);
-
         $crud = new Crud(new DB("proyecto"));
 
-        // Recogemos los datos del formulario
         // Trimamos las cadenas
         $nombre = trim($datos->nombre);
         $email = trim($datos->email);
@@ -51,30 +50,34 @@
         else
             $telefono = $datos->telefono;
 
+        // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
 
+        // Comprobamos si ya existe un usuario con el email introducido
         $respuesta = $crud->obtener("clientes", "where email = \"$email\"");
         if($respuesta != null) {
             error("El email está repetido");
         }
 
+        // Comprobamos si la contraseña coincide con la confirmación de la contraseña
         if($datos->contraseña != $datos->confirmarContraseña){
             error("La contraseña tiene que coincidir");
         }
 
+        // Guardamos en una variable la contraseña cifrada
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
-
+        // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", $telefono");
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;
-
-        //header('Location:public/reservarPista.php');
     } else {
+        // Si ha habido algún error, lo mostramos antes que la información principal de la página
         if (isset($_SESSION['error'])) {
             echo "<div class='mt-3 text-danger font-weight-bold text-lg d-flex justify-content-center'>";
             echo $_SESSION['error'];
             echo "</div>";
+            // Borramos la variable para no volver a mostrar el error
             unset($_SESSION['error']);
         }
 ?>

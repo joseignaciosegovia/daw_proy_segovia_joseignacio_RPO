@@ -1,14 +1,14 @@
 <?php
     session_start();
 
-    $titulo = "Gestión de pistas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     $home = "/proyecto/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
     use Clases\DB;
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
     }

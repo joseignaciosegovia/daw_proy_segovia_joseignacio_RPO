@@ -592,7 +592,7 @@ function validarEnviarIncidencias(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La incidencia ha sido enviada correctamente", "http://localhost/proyecto/public/incidenciasQuejas.php");
+        mostrarModal("La incidencia/sugerencia ha sido enviada correctamente", "http://localhost/proyecto/public/incidenciasQuejas.php");
         
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
@@ -672,22 +672,6 @@ function validarEditarPista(form) {
       }
     }
     
-    const ncNombre = document.getElementById('nombre');
-
-    if (!ncNombre.checkValidity()) {
-      isValid = false;
-      if(ncNombre.validity.valueMissing) {
-        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
-      }
-      else {
-        showFeedBack(ncNombre, false);
-      }
-
-      firstInvalidElement = ncNombre;
-    } else {
-      showFeedBack(ncNombre, true, "El nombre es correcto");
-    }
-
     if (!isValid) {
 
       // Indicamos que no se ha podido modificar la pista
@@ -712,7 +696,6 @@ function validarEditarPista(form) {
       }
 
       let datosAEnviar = JSON.stringify({ 
-        nombre: ncNombre.value, 
         localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value)[0], 
         precio: JSON.stringify(Object.fromEntries(mapa)),
         nombreOriginal: ncNombreOriginal.value
@@ -767,15 +750,9 @@ function validarEditarPista(form) {
     // Reseteamos el formulario
 
     form.reset();
-
-    // Ponemos el foco en el primer elemento
-
-    const ncNombre = document.getElementById('nombre');
-    ncNombre.focus();
   })
 
   const ncPrecio = document.getElementsByName('Precio');
-  const ncNombre = document.getElementById('nombre');
 
   // Validación en línea de cada "input"
 
@@ -788,20 +765,6 @@ function validarEditarPista(form) {
       }
     });
   }
-  
-
-  ncNombre.addEventListener('change', function (event) {
-    if (!ncNombre.checkValidity()) {
-      if(ncNombre.validity.valueMissing) {
-        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
-      }
-      else {
-        showFeedBack(ncNombre, false);
-      }
-    } else {
-      showFeedBack(ncNombre, true);
-    }
-  });
 }
 
 // Validación del formulario para añadir una pista
@@ -854,11 +817,31 @@ function validarAñadirPista(form) {
       firstInvalidElement.focus();
     } else {
       const ncLocalizacion = document.getElementById('Localizacion');
+      let precio;
 
+      if(ncPrecio.legnth != null) {
+        let precios = new Array();
+        precios.length = ncPrecio.length;
+        let mapa = new Map();
+        let contador = 0;
+
+        for(const precio of ncPrecio) {
+          mapa.set(precio.id, precio.value);
+          precios[precio.id] = precio.value;
+          contador++;
+        }
+
+        precio = JSON.stringify(Object.fromEntries(mapa));
+      }
+
+      else {
+        precio = ncPrecio.value;
+      }
+      
       let datosAEnviar = JSON.stringify({ 
         nombre: ncNombre.value, 
         localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value), 
-        precio: ncPrecio.value
+        precio: precio
       });
 
       // Realizamos el envío al servidor

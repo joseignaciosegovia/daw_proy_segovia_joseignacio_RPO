@@ -10,7 +10,7 @@
         <script type="module" src="/proyecto/js/validacion.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, volvemos a la página para iniciar sesión
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
     }
@@ -32,12 +32,6 @@
 
         // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
         $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$datos->contenido\", \"$_SESSION[cliente]\"");
-
-        // Ventana que indica que el perfil se ha actualizado correctamente
-        echo "<dialog open>
-              <p>La queja o sugerencia se ha realizado correctamente</p>
-            <button onclick=\"this.parentElement.close()\">OK</button>
-        </dialog>";
     }
 
     // Cargamos la cabecera
@@ -66,12 +60,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button></div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
 
     <?php
         // Cargamos el pie
