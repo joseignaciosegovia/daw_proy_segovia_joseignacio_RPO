@@ -1,26 +1,26 @@
-version: '3.8'
-
 services:
   web:
-    build: .
-    container_name: php-proyecto
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: reservar_pistas
     ports:
-      - "8080:80"
-      - "9003:9003" # Puerto para el depurador
-    volumes:
-      - ./:/var/www/html
+      - "14070:80"
+    # volumes:
+#       - reservar_data:/var/www/html
     depends_on:
       - db
     environment:
-      MYSQL_HOST: db
-      MYSQL_DATABASE: proyecto
-      MYSQL_USER: gestor
-      MYSQL_PASSWORD: secreto
-
+      TIMEZONE: Europe/Madrid
+      VIRTUAL_HOST: www.reservar.dockergp.ip-ddns.com
+      LETSENCRYPT_HOST: www.reservar.dockergp.ip-ddns.com
+    restart: unless-stopped
+    networks:
+      - proxy-network # Red externa para proxy inverso
+      - reservar-internal # Red interna para comunicar servicios
   db:
     image: mysql:8.0
-    container_name: mysql-proyecto
-    restart: always
+    container_name: reservar_db
     environment:
       MYSQL_ROOT_PASSWORD: secreto
       MYSQL_DATABASE: proyecto
@@ -28,8 +28,17 @@ services:
       MYSQL_PASSWORD: secreto
     volumes:
       - db_data:/var/lib/mysql
-    ports:
-      - "3308:3306"
+    restart: unless-stopped
+    networks:
+      - reservar-internal # Solo necesita estar en la red interna
+
+networks:
+  proxy-network:
+  reservar-internal:
+    name: reservar-internal
+    driver: bridge
+    internal: true # Cambiar a true si quieres aislarla completamente de internet
 
 volumes:
+  reservar_data:
   db_data:

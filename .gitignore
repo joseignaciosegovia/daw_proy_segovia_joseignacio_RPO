@@ -7,3 +7,4 @@ node_modules
 js/daypilot-all.min.js
 package-lock.json
 db_data
+docker-compose(local).yml

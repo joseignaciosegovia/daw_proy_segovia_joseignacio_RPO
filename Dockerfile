@@ -22,15 +22,19 @@ RUN echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ex
 # Activar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# Instalar Composer globalmente
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Instala Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copia el composer.json antes para aprovechar cache
+COPY composer.json /var/www/html/
+
+# Instala dependencias PHP
+WORKDIR /var/www/html
+RUN composer install
 
 # Copiar código fuente
-COPY ./src /var/www/html
+COPY . /var/www/html
 WORKDIR /var/www/html
-
-# Instalar dependencias de Composer
-RUN composer install
 
 # Ajustar permisos
 RUN chown -R www-data:www-data /var/www/html \
