@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Si pulsamos el botón de borrar pista
         document.getElementById('borrar').addEventListener('click', function(e) {
             e.preventDefault();
-            pregunta("¿Seguro que quieres borrar esta pista?", "http://localhost/proyecto/servidor/editarPista.php?Borrar=" + document.getElementById('nombreOriginal').value)
+            pregunta("¿Seguro que quieres borrar esta pista?", "/servidor/editarPista.php?Borrar=" + document.getElementById('nombreOriginal').value)
         });
     }
 });

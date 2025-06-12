@@ -85,7 +85,7 @@ function confirmarCancelacion(fecha, horaInicio, pista) {
         }).then ((response) => response.text()
         ).then(function (datos) {
             // Después de actualizar el calendario nos dirigimos a reservasCliente.php para que el cliente vea sus reservas
-            const direccion = "http://localhost/proyecto/public/reservasCliente.php";
+            const direccion = "/public/reservasCliente.php";
             location.replace(direccion);
 
         }).catch(function (err) {

@@ -1,4 +1,5 @@
 <?php
+    ob_start(); // activa el buffer
     session_start();
 
     // Actualizamos el título de la página
