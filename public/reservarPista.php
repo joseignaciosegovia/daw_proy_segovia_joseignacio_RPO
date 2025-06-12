@@ -3,14 +3,14 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script type="module" src="/proyecto/js/calendarioCliente.js"></script>
+        <script type="module" src="/js/calendarioCliente.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -28,7 +28,7 @@
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
 
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
         <div class="col-8 col-sm-6">
             <h4>Escoger pista</h4>
@@ -77,5 +77,5 @@
     <p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
 
 <?php 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

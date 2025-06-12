@@ -2,12 +2,12 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
-        <script type="module" src="/proyecto/js/cancelarReserva.js"></script>
+        <script type="module" src="/js/cancelarReserva.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -23,11 +23,11 @@
 
     $crud = new Crud(new DB("proyecto"));
     // Cargamos la cabecera
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Lista de reservas de $cliente[nombre]</h2>";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
 
     <!-- El contenido principal de la página será la segunda columna -->
@@ -83,7 +83,7 @@
 
     <?php
         // Cargamos el pie
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
     ?>
     </body>
 </html>

@@ -4,10 +4,10 @@
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
-    $home = "/proyecto/servidor/intranet.php";
+    $home = "/servidor/intranet.php";
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col-12 col-lg-8">
@@ -76,5 +76,5 @@
 </body>
 </html>
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

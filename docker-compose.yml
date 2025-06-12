@@ -1,18 +1,35 @@
-services:
-  miapp:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "14070:80"
-    container_name: bbdd-joseignacio
-    restart: unless-stopped
-    environment:
-      - VIRTUAL_HOST=www.bbdd-joseignacio.dockergp.ip-ddns.com
-      - LETSENCRYPT_HOST=www.bbdd-joseignacio.dockergp.ip-ddns.com
-    networks:
-      - proxy-network
+version: '3.8'
 
-  networks:
-    proxy-network:
-      external: true
+services:
+  web:
+    build: .
+    container_name: php-proyecto
+    ports:
+      - "8080:80"
+      - "9003:9003" # Puerto para el depurador
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: proyecto
+      MYSQL_USER: gestor
+      MYSQL_PASSWORD: secreto
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-proyecto
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secreto
+      MYSQL_DATABASE: proyecto
+      MYSQL_USER: gestor
+      MYSQL_PASSWORD: secreto
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3308:3306"
+
+volumes:
+  db_data:

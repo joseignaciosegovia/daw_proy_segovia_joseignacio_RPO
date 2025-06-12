@@ -8,14 +8,14 @@
         <!-- Titulo -->
         <title><?= isset($titulo) ? $titulo : "Reserva de pistas | Moral de Calatrava"?></title>
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="/proyecto/imagenes/Moral.png"/>
+        <link rel="icon" type="image/x-icon" href="/imagenes/Moral.png"/>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Hoja de estilos -->
-        <link rel="stylesheet" type="text/css" href="/proyecto/css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <!-- Animanate CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         <!-- Cada página añadirá los scripts que necesite -->
@@ -28,10 +28,10 @@
             <div class="container-fluid" id="cabecera">
                 <div class="row d-flex align-items-center py-3">
                     <div class="col">
-                        <a href="index.php"><img src="/proyecto/imagenes/Moral2.png" alt="Logo de la página"></img></a>
+                        <a href="index.php"><img src="/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11 fs-1">
-                        <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/proyecto/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>
+                        <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>
                     </div>
                 </div>
             </div>

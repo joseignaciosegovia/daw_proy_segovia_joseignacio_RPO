@@ -2,13 +2,13 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
-        <script type="module" src="/proyecto/js/validacion.js"></script>
+        <script type="module" src="/js/validacion.js"></script>
 <?php }
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
@@ -66,8 +66,30 @@
 
         // Guardamos en una variable la contraseña cifrada
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
+        $codigo = password_hash(rand(0,1000), PASSWORD_DEFAULT);
         // Insertamos el usuario en la base de datos
-        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", $telefono");
+        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", $telefono, \"$codigo\", 0");
+
+        // Enviamos el email de verificación
+        $destinatario = $email; 
+        $asunto = 'Verificación'; 
+        $mensaje = ' 
+
+        ¡Gracias por registrarte! 
+        Tu cuenta se ha creado correctamente, ahora tienes que activarla pinchando en el enlace.
+
+        ------------------------ 
+        Usuario: '.$email.' 
+        Contraseña: '.$datos->contraseña.' 
+        ------------------------ 
+
+        Por favor, pincha en este enlace para activar tu cuenta: 
+        http://www.localhost.com/verificar.php?email='.$email.'&codigo='.$codigo.' 
+
+        ';
+
+        $cabecera = 'From:noreply@yourwebsite.com' . "\r\n"; 
+        mail($destinatario, $asunto, $mensaje, $cabecera);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         $_SESSION['cliente'] = $email;
@@ -158,6 +180,6 @@
 <?php
 
     // Cargamos el pie
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 }
 ?>

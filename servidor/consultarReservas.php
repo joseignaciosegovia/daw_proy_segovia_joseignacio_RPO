@@ -4,16 +4,16 @@
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
-    $home = "/proyecto/servidor/intranet.php";
+    $home = "/servidor/intranet.php";
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
-        <script type="module" src="/proyecto/js/editarReserva.js"></script>
+        <script type="module" src="/js/editarReserva.js"></script>
 <?php }
 
     // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y redirige a la página principal
@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- La barra de navegación será la primera columna -->
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
                 <!-- El contenido principal de la página será la segunda columna -->
                 <div class="col-12 col-lg-8 d-flex align-items-center">
             <?php
@@ -120,5 +120,5 @@
         die();
     }
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

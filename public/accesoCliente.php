@@ -2,19 +2,19 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
-        header('Location:accesoCliente.php');
+        header('Location: public/accesoCliente.php');
         die();
     }
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (!empty($_SESSION["cliente"])) {
-        header("Location: reservarPista.php");
+        header("Location: public/reservarPista.php");
         exit();
     }
 
@@ -94,14 +94,20 @@
                 
                 error("Credenciales Inválidas");
             }
-
             // Si el acceso es correcto
-            $acceso = "Concedido";
-            $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
+            // Si el cliente no está validado
+            if($cliente->activo == 0) {
+                error("El cliente no está validado");
+            }
+            // Si el cliente está validado
+            else {
+                $acceso = "Concedido";
+                $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
 
-            $_SESSION['cliente'] = $nombre;
-
-            header('Location: reservarPista.php');
+                $_SESSION['cliente'] = $nombre;
+                header('Location: reservarPista.php');
+            }
+        // Si no pulsamos el botón de acceder
         } else {
             ?>
             <div class="container mt-5">

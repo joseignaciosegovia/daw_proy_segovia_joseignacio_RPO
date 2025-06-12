@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";
 
 class Crud {
     private $base;
@@ -8,6 +8,17 @@ class Crud {
     function __construct($base) {
         $this->base = $base;
     }
+
+    function crearTabla($tabla, $columnas) {
+        $consulta = "create table if not exists " . $tabla . "(" . $columnas . ")";
+
+        try {
+            $this->base->ConsultaSimple($consulta);
+        } catch (PDOException $ex) {
+            die("Ocurrió un error al insertar datos en la tabla " . $tabla . ": " . $ex->getMessage());
+        }
+    }
+
     function insertar($tabla, $valores) {
         $consulta = "insert into " . $tabla . " values (" . $valores . ")";
 
@@ -81,7 +92,7 @@ class Crud {
             // Si se ha encontrado un usuario
             if($resultado) {
                 // Comprobamos que la contraseña es correcta
-                if(password_verify($contraseña, $resultado['contraseña'])) {
+                if(password_verify($contraseña, $resultado['contrasena'])) {
                     // Devolvemos los datos del usuario
                     return $resultado;
                 }

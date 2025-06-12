@@ -2,8 +2,8 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/modelo/Conexion.inc.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";
 
     // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {

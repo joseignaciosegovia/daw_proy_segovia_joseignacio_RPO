@@ -2,12 +2,12 @@
     session_start();
 
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
-        <script type="module" src="/proyecto/js/validacion.js"></script>
+        <script type="module" src="/js/validacion.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -68,11 +68,11 @@
 
 <?php
     // Cargamos la cabecera
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navCliente.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
     // Si ha habido algún error, lo mostramos antes que la información principal de la página
     if (isset($_SESSION['error'])) {
@@ -150,5 +150,5 @@
     
 <?php
     // Cargamos el pie
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

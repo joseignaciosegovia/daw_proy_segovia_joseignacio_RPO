@@ -4,10 +4,10 @@
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
-    $home = "/proyecto/servidor/intranet.php";
+    $home = "/servidor/intranet.php";
     
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
     // Función para añadir scripts en la cabecera
@@ -21,7 +21,7 @@
     function añadirScriptsPie(){
 ?>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script type="module" src="/proyecto/js/calendarioAdministrador.js"></script>
+        <script type="module" src="/js/calendarioAdministrador.js"></script>
 <?php }
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -49,7 +49,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- La barra de navegación será la primera columna -->
-                <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/navGestor.php"; ?>
+                <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
             </div>
         </div>
         <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
@@ -66,5 +66,5 @@
         die();
     }
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/proyecto/vista/template/footer.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

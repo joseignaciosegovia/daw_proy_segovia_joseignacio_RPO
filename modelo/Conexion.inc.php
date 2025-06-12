@@ -7,7 +7,7 @@ use PDOException;
 class DB {
     private $con;
 	private $bbdd;
-	private $host = "localhost";
+	private $host = "db";
  	private $usu = "gestor";
 	private $clave = "secreto";
 	public $datos;          // Devolverá un array con los datos de la consulta
