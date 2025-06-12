@@ -180,7 +180,7 @@ function validacionCrearUsuario(form) {
           body: formData
         }).then((response) => response.text())
         .then(function(data) {
-          mostrarModal("El usuario ha sido creado correctamente", "http://localhost/proyecto/public/reservarPista.php");
+          mostrarModal("El usuario ha sido creado correctamente", "/public/reservarPista.php");
           
         }).catch(function (err) {
           console.log("Ha habido un error");
@@ -431,7 +431,7 @@ function validacionPerfilCliente(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("El usuario ha sido modificado correctamente", "http://localhost/proyecto/public/perfilCliente.php");
+        mostrarModal("El usuario ha sido modificado correctamente", "/public/perfilCliente.php");
         
       }).catch(function (err) {
         console.log("Ha habido un error");
@@ -594,7 +594,7 @@ function validarEnviarIncidencias(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La incidencia/sugerencia ha sido enviada correctamente", "http://localhost/proyecto/public/incidenciasQuejas.php");
+        mostrarModal("La incidencia/sugerencia ha sido enviada correctamente", "/public/incidenciasQuejas.php");
         
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
@@ -732,7 +732,7 @@ function validarEditarPista(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La pista ha sido modificada correctamente", "http://localhost/proyecto/servidor/intranet.php");
+        mostrarModal("La pista ha sido modificada correctamente", "/servidor/intranet.php");
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
       });
@@ -877,7 +877,7 @@ function validarAñadirPista(form) {
         body: formData
       }).then((response) => response.text())
       .then(function(data) {
-        mostrarModal("La pista ha sido añadida correctamente", "http://localhost/proyecto/servidor/intranet.php");
+        mostrarModal("La pista ha sido añadida correctamente", "/servidor/intranet.php");
         
       }).catch(function (err) {
         mostrarModal("Ha habido un error");
