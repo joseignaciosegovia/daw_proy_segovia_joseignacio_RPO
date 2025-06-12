@@ -1,4 +1,5 @@
 <?php
+    ob_start(); // activa el buffer
     session_start();
 
     use Clases\DB;
@@ -58,7 +59,7 @@
 
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
 
-        $valores = "nombre = \"$nombre\", telefono = $telefono, contraseña = \"$contraseña\"";
+        $valores = "nombre = \"$nombre\", telefono = $telefono, contrasena = \"$contraseña\"";
         $condicion = "where email = \"$_SESSION[cliente]\"";
 
         // Actualizamos el perfil en la base de datos

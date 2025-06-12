@@ -28,7 +28,7 @@
             <div class="container-fluid" id="cabecera">
                 <div class="row d-flex align-items-center py-3">
                     <div class="col">
-                        <a href="index.php"><img src="/imagenes/Moral2.png" alt="Logo de la página"></img></a>
+                        <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11 fs-1">
                         <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>

@@ -97,7 +97,7 @@
             }
             // Si el acceso es correcto
             // Si el cliente no está validado
-            if($cliente->activo == 0) {
+            if($cliente['activo'] == 0) {
                 error("El cliente no está validado");
             }
             // Si el cliente está validado

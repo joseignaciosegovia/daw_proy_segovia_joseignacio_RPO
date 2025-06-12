@@ -22,7 +22,7 @@
     }
 
     $crud = new Crud(new DB("proyecto"));
-    $incidencias = $crud->listar("*", "sugerencias_incidencias", "");
+    $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
 
 ?>
     <h1 class="d-flex justify-content-center">Incidencias de los usuarios</h1>

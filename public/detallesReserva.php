@@ -29,14 +29,12 @@
             <table class="table table-hover">
                 <thead>
                     <th>Pista</th>
-                    <th>Precio</th>
                     <th>Fecha</th>
                     <th>Hora de inicio</th>
                     <th>Hora de fin</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $datosReserva->pista ?></td>
                         <td><?php echo $datosReserva->pista ?></td>
                         <td><?php echo $datosReserva->fecha ?></td>
                         <td><?php echo $datosReserva->horaInicio ?></td>

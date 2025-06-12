@@ -1,5 +1,5 @@
 <?php
-
+    ob_start(); // activa el buffer
     session_start();
 
     use Clases\DB;

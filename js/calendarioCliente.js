@@ -102,7 +102,8 @@ async function cargarCalendario(pista){
 
     var events = new Array();
 
-    let url = new URL('/servidor/obtenerCalendario.php');
+    //let url = new URL('http://localhost/proyecto/servidor/obtenerCalendario.php');
+    let url = new URL('http://localhost:8080/servidor/obtenerCalendario.php');
     let parametro = {pista: pista};
     url.search = new URLSearchParams(parametro).toString();
 
