@@ -1,4 +1,5 @@
 <?php
+    ob_start(); // activa el buffer
     session_start();
 
     use Clases\DB;
@@ -8,13 +9,13 @@
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
-        header('Location: public/accesoCliente.php');
-        die();
+        header('Location: accesoCliente.php');
+        exit;
     }
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (!empty($_SESSION["cliente"])) {
-        header("Location: public/reservarPista.php");
+        header("Location: reservarPista.php");
         exit();
     }
 
