@@ -143,7 +143,7 @@
             <?php
                 // Si ha habido algún error, lo mostramos antes que la información principal de la página
                 if (isset($_SESSION['error'])) {
-                    echo "<div class='mt-3 text-danger font-weight-bold text-lg'>";
+                    echo "<div class='mt-3 text-danger font-weight-bold text-lg text-center'>";
                     echo $_SESSION['error'];
                     echo "</div>";
                     // Borramos la variable para no volver a mostrar el error

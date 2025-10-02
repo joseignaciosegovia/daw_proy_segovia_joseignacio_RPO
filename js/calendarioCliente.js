@@ -46,6 +46,8 @@ async function cargarCalendario(pista){
 
         allDaySlot: false,
 
+        timeFormat: "h(:mm)t",
+
         headerToolbar: {
             left: "prev,next today",
             center: "title",

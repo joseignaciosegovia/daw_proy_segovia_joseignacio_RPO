@@ -93,7 +93,7 @@
         mail($destinatario, $asunto, $mensaje, $cabecera);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
-        $_SESSION['cliente'] = $email;
+        //$_SESSION['cliente'] = $email;
     } else {
         // Si ha habido algún error, lo mostramos antes que la información principal de la página
         if (isset($_SESSION['error'])) {

@@ -30,8 +30,11 @@
                     <div class="col">
                         <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></img></a>
                     </div>
-                    <div class="col-9 col-sm-10 col-lg-11 fs-1">
+                    <div class="col-8 col-sm-9 col-lg-9 fs-1">
                         <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>
+                    </div>
+                    <div class="col-2">
+                        <a href="/servidor/accesoAdministrador.php"><button class="btn btn-primary form-floating" name="intranet"><i class="bi bi-person"></i> Intranet</button></a>
                     </div>
                 </div>
             </div>
