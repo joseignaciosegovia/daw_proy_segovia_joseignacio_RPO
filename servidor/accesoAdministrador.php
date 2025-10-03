@@ -13,8 +13,8 @@
         die();
     }
 
-    // Si ya hemos iniciado sesión como administrador, redirigimos a la página de gestión
-    if (!empty($_SESSION["administrador"])) {
+    // Si ya hemos iniciado sesión como administrador o gestor, redirigimos a la página de gestión
+    if (!empty($_SESSION["gestor"]) || !empty($_SESSION["administrador"])) {
         header("Location: intranet.php");
         exit();
     }
@@ -44,22 +44,35 @@
             // Comprobamos si existe un administrador con el usuario y la contraseña introducidos
             
             $administrador = $crud->isValido("gestores", $nombre, $contraseña);
-            // Si no existe, mostramos el error y actualizamos la página
+            // Si no existe el gestor, comprobamos si es un administrador
             if ($administrador == null) {
-                unset($_POST['login']);
-                error("Credenciales Inválidas");
+                $administrador = $crud->isValido("administradores", $nombre, $contraseña);
+                // Si tampoco es un administrador
+                if ($administrador == null) {
+                    unset($_POST['login']);
+                    error("Credenciales Inválidas");
+                }
+
+                else {
+                    // Si el acceso es correcto
+                    $_SESSION['administrador'] = $nombre;
+                    header('Location: intranet.php');
+                }
             }
 
-            // Si el acceso es correcto
-            $_SESSION['administrador'] = $nombre;
-            header('Location: intranet.php');
+            else {
+                // Si el acceso es correcto
+                $_SESSION['gestor'] = $nombre;
+                header('Location: intranet.php');
+            }
+            
         } else {
     ?>
             <div class="container mt-5">
                 <div class="d-flex justify-content-center h-100">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Iniciar sesión como administrador</h3>
+                            <h3>Iniciar sesión como administrador o gestor</h3>
                         </div>
                         <div class="card-body">
                             <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>

@@ -14,16 +14,19 @@
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
+        unset($_SESSION['gestor']);
     }
 
-    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de los administradores
-    if (empty($_SESSION["administrador"])) {
+    // Si no hemos iniciado sesión ni como administrador ni como gestor, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["gestor"]) && empty($_SESSION["administrador"])) {
         header("Location: accesoAdministrador.php");
         exit();
     }
 
-    $crud = new Crud(new DB("proyecto"));
-    $pistas = $crud->listar("*", "pistas", "");
+    // Si hemos iniciado sesión como gestor
+    if(!empty($_SESSION["gestor"])){
+        $crud = new Crud(new DB("proyecto"));
+        $pistas = $crud->listar("*", "pistas", "");
 
 ?>
     <h1 class="d-flex justify-content-center">Lista de Pistas</h1>
@@ -74,6 +77,58 @@
             </div>
         </div>
     </div>
+<?php } 
+
+    // Si hemos iniciado sesión como administrador
+    if(!empty($_SESSION["administrador"])){
+        $crud = new Crud(new DB("proyecto"));
+        $gestores = $crud->listar("*", "gestores", "");
+        
+?>
+    <h1 class="d-flex justify-content-center">Lista de Gestores</h1>
+    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- La barra de navegación será la primera columna -->
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
+
+            <!-- El contenido principal de la página será la segunda columna -->
+            <div class="col-12 col-lg-8"></div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Correo</th>
+                    <th>Editar gestor</th>
+                </thead>
+                <tbody>
+                    <?php
+                        $cont = 1;
+                        // Recorremos los gestores y los añadimos a la tabla
+                        foreach($gestores as $gestor){
+                    ?>
+                    <tr>
+                        <th><?php echo $cont ?></th>
+                        <td><?php echo $gestor['email'] ?></td>
+                        <td>
+                            <form method='POST' action='<?php echo "editarGestor.php"; ?>'>
+                                <input type="submit" class="btn btn-primary" name="Editar" value="Editar gestor">
+                            </form>
+                        </td>
+                    </tr>
+                        <?php 
+                            $cont++;
+                        } 
+                        ?>
+                    <tr>
+                        <td colspan="2">
+                            <form method='POST' action='<?php echo "añadirGestor.php"; ?>'>
+                                <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir gestor">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+<?php } ?>
 </body>
 </html>
 <?php

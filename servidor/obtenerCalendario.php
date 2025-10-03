@@ -13,8 +13,8 @@
 
     // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
     else {
-        // Si hemos iniciado sesión como administrador, redirigimos a la página principal del administrador
-        if (!empty($_SESSION["administrador"])) {
+        // Si hemos iniciado sesión como gestor, redirigimos a la página principal de la intranet
+        if (!empty($_SESSION["gestor"])) {
             header("Location: intranet.php");
             exit();
         }

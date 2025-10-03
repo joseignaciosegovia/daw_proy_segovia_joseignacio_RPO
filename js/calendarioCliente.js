@@ -46,8 +46,20 @@ async function cargarCalendario(pista){
 
         allDaySlot: false,
 
-        timeFormat: "h(:mm)t",
+        //timeFormat: "h(:mm)t",
 
+        //timeFormat: 'H(:mm)',
+/*
+        timeFormat: {
+            agenda: 'h(:mm)tt { - h(:mm)tt}',
+            month: 'h(:mm)tt { - h(:mm)tt}',
+        },
+*/
+/*
+        timeFormat: {
+            agenda: 'h(:mm)tt { - h(:mm)tt}'
+        },
+*/
         headerToolbar: {
             left: "prev,next today",
             center: "title",
@@ -105,7 +117,7 @@ async function cargarCalendario(pista){
     var events = new Array();
 
     //let url = new URL('http://localhost/proyecto/servidor/obtenerCalendario.php');
-    let url = new URL('http://localhost:14070/servidor/obtenerCalendario.php');
+    let url = new URL('http://localhost:8080/servidor/obtenerCalendario.php');
     let parametro = {pista: pista};
     url.search = new URLSearchParams(parametro).toString();
 
