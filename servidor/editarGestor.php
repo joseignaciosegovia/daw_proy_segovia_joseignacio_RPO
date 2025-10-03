@@ -44,9 +44,9 @@
     }
 
     // Si pulsamos el botón de borrar
-    elseif (isset($_GET['Borrar'])) {
+    elseif (isset($_POST['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("gestores", "where email = \"$_GET[Borrar]\"");
+        $crud->eliminar("gestores", "where email = \"$_POST[Email]\"");
         // En confirmacion.js está el mensaje para confirmar el borrado
         header("Location: intranet.php");
     }
@@ -94,7 +94,7 @@
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar gestor</button>
-                            <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar gestor</button>
+                            <button class="btn btn-danger profile-button" name="Borrar">Borrar gestor</button>
                         </div>
                         <!-- Campo oculto para guardar el email del gestor antes de actualizarlo -->
                         <input id="emailOriginal" name="emailOriginal" type="hidden" value="<?php echo "$gestor[email]"?>">
