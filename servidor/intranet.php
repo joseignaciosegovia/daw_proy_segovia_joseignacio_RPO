@@ -109,11 +109,7 @@
                     <tr>
                         <th><?php echo $cont ?></th>
                         <td><?php echo $gestor['email'] ?></td>
-                        <td>
-                            <form method='POST' action='<?php echo "editarGestor.php"; ?>'>
-                                <input type="submit" class="btn btn-primary" name="Editar" value="Editar gestor">
-                            </form>
-                        </td>
+                        <td><?php echo "<a href=\"editarGestor.php?gestor=$gestor[email]\"><button>Editar</button></a>"?></td>
                     </tr>
                         <?php 
                             $cont++;
