@@ -46,6 +46,13 @@ async function cargarCalendario(pista){
 
         allDaySlot: false,
 
+        slotLabelFormat:{
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+            meridiem: 'short',
+        },
+
         //timeFormat: "h(:mm)t",
 
         //timeFormat: 'H(:mm)',
