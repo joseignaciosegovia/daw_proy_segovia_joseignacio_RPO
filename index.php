@@ -85,7 +85,7 @@
         ------------------------ 
 
         Por favor, pincha en este enlace para activar tu cuenta: 
-        http://www.localhost:14070/verificar.php?email='.$email.'&codigo='.$codigo.' 
+        http://www.localhost:8080/verificar.php?email='.$email.'&codigo='.$codigo.' 
 
         ';
 

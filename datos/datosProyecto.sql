@@ -9,9 +9,7 @@ INSERT INTO clientes VALUES
 -- Tabla gestores
 
 INSERT INTO gestores VALUES 
-    ('adminAnton@gmail.com', 'admAn'),
-    ('adminMer@gmail.com', 'admMer'),
-    ('admPrueba@gmail.com', 'prueba');
+    ('adminMer@gmail.com', 'admMer');
 
 -- Tabla administradores
 
