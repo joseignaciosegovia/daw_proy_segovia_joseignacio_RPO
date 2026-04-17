@@ -12,52 +12,55 @@ CREATE TABLE if not exists CLIENTES(
     email VARCHAR(100) PRIMARY KEY,
     contrasena VARCHAR(100) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
     telefono INT(9),
+    foto VARCHAR(100),
     codigo VARCHAR(100) NOT NULL,
     activo INT(1) NOT NULL DEFAULT 0
 );
 
 CREATE TABLE if not exists GESTORES(
     email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE if not exists ADMINISTRADORES(
-    email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL
+    contrasena VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
+    telefono INT(9),
+    foto VARCHAR(100),
+    administrador TINYINT(1)
 );
 
 CREATE TABLE if not exists PISTAS(
-    nombre VARCHAR(100) PRIMARY KEY,
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
     localizacion VARCHAR(100) NOT NULL,
     precioReserva JSON NOT NULL
 );
 
 CREATE TABLE if not exists RESERVAS(
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE NOT NULL,
     horaInicio TIME NOT NULL,
     horaFin TIME NOT NULL,
     pista VARCHAR(100) NOT NULL,
     cliente VARCHAR(100),
     informacion VARCHAR(100) NOT NULL,
-    CONSTRAINT Res_PK PRIMARY KEY (fecha, horaInicio, pista),
     CONSTRAINT Res_pis_FK FOREIGN KEY(pista) REFERENCES PISTAS(nombre),
     CONSTRAINT Res_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)
 );
 
 CREATE TABLE if not exists SUGERENCIAS_INCIDENCIAS(
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
     contenido VARCHAR(100),
     cliente VARCHAR(100),
-    CONSTRAINT Sug_PK PRIMARY KEY (fecha, contenido, cliente),
     CONSTRAINT Sug_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)
 );
 
 CREATE TABLE if not exists CONEXIONES(
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
     usuario VARCHAR(100),
     hora INT(100),
-    acceso VARCHAR(100),
-    CONSTRAINT Con_PK PRIMARY KEY (usuario, hora)
+    acceso VARCHAR(100)
 );
 
 -- 4.- Creamos un usuario

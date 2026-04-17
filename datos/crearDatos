@@ -3,12 +3,19 @@ $crud = new Crud(new DB("proyecto"));
 $crud->crearTabla("clientes", "email VARCHAR(100) PRIMARY KEY,
     contrasena VARCHAR(100) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
     telefono INT(9),
+    foto VARCHAR(100),
     codigo VARCHAR(100) NOT NULL,
     activo INT(1) NOT NULL DEFAULT 0");
 
 $crud->crearTabla("gestores", "email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL");
+    contrasena VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
+    telefono INT(9),
+    foto VARCHAR(100),
+    administrador TINYINT(1)");
 
 $contraseña1 = password_hash('admAn', PASSWORD_DEFAULT);
 $contraseña2 = password_hash('admMer', PASSWORD_DEFAULT);
@@ -16,14 +23,8 @@ $contraseña2 = password_hash('admMer', PASSWORD_DEFAULT);
 $crud->insertar("gestores", "'adminAnton@gmail.com', '$contraseña1'");
 $crud->insertar("gestores", "'adminMer@gmail.com', '$contraseña2'");
 
-$crud->crearTabla("administradores", columnas: "email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL");
-
-$contraseña1 = password_hash('admin1', PASSWORD_DEFAULT);
-
-$crud->insertar("administradores", "'administradorn@gmail.com', '$contraseña1'");
-
-$crud->crearTabla("pistas", "nombre VARCHAR(100) PRIMARY KEY,
+$crud->crearTabla("pistas", " id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
     localizacion VARCHAR(100) NOT NULL,
     precioReserva JSON NOT NULL");
 
@@ -35,23 +36,23 @@ $crud->insertar("pistas", "'Multiusos', 'Ciudad Deportiva', '{\"adultoNormal\": 
 $crud->insertar("pistas", "'Pista interna', 'Polideportivo', '4'");
 $crud->insertar("pistas", "'Pista externa', 'Polideportivo', '4'");
 
-$crud->crearTabla("reservas", "fecha DATE NOT NULL,
+$crud->crearTabla("reservas", "id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE NOT NULL,
     horaInicio TIME NOT NULL,
     horaFin TIME NOT NULL,
     pista VARCHAR(100) NOT NULL,
     cliente VARCHAR(100),
     informacion VARCHAR(100) NOT NULL,
-    CONSTRAINT Res_PK PRIMARY KEY (fecha, horaInicio, pista),
-    CONSTRAINT Res_pis_FK FOREIGN KEY(pista) REFERENCES pistas(nombre),
-    CONSTRAINT Res_Cli_FK FOREIGN KEY(cliente) REFERENCES clientes(email)");
+    CONSTRAINT Res_pis_FK FOREIGN KEY(pista) REFERENCES PISTAS(nombre),
+    CONSTRAINT Res_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)");
 
-$crud->crearTabla("sugerencias_incidencias", "fecha DATE,
+$crud->crearTabla("sugerencias_incidencias", "id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE,
     contenido VARCHAR(100),
     cliente VARCHAR(100),
-    CONSTRAINT Sug_PK PRIMARY KEY (fecha, contenido, cliente),
-    CONSTRAINT Sug_Cli_FK FOREIGN KEY(cliente) REFERENCES clientes(email)");
+    CONSTRAINT Sug_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)");
 
-$crud->crearTabla("conexiones", "usuario VARCHAR(100),
+$crud->crearTabla("conexiones", " id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(100),
     hora INT(100),
-    acceso VARCHAR(100),
-    CONSTRAINT Con_PK PRIMARY KEY (usuario, hora)");
+    acceso VARCHAR(100)");
