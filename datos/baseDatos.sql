@@ -14,9 +14,9 @@ CREATE TABLE if not exists CLIENTES(
     nombre VARCHAR(100) NOT NULL,
     DNI VARCHAR(100) NOT NULL,
     telefono INT(9),
-    foto VARCHAR(100),
+    foto BLOB,
     codigo VARCHAR(100) NOT NULL,
-    activo INT(1) NOT NULL DEFAULT 0
+    activo TINYINT(1) NOT NULL DEFAULT 0
 );
 
 CREATE TABLE if not exists GESTORES(
@@ -25,7 +25,7 @@ CREATE TABLE if not exists GESTORES(
     nombre VARCHAR(100) NOT NULL,
     DNI VARCHAR(100) NOT NULL,
     telefono INT(9),
-    foto VARCHAR(100),
+    foto BLOB,
     administrador TINYINT(1)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE if not exists PISTAS(
     id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     localizacion VARCHAR(100) NOT NULL,
-    precioReserva JSON NOT NULL
+    precioReserva DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE if not exists RESERVAS(
@@ -41,10 +41,10 @@ CREATE TABLE if not exists RESERVAS(
     fecha DATE NOT NULL,
     horaInicio TIME NOT NULL,
     horaFin TIME NOT NULL,
-    pista VARCHAR(100) NOT NULL,
+    pista MEDIUMINT NOT NULL,
     cliente VARCHAR(100),
     informacion VARCHAR(100) NOT NULL,
-    CONSTRAINT Res_pis_FK FOREIGN KEY(pista) REFERENCES PISTAS(nombre),
+    CONSTRAINT Res_pis_FK FOREIGN KEY(pista) REFERENCES PISTAS(id),
     CONSTRAINT Res_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)
 );
 
