@@ -51,6 +51,11 @@
         else
             $telefono = $datos->telefono;
 
+        if($datos->foto == null)
+            $foto =  null;
+        else
+            $foto = $datos->foto;
+
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
 
@@ -69,7 +74,7 @@
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
         $codigo = password_hash(rand(0,1000), PASSWORD_DEFAULT);
         // Insertamos el usuario en la base de datos
-        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", $telefono, \"$codigo\", 0");
+        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$datos->foto\", \"$codigo\", 0");
 
         // Enviamos el email de verificación
         $destinatario = $email; 
@@ -162,10 +167,30 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="dni" placeholder="Ej.: 70114785H" pattern="[0-9]{8}[A-Z]">
+                        <div class="invalid-feedback">
+                            Introduzca un DNI válido
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control" id="telefono" placeholder="Teléfono (opcional)" pattern="[0-9]{9}">
                         <div class="invalid-feedback">
                             Introduzca un número de teléfono válido
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto de perfil</label>
+                        <input type="file" class="form-control" id="foto">
+                        <div class="invalid-feedback">
+                            Introduzca una imagen válida
                         </div>
                         <div class="valid-feedback">
                             Dato correcto

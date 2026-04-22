@@ -62,6 +62,17 @@ function validacionCrearUsuario(form) {
     form.addEventListener('submit', async function (event) {
       let isValid = true;
       let firstInvalidElement = null;
+
+      const ncFoto = document.getElementById('foto');
+  
+      if (!ncFoto.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncFoto, false);
+  
+        firstInvalidElement = ncFoto;
+      } else {
+        showFeedBack(ncFoto, true);
+      }
   
       const ncTelefono = document.getElementById('telefono');
   
@@ -72,6 +83,17 @@ function validacionCrearUsuario(form) {
         firstInvalidElement = ncTelefono;
       } else {
         showFeedBack(ncTelefono, true);
+      }
+
+      const ncDNI = document.getElementById('dni');
+  
+      if (!ncDNI.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncDNI, false);
+  
+        firstInvalidElement = ncDNI;
+      } else {
+        showFeedBack(ncDNI, true);
       }
   
       const ncConfirmar = document.getElementById('confirmarContraseña');
@@ -161,7 +183,9 @@ function validacionCrearUsuario(form) {
           nombre: ncNombre.value, 
           contraseña: ncContraseña.value, 
           confirmarContraseña: ncConfirmar.value,
-          telefono: ncTelefono.value
+          dni: ncDNI.value,
+          telefono: ncTelefono.value,
+          foto: ncFoto.value
         });
   
         // Realizamos el envío al servidor
@@ -236,7 +260,9 @@ function validacionCrearUsuario(form) {
     ncNombre.focus();
   })
 
+    const ncFoto = document.getElementById('foto');
     const ncTelefono = document.getElementById('telefono');
+    const ncDNI = document.getElementById('dni');
     const ncConfirmar = document.getElementById('confirmarContraseña');
     const ncContraseña = document.getElementById('contraseña');
     const ncEmail = document.getElementById('email');
@@ -249,6 +275,14 @@ function validacionCrearUsuario(form) {
       showFeedBack(ncTelefono, false, "Introduzca un teléfono válido");
     } else {
       showFeedBack(ncTelefono, true);
+    }
+  });
+
+  ncDNI.addEventListener('change', function (event) {
+    if (!ncDNI.checkValidity()) {
+      showFeedBack(ncDNI, false, "Introduzca un DNI válido");
+    } else {
+      showFeedBack(ncDNI, true);
     }
   });
 
