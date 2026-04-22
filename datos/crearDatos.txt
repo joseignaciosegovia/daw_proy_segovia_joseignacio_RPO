@@ -1,0 +1,58 @@
+$crud = new Crud(new DB("proyecto"));
+
+$crud->crearTabla("clientes", "email VARCHAR(100) PRIMARY KEY,
+    contrasena VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
+    telefono INT(9),
+    foto BLOB,
+    codigo VARCHAR(100) NOT NULL,
+    activo TINYINT(1) NOT NULL DEFAULT 0");
+
+$crud->crearTabla("gestores", "email VARCHAR(100) PRIMARY KEY,
+    contrasena VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    DNI VARCHAR(100) NOT NULL,
+    telefono INT(9),
+    foto BLOB,
+    administrador TINYINT(1)");
+
+$contraseña1 = password_hash('admAn', PASSWORD_DEFAULT);
+$contraseña2 = password_hash('admMer', PASSWORD_DEFAULT);
+
+$crud->insertar("gestores", "'adminAnton@gmail.com', '$contraseña1', 'Antonio Castillo', '71822198U', 617291009, LOAD_FILE('/imagenes/perfil1.png'), 0");
+$crud->insertar("gestores", "'adminMer@gmail.com', '$contraseña2', 'Mercedes Puertas', '77319284T', 661281938, LOAD_FILE('/imagenes/perfil2.png'), 0");
+
+$crud->crearTabla("pistas", "id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    localizacion VARCHAR(100) NOT NULL,
+    precioReserva DECIMAL(10, 2) NOT NULL");
+
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Campo fútbol 7', 'Ciudad Deportiva', 8.25");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Campo fútbol 11', 'Ciudad Deportiva', 9");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Pádel', 'Ciudad Deportiva', 7.30");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Atletismo', 'Ciudad Deportiva', 8");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Multiusos', 'Ciudad Deportiva', 5");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Pista interna', 'Polideportivo', 4");
+$crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", "'Pista externa', 'Polideportivo', 4");
+
+$crud->crearTabla("reservas", "id INT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE NOT NULL,
+    horaInicio TIME NOT NULL,
+    horaFin TIME NOT NULL,
+    pista INT NOT NULL,
+    cliente VARCHAR(100),
+    informacion VARCHAR(100) NOT NULL,
+    CONSTRAINT Res_Pis_FK FOREIGN KEY(pista) REFERENCES pistas(id),
+    CONSTRAINT Res_Cli_FK FOREIGN KEY(cliente) REFERENCES clientes(email)");
+
+$crud->crearTabla("sugerencias_incidencias", "id INT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATE,
+    contenido VARCHAR(100),
+    cliente VARCHAR(100),
+    CONSTRAINT Sug_Cli_FK FOREIGN KEY(cliente) REFERENCES CLIENTES(email)");
+
+$crud->crearTabla("conexiones", "id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(100),
+    hora INT(100),
+    acceso VARCHAR(100)");

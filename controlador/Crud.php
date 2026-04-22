@@ -29,6 +29,16 @@ class Crud {
         }
     }
 
+    function insertarColumnas($tabla, $columnas, $valores) {
+        $consulta = "insert into " . $tabla . " " . $columnas . " values (" . $valores . ")";
+
+        try {
+            $this->base->ConsultaSimple($consulta);
+        } catch (PDOException $ex) {
+            die("Ocurrió un error al insertar datos en la tabla " . $tabla . ": " . $ex->getMessage());
+        }
+    }
+
     function actualizar($tabla, $valores, $condicion) {
         $consulta = "update " . $tabla . " set " . $valores . " " . $condicion;
         try {
