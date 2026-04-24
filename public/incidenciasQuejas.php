@@ -31,7 +31,7 @@
         $fecha = date('Y-m-d', time());
 
         // Añadimos la queja/sugerencia al perfil del usuario en la base de datos
-        $crud->insertar("sugerencias_incidencias", "\"$fecha\", \"$datos->contenido\", \"$_SESSION[cliente]\"");
+        $crud->insertarColumnas("sugerencias_incidencias", "(fecha, contenido, cliente)", "\"$fecha\", \"$datos->contenido\", \"$_SESSION[cliente]\"");
     }
 
     // Cargamos la cabecera

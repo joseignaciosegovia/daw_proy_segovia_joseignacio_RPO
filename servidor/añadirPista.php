@@ -38,7 +38,7 @@
         $valores = "\"$datos->nombre\", \"$localizacion\", \"$datos->precio\"";
 
         // Añadimos la pista en la base de datos
-        $crud->insertar("pistas", $valores);
+        $crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", $valores);
         header("Location: intranet.php");
     }
 
