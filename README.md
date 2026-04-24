@@ -7,3 +7,5 @@ Tecnologías usadas:
 - Entorno de Desarrollo. Visual Studio Code.
 - Despliegue. La aplicación se desplegará con Docker.
 - Frameworks. Bootstrap.
+
+Enlace a Trello:
