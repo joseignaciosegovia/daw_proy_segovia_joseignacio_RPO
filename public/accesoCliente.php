@@ -65,7 +65,7 @@
             // Si no existe, mostramos el error y actualizamos la página
             if ($cliente == null) {
                 $acceso = "Denegado";
-                $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
+                $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$nombre\", $fecha, \"$acceso\"");
                 
                 unset($_POST['login']);
                 
@@ -103,7 +103,7 @@
             // Si el cliente está validado
             else {
                 $acceso = "Concedido";
-                $crud->insertar("conexiones", "\"$nombre\", $fecha, \"$acceso\"");
+                $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$nombre\", $fecha, \"$acceso\"");
 
                 $_SESSION['cliente'] = $nombre;
                 header('Location: reservarPista.php');
