@@ -22,18 +22,3 @@ INSERT INTO pistas (nombre, localizacion, precioReserva) VALUES
     ('Multiusos', 'Ciudad Deportiva', 5),
     ('Pista interna', 'Polideportivo', 4),
     ('Pista externa', 'Polideportivo', 4);
-
--- Tabla reservas
-
-INSERT INTO reservas (fecha, horaInicio, horaFin, pista, cliente, informacion) VALUES 
-    ('2025-06-18', '18:00:00', '19:00:00', 1, 'antGar@gmail.com', 'Reserva realizada por un cliente'),
-    ('2025-06-19', '15:00:00', '16:00:00', 2, 'ferSan@gmail.com', 'Reserva realizada por un cliente'),
-    ('2025-06-18', '18:00:00', '19:00:00', 3, 'marLop@gmail.com', 'Reserva realizada por un cliente'),
-    ('2025-06-20', '18:00:00', '19:00:00', 6, 'marLop@gmail.com', 'Reserva realizada por un cliente');
-
--- Tabla sugerencias_incidencias
-
-INSERT INTO (fecha, contenido, cliente) sugerencias_incidencias VALUES 
-    ('2025-10-06', 'La página va lenta', 'marLop@gmail.com'),
-    ('2025-10-15', 'La página da error', 'antGar@gmail.com'),
-    ('2025-11-08', 'No veo mis reservas', 'antGar@gmail.com');
