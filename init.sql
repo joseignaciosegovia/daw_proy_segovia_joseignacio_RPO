@@ -10,10 +10,10 @@ use proyecto;
 
 CREATE TABLE if not exists CLIENTES(
     email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    DNI VARCHAR(100) NOT NULL,
-    telefono INT(9),
+    DNI VARCHAR(20) NOT NULL,
+    telefono INT(15),
     foto BLOB,
     codigo VARCHAR(100) NOT NULL,
     activo TINYINT(1) NOT NULL DEFAULT 0
@@ -21,10 +21,10 @@ CREATE TABLE if not exists CLIENTES(
 
 CREATE TABLE if not exists GESTORES(
     email VARCHAR(100) PRIMARY KEY,
-    contrasena VARCHAR(100) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    DNI VARCHAR(100) NOT NULL,
-    telefono INT(9),
+    DNI VARCHAR(20) NOT NULL,
+    telefono INT(15),
     foto BLOB,
     administrador TINYINT(1)
 );
@@ -43,17 +43,17 @@ CREATE TABLE if not exists RESERVAS(
     horaFin TIME NOT NULL,
     pista INT NOT NULL,
     cliente VARCHAR(100),
-    informacion VARCHAR(100) NOT NULL,
-    CONSTRAINT FOREIGN KEY(pista) REFERENCES pistas(id),
-    CONSTRAINT FOREIGN KEY(cliente) REFERENCES clientes(email)
+    informacion VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_res_pist FOREIGN KEY(pista) REFERENCES pistas(id),
+    CONSTRAINT fk_res_cli FOREIGN KEY(cliente) REFERENCES clientes(email)
 );
 
 CREATE TABLE if not exists SUGERENCIAS_INCIDENCIAS(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
-    contenido VARCHAR(100),
+    contenido VARCHAR(500),
     cliente VARCHAR(100),
-    CONSTRAINT FOREIGN KEY(cliente) REFERENCES CLIENTES(email)
+    CONSTRAINT fk_sug_cli FOREIGN KEY(cliente) REFERENCES clientes(email)
 );
 
 CREATE TABLE if not exists CONEXIONES(
