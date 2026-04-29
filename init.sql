@@ -68,14 +68,24 @@ CREATE TABLE if not exists conexiones(
 -- Tabla clientes
 
 INSERT INTO clientes VALUES 
-    ('marLop@gmail.com', 'marL1234', 'María López', '87182344I', 655871025, null, '$2y$12$GRoxOUyMK.YyXPot2/2F..7Q8zTrzrlY4y2k9CZMNmPFgoOiMHq6y', 0),
-    ('ferSan@gmail.com', 'ferS1234', 'Fernando Sanz', '11298419O', 664788795, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 0),
-    ('antGar@gmail.com', 'antG1234', 'Antonio García', '744391209U', 697874169, null, '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 0),
-    ('ferLui@gmail.com', 'ferL1234', 'Fernanda Luisa', '11298437H', 604975301, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 0);
+    ('marLop@gmail.com', '$2y$10$lpTs.g49VSLKkD8SGzl9LOVpZ7UNFwmecxGC9PqSioXlREtjGp.r2', 'María López', '87182344I', 655871025, null, '$2y$12$GRoxOUyMK.YyXPot2/2F..7Q8zTrzrlY4y2k9CZMNmPFgoOiMHq6y', 1),
+    ('ferSan@gmail.com', '$2y$10$jEGR/YfIt9Xiu5r/rjrreOYVwISNnJxYKGmybCdmwkDBYoR.XGyCW', 'Fernando Sanz', '11298419O', 664788795, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1),
+    ('antGar@gmail.com', '$2y$10$DMMANtYfLFFAMXhnIzH7q.jlB7yyHam18wGwUZU1T.Z0o3CJl3qdu', 'Antonio García', '744391209U', 697874169, null, '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 1),
+    ('ferLui@gmail.com', '$2y$10$u4AZ1xTiDSyXublcDmqv3.8UOt2SXdaeiRCjUPwQdNDIQEyM5pHCC', 'Fernanda Luisa', '11298437H', 604975301, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1);
+
+-- Contraseñas de clientes: 
+-- 'marL1234'
+-- 'ferS1234'
+-- 'antG1234'
+-- 'ferL1234'
 
 INSERT INTO gestores VALUES 
-    ('adminMer@gmail.com', 'admMer', 'Mercedes Puertas', '77319284T', 661281938, null, 0),
-    ('adminAnton@gmail.com', 'admAn', 'Antonio Castillo', '71822198U', 617291009, null, 0);
+    ('adminMer@gmail.com', '$2y$10$V0CR1TLyM0dkvzHU8ZGIneJM41LeNx81PS9O5mmqT5nUOcoZEoSMi', 'Mercedes Puertas', '77319284T', 661281938, null, 0),
+    ('adminAnton@gmail.com', '$2y$10$5S6n3ynswju4aoWasJF4A.oh30Y0piMKBHOdWjJnDio5KJJZlk.Sa', 'Antonio Castillo', '71822198U', 617291009, null, 0);
+
+-- Contaseñas de gestores:
+-- 'admMer'
+-- 'admAn'
 
 INSERT INTO pistas (nombre, localizacion, precioReserva) VALUES 
     ('Campo fútbol 7', 'Ciudad Deportiva', 8.25),
