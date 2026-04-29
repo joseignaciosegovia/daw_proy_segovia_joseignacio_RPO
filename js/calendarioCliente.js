@@ -80,7 +80,10 @@ async function cargarCalendario(pista){
             
             const fecha = info.dateStr.substring(0, info.dateStr.indexOf('T'));
             const horaInicio = info.dateStr.substring(info.dateStr.indexOf('T') +1, info.dateStr.indexOf('+'));
-            const horaFin = (fechaCompleta.getHours() +1) + ":00:00";
+            var horaFin = (fechaCompleta.getHours() +1) + ":00:00";
+
+            if (horaFin.indexOf(":") == 1)
+                horaFin = "0" + horaFin;
 
             const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
             const horaReserva = fechaCompleta.getTime() / 1000 / 60 / 60;
