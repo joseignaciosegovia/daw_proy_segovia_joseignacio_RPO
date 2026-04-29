@@ -1,0 +1,44 @@
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: reservar_pistas
+    ports:
+      - "14070:80"
+    # volumes:
+#       - reservar_data:/var/www/html
+    depends_on:
+      - db
+    environment:
+      TIMEZONE: Europe/Madrid
+      VIRTUAL_HOST: www.reservar.dockergp.ip-ddns.com
+      LETSENCRYPT_HOST: www.reservar.dockergp.ip-ddns.com
+    restart: unless-stopped
+    networks:
+      - proxy-network # Red externa para proxy inverso
+      - reservar-internal # Red interna para comunicar servicios
+  db:
+    image: mysql:8.0
+    container_name: reservar_db
+    environment:
+      MYSQL_ROOT_PASSWORD: secreto
+      MYSQL_DATABASE: proyecto
+      MYSQL_USER: gestor
+      MYSQL_PASSWORD: secreto
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - reservar-internal # Solo necesita estar en la red interna
+
+networks:
+  proxy-network:
+  reservar-internal:
+    name: reservar-internal
+    driver: bridge
+    internal: true # Cambiar a true si quieres aislarla completamente de internet
+
+volumes:
+  reservar_data:
+  db_data:
