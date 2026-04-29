@@ -63,6 +63,8 @@ CREATE TABLE if not exists conexiones(
     acceso VARCHAR(100)
 );
 
+SET NAMES utf8mb4;
+
 -- 4. Inserción de datos iniciales
 
 -- Tabla clientes
