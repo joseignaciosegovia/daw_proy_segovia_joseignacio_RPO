@@ -1,6 +1,6 @@
 -- 1. Crear la base de datos:
 
-create database proyecto DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+create database if not exists proyecto DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- 2. Seleccionamos la base de datos "proyecto"
 
@@ -70,12 +70,3 @@ create user gestor@'localhost' identified by "secreto";
 -- 5.- Le damos permiso en la base de datos "proyecto"
 
 grant all on proyecto.* to gestor@'localhost';
-
--- 6. Borrar las tablas
-
-drop table conexiones;
-drop table sugerencias_incidencias;
-drop table reservas;
-drop table pistas;
-drop table gestores;
-drop table clientes;
