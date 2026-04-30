@@ -51,6 +51,7 @@
                             $horaActual = strtotime("now"); 
                             // Recorremos las reservas y las mostramos
                             foreach($reservas as $reserva){
+                                // Guardamos el nombre de la pista para mostrarlo
                                 $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
                                 echo "<tr>";
                                     echo "<td>$reserva[fecha]</td>";

@@ -128,7 +128,7 @@ async function cargarCalendario(pista, id){
 
     //let url = new URL('http://localhost/proyecto/servidor/obtenerCalendario.php');
     let url = new URL('http://localhost:8080/servidor/obtenerCalendario.php');
-    let parametro = {pista: pista};
+    let parametro = {pista: id};
     url.search = new URLSearchParams(parametro).toString();
 
     // Obtenemos las fechas ocupadas de esta pista
@@ -158,13 +158,14 @@ async function cargarCalendario(pista, id){
     calendar.setOption('events', events);
 }
 
-function confirmarFecha(fecha, horaInicio, horaFin, id, cliente) {
+function confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             horaInicio: horaInicio, 
-            pista: id,
+            pista: pista,
+            id: id,
             horaFin, horaFin,
             cliente: cliente,
             informacion: "Reserva realizada por un cliente"

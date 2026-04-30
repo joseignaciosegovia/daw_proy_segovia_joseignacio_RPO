@@ -7,7 +7,7 @@
     if(isset($_GET['pista'])){
         $crud = new Crud(new DB("proyecto"));
         // Enviamos las fechas ocupadas de esta pista a JavaScript para que actualice el calendario para el cliente
-        $calendario = json_encode($crud->listar("*", "reservas", "where pista = \"$_GET[pista]\""));
+        $calendario = json_encode($crud->listar("*", "reservas", "where pista = $_GET[pista]"));
         echo $calendario;
     }
 
