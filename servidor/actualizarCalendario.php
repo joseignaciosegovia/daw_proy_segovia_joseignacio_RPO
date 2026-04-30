@@ -12,10 +12,10 @@
         $crud = new Crud(new DB("proyecto"));
         // Si la reserva no tiene cliente
         if($datos->cliente == null) {
-            $crud->insertarColumnas("reservas", "(fecha, horaInicio, horaFin, pista, cliente, informacion)", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->horaFin\", \"$datos->pista\", null, \"$datos->informacion\"");
+            $crud->insertarColumnas("reservas", "(fecha, horaInicio, horaFin, pista, cliente, informacion)", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->horaFin\", \"$datos->id\", null, \"$datos->informacion\"");
         }
         else {
-            $crud->insertarColumnas("reservas", "(fecha, horaInicio, horaFin, pista, cliente, informacion)", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->horaFin\", \"$datos->pista\", \"$datos->cliente\", \"$datos->informacion\"");
+            $crud->insertarColumnas("reservas", "(fecha, horaInicio, horaFin, pista, cliente, informacion)", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->horaFin\", \"$datos->id\", \"$datos->cliente\", \"$datos->informacion\"");
         }
     }
 
