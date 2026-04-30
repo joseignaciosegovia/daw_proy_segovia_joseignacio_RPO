@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
 
-            cargarCalendario(pista.outerText);
+            cargarCalendario(pista.outerText, pista.childNodes[1].value);
         });
     }
 });
 
 // Función que muestra el calendario
-async function cargarCalendario(pista){
+async function cargarCalendario(pista, id){
     crearModal();
     // Obtenemos el email del cliente
     const cliente = document.getElementById('cliente').outerText;
@@ -112,7 +112,7 @@ async function cargarCalendario(pista){
                     Añadir una reserva el ${fecha} a las ${horaInicio}
                 `);
 
-                confirmarFecha(fecha, horaInicio, horaFin, pista, cliente);
+                confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente);
             }
             
             const modal = new bootstrap.Modal('#modal');
@@ -158,14 +158,13 @@ async function cargarCalendario(pista){
     calendar.setOption('events', events);
 }
 
-function confirmarFecha(fecha, horaInicio, horaFin, pista, cliente) {
+function confirmarFecha(fecha, horaInicio, horaFin, id, cliente) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     $(botonConfirmar[0]).on('click', function(event) {
-  
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             horaInicio: horaInicio, 
-            pista: pista,
+            pista: id,
             horaFin, horaFin,
             cliente: cliente,
             informacion: "Reserva realizada por un cliente"

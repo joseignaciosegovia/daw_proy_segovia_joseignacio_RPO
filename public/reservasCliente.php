@@ -51,11 +51,12 @@
                             $horaActual = strtotime("now"); 
                             // Recorremos las reservas y las mostramos
                             foreach($reservas as $reserva){
+                                $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
                                 echo "<tr>";
                                     echo "<td>$reserva[fecha]</td>";
                                     echo "<td>$reserva[horaInicio]</td>";
                                     echo "<td>$reserva[horaFin]</td>";
-                                    echo "<td>$reserva[pista]</td>";
+                                    echo "<td>$pista</td>";
                                     echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
                                     // Los campos ocultos guardan información que será utilizada por JavaScript
                                     echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";

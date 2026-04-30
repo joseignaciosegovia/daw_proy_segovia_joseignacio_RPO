@@ -48,10 +48,11 @@
                         <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
                     <?php
                         // Para cada localización, añadimos las pistas al acordeón
-                        $pistas = $crud->listar("nombre", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
+                        $pistas = $crud->listar("nombre, id", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
                         foreach($pistas as $pista){
                     ?>
                             <div class="accordion-body">
+                                <input id="id" name="id" type="hidden" value=<?php echo "$pista[id]"; ?> />
                                 <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
                             </div>
                     <?php
