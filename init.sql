@@ -14,7 +14,7 @@ CREATE TABLE if not exists clientes(
     nombre VARCHAR(100) NOT NULL,
     DNI VARCHAR(20) NOT NULL,
     telefono INT(15),
-    foto BLOB,
+    foto VARCHAR(255),
     codigo VARCHAR(100) NOT NULL,
     activo TINYINT(1) NOT NULL DEFAULT 0
 );
@@ -25,7 +25,7 @@ CREATE TABLE if not exists gestores(
     nombre VARCHAR(100) NOT NULL,
     DNI VARCHAR(20) NOT NULL,
     telefono INT(15),
-    foto BLOB,
+    foto VARCHAR(255),
     administrador TINYINT(1)
 );
 

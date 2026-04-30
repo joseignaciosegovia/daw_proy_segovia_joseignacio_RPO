@@ -65,6 +65,20 @@
             $valores = $valores . ", contrasena = \"$contraseña\"";
         }
 
+        // Si el usuario ha elegido una imagen
+       if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+            $nombreTmp = $_FILES['foto']['tmp_name'];
+            $nombreFinal = $_FILES['foto']['name'];
+
+            // Ruta del archivo dentro del directorio del proyecto
+            $rutaDestino = "/imagenes/" . $nombreFinal;
+
+            // Guardamos la imagen en el directorio "imagenes"
+            move_uploaded_file($nombreTmp, $rutaDestino);
+            // Añadimos la ruta de la imagen para actualizar el cliente
+            $valores = $valores . ", foto = \"$rutaDestino\"";
+        }
+
         $condicion = "where email = \"$_SESSION[cliente]\"";
 
         // Actualizamos el perfil en la base de datos
@@ -96,7 +110,7 @@
             $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
         ?>
         
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente">
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Perfil</h4>
@@ -149,7 +163,7 @@
                     <div class="row mt-3">
                         <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
                             <label class="labels">Foto de perfil</label>
-                            <input type="file" class="form-control" id="foto">
+                            <input type="file" class="form-control" id="foto" name="foto">
                             <div class="invalid-feedback">
                                 Introduzca una foto válida
                             </div>
