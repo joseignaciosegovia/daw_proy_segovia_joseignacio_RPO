@@ -376,6 +376,28 @@ function validacionPerfilCliente(form) {
       showFeedBack(ncTelefono, true);
     }
 
+    const ncFoto = document.getElementById('foto');
+  
+    if (!ncFoto.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncFoto, false);
+
+      firstInvalidElement = ncFoto;
+    } else {
+      showFeedBack(ncFoto, true);
+    }
+
+    const ncDNI = document.getElementById('dni');
+  
+    if (!ncDNI.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncDNI, false);
+
+      firstInvalidElement = ncDNI;
+    } else {
+      showFeedBack(ncDNI, true);
+    }
+
     const ncConfirmar = document.getElementById('confirmarContraseña');
     const ncContraseña = document.getElementById('contraseña');
 
@@ -446,7 +468,9 @@ function validacionPerfilCliente(form) {
         nombre: ncNombre.value, 
         contraseña: ncContraseña.value, 
         confirmarContraseña: ncConfirmar.value,
-        telefono: ncTelefono.value
+        dni: ncDNI.value,
+        telefono: ncTelefono.value,
+        foto: ncFoto.value
       });
 
       // Realizamos el envío al servidor
@@ -507,6 +531,8 @@ function validacionPerfilCliente(form) {
   })
 
     const ncTelefono = document.getElementById('telefono');
+    const ncDNI = document.getElementById('dni');
+    const ncFoto = document.getElementById('foto');
     const ncConfirmar = document.getElementById('confirmarContraseña');
     const ncContraseña = document.getElementById('contraseña');
     const ncNombre = document.getElementById('nombre');
@@ -518,6 +544,14 @@ function validacionPerfilCliente(form) {
       showFeedBack(ncTelefono, false, "Introduzca un teléfono válido");
     } else {
       showFeedBack(ncTelefono, true);
+    }
+  });
+
+  ncDNI.addEventListener('change', function (event) {
+    if (!ncTelefono.checkValidity()) {
+      showFeedBack(ncDNI, false, "Introduzca un DNI válido");
+    } else {
+      showFeedBack(ncDNI, true);
     }
   });
 

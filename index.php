@@ -168,7 +168,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="dni" class="form-label">DNI</label>
-                        <input type="text" class="form-control" id="dni" placeholder="Ej.: 70114785H" pattern="[0-9]{8}[A-Z]">
+                        <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]">
                         <div class="invalid-feedback">
                             Introduzca un DNI válido
                         </div>
