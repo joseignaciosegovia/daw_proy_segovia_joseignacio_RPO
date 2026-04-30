@@ -39,7 +39,9 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $reservas = $crud->listar("*", "reservas", "where pista = \"$_GET[pista]\"");
+        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0]['id'];
+
+        $reservas = $crud->listar("*", "reservas", "where pista = $pista");
 ?>
 
         <h1>Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
