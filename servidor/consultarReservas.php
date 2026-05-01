@@ -84,7 +84,8 @@
                             }
                     ?>
                         <tr>
-                            <td hidden><?php echo $_GET['pista'] ?></td>
+                            <!-- Guardamos el id de la pista para poder actualizar la reserva desde actualizarCalendario.php -->
+                            <td hidden><?php echo $pista ?></td>
                             <td><?php echo $cont ?></td>
                             <td><?php echo $reserva['fecha'] ?></td>
                             <td><?php echo $reserva['horaInicio'] ?></td>

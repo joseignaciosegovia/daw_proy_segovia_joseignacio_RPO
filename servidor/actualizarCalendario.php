@@ -23,7 +23,7 @@
     if(isset($_POST['Confirmar'])) {
         $editar = json_decode(($_POST['Confirmar']));
         $crud = new Crud(new DB("proyecto"));
-        $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where fecha = \"$editar->fechaOriginal\" and horaInicio = \"$editar->horaInicioOriginal\" and pista = \"$editar->id\"");
+        $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where fecha = \"$editar->fechaOriginal\" and horaInicio = \"$editar->horaInicioOriginal\" and pista = \"$editar->pista\"");
     }
 
     // Si el administrador borra una reserva
