@@ -30,16 +30,14 @@ function editarReserva(botonEditar) {
     modalCuerpo.insertAdjacentHTML('afterbegin', `
         <form class="row needs-validation px-4" name="editarReserva" novalidate>
             <label for="fecha">Fecha</label>
-            <input type="date" id="fecha" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
-            <input type="date" hidden id="fechaOriginal" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
+            <input type="date" id="fecha" value=${botonEditar.parentNode.parentNode.childNodes[11].outerText}>
+            <input type="number" hidden id="id" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
             <label for="horaInicio">Hora de inicio</label>
-            <input type="time" id="horaInicio" min="08:00" max="22:00" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
-            <input type="time" hidden id="horaInicioOriginal" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
+            <input type="time" id="horaInicio" min="08:00" max="22:00" value=${botonEditar.parentNode.parentNode.childNodes[13].outerText}>
             <label for="horaFin">Hora de fin</label>
-            <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[11].outerText}>
-            <input type="text" hidden id="pista" value=${botonEditar.parentNode.parentNode.childNodes[3].outerText}>
+            <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[15].outerText}>
             <label for="informacion">Información de la reserva</label>
-            <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[15].outerText}>
+            <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[19].outerText}>
         </form>
     `);
 
@@ -86,12 +84,10 @@ function actualizarReserva() {
         // Datos necesarios para modificar una reserva
         let datosAEnviar = JSON.stringify({  
             fecha: document.getElementById("fecha").value,
-            fechaOriginal: document.getElementById("fechaOriginal").value,
             horaInicio: document.getElementById("horaInicio").value + ":00", 
-            horaInicioOriginal: document.getElementById("horaInicioOriginal").value, 
             horaFin: document.getElementById("horaFin").value + ":00",
-            pista: document.getElementById("pista").value,
-            informacion: document.getElementById("informacion").value
+            informacion: document.getElementById("informacion").value,
+            id: document.getElementById("id").value
         });
 
         actualizarCalendario(datosAEnviar, botonEditar.outerText);
@@ -105,10 +101,8 @@ function borrarReserva() {
     const botonBorrar = document.querySelectorAll('.modal-footer .btn-danger')[0];
     $(botonBorrar).on('click', function(event) {
         // Datos necesarios para borrar una reserva
-        let datosAEnviar = JSON.stringify({  
-            fecha: document.getElementById("fechaOriginal").value,
-            horaInicio: document.getElementById("horaInicioOriginal").value, 
-            pista: document.getElementById("pista").value,
+        let datosAEnviar = JSON.stringify({
+            id: document.getElementById("id").value,
         });
 
         actualizarCalendario(datosAEnviar, botonBorrar.outerText);
