@@ -16,6 +16,8 @@ function editarReserva(botonEditar) {
     crearModal();
 
     const modalTitulo = document.getElementsByClassName('modal-title')[0];
+    // Borramos el título del modal para que no muestre el mensaje anterior
+    modalTitulo.replaceChildren();
     modalTitulo.insertAdjacentHTML('afterbegin', `
         Editar reserva
     `);
@@ -28,16 +30,16 @@ function editarReserva(botonEditar) {
     modalCuerpo.insertAdjacentHTML('afterbegin', `
         <form class="row needs-validation px-4" name="editarReserva" novalidate>
             <label for="fecha">Fecha</label>
-            <input type="date" id="fecha" value=${botonEditar.parentNode.parentNode.childNodes[5].outerText}>
-            <input type="date" hidden id="fechaOriginal" value=${botonEditar.parentNode.parentNode.childNodes[5].outerText}>
+            <input type="date" id="fecha" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
+            <input type="date" hidden id="fechaOriginal" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
             <label for="horaInicio">Hora de inicio</label>
-            <input type="time" id="horaInicio" min="08:00" max="22:00" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
-            <input type="time" hidden id="horaInicioOriginal" value=${botonEditar.parentNode.parentNode.childNodes[7].outerText}>
+            <input type="time" id="horaInicio" min="08:00" max="22:00" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
+            <input type="time" hidden id="horaInicioOriginal" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
             <label for="horaFin">Hora de fin</label>
-            <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[9].outerText}>
-            <input type="text" hidden id="pista" value=${botonEditar.parentNode.parentNode.childNodes[1].outerText}>
+            <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[11].outerText}>
+            <input type="text" hidden id="pista" value=${botonEditar.parentNode.parentNode.childNodes[3].outerText}>
             <label for="informacion">Información de la reserva</label>
-            <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[13].outerText}>
+            <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[15].outerText}>
         </form>
     `);
 
