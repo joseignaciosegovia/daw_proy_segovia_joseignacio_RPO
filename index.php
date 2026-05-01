@@ -46,15 +46,32 @@
         $nombre = trim($datos->nombre);
         $email = trim($datos->email);
 
+        // Si el usuario ha introducido un teléfono
         if($datos->telefono == null)
             $telefono =  0;
         else
             $telefono = $datos->telefono;
 
+        // Si el usuario ha elegido una foto de perfil
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+            $nombreTmp = $_FILES['foto']['tmp_name'];
+            $nombreFinal = $_FILES['foto']['name'];
+
+            // Ruta del archivo dentro del directorio del proyecto
+            $rutaDestino = "/imagenes/" . $nombreFinal;
+
+            // Guardamos la imagen en el directorio "imagenes"
+            move_uploaded_file($nombreTmp, $rutaDestino);
+        }
+        else
+            $rutaDestino = null;
+
+        /*
         if($datos->foto == null)
             $foto =  null;
         else
             $foto = $datos->foto;
+        */
 
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
@@ -74,7 +91,7 @@
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
         $codigo = password_hash(rand(0,1000), PASSWORD_DEFAULT);
         // Insertamos el usuario en la base de datos
-        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$datos->foto\", \"$codigo\", 0");
+        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$rutaDestino\", \"$codigo\", 0");
 
         // Enviamos el email de verificación
         $destinatario = $email; 

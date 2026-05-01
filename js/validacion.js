@@ -184,8 +184,7 @@ function validacionCrearUsuario(form) {
           contraseña: ncContraseña.value, 
           confirmarContraseña: ncConfirmar.value,
           dni: ncDNI.value,
-          telefono: ncTelefono.value,
-          foto: ncFoto.value
+          telefono: ncTelefono.value
         });
   
         // Realizamos el envío al servidor
@@ -196,6 +195,11 @@ function validacionCrearUsuario(form) {
         // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['datos']"
   
         formData.append("datos", datosAEnviar);
+
+        // Si el usuario ha añadido una foto de perfil
+        if (ncFoto.files.length > 0) {
+          formData.append("foto", ncFoto.files[0]);
+        }
   
         // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
   /*
