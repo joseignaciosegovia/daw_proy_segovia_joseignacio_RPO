@@ -11,8 +11,10 @@ function cargarCalendario(){
 
     var calendario = JSON.parse(document.getElementById('calendario').outerText);
 
-    // Sacamos la pista del array que contenía el calendario y el nombre de la pista
+    // Sacamos el nombre de la pista del array que contenía el calendario, el id de la pista y su nombre
     const pista = calendario.pop();
+    // Sacamos el id de la pista del array que contenía el calendario, el id de la pista y su nombre
+    const id = calendario.pop();
     // Guardamos en una variable el div en el que incluiremos el calendario
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
@@ -90,7 +92,7 @@ function cargarCalendario(){
                 `);
                 modal.show();
                 
-                confirmarFecha(pista, calendar, modal);
+                confirmarFecha(pista, id, calendar, modal);
             }
             
             cerrarModal(modal);
@@ -126,7 +128,7 @@ function cargarCalendario(){
 }
 
 // Función que define lo que pasará cuando se confirme una reserva
-function confirmarFecha(pista) {
+function confirmarFecha(pista, id) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     // Comportamiento del botón de Confirmar
     $(botonConfirmar[0]).on('click', async function(event) {
@@ -141,6 +143,7 @@ function confirmarFecha(pista) {
             horaInicio: horaInicio, 
             horaFin: horaFin,
             pista: pista,
+            id: id,
             informacion: informacion
         });
 

@@ -39,8 +39,12 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        // Guardamos las fechas ocupadas y el nombre de la pista
-        $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = \"$_GET[pista]\"");
+        // Guardamos el id de la pista
+        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0]['id'];
+
+        // Guardamos las fechas ocupadas, el id de la pista y su nombre
+        $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = $pista");
+        $reservasYPista[] = $pista;
         $reservasYPista[] = $_GET['pista'];
 ?>
 
