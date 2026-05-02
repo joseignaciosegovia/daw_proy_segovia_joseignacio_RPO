@@ -27,7 +27,6 @@
     if(!empty($_SESSION["gestor"])){
         $crud = new Crud(new DB("proyecto"));
         $pistas = $crud->listar("*", "pistas", "");
-
         $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
 ?>

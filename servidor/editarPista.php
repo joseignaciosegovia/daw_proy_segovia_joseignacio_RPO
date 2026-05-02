@@ -55,10 +55,11 @@
     if(isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
         $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
-    
+        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 ?>
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container-fluid">
+        <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
@@ -68,6 +69,7 @@
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
+                            
                             <h4 class="text-right">Pista: <?php echo "$_GET[pista]" ?></h4>
                         </div>
                         <div class="row mt-3">

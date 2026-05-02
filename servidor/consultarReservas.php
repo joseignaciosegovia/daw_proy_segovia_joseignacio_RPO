@@ -40,11 +40,12 @@
         $crud = new Crud(new DB("proyecto"));
 
         $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0]['id'];
+        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
         $reservas = $crud->listar("*", "reservas", "where pista = $pista");
 ?>
-
-        <h1>Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
+        <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
+        <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">
