@@ -58,18 +58,16 @@ function cancelarReserva(icono) {
     modal.show();
 
     cerrarModal(modal);
-    confirmarCancelacion(fecha, horaInicio, pista);
+    confirmarCancelacion(parseInt(icono.dataset.id));
 }
 
 // Función que define el comportamiento del botón de confirmar la cancelación
-function confirmarCancelacion(fecha, horaInicio, pista) {
+function confirmarCancelacion(id) {
     const botonConfirmar = $('.modal-footer .btn-primary');
     // Pinchamos en el botón de Confirmar
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
-            fecha: fecha,
-            horaInicio: horaInicio, 
-            pista: pista
+            id: id
         });
 
         const formData = new FormData();

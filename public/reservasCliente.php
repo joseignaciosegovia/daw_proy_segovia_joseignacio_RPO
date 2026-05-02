@@ -59,14 +59,11 @@
                                     echo "<td>$reserva[horaFin]</td>";
                                     echo "<td>$pista</td>";
                                     echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
-                                    // Los campos ocultos guardan información que será utilizada por JavaScript
-                                    echo "<input name=\"fecha\" type=\"hidden\" value=\"$reserva[fecha]\">";
-                                    echo "<input name=\"horaInicio\" type=\"hidden\" value=\"$reserva[horaInicio]\">";
-                                    echo "<input name=\"pista\" type=\"hidden\" value=\"$reserva[pista]\">";
                                     $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
                                     // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
                                     if($horaReserva > $horaActual) {
-                                        echo "<td><i class=\"bi bi-x-circle\"></i></td>";
+                                        // Guardamos el id de la reserva para poder cancelarla
+                                        echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
                                     }
                                     else {
                                         echo "<td>Fecha pasada</td>";

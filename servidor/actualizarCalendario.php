@@ -37,7 +37,7 @@
     if(isset($_POST['cancelar'])) {
         $reserva = json_decode($_POST['cancelar']);
         $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("reservas", "where fecha = \"$reserva->fecha\" and horaInicio = \"$reserva->horaInicio\" and pista = \"$reserva->id\"");
+        $crud->eliminar("reservas", "where id = $reserva->id");
         header("Location: ../public/reservasCliente.php");
     }
 
