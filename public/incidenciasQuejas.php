@@ -66,9 +66,43 @@
                     </div>
                 </form>
             </div>
+
+<?php
+    $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
+
+    if($sugerencias == null) {
+        echo "<h4 class=\"d-flex justify-content-center py-2\">No has realizado ninguna sugerencia/incidencia</h4>";
+    }
+
+    else{
+
+?>
+        <h4 class="d-flex justify-content-center py-2">Historial de sugerencias/incidencias</h4>
+        <div class="accordion accordion-flush">
+            <table class="table table-hover">
+                <?php $contador = 1; ?>
+                <thead>
+                    <th>Número</th>
+                    <th>Fecha</th>
+                    <th>Contenido</th>
+                </thead>
+                <tbody>
+                    <?php foreach($sugerencias as $sugerencia){ ?>
+                    <tr>
+                        <td><?php echo $contador ?></td>
+                        <td><?php echo $sugerencia['fecha'] ?></td>
+                        <td><?php echo $sugerencia['contenido'] ?></td>
+                        <?php $contador++; ?>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
+    </div>
 
     <?php
+    
+    }
         // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
     ?>
