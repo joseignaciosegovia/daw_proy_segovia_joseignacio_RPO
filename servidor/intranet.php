@@ -28,7 +28,10 @@
         $crud = new Crud(new DB("proyecto"));
         $pistas = $crud->listar("*", "pistas", "");
 
+        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
+
 ?>
+    <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
     <h1 class="d-flex justify-content-center">Lista de Pistas</h1>
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container-fluid">
