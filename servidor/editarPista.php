@@ -46,7 +46,9 @@
     // Si pulsamos el botón de borrar
     elseif (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("pistas", "where nombre = \"$_GET[Borrar]\"");
+
+        $id = $crud->listar("id", "pistas", "where nombre = \"$_GET[Borrar]\"")[0]['id'];
+        $crud->eliminar("pistas", "where id = $id");
         // En confirmacion.js está el mensaje para confirmar el borrado
         header("Location: intranet.php");
     }

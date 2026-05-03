@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Precio de Reserva</label>
-                                    <input type="number" class="form-control" id="precio" name="Precio" value="" required>
+                                    <input type="number" class="form-control" id="precio" name="Precio" value="" step="0.01" required>
                                     <div class="invalid-feedback">
                                         Introduzca un precio válido
                                     </div>

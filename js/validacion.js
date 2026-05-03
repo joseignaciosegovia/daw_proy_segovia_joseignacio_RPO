@@ -902,33 +902,12 @@ function validarAñadirPista(form) {
       firstInvalidElement.focus();
     } else {
       const ncLocalizacion = document.getElementById('Localizacion');
-      let precio;
-
-      // Si hay varios precios
-      if(ncPrecio.legnth != null) {
-        let precios = new Array();
-        precios.length = ncPrecio.length;
-        let mapa = new Map();
-        let contador = 0;
-
-        for(const precio of ncPrecio) {
-          mapa.set(precio.id, precio.value);
-          precios[precio.id] = precio.value;
-          contador++;
-        }
-
-        precio = JSON.stringify(Object.fromEntries(mapa));
-      }
-
-      // Si solo hay un precio
-      else {
-        precio = ncPrecio.value;
-      }
+      const ncPrecio = document.getElementById('precio');
       
       let datosAEnviar = JSON.stringify({ 
         nombre: ncNombre.value, 
         localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value), 
-        precio: precio
+        precio: ncPrecio.value
       });
 
       // Realizamos el envío al servidor
