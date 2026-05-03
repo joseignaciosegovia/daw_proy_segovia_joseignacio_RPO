@@ -736,18 +736,26 @@ function validarEditarPista(form) {
     let isValid = true;
     let firstInvalidElement = null;
 
-    //const ncLocalizacion = document.getElementById('Localizacion');
-    const ncPrecio = document.getElementsByName('Precio');
+    const ncNombre = document.getElementById('nombre');
 
-    for(const precio of ncPrecio) {
-      if (!precio.checkValidity()) {
-        isValid = false;
-        showFeedBack(precio, false);
+    if (!ncNombre.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncNombre, false);
 
-        firstInvalidElement = precio;
-      } else {
-        showFeedBack(precio, true);
-      }
+      firstInvalidElement = ncNombre;
+    } else {
+      showFeedBack(ncNombre, true);
+    }
+
+    const ncPrecio = document.getElementById('precio');
+
+    if (!ncPrecio.checkValidity()) {
+      isValid = false;
+      showFeedBack(ncPrecio, false);
+
+      firstInvalidElement = ncPrecio;
+    } else {
+      showFeedBack(ncPrecio, true);
     }
     
     if (!isValid) {
@@ -761,35 +769,14 @@ function validarEditarPista(form) {
       firstInvalidElement.focus();
     } else {
       const ncLocalizacion = document.getElementById('Localizacion');
-      const ncNombreOriginal = document.getElementById('nombreOriginal');
-      
-      let precio;
-
-      // Si hay varios precios
-      if(ncPrecio.legnth != null) {
-        let precios = new Array();
-        precios.length = ncPrecio.length;
-        let mapa = new Map();
-        let contador = 0;
-
-        for(const precio of ncPrecio) {
-          mapa.set(precio.id, precio.value);
-          precios[precio.id] = precio.value;
-          contador++;
-        }
-
-        precio = JSON.stringify(Object.fromEntries(mapa));
-      }
-
-      // Si solo hay un precio
-      else {
-        precio = ncPrecio[0].value;
-      }
+      const ncNombre = document.getElementById('nombre');
+      const ncPrecio = document.getElementById('precio');
 
       let datosAEnviar = JSON.stringify({ 
+        id: document.getElementById('id').value,
         localizacion: [...ncLocalizacion.selectedOptions].map((option) => option.value)[0], 
-        precio: precio,
-        nombreOriginal: ncNombreOriginal.value
+        precio: ncPrecio.value,
+        nombre: ncNombre.value
       });
 
       // Realizamos el envío al servidor
@@ -843,19 +830,26 @@ function validarEditarPista(form) {
     form.reset();
   })
 
-  const ncPrecio = document.getElementsByName('Precio');
+  const ncPrecio = document.getElementById('precio');
+  const ncNombre = document.getElementById('nombre');
 
   // Validación en línea de cada "input"
 
-  for(const precio of ncPrecio){
-    precio.addEventListener('change', function (event) {
-      if (!precio.checkValidity()) {
-        showFeedBack(precio, false, "Introduzca un precio válido");
-      } else {
-        showFeedBack(precio, true);
-      }
-    });
-  }
+  ncPrecio.addEventListener('change', function (event) {
+    if (!ncPrecio.checkValidity()) {
+      showFeedBack(ncPrecio, false, "Introduzca un precio válido");
+    } else {
+      showFeedBack(ncPrecio, true);
+    }
+  });
+
+  ncNombre.addEventListener('change', function (event) {
+    if (!ncNombre.checkValidity()) {
+      showFeedBack(ncNombre, false, "Introduzca un nombre válido");
+    } else {
+      showFeedBack(ncNombre, true); 
+    }
+  });
 }
 
 // Validación del formulario para añadir una pista

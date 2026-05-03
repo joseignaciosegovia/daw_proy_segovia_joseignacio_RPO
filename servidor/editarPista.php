@@ -33,8 +33,8 @@
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
-        $valores = "localizacion = \"$datos->localizacion\", precioReserva = '$datos->precio'";        
-        $condicion = "where nombre = \"$datos->nombreOriginal\"";
+        $valores = "nombre = \"$datos->nombre\", localizacion = \"$datos->localizacion\", precioReserva = '$datos->precio'";        
+        $condicion = "where id = $datos->id";
 
         // Actualizamos el perfil en la base de datos
         $crud = new Crud(new DB("proyecto"));
@@ -55,11 +55,11 @@
     if(isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
         $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
-        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
+    
 ?>
+    <h1 class="d-flex justify-content-center">Editar pista</h1>
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <div class="container-fluid">
-        <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
         <div class="row">
             <!-- La barra de navegación será la primera columna -->
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
@@ -68,11 +68,17 @@
             <div class="col-12 col-lg-8 d-flex align-items-center">
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
                     <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            
-                            <h4 class="text-right">Pista: <?php echo "$_GET[pista]" ?></h4>
-                        </div>
                         <div class="row mt-3">
+                            <div class="col-md-12 mt-3">
+                                <label class="labels">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <label for="Localizacion">Localización</label>
                                 <select name="Localizacion" id="Localizacion">
@@ -93,87 +99,22 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mt-3">
-                                
-                            <?php
-                                $precios = json_decode($pista['precioReserva']);
-                                // Si la localización de la pista es "Ciudad Deportiva", mostramos los distintos precios en una tabla
-                                if($pista['localizacion'] == "Ciudad Deportiva"){
-                            ?>
-                                <label class="labels">Precios de Reserva</label>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th colspan="2">Adultos</th>
-                                        <th colspan="2">Menores de edad</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Normal</td>
-                                            <td>Con luz</td>
-                                            <td>Normal</td>
-                                            <td>Con luz</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="number" class="form-control" id="adultoNormal" name="Precio" value="<?php echo $precios->adultoNormal?>">
-                                                <div class="invalid-feedback">
-                                                    Introduzca un precio válido
-                                                </div>
-                                                <div class="valid-feedback">
-                                                    Dato correcto
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control" id="adultoConLuz" name="Precio" value="<?php echo $precios->adultoConLuz?>">
-                                                <div class="invalid-feedback">
-                                                    Introduzca un precio válido
-                                                </div>
-                                                <div class="valid-feedback">
-                                                    Dato correcto
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control" id="menorNormal" name="Precio" value="<?php echo $precios->menorNormal?>">
-                                                <div class="invalid-feedback">
-                                                    Introduzca un precio válido
-                                                </div>
-                                                <div class="valid-feedback">
-                                                    Dato correcto
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="number" class="form-control" id="menorConLuz" name="Precio" value="<?php echo $precios->menorConLuz?>">
-                                                <div class="invalid-feedback">
-                                                    Introduzca un precio válido
-                                                </div>
-                                                <div class="valid-feedback">
-                                                    Dato correcto
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            <?php
-                                }
-                                // Si la localización de la pista no es "Ciudad Deportiva", mostramos solo un precio
-                                else {
-                            ?>
                                 <label class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" id="precioUnico" name="Precio" value="<?php echo $precios ?>">
+                                <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un precio válido
                                 </div>
                                 <div class="valid-feedback">
                                     Dato correcto
                                 </div>
-                            <?php } ?>
                             </div>
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
                             <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
                         </div>
-                        <!-- Campo oculto para guardar el nombre de la pista antes de actualizarlo -->
-                        <input id="nombreOriginal" type="hidden" value="<?php echo "$pista[nombre]"?>">
+                        <!-- Campo oculto para guardar el id de la pista para poder actualizarlo -->
+                        <input id="id" type="hidden" value="<?php echo "$pista[id]"?>">
                     </div>
                 </form>
             </div>
