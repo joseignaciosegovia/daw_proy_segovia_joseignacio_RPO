@@ -12,6 +12,13 @@
         <script type="module" src="/js/validacion.js"></script>
 <?php }
 
+    // Función para añadir scripts en el pie
+    function añadirScriptsPie(){
+?>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+        <script type="module" src="/js/calendarioSinCliente.js"></script>
+<?php }
+
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
@@ -65,13 +72,6 @@
         }
         else
             $rutaDestino = null;
-
-        /*
-        if($datos->foto == null)
-            $foto =  null;
-        else
-            $foto = $datos->foto;
-        */
 
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
@@ -219,6 +219,52 @@
                 </form>
             </div>
         </div>
+
+        <div class="col-8 col-sm-6">
+            <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
+            <div class="accordion accordion-flush" id="elegirPista">
+            <?php
+                $crud = new Crud(new DB("proyecto"));
+                $contador = 0;
+                // Obtenemos todas las localizaciones y las añadimos al acordeón
+                $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                foreach($localizaciones as $localizacion){
+            ?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
+                                <?php echo "$localizacion[localizacion]"; ?>
+                            </button>
+                        </h2>
+                        <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
+                    <?php
+                        // Para cada localización, añadimos las pistas al acordeón
+                        $pistas = $crud->listar("nombre, id", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
+                        foreach($pistas as $pista){
+                    ?>
+                            <div class="accordion-body">
+                                <input id="id" name="id" type="hidden" value=<?php echo "$pista[id]"; ?> />
+                                <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
+                            </div>
+                    <?php
+                        }
+                    ?>
+                        </div>
+            <?php
+                    $contador++;
+                }
+            ?>
+                    </div>
+                </div>
+               
+        </div>
+        <!-- Cerramos la sección principal, creada en navCliente.php -->
+        <h3 id="tituloPista" class="d-flex justify-content-center"></h3>
+    </div>
+    
+    <div class="col" id="calendario">
+        
+    </div>
     </div>
 <?php
 
