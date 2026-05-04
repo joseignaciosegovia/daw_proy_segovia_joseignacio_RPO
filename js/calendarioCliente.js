@@ -46,6 +46,10 @@ async function cargarCalendario(pista, id){
 
         allDaySlot: false,
 
+        // La altura del calendario se ajusta automáticamente a su tamaño
+        height: 'auto',
+
+        // Formato de la columna que indica la hora
         slotLabelFormat:{
             hour: '2-digit',
             minute: '2-digit',
@@ -53,25 +57,12 @@ async function cargarCalendario(pista, id){
             meridiem: 'short',
         },
 
-        //timeFormat: "h(:mm)t",
-
-        //timeFormat: 'H(:mm)',
-/*
-        timeFormat: {
-            agenda: 'h(:mm)tt { - h(:mm)tt}',
-            month: 'h(:mm)tt { - h(:mm)tt}',
-        },
-*/
-/*
-        timeFormat: {
-            agenda: 'h(:mm)tt { - h(:mm)tt}'
-        },
-*/
         headerToolbar: {
             left: "prev,next today",
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay"
         },
+
         dayMaxEvents: true, 
 
         // Al pinchar en el calendario, mostraremos un modal para crear un evento

@@ -44,17 +44,23 @@ async function cargarCalendario(pista, id){
 
         allDaySlot: false,
 
+        // La altura del calendario se ajusta automáticamente a su tamaño
+        height: 'auto',
+
+        // Formato de la columna que indica la hora
         slotLabelFormat:{
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
             meridiem: 'short',
         },
+        
         headerToolbar: {
             left: "prev,next today",
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay"
         },
+
         dayMaxEvents: true, 
     });
 

@@ -27,18 +27,9 @@ function cargarCalendario(){
         initialView: 'timeGridWeek',
 
         firstDay: 1,
-
-        headerToolbar: {
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-        },
         // Ponemos el calendario en español
+
         locale: esLocale,
-
-        dayMaxEvents: true, 
-
-        allDaySlot: false,
 
         // No mostramos sábados y domingos
         hiddenDays: [6, 0],
@@ -46,6 +37,27 @@ function cargarCalendario(){
         slotMinTime: "08:00:00",
 
         slotMaxTime: "22:00:00",
+
+        allDaySlot: false,
+
+        // La altura del calendario se ajusta automáticamente a su tamaño
+        height: 'auto',
+
+        // Formato de la columna que indica la hora
+        slotLabelFormat:{
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+            meridiem: 'short',
+        },
+
+        headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+        },  
+
+        dayMaxEvents: true, 
 
         // Al pinchar en el calendario, mostraremos un modal para añadir un horario ocupado
         dateClick: function(info) {
