@@ -59,19 +59,42 @@
         else
             $telefono = $datos->telefono;
 
-        // Si el usuario ha elegido una foto de perfil
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+        // Si el usuario ha elegido una imagen
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
-            $nombreFinal = $_FILES['foto']['name'];
 
-            // Ruta del archivo dentro del directorio del proyecto
-            $rutaDestino = "/imagenes/" . $nombreFinal;
+            // Obtener extensión real
+            $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
-            // Guardamos la imagen en el directorio "imagenes"
-            move_uploaded_file($nombreTmp, $rutaDestino);
+            // Lista de extensiones permitidas
+            $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (in_array(strtolower($ext), $extPermitidas)) {
+
+                // Generar nombre único
+                $nombreFinal = uniqid("img_") . "." . $ext;
+
+                // Ruta en el servidor
+                $rutaServidor = __DIR__ . "/imagenes/" . $nombreFinal;
+
+                // Ruta de la base de datos (para mostrar en HTML)
+                $rutaBD = "/imagenes/" . $nombreFinal;
+
+                if (move_uploaded_file($nombreTmp, $rutaServidor)) {
+
+                    // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
+                    $foto = $rutaBD;
+
+                } else {
+                    echo "Error al mover el archivo";
+                }
+
+            } else {
+                echo "Formato de imagen no permitido";
+            }
         }
         else
-            $rutaDestino = null;
+            $foto = null;
 
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
@@ -91,7 +114,7 @@
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
         $codigo = password_hash(rand(0,1000), PASSWORD_DEFAULT);
         // Insertamos el usuario en la base de datos
-        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$rutaDestino\", \"$codigo\", 0");
+        $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
         /*
         // Enviamos el email de verificación

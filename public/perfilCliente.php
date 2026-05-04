@@ -66,22 +66,6 @@
         }
 
         // Si el usuario ha elegido una imagen
-
-        /*
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-            $nombreTmp = $_FILES['foto']['tmp_name'];
-            $nombreFinal = $_FILES['foto']['name'];
-
-            // Ruta del archivo dentro del directorio del proyecto
-            $rutaDestino = "/imagenes/" . $nombreFinal;
-
-            // Guardamos la imagen en el directorio "imagenes"
-            move_uploaded_file($nombreTmp, $rutaDestino);
-            // Añadimos la ruta de la imagen para actualizar el cliente
-            $valores = $valores . ", foto = \"$rutaDestino\"";
-        }
-        */
-
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
