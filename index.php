@@ -93,8 +93,9 @@
                 echo "Formato de imagen no permitido";
             }
         }
+        // Si el usuario no introduce ninguna foto de perfil, se le asigna la foto de perfil vacío
         else
-            $foto = null;
+            $foto = "/imagenes/blank-profile-picture.png";
 
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
