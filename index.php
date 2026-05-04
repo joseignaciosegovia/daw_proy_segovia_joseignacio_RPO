@@ -93,6 +93,7 @@
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$rutaDestino\", \"$codigo\", 0");
 
+        /*
         // Enviamos el email de verificación
         $destinatario = $email; 
         $asunto = 'Verificación'; 
@@ -103,7 +104,6 @@
 
         ------------------------ 
         Usuario: '.$email.' 
-        Contraseña: '.$datos->contraseña.' 
         ------------------------ 
 
         Por favor, pincha en este enlace para activar tu cuenta: 
@@ -113,6 +113,45 @@
 
         $cabecera = 'From:noreply@yourwebsite.com' . "\r\n"; 
         mail($destinatario, $asunto, $mensaje, $cabecera);
+
+        */
+
+        /*
+
+        $resend = Resend::client('re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj');
+
+        $resend->emails->send([
+        'from' => 'onboarding@resend.dev',
+        'to' => 'josegoviaramirez@gmail.com',
+        'subject' => 'Hello World',
+        'html' => '<p>Congrats on sending your <strong>first email</strong>!</p>'
+        ]);
+
+        */
+
+        // Dominio: reservapistasonline.moral.daw
+
+        $ch = curl_init('https://api.resend.com/emails');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_HTTPHEADER     => [
+                'Authorization: re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj',
+                'Content-Type: application/json'
+            ],
+            CURLOPT_POSTFIELDS => json_encode([
+                'from'    => 'noreply@reservapistasonline.moral.daw',
+                'to'      => [$email],
+                'subject' => 'Verificación de cuenta',
+                'html'    => "<p>Activa tu cuenta: <a href='http://www.localhost:8080/verificar.php?email='.$email.'&codigo='.$codigo>Enlace</a></p>"
+            ])
+        ]);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        echo "Código HTTP: $httpCode\n";
+        echo "Respuesta: $response\n";
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         //$_SESSION['cliente'] = $email;

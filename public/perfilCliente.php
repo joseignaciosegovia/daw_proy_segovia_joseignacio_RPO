@@ -66,7 +66,9 @@
         }
 
         // Si el usuario ha elegido una imagen
-       if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+
+        /*
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
             $nombreFinal = $_FILES['foto']['name'];
 
@@ -77,6 +79,41 @@
             move_uploaded_file($nombreTmp, $rutaDestino);
             // Añadimos la ruta de la imagen para actualizar el cliente
             $valores = $valores . ", foto = \"$rutaDestino\"";
+        }
+        */
+
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
+            $nombreTmp = $_FILES['foto']['tmp_name'];
+
+            // Obtener extensión real
+            $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+
+            // Lista de extensiones permitidas
+            $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
+
+            if (in_array(strtolower($ext), $extPermitidas)) {
+
+                // Generar nombre único
+                $nombreFinal = uniqid("img_") . "." . $ext;
+
+                // Ruta en el servidor
+                $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
+
+                // Ruta de la base de datos (para mostrar en HTML)
+                $rutaBD = "/imagenes/" . $nombreFinal;
+
+                if (move_uploaded_file($nombreTmp, $rutaServidor)) {
+
+                    // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
+                    $valores .= ", foto = '$rutaBD'";
+
+                } else {
+                    echo "Error al mover el archivo";
+                }
+
+            } else {
+                echo "Formato de imagen no permitido";
+            }
         }
 
         $condicion = "where email = \"$_SESSION[cliente]\"";
@@ -117,6 +154,19 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12 col-lg-7">
+                        <label class="labels">Foto de perfil</label>
+                        <img class="img-thumbnail mb-2" name="foto" src="<?php echo $cliente["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                        <input type="file" class="form-control" id="foto" name="foto">
+                        <div class="invalid-feedback">
+                            Introduzca una foto válida
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12 col-lg-7">
                         <label class="labels">Nombre</label>
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
                         <div class="invalid-feedback">
@@ -154,18 +204,6 @@
                             <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]" name="dni" value="<?php echo $cliente['DNI'] ?>">
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
-                            <label class="labels">Foto de perfil</label>
-                            <input type="file" class="form-control" id="foto" name="foto">
-                            <div class="invalid-feedback">
-                                Introduzca una foto válida
                             </div>
                             <div class="valid-feedback">
                                 Dato correcto
