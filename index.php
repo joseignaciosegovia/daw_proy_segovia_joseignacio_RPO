@@ -118,29 +118,6 @@
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
         /*
-        // Enviamos el email de verificación
-        $destinatario = $email; 
-        $asunto = 'Verificación'; 
-        $mensaje = ' 
-
-        ¡Gracias por registrarte! 
-        Tu cuenta se ha creado correctamente, ahora tienes que activarla pinchando en el enlace.
-
-        ------------------------ 
-        Usuario: '.$email.' 
-        ------------------------ 
-
-        Por favor, pincha en este enlace para activar tu cuenta: 
-        http://www.localhost:8080/verificar.php?email='.$email.'&codigo='.$codigo.' 
-
-        ';
-
-        $cabecera = 'From:noreply@yourwebsite.com' . "\r\n"; 
-        mail($destinatario, $asunto, $mensaje, $cabecera);
-
-        */
-
-        /*
 
         $resend = Resend::client('re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj');
 
@@ -160,7 +137,7 @@
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST           => true,
             CURLOPT_HTTPHEADER     => [
-                'Authorization: re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj',
+                'Authorization: re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj', // ACTUALIZAR
                 'Content-Type: application/json'
             ],
             CURLOPT_POSTFIELDS => json_encode([

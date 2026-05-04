@@ -134,7 +134,7 @@
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Perfil</h4>
+                    <h4 class="text-right">Información del perfil</h4>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12 col-lg-7">
