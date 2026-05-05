@@ -72,6 +72,16 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
+                                <label class="labels">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <label class="labels">Email</label>
                                 <input type="email" class="form-control" id="email" name="Email" value="<?php echo $gestor['email'] ?>">
                                 <div class="invalid-feedback">
@@ -86,6 +96,39 @@
                                 <input type="password" class="form-control" id="contraseña" name="Contraseña" value="<?php echo $gestor['contrasena'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca una contraseña válida
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">DNI</label>
+                                <input type="text" class="form-control" id="DNI" name="DNI" value="<?php echo $gestor['DNI'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un DNI válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Teléfono</label>
+                                <input type="number" class="form-control" id="telefono" name="telefono" value="<?php echo $gestor['telefono'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un teléfono válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels" for="administrador">¿Es administrador?</label>
+                                <select id="administrador">
+                                    <option value="volvo" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
+                                    <option value="saab" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Introduzca un correo válido
                                 </div>
                                 <div class="valid-feedback">
                                     Dato correcto
