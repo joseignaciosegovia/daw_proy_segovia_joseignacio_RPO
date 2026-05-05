@@ -50,6 +50,10 @@
                 <thead>
                     <th>#</th>
                     <th>Correo</th>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Teléfono</th>
+                    <th>¿Es administrador?</th>
                     <th>Editar gestor</th>
                 </thead>
                 <tbody>
@@ -61,6 +65,16 @@
                     <tr>
                         <th><?php echo $cont ?></th>
                         <td><?php echo $gestor['email'] ?></td>
+                        <td><?php echo $gestor['nombre'] ?></td>
+                        <td><?php echo $gestor['DNI'] ?></td>
+                        <td><?php echo $gestor['telefono'] ?></td>
+                        <td><?php 
+                            if($gestor['administrador'] == 1)
+                                echo "Sí";
+                            else
+                                echo "No";
+                        ?>
+                        </td>
                         <td><?php echo "<a href=\"editarGestor.php?gestor=$gestor[email]\"><button>Editar</button></a>"?></td>
                     </tr>
                         <?php 
