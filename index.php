@@ -5,6 +5,7 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    require_once 'config.php';
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
@@ -117,8 +118,8 @@
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
-        /*
-
+        
+/*
         $resend = Resend::client('re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj');
 
         $resend->emails->send([
@@ -127,32 +128,40 @@
         'subject' => 'Hello World',
         'html' => '<p>Congrats on sending your <strong>first email</strong>!</p>'
         ]);
-
-        */
+*/
+        
 
         // Dominio: reservapistasonline.moral.daw
 
-        $ch = curl_init('https://api.resend.com/emails');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST           => true,
-            CURLOPT_HTTPHEADER     => [
-                'Authorization: re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj', // ACTUALIZAR
-                'Content-Type: application/json'
-            ],
-            CURLOPT_POSTFIELDS => json_encode([
-                'from'    => 'noreply@reservapistasonline.moral.daw',
-                'to'      => [$email],
-                'subject' => 'Verificación de cuenta',
-                'html'    => "<p>Activa tu cuenta: <a href='http://www.localhost:8080/verificar.php?email='.$email.'&codigo='.$codigo>Enlace</a></p>"
-            ])
-        ]);
-        
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        // GoDaddy: ns59.domaincontrol.com ns60.domaincontrol.com
 
-        echo "Código HTTP: $httpCode\n";
-        echo "Respuesta: $response\n";
+        $body = json_encode([
+        'from'    => 'Tu App <onboarding@resend.dev>',
+        'to'      => [$email],
+        'subject' => 'Verifica tu cuenta',
+        'html'    => "
+            <h2>Hola, $email</h2>
+            <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
+            <a href=\"http://localhost:8080/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
+            <p style='color:#64748b; font-size:13px;'>
+                Si no creaste esta cuenta, ignora este mensaje.
+            </p>
+        ",
+    ]);
+
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => $body,
+        CURLOPT_HTTPHEADER     => [
+            'Authorization: Bearer ' . RESEND_API_KEY,
+            'Content-Type: application/json',
+        ],
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         //$_SESSION['cliente'] = $email;
