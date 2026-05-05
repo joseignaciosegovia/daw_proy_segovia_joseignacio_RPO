@@ -36,33 +36,26 @@
     <?php
         // Si pulsamos el botón de "Acceder
         if (isset($_POST['login'])) {
-            $nombre = trim($_POST['usuario']);
+            $email = trim($_POST['usuario']);
             $contraseña = trim($_POST['pass']);
 
             $crud = new Crud(new DB("proyecto"));
 
-            // Comprobamos si existe un administrador con el usuario y la contraseña introducidos
+            // Comprobamos si existe un gestor con el usuario y la contraseña introducidos
             
-            $administrador = $crud->isValido("gestores", $nombre, $contraseña);
-            // Si no existe el gestor, comprobamos si es un administrador
-            if ($administrador == null) {
-                $administrador = $crud->isValido("administradores", $nombre, $contraseña);
-                // Si tampoco es un administrador
-                if ($administrador == null) {
-                    unset($_POST['login']);
-                    error("Credenciales Inválidas");
-                }
-
-                else {
-                    // Si el acceso es correcto
-                    $_SESSION['administrador'] = $nombre;
-                    header('Location: intranet.php');
-                }
+            $gestor = $crud->isValido("gestores", $email, $contraseña);
+            // Si no existe el gestor
+            if ($gestor == null) {
+                unset($_POST['login']);
+                error("Credenciales Inválidas");
             }
 
             else {
                 // Si el acceso es correcto
-                $_SESSION['gestor'] = $nombre;
+                $_SESSION['gestor'] = $email;
+                // Si el gestor también es administrador
+                if($gestor['administrador'] == 1)
+                    $_SESSION['administrador'] = $email;
                 header('Location: intranet.php');
             }
             

@@ -269,12 +269,12 @@
             </div>
         </div>
 
-        <div id="leyenda">
-            <span><span class="color" style="background:#28a745;"></span> Disponible</span>
-            <span><span class="color" style="background:#dc3545;"></span> Ocupado</span>
-        </div>
         <div class="col-8 col-sm-6">
             <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
+            <div id="leyenda">
+                <span><span class="color" style="background:#28a745;"></span> Disponible</span>
+                <span><span class="color" style="background:#dc3545;"></span> Ocupado</span>
+            </div>
             <div class="accordion accordion-flush" id="elegirPista">
             <?php
                 $crud = new Crud(new DB("proyecto"));

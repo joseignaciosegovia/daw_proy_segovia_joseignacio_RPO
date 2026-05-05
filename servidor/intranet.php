@@ -80,7 +80,7 @@
         </div>
     </div>
 <?php } 
-
+/*
     // Si hemos iniciado sesión como administrador
     if(!empty($_SESSION["administrador"])){
         $crud = new Crud(new DB("proyecto"));
@@ -127,6 +127,8 @@
                 </tbody>
             </table>
 <?php } ?>
+*/
+?>
 </body>
 </html>
 <?php

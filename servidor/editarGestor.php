@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    <a href="intranet.php"><button>Volver atrás</button></a>
+    <a href="administrarGestores.php"><button>Volver atrás</button></a>
 
 <?php
     }
