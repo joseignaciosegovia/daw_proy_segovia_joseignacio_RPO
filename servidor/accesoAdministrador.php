@@ -56,6 +56,8 @@
                 // Si el gestor también es administrador
                 if($gestor['administrador'] == 1)
                     $_SESSION['administrador'] = $email;
+                else
+                    $_SESSION['administrador'] = null;
                 header('Location: intranet.php');
             }
             
