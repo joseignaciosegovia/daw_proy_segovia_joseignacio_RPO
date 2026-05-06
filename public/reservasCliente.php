@@ -1,15 +1,6 @@
 <?php
     session_start();
 
-    use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-
-    // Función para añadir scripts en el pie
-    function añadirScriptsPie(){
-?>
-        <script type="module" src="/js/cancelarReserva.js"></script>
-<?php }
-
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
@@ -20,6 +11,15 @@
         header("Location: ../index.php");
         exit();
     }
+
+    use Clases\DB;
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+
+    // Función para añadir scripts en el pie
+    function añadirScriptsPie(){
+?>
+        <script type="module" src="/js/cancelarReserva.js"></script>
+<?php }
 
     $crud = new Crud(new DB("proyecto"));
     // Cargamos la cabecera

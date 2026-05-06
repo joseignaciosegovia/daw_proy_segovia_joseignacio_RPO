@@ -1,6 +1,17 @@
 <?php
     session_start();
 
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['cliente']);
+    }
+
+    // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
+    if (empty($_SESSION["cliente"])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
 
@@ -10,24 +21,12 @@
         <script type="module" src="/js/validacion.js"></script>
 <?php }
 
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
-    if(isset($_GET['salir'])) {
-        unset($_SESSION['cliente']);
-    }
-
     $crud = new Crud(new DB("proyecto"));
-
-    // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
-    if (empty($_SESSION["cliente"])) {
-        header("Location: ../index.php");
-        exit();
-    }
 
     // Si pulsamos el botón de "Enviar"
     if (isset($_POST['datos'])) {
 
         $datos = json_decode($_POST['datos']);
-
         $fecha = date('Y-m-d', time());
 
         // Añadimos la queja/sugerencia al perfil del usuario en la base de datos

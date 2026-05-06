@@ -1,6 +1,17 @@
 <?php
-    ob_start(); // activa el buffer
+    //ob_start(); // activa el buffer
     session_start();
+
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['cliente']);
+    }
+
+    // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
+    if (empty($_SESSION["cliente"])) {
+        header("Location: ../index.php");
+        exit();
+    }
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
@@ -10,11 +21,6 @@
 ?>
         <script type="module" src="/js/validacion.js"></script>
 <?php }
-
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
-    if(isset($_GET['salir'])) {
-        unset($_SESSION['cliente']);
-    }
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {

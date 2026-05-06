@@ -2,9 +2,6 @@
 
     session_start();
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['cliente']);
@@ -15,6 +12,9 @@
         header("Location: ../index.php");
         exit();
     }
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     // Si hemos recibido los datos de la reserva desde calendarioCliente.js
     if(isset($_GET['datos'])){
