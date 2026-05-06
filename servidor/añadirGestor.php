@@ -8,9 +8,9 @@
         unset($_SESSION['gestor']);
     }
 
-    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["administrador"])) {
-        header("Location: accesoAdministrador.php");
+    // Si no hemos iniciado sesión como un gestor que además sea administrador, volvemos a la página de gestión de pistas
+    if (!(!empty($_SESSION["gestor"]) && !empty($_SESSION["administrador"]))) {
+        header("Location: intranet.php");
         exit();
     }
 
@@ -42,7 +42,7 @@
 
     $crud = new Crud(new DB("proyecto"));
 
-    // Si pulsamos el botón de crear pista
+    // Si pulsamos el botón de crear Gestor
     if (isset($_POST['Crear'])) {
         $datos = json_decode($_POST['Crear']);
      
@@ -104,9 +104,6 @@
 
         header("Location: intranet.php");
     }
-
-    if(isset($_POST['Añadir'])) {
-
 ?>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
@@ -208,10 +205,8 @@
                 </div>
             </div>
         </div>
-        <a href="intranet.php"><button>Volver atrás</button></a>
+        <a href="administrarGestores.php"><button>Volver atrás</button></a>
     </div>
 <?php
-    }
-
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

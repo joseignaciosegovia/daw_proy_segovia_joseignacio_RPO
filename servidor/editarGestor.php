@@ -8,9 +8,9 @@
         unset($_SESSION['administrador']);
     }
 
-    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["administrador"])) {
-        header("Location: accesoAdministrador.php");
+    // Si no hemos iniciado sesión como un gestor que además sea administrador, volvemos a la página de gestión de pistas
+    if (!(!empty($_SESSION["gestor"]) && !empty($_SESSION["administrador"]))) {
+        header("Location: intranet.php");
         exit();
     }
 

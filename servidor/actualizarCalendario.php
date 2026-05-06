@@ -1,10 +1,25 @@
 <?php
     session_start();
 
-    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["gestor"])) {
+    // Si no hemos iniciado sesión ni como gestor ni como cliente, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["gestor"]) && empty($_SESSION["cliente"])) {
         header("Location: accesoAdministrador.php");
         exit();
+    }
+
+    // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
+    if(!isset($_POST['datos']) && !isset($_POST['Confirmar']) && !isset($_POST['Borrar']) && !isset($_POST['cancelar'])) {
+        // Si hemos iniciado sesión como gestor, vamos a la página principal de los gestores
+        if(!empty($_SESSION["gestor"])){
+            header("Location: intranet.php");
+            exit();
+        }
+        // Si hemos iniciado sesión como cliente, vamos a la página principal de los clientes
+        if(!empty($_SESSION["cliente"])){
+            header("Location: ../index.php");
+            exit();
+        }
+        
     }
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
@@ -45,17 +60,4 @@
         $crud = new Crud(new DB("proyecto"));
         $crud->eliminar("reservas", "where id = $reserva->id");
         header("Location: ../public/reservasCliente.php");
-    }
-
-    // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
-    else {
-        // Si hemos iniciado sesión como administrador, redirigimos a la página principal del administrador
-        if (!empty($_SESSION["administrador"])) {
-            header("Location: intranet.php");
-            exit();
-        }
-        // Si no, vamos al inicio del cliente
-        else {
-            header("Location: ../public/reservarPista.php");
-        }    
     }
