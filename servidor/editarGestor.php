@@ -31,9 +31,9 @@
 
     // Si pulsamos el botón de actualizar
     if (isset($_POST['Actualizar'])) {
-        $datos = json_decode($_POST['datos']);
+        $datos = json_decode($_POST['Actualizar']);
 
-        $valores = "email = \"$_POST[Email]\", contrasena = '$_POST[Contraseña]'";        
+        $valores = "email = \"$datos[email]\", contrasena = '$_POST[Contraseña]'";        
         $condicion = "where email = \"$_POST[emailOriginal]\"";
 
         // Actualizamos el perfil en la base de datos
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <label class="labels">Contraseña</label>
-                                <input type="password" class="form-control" id="contraseña" name="Contraseña" value="<?php echo $gestor['contrasena'] ?>">
+                                <input type="password" class="form-control" id="contraseña" name="Contraseña" value="">
                                 <div class="invalid-feedback">
                                     Introduzca una contraseña válida
                                 </div>
@@ -101,9 +101,19 @@
                                     Dato correcto
                                 </div>
                             </div>
+                            <div class="col-md-12 col-lg-7">
+                                <label class="labels">Confirmar contraseña</label>
+                                <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="">
+                                <div class="invalid-feedback">
+                                    Confirme la contraseña
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <label class="labels">DNI</label>
-                                <input type="text" class="form-control" id="DNI" name="DNI" value="<?php echo $gestor['DNI'] ?>">
+                                <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $gestor['DNI'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un DNI válido
                                 </div>
@@ -124,11 +134,16 @@
                             <div class="col-md-12">
                                 <label class="labels" for="administrador">¿Es administrador?</label>
                                 <select id="administrador">
-                                    <option value="volvo" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
-                                    <option value="saab" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
+                                    <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
+                                    <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
                                 </select>
+                            </div>
+                            <div class="col-md-12 col-lg-7">
+                                <label class="labels">Foto de perfil</label>
+                                <img class="img-thumbnail mb-2" name="foto" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                                <input type="file" class="form-control" id="foto" name="foto">
                                 <div class="invalid-feedback">
-                                    Introduzca un correo válido
+                                    Introduzca una foto válida
                                 </div>
                                 <div class="valid-feedback">
                                     Dato correcto

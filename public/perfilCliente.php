@@ -49,20 +49,21 @@
         // Trimamos el nombre
         $nombre = ucwords($datos->nombre);
 
-        if($datos->telefono == null)
-            $telefono =  0;
-        else
-            $telefono = $datos->telefono;
-
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
 
-        $valores = "nombre = \"$nombre\", telefono = $telefono, DNI = \"$datos->dni\"";
+        $valores = "nombre = \"$nombre\", DNI = \"$datos->dni\"";
+
+        // Si el usuario introduce un telefono
+        if($datos->telefono != null)
+            $valores .= ", telefono = $datos->telefono";
+        else
+            $valores .= ", telefono = null";
 
         // Si el usuario ha cambiado la contraseña, la añadimos a los valores para actualizar el usuario
         if($datos->contraseña != "") {
             $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
-            $valores = $valores . ", contrasena = \"$contraseña\"";
+            $valores .= ", contrasena = \"$contraseña\"";
         }
 
         // Si el usuario ha elegido una imagen
@@ -185,7 +186,7 @@
                     <div class="row mt-3">
                         <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
                             <label class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]" name="dni" value="<?php echo $cliente['DNI'] ?>">
+                            <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]" name="dni" value="<?php echo $cliente['DNI'] ?>" required>
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
                             </div>
@@ -196,7 +197,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
-                            <label class="labels">Teléfono</label>
+                            <label class="labels">Teléfono (opcional)</label>
                             <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" pattern="[0-9]{9}" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
                             <div class="invalid-feedback">
                                 Introduzca un número de teléfono válido
