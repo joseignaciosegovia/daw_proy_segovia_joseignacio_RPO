@@ -1081,22 +1081,6 @@ function validarEditarGestor(form) {
         showFeedBack(ncContraseña, true, "La contraseña es correcta");
       }
   
-      const ncEmail = document.getElementById('email');
-  
-      if (!ncEmail.checkValidity()) {
-        isValid = false;
-        if(ncEmail.validity.valueMissing) {
-          showFeedBack(ncEmail, false, "Hay que introducir el email"); 
-        }
-        else {
-          showFeedBack(ncEmail, false);
-        }
-  
-        firstInvalidElement = ncEmail;
-      } else {
-        showFeedBack(ncEmail, true, "El email es correcto");
-      }
-  
       const ncNombre = document.getElementById('nombre');
   
       if (!ncNombre.checkValidity()) {
@@ -1128,11 +1112,11 @@ function validarEditarGestor(form) {
       } else {
 
         let datosAEnviar = JSON.stringify({ 
-          email: ncEmail.value, 
           nombre: ncNombre.value, 
           contraseña: ncContraseña.value, 
           confirmarContraseña: ncConfirmar.value,
           dni: ncDNI.value,
+          email: document.getElementById('email').value,
           telefono: ncTelefono.value,
           administrador: [...ncAdministrador.selectedOptions].map((option) => option.value)[0]
         });
@@ -1202,7 +1186,6 @@ function validarEditarGestor(form) {
     const ncDNI = document.getElementById('dni');
     const ncConfirmar = document.getElementById('confirmarContraseña');
     const ncContraseña = document.getElementById('contraseña');
-    const ncEmail = document.getElementById('email');
     const ncNombre = document.getElementById('nombre');
 
   // Validación en línea de cada "input"
@@ -1259,19 +1242,6 @@ function validarEditarGestor(form) {
       }
     } else {
       showFeedBack(ncContraseña, true);
-    }
-  });
-
-  ncEmail.addEventListener('change', function (event) {
-    if (!ncEmail.checkValidity()) {
-      if(ncEmail.validity.valueMissing) {
-        showFeedBack(ncEmail, false, "Hay que introducir el email"); 
-      }
-      else {
-        showFeedBack(ncEmail, false);
-      }
-    } else {
-      showFeedBack(ncEmail, true);
     }
   });
 
