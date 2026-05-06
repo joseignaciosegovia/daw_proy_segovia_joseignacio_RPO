@@ -1,5 +1,18 @@
 <?php
+    // ob_start(); // activa el buffer
     session_start();
+
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['gestor']);
+        unset($_SESSION['administrador']);
+    }
+
+    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["gestor"])) {
+        header("Location: accesoAdministrador.php");
+        exit();
+    }
 
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
@@ -23,18 +36,6 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
         <script type="module" src="/js/calendarioAdministrador.js"></script>
 <?php }
-
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
-    if(isset($_GET['salir'])) {
-        unset($_SESSION['gestor']);
-        unset($_SESSION['administrador']);
-    }
-
-    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["gestor"])) {
-        header("Location: accesoAdministrador.php");
-        exit();
-    }
 
     // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de accesoAdministrador.php)
     if (isset($_GET['pista'])) {

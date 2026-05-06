@@ -1,6 +1,18 @@
 <?php
-    ob_start(); // activa el buffer
+    // ob_start(); // activa el buffer
     session_start();
+
+    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    if(isset($_GET['salir'])) {
+        unset($_SESSION['gestor']);
+        unset($_SESSION['administrador']);
+    }
+
+    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["administrador"])) {
+        header("Location: accesoAdministrador.php");
+        exit();
+    }
 
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
@@ -27,18 +39,6 @@
 
         // Ponemos la primera letra de cada palabra en mayúsculas
         $nombre = ucwords($nombre); 
-    }
-
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
-    if(isset($_GET['salir'])) {
-        unset($_SESSION['gestor']);
-        unset($_SESSION['administrador']);
-    }
-
-    // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["administrador"])) {
-        header("Location: accesoAdministrador.php");
-        exit();
     }
 
     // Si pulsamos el botón de actualizar

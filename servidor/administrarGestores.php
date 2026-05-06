@@ -1,15 +1,6 @@
 <?php
-    ob_start(); // activa el buffer
+    // ob_start(); // activa el buffer
     session_start();
-
-    // Actualizamos el título de la página
-    $titulo = "Administración de gestores | Moral de Calatrava";
-    // Actualizamos la dirección del título y del logo de la página
-    $home = "/servidor/intranet.php";
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    use Clases\DB;
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
@@ -22,6 +13,15 @@
         header("Location: accesoAdministrador.php");
         exit();
     }
+
+    // Actualizamos el título de la página
+    $titulo = "Administración de gestores | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
+    $home = "/servidor/intranet.php";
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
 
     // Si hemos iniciado sesión como gestor, pero éste no es administrador, volvemos a la página de gestión de pistas
     if (!empty($_SESSION["gestor"]) && empty($_SESSION["administrador"])) {

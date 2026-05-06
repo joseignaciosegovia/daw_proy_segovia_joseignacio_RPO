@@ -1,14 +1,6 @@
 <?php
+    //ob_start(); // activa el buffer
     session_start();
-
-    // Actualizamos el título de la página
-    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
-    // Actualizamos la dirección del título y del logo de la página
-    $home = "/servidor/intranet.php";
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    use Clases\DB;
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
@@ -22,14 +14,26 @@
         exit();
     }
 
-    $crud = new Crud(new DB("proyecto"));
-    $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
+    // Actualizamos el título de la página
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
+    $home = "/servidor/intranet.php";
 
-    if($incidencias == null) {
-        echo "<h1 class=\"d-flex justify-content-center\">No hay incidencias enviadas por usuarios</h1>";
-    }
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
 
-    else {
+    // Si hemos iniciado sesión como gestor
+    if(!empty($_SESSION["gestor"])){
+
+        $crud = new Crud(new DB("proyecto"));
+        $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
+
+        if($incidencias == null) {
+            echo "<h1 class=\"d-flex justify-content-center\">No hay incidencias enviadas por usuarios</h1>";
+        }
+
+        else {
 
 
 ?>
@@ -71,6 +75,7 @@
         </div>
     </div>
  <?php   
+        } 
     }
 ?>
     <a href="intranet.php"><button>Volver atrás</button></a>
