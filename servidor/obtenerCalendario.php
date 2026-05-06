@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    
+    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["gestor"])) {
+        header("Location: accesoAdministrador.php");
+        exit();
+    }
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
@@ -13,14 +20,7 @@
 
     // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
     else {
-        // Si hemos iniciado sesión como gestor, redirigimos a la página principal de la intranet
-        if (!empty($_SESSION["gestor"])) {
-            header("Location: intranet.php");
-            exit();
-        }
-        // Si no, vamos al inicio del cliente
-        else {
-            header("Location: ../public/reservarPista.php");
-        }    
+        header("Location: intranet.php");
+        exit();   
     }
 ?>

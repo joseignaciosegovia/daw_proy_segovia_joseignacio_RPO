@@ -1,6 +1,12 @@
 <?php
-    ob_start(); // activa el buffer
+    //ob_start(); // activa el buffer
     session_start();
+
+    // Si ya hemos iniciado sesión como gestor, redirigimos a la página de gestión
+    if (!empty($_SESSION["gestor"])) {
+        header("Location: intranet.php");
+        exit();
+    }
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
@@ -13,11 +19,34 @@
         die();
     }
 
-    // Si ya hemos iniciado sesión como administrador o gestor, redirigimos a la página de gestión
-    if (!empty($_SESSION["gestor"]) || !empty($_SESSION["administrador"])) {
-        header("Location: intranet.php");
-        exit();
-    }
+    // Si pulsamos el botón de "Acceder
+    if (isset($_POST['login'])) {
+        $email = trim($_POST['usuario']);
+        $contraseña = trim($_POST['pass']);
+
+        $crud = new Crud(new DB("proyecto"));
+
+        // Comprobamos si existe un gestor con el usuario y la contraseña introducidos
+        
+        $gestor = $crud->isValido("gestores", $email, $contraseña);
+        // Si no existe el gestor
+        if ($gestor == null) {
+            unset($_POST['login']);
+            error("Credenciales Inválidas");
+        }
+
+        else {
+            // Si el acceso es correcto
+            $_SESSION['gestor'] = $email;
+            // Si el gestor también es administrador
+            if($gestor['administrador'] == 1)
+                $_SESSION['administrador'] = $email;
+            else
+                $_SESSION['administrador'] = null;
+            header('Location: intranet.php');
+        }
+        
+    } else {
 
 ?>
 <!DOCTYPE html>
@@ -33,63 +62,33 @@
     </head>
 
     <body style="background:silver;">
-    <?php
-        // Si pulsamos el botón de "Acceder
-        if (isset($_POST['login'])) {
-            $email = trim($_POST['usuario']);
-            $contraseña = trim($_POST['pass']);
-
-            $crud = new Crud(new DB("proyecto"));
-
-            // Comprobamos si existe un gestor con el usuario y la contraseña introducidos
-            
-            $gestor = $crud->isValido("gestores", $email, $contraseña);
-            // Si no existe el gestor
-            if ($gestor == null) {
-                unset($_POST['login']);
-                error("Credenciales Inválidas");
-            }
-
-            else {
-                // Si el acceso es correcto
-                $_SESSION['gestor'] = $email;
-                // Si el gestor también es administrador
-                if($gestor['administrador'] == 1)
-                    $_SESSION['administrador'] = $email;
-                else
-                    $_SESSION['administrador'] = null;
-                header('Location: intranet.php');
-            }
-            
-        } else {
-    ?>
-            <div class="container mt-5">
-                <div class="d-flex justify-content-center h-100">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Iniciar sesión como administrador o gestor</h3>
-                        </div>
-                        <div class="card-body">
-                            <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center h-100">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Iniciar sesión como administrador o gestor</h3>
+                    </div>
+                    <div class="card-body">
+                        <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                    </div>
-                                    <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
+                                <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
                                 </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
-                                </div>
-                            </form>
-                        </div>
+                                <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
             <?php
                 // Si ha habido algún error, lo mostramos antes que la información principal de la página
                 if (isset($_SESSION['error'])) {
