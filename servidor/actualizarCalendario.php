@@ -1,5 +1,11 @@
 <?php
     session_start();
+
+    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
+    if (empty($_SESSION["gestor"])) {
+        header("Location: accesoAdministrador.php");
+        exit();
+    }
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
