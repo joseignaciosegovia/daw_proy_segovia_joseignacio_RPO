@@ -176,7 +176,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Teléfono (opcional)</label>
-                                <input type="number" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
+                                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
                                 <div class="invalid-feedback">
                                     Introduzca un teléfono válido
                                 </div>
