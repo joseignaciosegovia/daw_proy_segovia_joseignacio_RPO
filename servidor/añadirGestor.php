@@ -31,6 +31,7 @@
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
+        unset($_SESSION['gestor']);
     }
 
     // Si no hemos iniciado sesión como administrador, volvemos a la página de inicio de sesión de la intranet

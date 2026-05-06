@@ -31,6 +31,7 @@
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
+        unset($_SESSION['gestor']);
         unset($_SESSION['administrador']);
     }
 
