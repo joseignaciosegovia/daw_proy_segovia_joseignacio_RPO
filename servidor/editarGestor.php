@@ -165,7 +165,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">DNI</label>
-                                <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $gestor['DNI'] ?>">
+                                <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un DNI válido
                                 </div>
@@ -174,8 +174,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">Teléfono</label>
-                                <input type="number" class="form-control" id="telefono" name="telefono" value="<?php echo $gestor['telefono'] ?>">
+                                <label class="labels">Teléfono (opcional)</label>
+                                <input type="number" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un teléfono válido
                                 </div>

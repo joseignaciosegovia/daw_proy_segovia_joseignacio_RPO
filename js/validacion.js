@@ -21,6 +21,9 @@ window.addEventListener('load', function() {
     case "añadirPista":
       validarAñadirPista(form);
       break;
+    case "añadirGestor":
+      validarAñadirGestor(form);
+      break;
     case "editarGestor":
       validarEditarGestor(form);
       break;
@@ -995,6 +998,300 @@ function validarAñadirPista(form) {
       showFeedBack(ncNombre, true);
     }
   });
+}
+
+// Validación del formulario para añadir un gestor
+function validarAñadirGestor(form) {
+  // Deshabilitamos la forma declarativa de validación
+  
+  form.setAttribute('novalidate', true);
+
+  // Validación al enviar el formulario
+
+  form.addEventListener('submit', function (event) {
+    let isValid = true;
+    let firstInvalidElement = null;
+
+    const ncFoto = document.getElementById('foto');
+  
+      if (!ncFoto.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncFoto, false);
+  
+        firstInvalidElement = ncFoto;
+      } else {
+        showFeedBack(ncFoto, true);
+      }
+  
+      const ncTelefono = document.getElementById('telefono');
+  
+      if (!ncTelefono.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncTelefono, false);
+  
+        firstInvalidElement = ncTelefono;
+      } else {
+        showFeedBack(ncTelefono, true);
+      }
+
+      const ncDNI = document.getElementById('dni');
+  
+      if (!ncDNI.checkValidity()) {
+        isValid = false;
+        showFeedBack(ncDNI, false);
+  
+        firstInvalidElement = ncDNI;
+      } else {
+        showFeedBack(ncDNI, true);
+      }
+  
+      const ncConfirmar = document.getElementById('confirmarContraseña');
+      const ncContraseña = document.getElementById('contraseña');
+  
+      if (ncConfirmar.value !== ncContraseña.value){
+        isValid = false;
+        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+        firstInvalidElement = ncConfirmar;
+      }
+      else if (!ncConfirmar.checkValidity()) {
+        isValid = false;
+        if(ncConfirmar.validity.valueMissing) {
+          showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
+        }
+        else {
+            showFeedBack(ncConfirmar, false);
+        }
+  
+        firstInvalidElement = ncConfirmar;
+      } else {
+        showFeedBack(ncConfirmar, true, "La confirmación de la contraseña es correcta");
+      }
+  
+      if (!ncContraseña.checkValidity()) {
+        isValid = false;
+        if(ncContraseña.validity.valueMissing) {
+          showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+        }
+        else if (ncContraseña.validity.patternMismatch) {
+          showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
+        }
+        else {
+          showFeedBack(ncContraseña, false);
+        }
+  
+        firstInvalidElement = ncContraseña;
+      } else {
+        showFeedBack(ncContraseña, true, "La contraseña es correcta");
+      }
+  
+      const ncNombre = document.getElementById('nombre');
+  
+      if (!ncNombre.checkValidity()) {
+        isValid = false;
+        if(ncNombre.validity.valueMissing) {
+          showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+        }
+        else {
+          showFeedBack(ncNombre, false);
+        }
+  
+        firstInvalidElement = ncNombre;
+        
+      } else {
+        showFeedBack(ncNombre, true, "El nombre es correcto");
+      }
+
+      const ncEmail = document.getElementById('email');
+  
+      if (!ncEmail.checkValidity()) {
+        isValid = false;
+        if(ncEmail.validity.valueMissing) {
+          showFeedBack(ncEmail, false, "Hay que introducir el email"); 
+        }
+        else {
+          showFeedBack(ncEmail, false);
+        }
+  
+        firstInvalidElement = ncEmail;
+        
+      } else {
+        showFeedBack(ncEmail, true, "El email es correcto");
+      }
+
+      const ncAdministrador = document.getElementById('administrador');
+  
+      if (!isValid) {
+  
+        // Indicamos que no se ha podido editar el gestor
+  
+        mostrarModal("Error. El gestor " + ncNombre.value + " no ha podido modificarse");
+  
+        // Ponemos el foco en el primer elemento incorrecto
+  
+        firstInvalidElement.focus();
+      } else {
+
+        let datosAEnviar = JSON.stringify({ 
+          nombre: ncNombre.value, 
+          contraseña: ncContraseña.value, 
+          confirmarContraseña: ncConfirmar.value,
+          dni: ncDNI.value,
+          email: ncEmail.value,
+          telefono: ncTelefono.value,
+          administrador: [...ncAdministrador.selectedOptions].map((option) => option.value)[0]
+        });
+  
+        // Realizamos el envío al servidor
+  
+        const formData = new FormData();
+  
+        // Al llamar "Crear" al parámetro del "formData" que enviamos al servidor,
+        // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['Crear']"
+  
+        formData.append("Crear", datosAEnviar);
+
+        // Si el usuario ha añadido una foto de perfil
+        if (ncFoto.files.length > 0) {
+          formData.append("foto", ncFoto.files[0]);
+        }
+  
+        fetch('añadirGestor.php', {
+          method: 'post',
+          body: formData
+        }).then((response) => response.text())
+        .then(function(data) {
+          mostrarModal("El gestor ha sido modificado correctamente", "/servidor/administrarGestores.php");
+          
+        }).catch(function (err) {
+          console.log("Ha habido un error");
+        });
+        
+        // Disparamos el evento "reset" para resetear el formulario
+  
+        form.dispatchEvent(new Event('reset'));
+      }
+  
+      // Prevenimos el comportamiento por defecto y la propagación
+  
+      event.preventDefault();
+      event.stopPropagation();
+  
+    })
+
+  // Reset del formulario
+
+  form.addEventListener('reset', function (event) {
+    for (const div of this.querySelectorAll('div.valid-feedback, div.invalid-feedback')) {
+      div.classList.remove('d-block');
+      div.classList.add('d-none');
+    }
+
+    for (const input of this.querySelectorAll('input')) {
+      input.classList.remove('is-valid');
+      input.classList.remove('is-invalid');
+    }
+
+    // Reseteamos el formulario
+
+    form.reset();
+
+    // Ponemos el foco en el primer elemento
+
+    const ncNombre = document.getElementById('nombre');
+    ncNombre.focus();
+  })
+
+    const ncFoto = document.getElementById('foto');
+    const ncTelefono = document.getElementById('telefono');
+    const ncDNI = document.getElementById('dni');
+    const ncConfirmar = document.getElementById('confirmarContraseña');
+    const ncContraseña = document.getElementById('contraseña');
+    const ncEmail = document.getElementById('email');
+    const ncNombre = document.getElementById('nombre');
+
+  // Validación en línea de cada "input"
+
+  ncTelefono.addEventListener('change', function (event) {
+    if (!ncTelefono.checkValidity()) {
+      showFeedBack(ncTelefono, false, "Introduzca un teléfono válido");
+    } else {
+      showFeedBack(ncTelefono, true);
+    }
+  });
+
+  ncDNI.addEventListener('change', function (event) {
+    if (!ncDNI.checkValidity()) {
+      showFeedBack(ncDNI, false, "Introduzca un DNI válido");
+    } else {
+      showFeedBack(ncDNI, true);
+    }
+  });
+
+  ncConfirmar.addEventListener('change', function (event) {
+    if (ncConfirmar.value !== ncContraseña.value){
+      showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+    }
+    else if (!ncConfirmar.checkValidity()) {
+      if(ncConfirmar.validity.valueMissing) {
+        showFeedBack(ncConfirmar, false, "Hay que confirmar la contraseña"); 
+      }
+      else {
+        showFeedBack(ncConfirmar, false);
+      }
+    } else {
+      showFeedBack(ncConfirmar, true);
+    }
+  });
+
+  ncContraseña.addEventListener('change', function (event) {
+    if (ncConfirmar.value !== ncContraseña.value){
+        showFeedBack(ncConfirmar, false, "Las contraseñas deben coincidir"); 
+    }
+    else {
+      showFeedBack(ncConfirmar, true);
+    }
+    
+    if (!ncContraseña.checkValidity()) {
+      if(ncContraseña.validity.valueMissing) {
+        showFeedBack(ncContraseña, false, "Hay que introducir la contraseña"); 
+      }
+      else if (ncContraseña.validity.patternMismatch) {
+        showFeedBack(ncContraseña, false, "La contraseña debe tener al menos 8 caracteres"); 
+      }
+      else {
+        showFeedBack(ncContraseña, false);
+      }
+    } else {
+      showFeedBack(ncContraseña, true);
+    }
+  });
+
+  ncEmail.addEventListener('change', function (event) {
+    if (!ncEmail.checkValidity()) {
+      if(ncEmail.validity.valueMissing) {
+        showFeedBack(ncEmail, false, "Hay que introducir el email"); 
+      }
+      else {
+        showFeedBack(ncEmail, false);
+      }
+    } else {
+      showFeedBack(ncEmail, true);
+    }
+  });
+
+  ncNombre.addEventListener('change', function (event) {
+    if (!ncNombre.checkValidity()) {
+      if(ncNombre.validity.valueMissing) {
+        showFeedBack(ncNombre, false, "Hay que introducir el nombre"); 
+      }
+      else {
+        showFeedBack(ncNombre, false);
+      }
+    } else {
+      showFeedBack(ncNombre, true);
+    }
+  });
+  
 }
 
 // Validación del formulario para editar un gestor
