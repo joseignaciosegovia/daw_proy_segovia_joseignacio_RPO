@@ -14,14 +14,11 @@
         exit();
     }
 
-    // Actualizamos el título de la página
-    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
-    // Actualizamos la dirección del título y del logo de la página
-    $home = "/servidor/intranet.php";
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    use Clases\DB;
+    // Si no hemos llegado a esta página de las maneras adecuadas, volvemos a intranet.php
+    if (!isset($_POST['Actualizar']) && !isset($_POST['Borrar']) && ! isset($_GET['gestor'])) {
+        header('Location: intranet.php');
+        die();
+    }
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
@@ -40,6 +37,15 @@
         // Ponemos la primera letra de cada palabra en mayúsculas
         $nombre = ucwords($nombre); 
     }
+
+    // Actualizamos el título de la página
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
+    $home = "/servidor/intranet.php";
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
 
     // Si pulsamos el botón de actualizar
     if (isset($_POST['Actualizar'])) {
@@ -217,11 +223,6 @@
     <a href="administrarGestores.php"><button>Volver atrás</button></a>
 
 <?php
-    }
-    // Si no hemos llegado a esta página a través del botón "Editar gestor" de intranet.php, volvemos a dicha página
-    else {
-        header('Location: intranet.php');
-        die();
     }
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";

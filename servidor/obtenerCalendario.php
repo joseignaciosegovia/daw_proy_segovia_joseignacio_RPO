@@ -7,6 +7,12 @@
         exit();
     }
 
+    // Si no se obtiene la variable "pista"
+    if(!isset($_GET['pista'])){
+        header("Location: intranet.php");
+        exit(); 
+    }
+
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
 
@@ -16,11 +22,5 @@
         // Enviamos las fechas ocupadas de esta pista a JavaScript para que actualice el calendario para el cliente
         $calendario = json_encode($crud->listar("*", "reservas", "where pista = $_GET[pista]"));
         echo $calendario;
-    }
-
-    // Si hemos llegado a esta página por otros medios (por ejemplo, escribiendo la dirección directamente)
-    else {
-        header("Location: intranet.php");
-        exit();   
     }
 ?>

@@ -1,5 +1,4 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -8,20 +7,11 @@
         unset($_SESSION['administrador']);
     }
 
-    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["gestor"])) {
-        header("Location: accesoAdministrador.php");
+    // Si no hemos iniciado sesión como gestor o no obtenemos la variable "pista", volvemos a la página de inicio de la intranet
+    if (empty($_SESSION["gestor"]) || !isset($_GET['pista'])) {
+        header("Location: intranet.php");
         exit();
     }
-
-    // Actualizamos el título de la página
-    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
-    // Actualizamos la dirección del título y del logo de la página
-    $home = "/servidor/intranet.php";
-    
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    use Clases\DB;
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
@@ -36,6 +26,15 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
         <script type="module" src="/js/calendarioAdministrador.js"></script>
 <?php }
+
+    // Actualizamos el título de la página
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
+    $home = "/servidor/intranet.php";
+    
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
 
     // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de accesoAdministrador.php)
     if (isset($_GET['pista'])) {
@@ -67,11 +66,6 @@
         </div>
         <a href="intranet.php"><button>Volver atrás</button></a>
 <?php
-    }
-
-    else {
-        header('Location: intranet.php');
-        die();
     }
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";

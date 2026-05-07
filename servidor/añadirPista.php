@@ -43,8 +43,6 @@
         header("Location: intranet.php");
     }
 
-    if(isset($_POST['Añadir'])) {
-
 ?>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
@@ -104,7 +102,5 @@
         <a href="intranet.php"><button>Volver atrás</button></a>
     </div>
 <?php
-    }
-
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>
