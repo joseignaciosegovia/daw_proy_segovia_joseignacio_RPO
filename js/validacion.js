@@ -1160,7 +1160,7 @@ function validarAñadirGestor(form) {
           body: formData
         }).then((response) => response.text())
         .then(function(data) {
-          mostrarModal("El gestor ha sido modificado correctamente", "/servidor/administrarGestores.php");
+          mostrarModal("El gestor ha sido creado correctamente", "/servidor/administrarGestores.php");
           
         }).catch(function (err) {
           console.log("Ha habido un error");

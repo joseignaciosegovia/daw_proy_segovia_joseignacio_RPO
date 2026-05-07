@@ -23,8 +23,6 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
-    
-
     // Si hemos iniciado sesión como gestor y el gestor es administrador
     if(!empty($_SESSION["gestor"]) && !empty($_SESSION["administrador"])){
         $crud = new Crud(new DB("proyecto"));

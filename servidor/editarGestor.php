@@ -8,7 +8,7 @@
         unset($_SESSION['administrador']);
     }
 
-    // Si no hemos iniciado sesión como un gestor que además sea administrador, volvemos a la página de gestión de pistas
+    // Si no hemos iniciado sesión como un gestor que además sea administrador, volvemos a la página de inicio
     if (!(!empty($_SESSION["gestor"]) && !empty($_SESSION["administrador"]))) {
         header("Location: intranet.php");
         exit();
@@ -18,6 +18,23 @@
     if (!isset($_POST['Actualizar']) && !isset($_POST['Borrar']) && ! isset($_GET['gestor'])) {
         header('Location: intranet.php');
         die();
+    }
+
+    // Actualizamos el título de la página
+    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    // Actualizamos la dirección del título y del logo de la página
+    $home = "/servidor/intranet.php";
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
+
+    // Si pulsamos el botón de borrar
+    if (isset($_POST['Borrar'])) {
+        $crud = new Crud(new DB("proyecto"));
+        $crud->eliminar("gestores", "where email = \"$_POST[Email]\"");
+        // En confirmacion.js está el mensaje para confirmar el borrado
+        header("Location: intranet.php");
     }
 
     // Función para añadir scripts en el pie
@@ -37,15 +54,6 @@
         // Ponemos la primera letra de cada palabra en mayúsculas
         $nombre = ucwords($nombre); 
     }
-
-    // Actualizamos el título de la página
-    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
-    // Actualizamos la dirección del título y del logo de la página
-    $home = "/servidor/intranet.php";
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    use Clases\DB;
 
     // Si pulsamos el botón de actualizar
     if (isset($_POST['Actualizar'])) {
@@ -110,14 +118,6 @@
         $crud = new Crud(new DB("proyecto"));
         $condicion = "where email = \"$datos->email\"";
         $crud->actualizar("gestores", $valores, $condicion);
-    }
-
-    // Si pulsamos el botón de borrar
-    elseif (isset($_POST['Borrar'])) {
-        $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("gestores", "where email = \"$_POST[Email]\"");
-        // En confirmacion.js está el mensaje para confirmar el borrado
-        header("Location: intranet.php");
     }
 
     // Si se obtiene la variable "gestor" (pulsando el botón "Editar gestor" de intranet.php)
@@ -211,13 +211,18 @@
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar gestor</button>
-                            <button class="btn btn-danger profile-button" name="Borrar">Borrar gestor</button>
                         </div>
                         <!-- Campo oculto para guardar el email del gestor para poder actualizarlo -->
                         <input id="email" name="email" type="hidden" value="<?php echo "$gestor[email]"?>">
                     </div>
                 </form>
             </div>
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <input type="hidden" name="Email" value="<?php echo $gestor['email']; ?>">
+                <div class="mt-3 text-center">
+                    <button class="btn btn-danger profile-button" type="submit" name="Borrar" value="1">Borrar gestor</button>
+                </div>
+            </form>
         </div>
     </div>
     <a href="administrarGestores.php"><button>Volver atrás</button></a>

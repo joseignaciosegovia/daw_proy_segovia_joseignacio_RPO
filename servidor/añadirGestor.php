@@ -58,7 +58,7 @@
         if($datos->telefono != null)
             $telefono = $datos->telefono;
         else
-            $telefono = null;
+            $telefono = 'null';
 
         // Si el gestor ha elegido una imagen
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {

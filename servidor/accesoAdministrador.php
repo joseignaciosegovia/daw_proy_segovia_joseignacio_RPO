@@ -1,5 +1,5 @@
 <?php
-    //ob_start(); // activa el buffer
+    ob_start(); // activa el buffer
     session_start();
 
     // Si ya hemos iniciado sesión como gestor, redirigimos a la página de gestión
@@ -8,16 +8,16 @@
         exit();
     }
 
-    use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";
-
     // Función que muestra un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: accesoAdministrador.php');
         die();
     }
+
+    use Clases\DB;
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";    
 
     // Si pulsamos el botón de "Acceder
     if (isset($_POST['login'])) {

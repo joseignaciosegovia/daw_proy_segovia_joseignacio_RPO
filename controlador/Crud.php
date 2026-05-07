@@ -15,7 +15,7 @@ class Crud {
         try {
             $this->base->ConsultaSimple($consulta);
         } catch (PDOException $ex) {
-            die("Ocurrió un error al insertar datos en la tabla " . $tabla . ": " . $ex->getMessage());
+            throw new PDOException("No puede conectarse con la base de datos: " . $ex->getMessage());
         }
     }
 
@@ -80,8 +80,12 @@ class Crud {
         $this->base->datos = null;
         
         $consulta = "select " . $seleccion . " from " . $tabla . " " . $condicion;
-        
-        $this->base->Consulta($consulta);
+        try {
+            $this->base->Consulta($consulta);
+        } catch (PDOException $ex) {
+            die("Ocurrió un error al listar datos de la tabla " . $tabla . ": " . $ex->getMessage());
+        }
+
         $data = array();
         if($this->base->datos != null){
             // Recorremos el array "datos" (donde están los registros de la tabla)

@@ -35,6 +35,11 @@ class DB {
 	public function Consulta($consulta) {
 		
 		$resultado = $this->con->query($consulta);
+
+		if ($resultado === false) {
+        	return;
+    	}
+
 		while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
 			$this->datos[] = $fila;
 		}

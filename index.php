@@ -56,7 +56,7 @@
 
         // Si el usuario ha introducido un teléfono
         if($datos->telefono == null)
-            $telefono =  0;
+            $telefono =  'null';
         else
             $telefono = $datos->telefono;
 
@@ -118,21 +118,7 @@
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
-        
-/*
-        $resend = Resend::client('re_TPJ6eTsz_4rTRhvEyX4Qj54CcyNEh2oRj');
-
-        $resend->emails->send([
-        'from' => 'onboarding@resend.dev',
-        'to' => 'josegoviaramirez@gmail.com',
-        'subject' => 'Hello World',
-        'html' => '<p>Congrats on sending your <strong>first email</strong>!</p>'
-        ]);
-*/
-        
-
         // Dominio: reservapistasonline.moral.daw
-
         // GoDaddy: ns59.domaincontrol.com ns60.domaincontrol.com
 
         $body = json_encode([
