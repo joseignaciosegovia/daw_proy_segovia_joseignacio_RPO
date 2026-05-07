@@ -34,7 +34,10 @@
     <div class="col-12 col-sm-6 col-md-7 col-lg-8">
         <?php
             $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\"");
-            if($reservas != null){
+            if($reservas == null){
+                echo "<h2 class=\"d-flex justify-content-center py-2\">Todavía no ha realizado ninguna reserva</h2>";
+            }
+            else {
                 ?>
                 <table class="table table-striped table-hover">
                     <thead>

@@ -1,5 +1,5 @@
 <?php
-    // ob_start(); // activa el buffer
+    ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
