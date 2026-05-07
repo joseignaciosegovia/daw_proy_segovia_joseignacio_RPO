@@ -171,7 +171,10 @@
                 <div class="row mt-3">
                     <div class="col-md-12 col-lg-7">
                         <label class="labels">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" value="" pattern=".{8,}">
+                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" pattern=".{8,}" value="" pattern=".{8,}">
+                        <div id="passwordHelpBlock" class="form-text">
+                            La contraseña debe tener al menos 8 caracteres 
+                        </div>
                         <div class="invalid-feedback">
                             Introduzca una contraseña válida
                         </div>

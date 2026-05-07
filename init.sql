@@ -82,12 +82,12 @@ INSERT INTO clientes VALUES
 -- 'ferL1234'
 
 INSERT INTO gestores VALUES 
-    ('adminMer@gmail.com', '$2y$10$V0CR1TLyM0dkvzHU8ZGIneJM41LeNx81PS9O5mmqT5nUOcoZEoSMi', 'Mercedes Puertas', '77319284T', 661281938, null, 1),
-    ('adminAnton@gmail.com', '$2y$10$5S6n3ynswju4aoWasJF4A.oh30Y0piMKBHOdWjJnDio5KJJZlk.Sa', 'Antonio Castillo', '71822198U', 617291009, null, 0);
+    ('adminMer@gmail.com', '$2y$10$LJpRbN7ZgtL1fgQeQh/tc.l6Hu49y6p/5tKzXZ8f.O/bDcvpWqPC2', 'Mercedes Puertas', '77319284T', 661281938, null, 1),
+    ('adminAnton@gmail.com', '$2y$10$xnq7nlX9FhSC7MQQbDzkW.jDo0irPlmkPCaFh59AZiOLkOIf93abO', 'Antonio Castillo', '71822198U', 617291009, null, 0);
 
 -- Contaseñas de gestores:
--- 'admMer'
--- 'admAn'
+-- 'admMer12'
+-- 'admAn123'
 
 INSERT INTO pistas (nombre, localizacion, precioReserva) VALUES 
     ('Campo fútbol 7', 'Ciudad Deportiva', 8.25),
