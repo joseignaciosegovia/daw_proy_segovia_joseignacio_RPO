@@ -70,10 +70,10 @@ SET NAMES utf8mb4;
 -- Tabla clientes
 
 INSERT INTO clientes VALUES 
-    ('marLop@gmail.com', '$2y$10$lpTs.g49VSLKkD8SGzl9LOVpZ7UNFwmecxGC9PqSioXlREtjGp.r2', 'María López', '87182344I', 655871025, null, '$2y$12$GRoxOUyMK.YyXPot2/2F..7Q8zTrzrlY4y2k9CZMNmPFgoOiMHq6y', 1),
-    ('ferSan@gmail.com', '$2y$10$jEGR/YfIt9Xiu5r/rjrreOYVwISNnJxYKGmybCdmwkDBYoR.XGyCW', 'Fernando Sanz', '11298419O', 664788795, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1),
-    ('antGar@gmail.com', '$2y$10$DMMANtYfLFFAMXhnIzH7q.jlB7yyHam18wGwUZU1T.Z0o3CJl3qdu', 'Antonio García', '744391209U', 697874169, null, '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 1),
-    ('ferLui@gmail.com', '$2y$10$u4AZ1xTiDSyXublcDmqv3.8UOt2SXdaeiRCjUPwQdNDIQEyM5pHCC', 'Fernanda Luisa', '11298437H', 604975301, null, '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1);
+    ('marLop@gmail.com', '$2y$10$lpTs.g49VSLKkD8SGzl9LOVpZ7UNFwmecxGC9PqSioXlREtjGp.r2', 'María López', '87182344I', 655871025, "/imagenes/blank-profile-picture.png", '$2y$12$GRoxOUyMK.YyXPot2/2F..7Q8zTrzrlY4y2k9CZMNmPFgoOiMHq6y', 1),
+    ('ferSan@gmail.com', '$2y$10$jEGR/YfIt9Xiu5r/rjrreOYVwISNnJxYKGmybCdmwkDBYoR.XGyCW', 'Fernando Sanz', '11298419O', 664788795, "/imagenes/blank-profile-picture.png", '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1),
+    ('antGar@gmail.com', '$2y$10$DMMANtYfLFFAMXhnIzH7q.jlB7yyHam18wGwUZU1T.Z0o3CJl3qdu', 'Antonio García', '744391209U', 697874169, "/imagenes/blank-profile-picture.png", '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 1),
+    ('ferLui@gmail.com', '$2y$10$u4AZ1xTiDSyXublcDmqv3.8UOt2SXdaeiRCjUPwQdNDIQEyM5pHCC', 'Fernanda Luisa', '11298437H', 604975301, "/imagenes/blank-profile-picture.png", '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1);
 
 -- Contraseñas de clientes: 
 -- 'marL1234'
@@ -82,8 +82,8 @@ INSERT INTO clientes VALUES
 -- 'ferL1234'
 
 INSERT INTO gestores VALUES 
-    ('adminMer@gmail.com', '$2y$10$LJpRbN7ZgtL1fgQeQh/tc.l6Hu49y6p/5tKzXZ8f.O/bDcvpWqPC2', 'Mercedes Puertas', '77319284T', 661281938, null, 1),
-    ('adminAnton@gmail.com', '$2y$10$xnq7nlX9FhSC7MQQbDzkW.jDo0irPlmkPCaFh59AZiOLkOIf93abO', 'Antonio Castillo', '71822198U', 617291009, null, 0);
+    ('adminMer@gmail.com', '$2y$10$LJpRbN7ZgtL1fgQeQh/tc.l6Hu49y6p/5tKzXZ8f.O/bDcvpWqPC2', 'Mercedes Puertas', '77319284T', 661281938, "/imagenes/blank-profile-picture.png", 1),
+    ('adminAnton@gmail.com', '$2y$10$xnq7nlX9FhSC7MQQbDzkW.jDo0irPlmkPCaFh59AZiOLkOIf93abO', 'Antonio Castillo', '71822198U', 617291009, "/imagenes/blank-profile-picture.png", 0);
 
 -- Contaseñas de gestores:
 -- 'admMer12'

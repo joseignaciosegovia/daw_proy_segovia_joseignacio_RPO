@@ -30,11 +30,16 @@
         $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
 
         if($incidencias == null) {
-            echo "<h1 class=\"d-flex justify-content-center\">No hay incidencias enviadas por usuarios</h1>";
+?>
+            <h1 class="d-flex justify-content-center">No hay incidencias enviadas por usuarios</h1>
+            <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- La barra de navegación será la primera columna -->
+<?php 
+                    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; 
         }
-
         else {
-
 
 ?>
     <h1 class="d-flex justify-content-center">Incidencias de los usuarios</h1>

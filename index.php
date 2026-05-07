@@ -122,32 +122,32 @@
         // GoDaddy: ns59.domaincontrol.com ns60.domaincontrol.com
 
         $body = json_encode([
-        'from'    => 'Tu App <onboarding@resend.dev>',
-        'to'      => [$email],
-        'subject' => 'Verifica tu cuenta',
-        'html'    => "
-            <h2>Hola, $email</h2>
-            <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
-            <a href=\"http://localhost:8080/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
-            <p style='color:#64748b; font-size:13px;'>
-                Si no creaste esta cuenta, ignora este mensaje.
-            </p>
-        ",
-    ]);
+            'from'    => 'Tu App <onboarding@resend.dev>',
+            'to'      => [$email],
+            'subject' => 'Verifica tu cuenta',
+            'html'    => "
+                <h2>Hola, $email</h2>
+                <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
+                <a href=\"http://localhost:8080/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
+                <p style='color:#64748b; font-size:13px;'>
+                    Si no creaste esta cuenta, ignora este mensaje.
+                </p>
+            ",
+        ]);
 
-    $ch = curl_init('https://api.resend.com/emails');
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST           => true,
-        CURLOPT_POSTFIELDS     => $body,
-        CURLOPT_HTTPHEADER     => [
-            'Authorization: Bearer ' . RESEND_API_KEY,
-            'Content-Type: application/json',
-        ],
-    ]);
+        $ch = curl_init('https://api.resend.com/emails');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $body,
+            CURLOPT_HTTPHEADER     => [
+                'Authorization: Bearer ' . RESEND_API_KEY,
+                'Content-Type: application/json',
+            ],
+        ]);
 
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
         //$_SESSION['cliente'] = $email;
