@@ -14,14 +14,31 @@
         exit();
     }
 
+    // Si no hemos llegado a esta página de la manera adecuada
+    if (!isset($_GET['Borrar']) && !isset($_POST['datos']) && !isset($_GET['pista'])) {
+        header('Location: intranet.php');
+        die();
+    }
+
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
     $home = "/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
+
+    // Si pulsamos el botón de borrar
+    if (isset($_GET['Borrar'])) {
+        $crud = new Crud(new DB("proyecto"));
+
+        $id = $crud->listar("id", "pistas", "where nombre = \"$_GET[Borrar]\"")[0]['id'];
+        $crud->eliminar("pistas", "where id = $id");
+        // En confirmacion.js está el mensaje para confirmar el borrado
+        header("Location: intranet.php");
+    }
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
@@ -42,16 +59,6 @@
         $crud->actualizar("pistas", $valores, $condicion);
 
         $_GET['pista'] = $datos->nombre;
-    }
-
-    // Si pulsamos el botón de borrar
-    elseif (isset($_GET['Borrar'])) {
-        $crud = new Crud(new DB("proyecto"));
-
-        $id = $crud->listar("id", "pistas", "where nombre = \"$_GET[Borrar]\"")[0]['id'];
-        $crud->eliminar("pistas", "where id = $id");
-        // En confirmacion.js está el mensaje para confirmar el borrado
-        header("Location: intranet.php");
     }
 
     // Si se obtiene la variable "pista" (pulsando el botón "Editar" de intranet.php)
@@ -126,11 +133,6 @@
     <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 
 <?php
-    }
-    // Si no hemos llegado a esta página a través del botón "Editar" de intranet.php, volvemos a dicha página
-    else {
-        header('Location: intranet.php');
-        die();
     }
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
