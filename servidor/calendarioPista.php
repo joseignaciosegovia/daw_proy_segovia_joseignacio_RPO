@@ -41,17 +41,17 @@
         $crud = new Crud(new DB("proyecto"));
 
         // Guardamos el id de la pista
-        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0]['id'];
+        $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0]['nombre'];
 
         $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
         // Guardamos las fechas ocupadas, el id de la pista y su nombre
-        $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = $pista");
-        $reservasYPista[] = $pista;
+        $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = $_GET[pista]");
         $reservasYPista[] = $_GET['pista'];
+        $reservasYPista[] = $pista;
 ?>
         <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
-        <h1 class="d-flex justify-content-center">Calendario de la pista <?php echo "$_GET[pista]" ?></h1>
+        <h1 class="d-flex justify-content-center">Calendario de la pista <?php echo "$pista" ?></h1>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">
@@ -64,7 +64,7 @@
             <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
             <?php echo json_encode($reservasYPista) ?>
         </div>
-        <a href="intranet.php"><button>Volver atrás</button></a>
+        <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 <?php
     }
 

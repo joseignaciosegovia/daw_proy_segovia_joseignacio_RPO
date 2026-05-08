@@ -141,12 +141,12 @@
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Información del perfil</h4>
+                    <h2 class="text-right">Información del perfil</h2>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12 col-lg-7">
                         <label class="labels">Foto de perfil</label>
-                        <img class="img-thumbnail mb-2" name="foto" src="<?php echo $cliente["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                        <img class="img-thumbnail mb-2" src="<?php echo $cliente["foto"] ?>" alt="Foto de perfil" width="100" height="100">
                         <input type="file" class="form-control" id="foto" name="foto">
                         <div class="invalid-feedback">
                             Introduzca una foto válida
@@ -171,7 +171,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12 col-lg-7">
                         <label class="labels">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" pattern=".{8,}" value="" pattern=".{8,}">
+                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" pattern=".{8,}" value="">
                         <div id="passwordHelpBlock" class="form-text">
                             La contraseña debe tener al menos 8 caracteres 
                         </div>

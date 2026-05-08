@@ -39,6 +39,7 @@
             }
             else {
                 ?>
+                <form method="post" action="../servidor/actualizarCalendario.php">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -61,7 +62,7 @@
                                     echo "<td>$reserva[horaInicio]</td>";
                                     echo "<td>$reserva[horaFin]</td>";
                                     echo "<td>$pista</td>";
-                                    echo "<form method=\"post\" action=\"../servidor/actualizarCalendario.php\">";
+                                    
                                     $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
                                     // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
                                     if($horaReserva > $horaActual) {
@@ -71,12 +72,13 @@
                                     else {
                                         echo "<td>Fecha pasada</td>";
                                     }
-                                    echo "</form>";
+                                    
                                 echo "</tr>";
                             }
                         ?>
                     </tbody>
                 </table>
+            </form>
         <?php
             }
         ?>
@@ -87,5 +89,3 @@
         // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
     ?>
-    </body>
-</html>

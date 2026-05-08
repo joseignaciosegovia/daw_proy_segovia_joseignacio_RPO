@@ -57,7 +57,7 @@
     // Si se obtiene la variable "pista" (pulsando el botón "Editar" de intranet.php)
     if(isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
-        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0];
+        $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0];
     
 ?>
     <h1 class="d-flex justify-content-center">Editar pista</h1>
@@ -69,7 +69,7 @@
 
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col-12 col-lg-8 d-flex align-items-center">
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['nombre']; ?>" name="editarPista">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['id']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="row mt-3">
                             <div class="col-md-12 mt-3">
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-    <a href="intranet.php"><button>Volver atrás</button></a>
+    <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 
 <?php
     }

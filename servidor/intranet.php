@@ -42,12 +42,14 @@
             <div class="col-12 col-lg-8">
                 <table class="table table-striped table-hover">
                     <thead>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Localización</th>
-                        <th>Reservas</th>
-                        <th>Calendario</th>
-                        <th>Editar pista</th>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Localización</th>
+                            <th>Reservas</th>
+                            <th>Calendario</th>
+                            <th>Editar pista</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php
@@ -56,19 +58,19 @@
                             foreach($pistas as $pista){
                         ?>
                         <tr>
-                            <th><?php echo $cont ?></th>
+                            <td><?php echo $cont ?></td>
                             <td><?php echo $pista['nombre'] ?></td>
                             <td><?php echo $pista['localizacion'] ?></td>
-                            <td><?php echo "<a href=\"consultarReservas.php?pista=$pista[nombre]\"><button>Consultar reservas</button></a>"?></td>
-                            <td><?php echo "<a href=\"calendarioPista.php?pista=$pista[nombre]\"><button>Calendario</button></a>"?></td>
-                            <td><?php echo "<a href=\"editarPista.php?pista=$pista[nombre]\"><button>Editar</button></a>"?></td>
+                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
+                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
+                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
                         </tr>
                             <?php 
                                 $cont++;
                             } 
                             ?>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="6">
                                 <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
                                     <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
                                 </form>
@@ -79,58 +81,7 @@
             </div>
         </div>
     </div>
-<?php } 
-/*
-    // Si hemos iniciado sesión como administrador
-    if(!empty($_SESSION["administrador"])){
-        $crud = new Crud(new DB("proyecto"));
-        $gestores = $crud->listar("*", "gestores", "");
-        
-?>
-    <h1 class="d-flex justify-content-center">Lista de Gestores</h1>
-    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- La barra de navegación será la primera columna -->
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col-12 col-lg-8"></div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <th>#</th>
-                    <th>Correo</th>
-                    <th>Editar gestor</th>
-                </thead>
-                <tbody>
-                    <?php
-                        $cont = 1;
-                        // Recorremos los gestores y los añadimos a la tabla
-                        foreach($gestores as $gestor){
-                    ?>
-                    <tr>
-                        <th><?php echo $cont ?></th>
-                        <td><?php echo $gestor['email'] ?></td>
-                        <td><?php echo "<a href=\"editarGestor.php?gestor=$gestor[email]\"><button>Editar</button></a>"?></td>
-                    </tr>
-                        <?php 
-                            $cont++;
-                        } 
-                        ?>
-                    <tr>
-                        <td colspan="2">
-                            <form method='POST' action='<?php echo "añadirGestor.php"; ?>'>
-                                <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir gestor">
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 <?php } ?>
-*/
-?>
-</body>
-</html>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

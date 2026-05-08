@@ -137,7 +137,7 @@
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestor=" . $gestor['email']; ?>" name="editarGestor">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Gestor: <?php echo "$_GET[gestor]" ?></h4>
+                            <h2 class="text-right">Gestor: <?php echo "$_GET[gestor]" ?></h2>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -202,7 +202,7 @@
                             </div>
                             <div class="col-md-12 col-lg-7">
                                 <label class="labels">Foto de perfil</label>
-                                <img class="img-thumbnail mb-2" name="foto" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                                <img class="img-thumbnail mb-2" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="100" height="100">
                                 <input type="file" class="form-control" id="foto" name="foto">
                                 <div class="invalid-feedback">
                                     Introduzca una foto válida
@@ -228,8 +228,7 @@
             </form>
         </div>
     </div>
-    <a href="administrarGestores.php"><button>Volver atrás</button></a>
-
+    <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
 <?php
     }
 

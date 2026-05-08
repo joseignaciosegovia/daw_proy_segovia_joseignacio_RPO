@@ -40,13 +40,16 @@
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
 
-        $pista = $crud->obtener("pistas", "where nombre = \"$_GET[pista]\"")[0]['id'];
+        $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0]['nombre'];
         $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
-        $reservas = $crud->listar("*", "reservas", "where pista = $pista");
+        // $_GET['pista'] = id
+        // $pista = nombre
+
+        $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista]");
 ?>
         <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
-        <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$_GET[pista]" ?></h1>
+        <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$pista" ?></h1>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">
@@ -64,13 +67,17 @@
             ?>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <th>#</th>
-                            <th>Fecha</th>
-                            <th>Hora de inicio</th>
-                            <th>Hora de Fin</th>
-                            <th>Cliente</th>
-                            <th>Información</th>
-                            <th>Editar</th>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Hora de inicio</th>
+                                <th>Hora de Fin</th>
+                                <th>Cliente</th>
+                                <th>Información</th>
+                                <th>Editar</th>
+                                <th hidden></th>
+                                <th hidden></th>
+                            </tr>
                         </thead>
                         <tbody>
                     <?php
@@ -87,7 +94,7 @@
                     ?>
                         <tr>
                             <!-- Guardamos el id de la pista para poder actualizar la reserva desde actualizarCalendario.php -->
-                            <td hidden><?php echo $pista ?></td>
+                            <td hidden><?php echo $_GET['pista'] ?></td>
                             <!-- Guardamos el id de la reserva para poder actualizarla desde actualizarCalendario.php -->
                             <td hidden><?php echo $reserva['id'] ?></td>
                             <td><?php echo $cont ?></td>
@@ -116,9 +123,7 @@
             </div>
             <?php } ?>
         </div>
-        <a href="intranet.php"><button>Volver atrás</button></a>
-    </body>
-</html>
+        <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 
 <?php
     }

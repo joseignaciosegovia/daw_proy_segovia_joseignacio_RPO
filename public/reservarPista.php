@@ -42,7 +42,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
         <div class="col-8 col-sm-6">
-            <h4>Escoger pista</h4>
+            <h3>Escoger pista</h3>
             <div class="accordion accordion-flush" id="elegirPista">
             <?php
                 $contador = 0;
@@ -63,7 +63,7 @@
                         foreach($pistas as $pista){
                     ?>
                             <div class="accordion-body">
-                                <input id="id" name="id" type="hidden" value=<?php echo "$pista[id]"; ?> />
+                                <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
                                 <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
                             </div>
                     <?php
@@ -79,7 +79,7 @@
             </div>    
         </div>
         <!-- Cerramos la sección principal, creada en navCliente.php -->
-        <h3 id="tituloPista" class="d-flex justify-content-center"></h3>
+        <h3 id="tituloPista" class="d-flex justify-content-center">Seleccione una pista</h3>
     </div>
     
     <div class="col" id="calendario">

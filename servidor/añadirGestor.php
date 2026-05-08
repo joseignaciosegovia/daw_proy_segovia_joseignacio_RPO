@@ -116,7 +116,7 @@
                     <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Crear gestor</h4>
+                                <h2 class="text-right">Crear gestor</h2>
                             </div>
                             <div class="col-md-12">
                                 <label class="labels">Nombre</label>
@@ -208,8 +208,7 @@
                 </div>
             </div>
         </div>
-        <a href="administrarGestores.php"><button>Volver atrás</button></a>
-    </div>
+        <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

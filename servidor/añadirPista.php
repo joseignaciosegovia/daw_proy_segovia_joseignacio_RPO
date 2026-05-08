@@ -55,7 +55,7 @@
                     <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Crear pista</h4>
+                                <h2 class="text-right">Crear pista</h2>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6">
@@ -99,8 +99,7 @@
                 </div>
             </div>
         </div>
-        <a href="intranet.php"><button>Volver atrás</button></a>
-    </div>
+        <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

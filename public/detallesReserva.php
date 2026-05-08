@@ -24,14 +24,16 @@
 ?>
 
     <div class="col">
-        <h4>Detalles de la reserva</h4>
+        <h2>Detalles de la reserva</h2>
         <div class="accordion accordion-flush">
             <table class="table table-hover">
                 <thead>
-                    <th>Pista</th>
-                    <th>Fecha</th>
-                    <th>Hora de inicio</th>
-                    <th>Hora de fin</th>
+                    <tr>
+                        <th>Pista</th>
+                        <th>Fecha</th>
+                        <th>Hora de inicio</th>
+                        <th>Hora de fin</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -44,6 +46,7 @@
             </table>
         </div>
     </div>
+</div>
 
 <?php 
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";

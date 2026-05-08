@@ -5,20 +5,20 @@
                     </div>
                     <div class="row">
                         <div class="col" id="telefonos">
-                            <h5>Teléfonos:</h5>
+                            <h3>Teléfonos:</h3>
                             <ul class="nav flex-column">
                                 <li class="nav-item mb-2">Ciudad deportiva: 656 539 016</li>
                                 <li class="nav-item mb-2">Polideportivo: 926 319 495</li>
                             </ul>
                         </div>
                         <div class="col" id="correosElectronicos">
-                            <h5>Correos electrónicos:</h5>
+                            <h3>Correos electrónicos:</h3>
                             <ul class="nav flex-column">
                                 <li class="nav-item mb-2">Ciudad deportiva: Ciudaddeportivamoral@gmail.com</li>
                             </ul>
                         </div>
                         <div class="col" id="paginaWeb">
-                            <h5>Páginas web:</h5>
+                            <h3>Páginas web:</h3>
                             <ul class="nav flex-column">
                                 <li><a href="https://www.moraldecalatrava.org/web1/ciudad-deportiva-moral-de-calatrava/" target="_blank">Ciudad Deportiva</a></li>
                             </ul>

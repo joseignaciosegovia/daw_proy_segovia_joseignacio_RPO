@@ -45,12 +45,12 @@
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Quejas y sugerencias</h4>
+                            <h2 class="text-right">Quejas y sugerencias</h2>
                         </div>
                         <div>
                             <div>
                                 <label class="labels">Queja o sugerencia</label>
-                                <textarea class="form-control" id="quejaIncidencia" placeholder="" name="Queja" value="" rows="5" cols="100" required></textarea>
+                                <textarea class="form-control" id="quejaIncidencia" placeholder="" name="Queja" rows="5" cols="100" required></textarea>
                                 <div class="invalid-feedback">
                                     Introduzca un mensaje
                                 </div>
@@ -76,14 +76,16 @@
     else{
 
 ?>
-        <h4 class="d-flex justify-content-center py-2">Historial de sugerencias/incidencias</h4>
+        <h2 class="d-flex justify-content-center py-2">Historial de sugerencias/incidencias</h2>
         <div class="accordion accordion-flush">
             <table class="table table-hover">
                 <?php $contador = 1; ?>
                 <thead>
-                    <th>Número</th>
-                    <th>Fecha</th>
-                    <th>Contenido</th>
+                    <tr>
+                        <th>Número</th>
+                        <th>Fecha</th>
+                        <th>Contenido</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php foreach($sugerencias as $sugerencia){ ?>
@@ -105,5 +107,3 @@
         // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
     ?>
-    </body>
-</html>

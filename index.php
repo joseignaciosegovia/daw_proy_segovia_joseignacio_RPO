@@ -282,7 +282,7 @@
                         foreach($pistas as $pista){
                     ?>
                             <div class="accordion-body">
-                                <input id="id" name="id" type="hidden" value=<?php echo "$pista[id]"; ?> />
+                                <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
                                 <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
                             </div>
                     <?php
@@ -297,8 +297,8 @@
                 </div>
                
         </div>
+        <h3 id="tituloPista" class="d-flex justify-content-center">Seleccione una pista</h3>
         <!-- Cerramos la sección principal, creada en navCliente.php -->
-        <h3 id="tituloPista" class="d-flex justify-content-center"></h3>
     </div>
     
     <div class="col" id="calendario">
