@@ -21,6 +21,11 @@
         <script type="module" src="/js/cancelarReserva.js"></script>
 <?php }
 
+    // Variables relacionadas con la tabla de reservas
+    $filasPorPagina = 10;
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $desplazamiento = ($pagina - 1) * $filasPorPagina;
+
     $crud = new Crud(new DB("proyecto"));
     // Cargamos la cabecera
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
@@ -33,11 +38,25 @@
     <!-- El contenido principal de la página será la segunda columna -->
     <div class="col-12 col-sm-6 col-md-7 col-lg-8">
         <?php
-            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC");
+            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
                 echo "<h2 class=\"d-flex justify-content-center py-2\">Todavía no ha realizado ninguna reserva</h2>";
             }
             else {
+                $filasTotales = $crud->listar("count(*)", "reservas", "where cliente = \"$_SESSION[cliente]\"")[0]['count(*)'];
+                $totalPaginas = ceil($filasTotales / $filasPorPagina);
+                $paginaSiguiente = $pagina + 1;
+                $paginaAnterior = $pagina - 1;
+
+                if ($pagina > 1){
+                    echo "<a href=\"?pagina=$paginaAnterior\">← Anterior</a>";
+                }
+                echo "<span>Página $pagina de $totalPaginas></span>";
+
+                if ($pagina < $totalPaginas) {
+                    echo "<a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
+                }
+
                 ?>
                 <form method="post" action="../servidor/actualizarCalendario.php">
                 <table class="table table-striped table-hover">

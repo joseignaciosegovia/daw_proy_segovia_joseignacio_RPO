@@ -27,6 +27,11 @@
         die();
     }
 
+    // Variables relacionadas con la tabla de reservas
+    $filasPorPagina = 10;
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $desplazamiento = ($pagina - 1) * $filasPorPagina;
+    
     // Actualizamos el título de la página
     $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
@@ -43,10 +48,7 @@
         $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0]['nombre'];
         $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
-        // $_GET['pista'] = id
-        // $pista = nombre
-
-        $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista] ORDER BY fecha, horaInicio ASC");
+        $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista] ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
 ?>
         <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
         <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$pista" ?></h1>
@@ -64,6 +66,19 @@
                 }
                 // Si hay reservas, creamos una tabla y las mostramos
                 else {
+                    $filasTotales = $crud->listar("count(*)", "reservas", "where pista = $_GET[pista]")[0]['count(*)'];
+                    $totalPaginas = ceil($filasTotales / $filasPorPagina);
+                    $paginaSiguiente = $pagina + 1;
+                    $paginaAnterior = $pagina - 1;
+
+                    if ($pagina > 1){
+                        echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaAnterior\">← Anterior</a>";
+                    }
+                    echo "<span>Página $pagina de $totalPaginas></span>";
+
+                    if ($pagina < $totalPaginas) {
+                        echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
+                    }
             ?>
                     <table class="table table-striped table-hover">
                         <thead>
