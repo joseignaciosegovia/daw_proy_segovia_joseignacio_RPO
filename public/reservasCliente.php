@@ -33,7 +33,7 @@
     <!-- El contenido principal de la página será la segunda columna -->
     <div class="col-12 col-sm-6 col-md-7 col-lg-8">
         <?php
-            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\"");
+            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC");
             if($reservas == null){
                 echo "<h2 class=\"d-flex justify-content-center py-2\">Todavía no ha realizado ninguna reserva</h2>";
             }

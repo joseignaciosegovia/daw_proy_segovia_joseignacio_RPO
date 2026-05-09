@@ -46,7 +46,7 @@
         // $_GET['pista'] = id
         // $pista = nombre
 
-        $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista]");
+        $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista] ORDER BY fecha, horaInicio ASC");
 ?>
         <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
         <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$pista" ?></h1>
