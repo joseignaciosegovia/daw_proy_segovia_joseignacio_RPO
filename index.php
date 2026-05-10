@@ -118,11 +118,8 @@
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
-        // Dominio: reservapistasonline.moral.daw
-        // GoDaddy: ns59.domaincontrol.com ns60.domaincontrol.com
-
         $body = json_encode([
-            'from'    => 'Tu App <onboarding@resend.dev>',
+            'from'    => '<onboarding@resend.dev>',
             'to'      => [$email],
             'subject' => 'Verifica tu cuenta',
             'html'    => "

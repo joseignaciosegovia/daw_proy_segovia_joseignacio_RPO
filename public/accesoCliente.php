@@ -29,6 +29,9 @@
         $fecha = time();
         $fechaBloqueado = 0;
 
+        // Borramos los registros que tengan más de diez minutos para limpiar la base de datos
+        $crud->eliminar("conexiones", "where (hora + 600) < $fecha");
+
         // Si es la primera vez que intentamos acceder con este usuario
         if(!isset($_SESSION[$nombre])){
             $_SESSION[$nombre]['bloqueado'] = 0;
