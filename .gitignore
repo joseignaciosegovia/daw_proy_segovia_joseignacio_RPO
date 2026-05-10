@@ -6,3 +6,4 @@ node_modules
 package-lock.json
 db_data
 docker-compose(local).yml
+config.php
