@@ -66,7 +66,7 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Iniciar sesión como gestor</h3>
+                        <h1>Iniciar sesión como gestor</h1>
                         <a class="btn btn-secondary d-flex justify-content-center" href="../index.php">Página de inicio</a>
                     </div>
                     <div class="card-body">

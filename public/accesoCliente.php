@@ -114,7 +114,7 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Iniciar sesión</h3>
+                        <h1>Iniciar sesión</h1>
                         <a class="btn btn-secondary" href="../index.php">Si no tienes cuenta, regístrate aquí</a>
                     </div>
                     <div class="card-body">
