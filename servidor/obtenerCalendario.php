@@ -1,11 +1,5 @@
 <?php
     session_start();
-    
-    // Si no hemos iniciado sesión como gestor, volvemos a la página de inicio de sesión de la intranet
-    if (empty($_SESSION["gestor"])) {
-        header("Location: accesoAdministrador.php");
-        exit();
-    }
 
     // Si no se obtiene la variable "pista"
     if(!isset($_GET['pista'])){
