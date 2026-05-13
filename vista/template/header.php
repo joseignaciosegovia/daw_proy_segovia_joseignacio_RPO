@@ -31,7 +31,9 @@
                         <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></a>
                     </div>
                     <div class="col-8 col-sm-9 col-lg-9 fs-1">
-                        <h1><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas en Moral de Calatrava</a></h1>
+                        <!-- El título contiene un enlace a la página principal -->
+                        <div class="hdr-title"><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas · Moral de Calatrava</a></div>
+                        <div class="hdr-sub">Polideportivo y Ciudad Deportiva</div>
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>

@@ -51,7 +51,6 @@
         $reservasYPista[] = $pista;
 ?>
         <h1 class="d-flex justify-content-center">Bienvenido/a <?php echo $nombre ?></h1>
-        <h1 class="d-flex justify-content-center">Calendario de la pista <?php echo "$pista" ?></h1>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <div class="container-fluid">
             <div class="row">

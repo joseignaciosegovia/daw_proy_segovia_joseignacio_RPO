@@ -19,6 +19,14 @@ function cargarCalendario(){
     var calendarEl = document.getElementById('calendario');
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
+    // Añadimos el título de la pista seleccionada y la leyenda del calendario
+    calendarEl.insertAdjacentHTML('beforebegin', `
+        <h2 class="d-flex justify-content-center">Calendario de la pista ${pista}</h2>
+        <div class="d-flex justify-content-center" id="leyenda">
+            <span><span class="color" style="background:#4ADE80;"></span>Disponible</span>
+            <span><span class="color" style="background:#3788D8;"></span>Ocupado</span>
+        </div>
+    `);
     calendarEl.hidden = false;
 
     crearModal();

@@ -109,6 +109,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!--Fontawesome CDN-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- Hoja de estilos -->
+        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <title>Login</title>
     </head>
 
@@ -136,7 +138,7 @@
                                 <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
+                                <input type="submit" value="Acceder" class="" name='login' id="btAccesoCliente">
                             </div>
                         </form>
                     </div>

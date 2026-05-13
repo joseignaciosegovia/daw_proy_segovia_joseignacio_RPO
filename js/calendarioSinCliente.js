@@ -18,9 +18,18 @@ async function cargarCalendario(pista, id){
     crearModal();
 
     var calendarEl = document.getElementById('calendario');
-    // Indicamos la pista antes de mostrar el calendario
+    // Indicamos el título de la pista antes de mostrar el calendario
     var tituloPista = document.getElementById('tituloPista');
-    tituloPista.innerHTML = "Pista: " + pista;
+    // Borramos el contenido del div para que no muestre el título de la pista que mostramos anteriormente
+    tituloPista.replaceChildren();
+    // Añadimos el título de la pista seleccionada y la leyenda del calendario
+    $(tituloPista).append(`
+        <h3>Pista: ${pista}</h3>
+        <div class="d-flex justify-content-center" id="leyenda">
+            <span><span class="color" style="background:#4ADE80;"></span>Disponible</span>
+            <span><span class="color" style="background:#F87171;"></span>Ocupado</span>
+        </div>
+    `);
     calendarEl.before(tituloPista);
     // Borramos el contenido del div para que no muestre la información de la pista y las fechas que ya hemos recogido
     calendarEl.replaceChildren();
@@ -85,8 +94,8 @@ async function cargarCalendario(pista, id){
                 events.push({
                     start: reserva.fecha + "T" + reserva.horaInicio,
                     end: reserva.fecha + "T" + reserva.horaFin,
-                    backgroundColor: "red",
-                    borderColor: "red"
+                    backgroundColor: "#F87171",
+                    borderColor: "#F87171"
                 });
             }
         }

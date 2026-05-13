@@ -163,18 +163,30 @@
         <div class="row column-gap-3">
             <div class="col-12 col-md-5 pt-4" id="informacionPrincipal">
                 <div class="row px-4">
-                    <h2>Reservar pistas del polideportivo y de la Ciudad Deportiva</h2>
-                    <p>En esta página podrás registrarte para reservar las pistas del polideportivo y de la Ciudad Deportiva de Moral de Calatrava</p>
+                    <h2>Reservar pistas en Moral de Calatrava</h2>
+                    <p>Consulta la disponibilidad de las pistas del Polideportivo y la Ciudad Deportiva en Moral de Calatrava</p>
+                </div>
+                <!-- Sección con los datos de las pistas -->
+                <div class="stats">
+<?php
+                    $crud = new Crud(new DB("proyecto"));
+                    $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
+                    $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
+                    echo "<div class=\"stat\"><div class=\"stat-n\">$numeroPistas</div><div class=\"stat-l\">Pistas disponibles</div></div>";
+                    echo "<div class=\"stat\"><div class=\"stat-n\">$numeroInstalaciones</div><div class=\"stat-l\">Instalaciones</div></div>";
+?>
+                    <div class="stat"><div class="stat-n">08:00</div><div class="stat-l">Apertura diaria</div></div>
+                    <div class="stat"><div class="stat-n">22:00</div><div class="stat-l">Cierre diario</div></div>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <h2 class="d-flex justify-content-center">Registrarse</h2>
                 <a class="btn btn-secondary my-2 d-flex justify-content-center" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
-                
-                <form class="row needs-validation px-4" name="crearUsuario" novalidate>
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Nombre Completo" required>
+                <div id="crearCuenta">
+                    <form class="row needs-validation px-4" name="crearUsuario" novalidate>
+                    <div class="col-6 mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" required>
                         <div class="invalid-feedback">
                             Introduzca un nombre
                         </div>
@@ -182,9 +194,9 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" placeholder="Correo electrónico" autocomplete="off" required>
+                    <div class="col-6 mb-3">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" autocomplete="off" required>
                         <div class="invalid-feedback">
                             Introduzca un correo electrónico válido
                         </div>
@@ -192,9 +204,9 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="col-6 mb-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" pattern=".{8,}" required>
+                        <input type="password" class="form-control" id="contraseña" placeholder="Mínimo 8 caracteres" pattern=".{8,}" required>
                         <div id="passwordHelpBlock" class="form-text">
                             La contraseña debe tener al menos 8 caracteres 
                         </div>
@@ -205,9 +217,9 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="col-6 mb-3">
                         <label for="confirmarContraseña" class="form-label">Confirmar contraseña</label>
-                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" required>
+                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Repite la contraseña" required>
                         <div class="invalid-feedback">
                             Confirme la contraseña
                         </div>
@@ -215,9 +227,9 @@
                             La contraseña coincide
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="col-6 mb-3">
                         <label for="dni" class="form-label">DNI</label>
-                        <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]">
+                        <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]">
                         <div class="invalid-feedback">
                             Introduzca un DNI válido
                         </div>
@@ -225,9 +237,9 @@
                             Dato correcto
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" placeholder="Teléfono (opcional)" pattern="[0-9]{9}">
+                    <div class="col-6 mb-3">
+                        <label for="telefono" class="form-label">Teléfono (opcional)</label>
+                        <input type="tel" class="form-control" id="telefono" placeholder="600 000 000" pattern="[0-9]{9}">
                         <div class="invalid-feedback">
                             Introduzca un número de teléfono válido
                         </div>
@@ -236,7 +248,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="foto" class="form-label">Foto de perfil</label>
+                        <label for="foto" class="form-label">Foto de perfil (opcional)</label>
                         <input type="file" class="form-control" id="foto">
                         <div class="invalid-feedback">
                             Introduzca una imagen válida
@@ -246,19 +258,36 @@
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary form-floating" name="crear">Crear Usuario</button>
+                        <button type="submit" class="btn btn-primary form-floating" id="btCrearUsuario" name="crear">Crear Usuario</button>
                     </div>
                 </form>
+                </div>
+                
+                <div id="sesion" style="display:none">
+                    <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="correo@ejemplo.com" name='usuario' required>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Tu contraseña" name='pass' required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <div class="col-8 col-sm-6">
+        <div id="consultarPistas" class="row column-gap-3">
             <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
-            <div id="leyenda">
-                <span><span class="color" style="background:#28a745;"></span> Disponible</span>
-                <span><span class="color" style="background:#dc3545;"></span> Ocupado</span>
-            </div>
-            <div class="accordion accordion-flush" id="elegirPista">
+            <div class="col-12 accordion accordion-flush d-flex justify-content-center" id="elegirPista">
             <?php
                 $crud = new Crud(new DB("proyecto"));
                 $contador = 0;
@@ -292,18 +321,19 @@
             ?>
                     </div>
                 </div>
-               
+            </div>
+            <!-- Div en el que irá el título de la pista -->
+            <div class="d-flex flex-column align-items-center" id="tituloPista">
+
+            </div>
+            <!-- Cerramos la sección principal, creada en navCliente.php -->
         </div>
-        <h3 id="tituloPista" class="d-flex justify-content-center">Seleccione una pista</h3>
-        <!-- Cerramos la sección principal, creada en navCliente.php -->
-    </div>
-    
-    <div class="col" id="calendario">
-        
-    </div>
+        <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
+        <div class="col" id="calendario">
+            
+        </div>
     </div>
 <?php
-
     // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 }

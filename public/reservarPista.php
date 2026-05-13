@@ -76,12 +76,15 @@
             ?>
                     </div>
                 </div>
-            </div>    
+            </div>  
+            <!-- Div en el que irá el título de la pista -->
+            <div class="d-flex flex-column align-items-center" id="tituloPista">
+
+            </div>  
         </div>
         <!-- Cerramos la sección principal, creada en navCliente.php -->
-        <h3 id="tituloPista" class="d-flex justify-content-center">Seleccione una pista</h3>
     </div>
-    
+    <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
     <div class="col" id="calendario">
         
     </div>

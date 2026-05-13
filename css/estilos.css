@@ -1,9 +1,74 @@
+/* Cabecera */
 #cabecera {
-    background-color: #FFCC99;
+    background-color: #1B3A6B;
+}
+/* Título de la cabecera */
+.hdr-title { 
+    font-size: 20px; 
+    font-weight: 600; 
+}
+/* Subtítulo de la cabecera */
+.hdr-sub { 
+    font-size: 15px; 
+    color: rgba(255,255,255,0.5); 
+}
+/* Ponemos el texto título en blanco */
+#cabecera a {
+    color: white;
+}
+
+#cabecera button {
+    color: #1B3A6B;
+    background-color: white;
+    border: 1px solid grey;
+    font-weight: bold;
+}
+/* Ponemos el ratón encima del botón de la cabecera */
+#cabecera button:hover { 
+    background: #e8eef7; 
+}
+/* Sección con los datos de las pistas */
+.stats { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-bottom: 1.5rem; 
+}
+.stat { 
+    background: rgba(255,255,255,0.08); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 9px; 
+    padding: 12px; 
+}
+.stat-n { 
+    font-size: 20px; 
+    font-weight: 600; 
+}
+.stat-l { 
+    font-size: 15px; 
+    color: rgba(255,255,255,0.55); 
+    margin-top: 2px; 
+}
+/* Botón crear usuario e iniciar sesión */
+#btCrearUsuario, #btAccesoCliente { 
+    width: 100%; 
+    background: #1B3A6B; 
+    color: #fff; border: none; 
+    border-radius: 8px; 
+    padding: 11px; 
+    font-size: 14px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    font-family: inherit; 
+    margin-top: 4px; 
+    transition: background 0.2s; 
+}
+#btCrearUsuario:hover,#btAccesoCliente:hover { 
+    background: #152e56; 
 }
 
 #informacionPrincipal {
-    background-color: #666666;
+    background-color: #1B3A6B;
     color: white;
 }
 
@@ -17,6 +82,47 @@
 
 nav {
     background-color: #CCCCCC;
+}
+
+.bg-primary {
+    background-color: #1B3A6B;
+}
+
+input[type=text] {
+    background-color: white;
+}
+
+input[type=text]::placeholder { 
+   color: #94B9DF;
+}
+
+input[type=email] {
+    background-color: white;
+}
+
+input[type=email]::placeholder { 
+   color: #94B9DF;
+}
+
+input[type=password] {
+    background-color: white;
+}
+
+input[type=password]::placeholder { 
+   color: #94B9DF;
+}
+
+input[type=tel] {
+    background-color: white;
+}
+
+input[type=tel]::placeholder { 
+   color: #94B9DF;
+}
+
+input[type=file] {
+    background-color: white;
+    color: #94B9DF;
 }
 
 i {
@@ -43,7 +149,7 @@ h1 {
 
 /* Color por defecto de las franjas de tiempo del calendario */
 .fc .fc-timegrid-body .fc-timegrid-cols .fc-timegrid-col {
-    background-color: #28a745;
+    background-color: #4ADE80;
 }
 /* Pintamos de blando el fondo de la columna que indica las horas */
 .fc .fc-timegrid-axis {
@@ -70,9 +176,19 @@ h1 {
     color: #fdfffc;
 }
 
+/* Pie */
 footer {
-    background-color: black;
+    padding: 20px;
+    background-color: #1A2332;
     color: white;
     display: flex;
     justify-content: center;
+}
+
+footer h3 {
+    color: #767B84;
+}
+
+footer a {
+    color: #3B97FA;
 }

@@ -145,21 +145,8 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-12 col-lg-7">
-                        <label class="labels">Foto de perfil</label>
-                        <img class="img-thumbnail mb-2" src="<?php echo $cliente["foto"] ?>" alt="Foto de perfil" width="100" height="100">
-                        <input type="file" class="form-control" id="foto" name="foto">
-                        <div class="invalid-feedback">
-                            Introduzca una foto válida
-                        </div>
-                        <div class="valid-feedback">
-                            Dato correcto
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-12 col-lg-7">
-                        <label class="labels">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
+                        <label class="labels">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" name="Nombre" value="<?php echo $cliente['nombre'] ?>" required>
                         <div class="invalid-feedback">
                             Introduzca un nombre
                         </div>
@@ -171,7 +158,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12 col-lg-7">
                         <label class="labels">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Contraseña" name="Contraseña" pattern=".{8,}" value="">
+                        <input type="password" class="form-control" id="contraseña" placeholder="Mínimo 8 caracteres" name="Contraseña" pattern=".{8,}" value="">
                         <div id="passwordHelpBlock" class="form-text">
                             La contraseña debe tener al menos 8 caracteres 
                         </div>
@@ -184,7 +171,7 @@
                     </div>
                     <div class="col-md-12 col-lg-7">
                         <label class="labels">Confirmar contraseña</label>
-                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Contraseña" name="Confirmar contraseña" value="">
+                        <input type="password" class="form-control" id="confirmarContraseña" placeholder="Repite la contraseña" name="Confirmar contraseña" value="">
                         <div class="invalid-feedback">
                             Confirme la contraseña
                         </div>
@@ -195,7 +182,7 @@
                     <div class="row mt-3">
                         <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
                             <label class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" placeholder="DNI" pattern="[0-9]{8}[A-Z]" name="dni" value="<?php echo $cliente['DNI'] ?>" required>
+                            <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]" name="dni" value="<?php echo $cliente['DNI'] ?>" required>
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
                             </div>
@@ -207,7 +194,7 @@
                     <div class="row mt-3">
                         <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
                             <label class="labels">Teléfono (opcional)</label>
-                            <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" pattern="[0-9]{9}" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
+                            <input type="tel" class="form-control" id="telefono" placeholder="600 000 000" pattern="[0-9]{9}" name="Telefono" value="<?php echo $cliente['telefono'] ?>">
                             <div class="invalid-feedback">
                                 Introduzca un número de teléfono válido
                             </div>
@@ -216,6 +203,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-2">
+                    <div class="col-md-12 col-lg-7">
+                        <label class="labels">Foto de perfil (opcional)</label>
+                        <img class="img-thumbnail mb-2" src="<?php echo $cliente["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                        <input type="file" class="form-control" id="foto" name="foto">
+                        <div class="invalid-feedback">
+                            Introduzca una foto válida
+                        </div>
+                        <div class="valid-feedback">
+                            Dato correcto
+                        </div>
+                    </div>
+                </div>
                 </div>
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar perfil</button></div>
             </div>
