@@ -1,6 +1,6 @@
 <!-- La barra de navegación será una columna dentro del contenido principal de la página -->
 <div class="col-8 col-sm-6 col-md-4 col-lg-4 d-flex align-items-center">
-    <nav class="navbar col-12 col-sm-9 col-lg-8 bg-primary ms-5 my-2 mb-4">
+    <nav class="navbar col-12 col-sm-9 col-lg-8 ms-5 my-2 mb-4">
         <?php 
             if($_SESSION['administrador'] != null) {
         ?>

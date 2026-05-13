@@ -64,10 +64,10 @@
     <body style="background:silver;">
         <div class="container mt-5">
             <div class="d-flex justify-content-center h-100">
-                <div class="card">
+                <div class="card shadow-sm border-0">
                     <div class="card-header">
                         <h1>Iniciar sesión como gestor</h1>
-                        <a class="btn btn-secondary d-flex justify-content-center" href="../index.php">Página de inicio</a>
+                        <a class="btn btn-primary d-flex justify-content-center" href="../index.php">Página de inicio</a>
                     </div>
                     <div class="card-body">
                         <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>

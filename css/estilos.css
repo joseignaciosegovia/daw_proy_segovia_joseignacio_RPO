@@ -67,25 +67,21 @@
     background: #152e56; 
 }
 
-#informacionPrincipal {
-    background-color: #1B3A6B;
-    color: white;
-}
-
-#seccionPrincipal {
-    background-color: #FFCC99;
-}
-
-#bienvenido {
-    background-color: #FFCC99;
+body {
+    background-color: #e0e0e0;
 }
 
 nav {
-    background-color: #CCCCCC;
+    background-color: #1B3A6B;
 }
 
-.bg-primary {
+.card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+#informacionPrincipal {
     background-color: #1B3A6B;
+    color: white;
 }
 
 input[type=text] {
