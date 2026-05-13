@@ -49,7 +49,7 @@
                         </div>
                         <div>
                             <div>
-                                <label class="labels">Queja o sugerencia</label>
+                                <label for="quejaIncidencia" class="labels">Queja o sugerencia</label>
                                 <textarea class="form-control" id="quejaIncidencia" placeholder="" name="Queja" rows="5" cols="100" required></textarea>
                                 <div class="invalid-feedback">
                                     Introduzca un mensaje

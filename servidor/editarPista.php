@@ -80,7 +80,7 @@
                     <div class="p-3 py-5">
                         <div class="row mt-3">
                             <div class="col-md-12 mt-3">
-                                <label class="labels">Nombre</label>
+                                <label for="nombre" class="labels">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un nombre válido
@@ -109,7 +109,7 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <label class="labels">Precio de Reserva</label>
+                                <label for="precio" class="labels">Precio de Reserva</label>
                                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
                                 <div class="invalid-feedback">
                                     Introduzca un precio válido
