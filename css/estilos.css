@@ -82,6 +82,8 @@ nav {
 #informacionPrincipal {
     background-color: #1B3A6B;
     color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 input[type=text] {
