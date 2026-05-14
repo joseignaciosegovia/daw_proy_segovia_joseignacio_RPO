@@ -1,4 +1,4 @@
-/* Cabecera */
+/* CABECERA */
 #cabecera {
     background-color: #1B3A6B;
 }
@@ -16,7 +16,6 @@
 #cabecera a {
     color: white;
 }
-
 #cabecera button {
     color: #1B3A6B;
     background-color: white;
@@ -27,6 +26,7 @@
 #cabecera button:hover { 
     background: #e8eef7; 
 }
+
 /* Sección con los datos de las pistas */
 .stats { 
     display: grid; 
@@ -66,18 +66,99 @@
 #btCrearUsuario:hover,#btAccesoCliente:hover { 
     background: #152e56; 
 }
-
+/* Div layout en el que se encuentra el cuerpo */
+.layout { 
+    display: grid; 
+    grid-template-columns: 350px 1fr; 
+    min-height: 420px; 
+}
 body {
     background-color: #e0e0e0;
 }
-
-nav {
-    background-color: #1B3A6B;
+.main { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+/* Barra de navegación del cliente */
+.sidebar { 
+    background: #1B3A6B; 
+    padding: 1rem 0; 
+}
+.sidebar .nav-item { 
+    /* Quita la decoración de los enlaces en el nav */
+    text-decoration: none;
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 10px 1rem; 
+    color: rgba(255,255,255,0.75); 
+    font-size: 13px; 
+    cursor: pointer; 
+    transition: background 0.15s; 
+    border-left: 3px solid transparent; 
+}
+.sidebar .nav-item:hover { 
+    background: rgba(255,255,255,0.08); 
+    color: white; 
+}
+.sidebar .nav-item.active { 
+    background: rgba(255,255,255,0.12); 
+    color: white; 
+    border-left-color: #5ab4f0; 
+}
+.nav-item i { 
+    font-size: 16px; 
+    opacity: 0.8; 
+}
+.nav-section { 
+    font-size: 10px; 
+    text-transform: uppercase; 
+    letter-spacing: 0.08em; 
+    color: rgba(255,255,255,0.4); 
+    padding: 1rem 1rem 0.25rem; 
+}
+.user-chip { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    padding: 0 1rem 1rem; 
+    border-bottom: 0.5px solid rgba(255,255,255,0.15); 
+    margin-bottom: 0.5rem; 
+}
+/* Imagen de perfil del usuario */
+.avatar { 
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    overflow: hidden;
+    background: rgba(255,255,255,0.2); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 12px; 
+    font-weight: 500; 
+    color: white; 
+    flex-shrink: 0; 
+}
+.user-chip span { 
+    font-size: 13px; 
+    color: white; 
+    font-weight: 500;
+}
+.user-chip small { 
+    font-size: 11px; 
+    color: rgba(255,255,255,0.6); 
+    display: block; 
 }
 
 .card {
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.stat-card .label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.stat-card .value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.stat-card .sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.stat-card.accent { border-left: 3px solid #1d9e75; }
+.section-title { font-size: 15px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+.section-title a { font-size: 12px; color: #185fa5; cursor: pointer; font-weight: 400; }
 
 #informacionPrincipal {
     background-color: #1B3A6B;
@@ -174,7 +255,7 @@ h1 {
     color: #fdfffc;
 }
 
-/* Pie */
+/* PIE */
 footer {
     padding: 20px;
     background-color: #1A2332;
@@ -182,11 +263,16 @@ footer {
     display: flex;
     justify-content: center;
 }
-
-footer h3 {
-    color: #767B84;
+.footer-col li { 
+    font-size: 15px; 
+    color: rgba(255,255,255,0.5);
+    margin-top: 1px; 
 }
-
-footer a {
-    color: #3B97FA;
+.footer-col strong { 
+    font-size: 20px; 
+    color: rgba(255,255,255,0.7); 
+}
+.footer-col a { 
+    color: #5ab4f0; 
+    font-size: 15px; 
 }

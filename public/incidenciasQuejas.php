@@ -37,11 +37,11 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
             <!-- El contenido principal de la página será la segunda columna -->
             <div class="col-12 col-md-6 d-flex align-items-center">
+                <h2 class="d-flex justify-content-center py-2" id="bienvenido">Bienvenido/a <?php echo "$cliente[nombre]"; ?></h2>
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">

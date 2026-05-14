@@ -38,10 +38,11 @@
     $crud = new Crud(new DB("proyecto"));
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
 
-    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
+    
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
-        <div class="col-8 col-sm-6">
+        <div class="main">
+            <h2 class="d-flex justify-content-center py-2" id="bienvenido">Bienvenido/a <?php echo "$cliente[nombre]"; ?></h2>
             <h3>Escoger pista</h3>
             <div class="accordion accordion-flush" id="elegirPista">
             <?php

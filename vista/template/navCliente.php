@@ -1,21 +1,20 @@
 <!-- La barra de navegación será una columna dentro del contenido principal de la página -->
-<div class="row" id="seccionPrincipal">
-    <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-        <nav class="navbar col-12 col-sm-9 col-lg-8 ms-5 my-2 mb-4">
-            <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="/public/perfilCliente.php">Datos personales</a>
+<div class="layout" id="seccionPrincipal">
+    <nav class="sidebar " aria-label="Menú principal">
+        <div class="user-chip">
+            <div class="avatar"><img class="rounded-circle" src="<?php echo $cliente['foto'] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;"></div>
+            <div>
+                <span><?php echo "$cliente[nombre]";  ?></span>
+                <small>Usuario activo</small>
             </div>
-            <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="/public/reservarPista.php">Nueva reserva</a>
-            </div>
-            <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="/public/reservasCliente.php">Mis reservas</a>
-            </div>
-            <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="/public/incidenciasQuejas.php">Buzón de incidencias</a>
-            </div>
-            <div class="container-fluid py-2">
-                <a class="navbar-brand mb-0 h1 link-light" href="<?php echo $_SERVER['PHP_SELF']; ?>?salir">Cerrar sesión</a>
-            </div>
-        </nav>
-    </div>
+        </div>
+        <div class="nav-section">General</div>
+        <a class="nav-item active" href="/public/inicioCliente.php"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Inicio</a>
+        <a class="nav-item" href="/public/perfilCliente.php"><i class="ti ti-user" aria-hidden="true"></i> Datos personales</a>
+        <div class="nav-section">Reservas</div>
+        <a class="nav-item" href="/public/reservarPista.php"><i class="ti ti-plus" aria-hidden="true"></i> Nueva reserva</a>
+        <a class="nav-item" href="/public/reservasCliente.php"><i class="ti ti-calendar" aria-hidden="true"></i> Mis reservas</a>
+        <div class="nav-section">Soporte</div>
+        <a class="nav-item" href="/public/incidenciasQuejas.php"><i class="ti ti-mail" aria-hidden="true"></i> Buzón de incidencias</a>
+        <a class="nav-item" href="<?php echo $_SERVER['PHP_SELF']; ?>?salir" style="margin-top:auto;"><i class="ti ti-logout" aria-hidden="true"></i> Cerrar sesión</a>
+    </nav>

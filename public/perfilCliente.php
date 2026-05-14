@@ -119,7 +119,6 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
     // Si ha habido algún error, lo mostramos antes que la información principal de la página
@@ -137,6 +136,7 @@
         <div class="card shadow-sm border-0 p-4">
         <?php
             $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
+            echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
         ?>
         
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">

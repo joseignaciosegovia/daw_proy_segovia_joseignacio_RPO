@@ -31,13 +31,13 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-    echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Lista de reservas de $cliente[nombre]</h2>";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
 
     <!-- El contenido principal de la página será la segunda columna -->
     <div class="col-12 col-sm-6 col-md-7 col-lg-8">
         <?php
+            echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Lista de reservas de $cliente[nombre]</h2>";
             $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
                 echo "<h2 class=\"d-flex justify-content-center py-2\">Todavía no ha realizado ninguna reserva</h2>";
