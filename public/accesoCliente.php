@@ -114,11 +114,11 @@
         <title>Login</title>
     </head>
 
-    <body style="background:silver;">
+    <body style="background:#e0e0e0;">
         <div class="container mt-5">
             <div class="d-flex justify-content-center h-100">
-                <div class="card">
-                    <div class="card-header">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header text-center">
                         <h1>Iniciar sesión</h1>
                         <a class="btn btn-primary" href="../index.php">Si no tienes cuenta, regístrate aquí</a>
                     </div>
@@ -137,8 +137,8 @@
                                 </div>
                                 <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Acceder" class="" name='login' id="btAccesoCliente">
+                            <div class="form-group mb-3 text-right">
+                                <input type="submit" value="Acceder" class="w-auto" name='login' id="btAccesoCliente">
                             </div>
                         </form>
                     </div>

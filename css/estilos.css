@@ -49,8 +49,8 @@
     color: rgba(255,255,255,0.55); 
     margin-top: 2px; 
 }
-/* Botón crear usuario e iniciar sesión */
-#btCrearUsuario, #btAccesoCliente { 
+/* Botón crear usuario e iniciar sesión del cliente y del gestor */
+#btCrearUsuario, #btAccesoCliente, #btAccesoGestor { 
     width: 100%; 
     background: #1B3A6B; 
     color: #fff; border: none; 

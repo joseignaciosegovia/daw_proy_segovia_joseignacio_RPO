@@ -58,16 +58,18 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!--Fontawesome CDN-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- Hoja de estilos -->
+        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <title>Acceso a la gestión</title>
     </head>
 
-    <body style="background:silver;">
+    <body style="background:#e0e0e0;">
         <div class="container mt-5">
             <div class="d-flex justify-content-center h-100">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <h1>Iniciar sesión como gestor</h1>
-                        <a class="btn btn-primary d-flex justify-content-center" href="../index.php">Página de inicio</a>
+                        <a class="btn btn-primary  w-auto" href="../index.php">Página de inicio</a>
                     </div>
                     <div class="card-body">
                         <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
@@ -83,8 +85,8 @@
                                 </div>
                                 <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Acceder" class="btn float-right btn-success" name='login'>
+                            <div class="form-group mb-3 text-right">
+                                <input type="submit" value="Acceder" class="btn btn-success w-auto" name='login' id="btAccesoGestor">
                             </div>
                         </form>
                     </div>
