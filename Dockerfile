@@ -19,6 +19,14 @@ RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.
     && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+RUN apt-get update && apt-get install -y \
+    unzip \
+    zip \
+    git \
+    libzip-dev \
+    libicu-dev \
+    && docker-php-ext-install zip mysqli pdo pdo_mysql intl
+
 # Activar mod_rewrite de Apache
 RUN a2enmod rewrite
 

@@ -4,7 +4,7 @@
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (!empty($_SESSION["cliente"])) {
-        header("Location: reservarPista.php");
+        header("Location: inicioCliente.php");
         exit();
     }
 
@@ -94,7 +94,7 @@
             $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$nombre\", $fecha, \"$acceso\"");
 
             $_SESSION['cliente'] = $nombre;
-            header('Location: reservarPista.php');
+            header('Location: inicioCliente.php');
             exit();
         }
     // Si no pulsamos el botón de acceder

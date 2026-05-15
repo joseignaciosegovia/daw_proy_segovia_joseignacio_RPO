@@ -1,0 +1,260 @@
+/* Contenedor principal del dashboard */
+.dash {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* --- BIENVENIDA --- */
+.welcome-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 0.5px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+}
+
+.welcome-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #1B3A6B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #B5D4F4;
+    flex-shrink: 0;
+    border: 2px solid #185FA5;
+}
+
+.welcome-text {
+    flex: 1;
+}
+
+.welcome-text h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #111;
+    font-family: inherit;
+}
+
+.welcome-text p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* --- ENCABEZADOS DE SECCIÓN --- */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.section-header span {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.section-header a {
+    font-size: 12px;
+    color: #2A71B2;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.15s;
+}
+
+.section-header a:hover {
+    opacity: 0.75;
+}
+
+/* --- GRIDS --- */
+.dash-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.dash-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+/* --- TARJETAS --- */
+.dash-card {
+    background: #30302E;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+/* Acento verde (por defecto) */
+.dash-card-accent {
+    border-left: 3px solid #1D9E75;
+}
+
+/* Acento azul */
+.dash-card-accent-blue {
+    border-left: 3px solid #185FA5;
+}
+
+/* Acento ámbar */
+.dash-card-accent-amber {
+    border-left: 3px solid #BA7517;
+}
+
+/* Etiqueta de la tarjeta */
+.dash-card .lbl {
+    font-size: 11px;
+    color: #BBB8A2;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Valor grande */
+.dash-card .val {
+    font-size: 28px;
+    font-weight: 500;
+    color: white;
+    line-height: 1;
+}
+
+/* Valor mediano (próxima reserva) */
+.dash-card .val-md {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    line-height: 1.3;
+}
+
+/* Subtexto de tarjeta */
+.dash-card .card-sub {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* --- PRÓXIMA RESERVA --- */
+.next-card {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.next-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #E6F1FB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.next-icon i {
+    font-size: 20px;
+    color: #185FA5;
+}
+
+.next-info {
+    flex: 1;
+}
+
+.pill-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* --- FILAS DE INFO (instalaciones) --- */
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-lbl {
+    font-size: 13px;
+    color: #BBB8A2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+}
+
+/* --- BADGES --- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge-green {
+    background: #E1F5EE;
+    color: #0F6E56;
+}
+
+.badge-blue {
+    background: #E6F1FB;
+    color: #185FA5;
+}
+
+.badge-amber {
+    background: #FAEEDA;
+    color: #854F0B;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 640px) {
+    .dash-grid-3 {
+        grid-template-columns: 1fr;
+    }
+    .dash-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .dash-card[style*="grid-column: span 2"] {
+        grid-column: span 1 !important;
+    }
+    .welcome-bar {
+        flex-wrap: wrap;
+    }
+}

@@ -208,18 +208,6 @@ function validacionCrearUsuario(form) {
         }
   
         // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
-  /*
-        fetch('index.php', {
-          method: 'post',
-          body: formData
-        }).then((response) => response.text())
-        .then(function(data) {
-          mostrarModal("El usuario ha sido creado correctamente", "/public/reservarPista.php");
-          
-        }).catch(function (err) {
-          console.log("Ha habido un error");
-        });
-    */
         try {
           const response = await fetch('index.php', {
             method: "POST",

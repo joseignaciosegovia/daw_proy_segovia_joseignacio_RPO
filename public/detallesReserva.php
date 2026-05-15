@@ -1,5 +1,5 @@
 <?php
-
+    ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -15,12 +15,16 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    use Clases\DB;
 
     // Si hemos recibido los datos de la reserva desde calendarioCliente.js
     if(isset($_GET['datos'])){
+        $datosReserva = json_decode(($_GET['datos']));
+        $crud = new Crud(new DB("proyecto"));
+        $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
-        $datosReserva = json_decode(($_GET['datos']));
+        
 ?>
 
     <div class="col">
@@ -54,6 +58,6 @@
 
     // Si hemos accedido a esta página de otra forma (por ejemplo, escribiendo la dirección), redirigimos a la página de inicio del cliente
     else {
-        header("Location: reservarPista.php");
+        header("Location: inicioCliente.php");
     }
 ?>
