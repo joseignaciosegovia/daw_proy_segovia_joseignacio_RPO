@@ -21,6 +21,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosInicioCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
 <?php }
 
     // Función para añadir scripts en el pie

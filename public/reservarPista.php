@@ -17,12 +17,30 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
+    // Función para añadir scripts en la cabecera
+    function añadirScriptsCabecera(){
+?>
+        <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+<?php }
+
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
         <script type="module" src="/js/calendarioCliente.js"></script>
 <?php }
+
+    // Devuelve las iniciales de una cadena con distintas palabras
+    function iniciales(string $nombre): string {
+        $palabras = explode(' ', trim($nombre));
+        $iniciales = '';
+        foreach ($palabras as $palabra) {
+            if ($palabra !== '') {
+                $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
+            }
+        }
+        return $iniciales;
+    }
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
     if(isset($_GET['salir'])) {
@@ -37,14 +55,32 @@
 
     $crud = new Crud(new DB("proyecto"));
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-
+    // Datos que vamos a mostrar
+    $fecha = new DateTime();
+    // Formato de fecha en español
+    $formatter = new IntlDateFormatter(
+        'es_ES',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE
+    );
+    $iniciales = iniciales($cliente['nombre']);
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 ?>
-        <div class="main">
-            <h2 class="d-flex justify-content-center py-2" id="bienvenido">Bienvenido/a <?php echo "$cliente[nombre]"; ?></h2>
-            <h3>Escoger pista</h3>
-            <div class="accordion accordion-flush" id="elegirPista">
+        <main class="main">
+            <div class="welcome-bar">
+                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+                <div class="welcome-text">
+                    <h1>Bienvenida, <?php echo "$cliente[nombre]"; ?></h1>
+                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
+                </div>
+                <span class="badge badge-green">
+                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+                </span>
+            </div>
+            <div class="card shadow-sm border-0">
+                <h3>Escoger pista</h3>
+                <div class="accordion accordion-flush" id="elegirPista">
             <?php
                 $contador = 0;
                 // Obtenemos todas las localizaciones y las añadimos al acordeón
@@ -75,6 +111,7 @@
                     $contador++;
                 }
             ?>
+                        </div>
                     </div>
                 </div>
             </div>  
@@ -82,7 +119,7 @@
             <div class="d-flex flex-column align-items-center" id="tituloPista">
 
             </div>  
-        </div>
+        </main>
         <!-- Cerramos la sección principal, creada en navCliente.php -->
     </div>
     <!-- Div en el que se mostrará el calendario de la pista seleccionada -->

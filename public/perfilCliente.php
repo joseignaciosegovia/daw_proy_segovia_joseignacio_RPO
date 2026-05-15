@@ -20,6 +20,7 @@
     function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
 <?php }
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
@@ -38,6 +39,18 @@
 
         // Ponemos la primera letra de cada palabra en mayúsculas
         $nombre = ucwords($nombre); 
+    }
+
+    // Devuelve las iniciales de una cadena con distintas palabras
+    function iniciales(string $nombre): string {
+        $palabras = explode(' ', trim($nombre));
+        $iniciales = '';
+        foreach ($palabras as $palabra) {
+            if ($palabra !== '') {
+                $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
+            }
+        }
+        return $iniciales;
     }
 
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
@@ -112,14 +125,23 @@
         // Actualizamos el perfil en la base de datos
         $crud->actualizar("clientes", $valores, $condicion);
     }
-?>
-
-<?php
+    
     // Cargamos la cabecera
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
+    // Guardamos el cliente para que puedan mostrarse sus datos en la barra de navegación
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
+    
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
+    // Datos que vamos a mostrar
+    $fecha = new DateTime();
+    // Formato de fecha en español
+    $formatter = new IntlDateFormatter(
+        'es_ES',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE
+    );
+    $iniciales = iniciales($cliente['nombre']);
 
     // Si ha habido algún error, lo mostramos antes que la información principal de la página
     if (isset($_SESSION['error'])) {
@@ -132,17 +154,22 @@
 ?>
 
     <!-- El contenido principal de la página será la segunda columna -->
-    <div class="col-8 col-sm-6">
-        <div class="card shadow-sm border-0 p-4">
-        <?php
-            $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
-            echo "<h2 class=\"d-flex justify-content-center py-2\" id=\"bienvenido\">Bienvenido/a $cliente[nombre]</h2>";
-        ?>
-        
+    <main class="main">
+        <div class="welcome-bar">
+            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+            <div class="welcome-text">
+                <h1>Bienvenida, <?php echo "$cliente[nombre]"; ?></h1>
+                <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
+            </div>
+            <span class="badge badge-green">
+                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+            </span>
+        </div>
+        <div class="card shadow-sm border-0">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h2 class="text-right">Información del perfil</h2>
+                        <h2 class="">Información del perfil</h2>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6 col-m3">
