@@ -86,55 +86,56 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-                <!-- El contenido principal de la página será la segunda columna -->
-                <div class="col-12 col-lg-8 d-flex align-items-center">
-                    <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 class="text-right">Crear pista</h2>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-md-6">
-                                    <label for="nombre" class="labels">Nombre</label>
-                                    <input type="text" id="nombre" class="form-control" name="Nombre" value="" required>
-                                    <div class="invalid-feedback">
-                                        Introduzca un nombre
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <label for="Localizacion">Localización</label>
-                                    <select name="Localizacion" id="Localizacion">
-                                        <?php
-                                            $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
-                                            // Añadimos las localizaciones a las opciones del select
-                                            foreach($localizaciones as $localizacion){
-                                                echo "<option value=\"$localizacion[localizacion]\">$localizacion[localizacion]</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <label for="precio" class="labels">Precio de Reserva</label>
-                                    <input type="number" class="form-control" id="precio" name="Precio" value="" step="0.01" required>
-                                    <div class="invalid-feedback">
-                                        Introduzca un precio válido
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear pista</button></div>
+            <!-- El contenido principal de la página será la segunda columna -->
+            <div class="col-12 col-lg-8 d-flex align-items-center">
+                <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="text-right">Crear pista</h2>
                         </div>
-                    </form>
-                </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label for="nombre" class="labels">Nombre</label>
+                                <input type="text" id="nombre" class="form-control" name="Nombre" value="" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label for="Localizacion">Localización</label>
+                                <select name="Localizacion" id="Localizacion">
+                                    <?php
+                                        $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                                        // Añadimos las localizaciones a las opciones del select
+                                        foreach($localizaciones as $localizacion){
+                                            echo "<option value=\"$localizacion[localizacion]\">$localizacion[localizacion]</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label for="precio" class="labels">Precio de Reserva</label>
+                                <input type="number" class="form-control" id="precio" name="Precio" value="" step="0.01" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un precio válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear pista</button></div>
+                    </div>
+                </form>
+            </div>
+            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </main>
-        <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+    </div>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

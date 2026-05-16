@@ -174,7 +174,8 @@
                 </div>
             <?php } ?>
         </main>
-        <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+    </div>
+    <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 <?php
     }
 

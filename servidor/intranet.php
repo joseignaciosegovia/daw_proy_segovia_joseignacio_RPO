@@ -63,60 +63,61 @@
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <main class="main">
         <!-- BIENVENIDA -->
-            <div class="welcome-bar">
-                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
-                <div class="welcome-text">
-                    <h1>Bienvenida, <?php echo "$gestor[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
-                </div>
-                <span class="badge badge-green">
-                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
-                </span>
+        <div class="welcome-bar">
+            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+            <div class="welcome-text">
+                <h1>Bienvenida, <?php echo "$gestor[nombre]"; ?></h1>
+                <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
             </div>
+            <span class="badge badge-green">
+                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+            </span>
+        </div>
 
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col-12 col-lg-8">
-                <h1 class="d-flex justify-content-center">Lista de Pistas</h1>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Localización</th>
-                            <th>Reservas</th>
-                            <th>Calendario</th>
-                            <th>Editar pista</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $cont = 1;
-                            // Recorremos las pistas y las añadimos a la tabla
-                            foreach($pistas as $pista){
+        <!-- El contenido principal de la página será la segunda columna -->
+        <div class="col-12 col-lg-8">
+            <h1 class="d-flex justify-content-center">Lista de Pistas</h1>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Localización</th>
+                        <th>Reservas</th>
+                        <th>Calendario</th>
+                        <th>Editar pista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $cont = 1;
+                        // Recorremos las pistas y las añadimos a la tabla
+                        foreach($pistas as $pista){
+                    ?>
+                    <tr>
+                        <td><?php echo $cont ?></td>
+                        <td><?php echo $pista['nombre'] ?></td>
+                        <td><?php echo $pista['localizacion'] ?></td>
+                        <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
+                        <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
+                        <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
+                    </tr>
+                        <?php 
+                            $cont++;
+                        } 
                         ?>
-                        <tr>
-                            <td><?php echo $cont ?></td>
-                            <td><?php echo $pista['nombre'] ?></td>
-                            <td><?php echo $pista['localizacion'] ?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
-                        </tr>
-                            <?php 
-                                $cont++;
-                            } 
-                            ?>
-                        <tr>
-                            <td colspan="6">
-                                <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
-                                    <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <tr>
+                        <td colspan="6">
+                            <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
+                                <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
+</div>
 <?php } ?>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";

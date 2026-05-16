@@ -88,39 +88,41 @@
             <div class="col-12 col-lg-8 d-flex align-items-center">
                 <h1 class="d-flex justify-content-center">Incidencias de los usuarios</h1>
                 <table class="table table-striped table-hover">
-                        <thead>
+                    <thead>
+                        <tr>
                             <th>#</th>
                             <th>Fecha</th>
                             <th>Contenido</th>
                             <th>Usuario</th>
-                        </thead>
-                        <tbody>
-                        <?php
-                            $cont = 1;
-                            // Recorremos y mostramos las incidencias
-                            foreach($incidencias as $incidencia){
-                        ?>
-                            <tr>
-                                <th><?php echo $cont ?></th>
-                                <td><?php echo $incidencia['fecha'] ?></td>
-                                <td><?php echo $incidencia['contenido'] ?></td>
-                                <td><?php echo $incidencia['cliente'] ?></td>
-                            </tr>
-                        <?php 
-                                $cont++;
-                            } 
-                        ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $cont = 1;
+                        // Recorremos y mostramos las incidencias
+                        foreach($incidencias as $incidencia){
+                    ?>
+                        <tr>
+                            <th><?php echo $cont ?></th>
+                            <td><?php echo $incidencia['fecha'] ?></td>
+                            <td><?php echo $incidencia['contenido'] ?></td>
+                            <td><?php echo $incidencia['cliente'] ?></td>
+                        </tr>
+                    <?php 
+                            $cont++;
+                        } 
+                    ?>
                     </tbody>
                 </table>
             </div>
+            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
     </main>
+    </div>
  <?php   
         } 
     }
 ?>
-    <a href="intranet.php"><button>Volver atrás</button></a>
-</body>
-</html>
+
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

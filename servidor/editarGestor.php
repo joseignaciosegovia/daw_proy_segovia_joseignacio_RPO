@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="administrador" class="labels" for="administrador">¿Es administrador?</label>
+                                <label for="administrador" class="labels">¿Es administrador?</label>
                                 <select id="administrador">
                                     <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
                                     <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
@@ -263,7 +263,8 @@
                 </div>
             </form>
     </main>
-    <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+</div>
+<button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
 <?php
     }
 

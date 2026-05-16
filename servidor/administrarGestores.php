@@ -61,20 +61,20 @@
     <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
     <main class="main">
-            <!-- BIENVENIDA -->
-            <div class="welcome-bar">
-                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
-                <div class="welcome-text">
-                    <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
-                </div>
-                <span class="badge badge-green">
-                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
-                </span>
+        <!-- BIENVENIDA -->
+        <div class="welcome-bar">
+            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+            <div class="welcome-text">
+                <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
+                <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
             </div>
+            <span class="badge badge-green">
+                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+            </span>
+        </div>
 
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col-12 col-lg-8">
+        <!-- El contenido principal de la página será la segunda columna -->
+        <div class="col-12 col-lg-8">
             <h1 class="d-flex justify-content-center">Lista de Gestores</h1>
             <table class="table table-striped table-hover">
                 <thead>
@@ -122,6 +122,7 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
     <?php } ?>
     <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
     

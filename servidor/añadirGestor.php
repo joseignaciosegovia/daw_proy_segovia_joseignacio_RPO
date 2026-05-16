@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="administrador" class="labels" for="administrador">¿Es administrador?</label>
+                                <label for="administrador" class="labels">¿Es administrador?</label>
                                 <select id="administrador">
                                     <option value="1">Sí</option>
                                     <option value="0">No</option>
@@ -242,7 +242,8 @@
                         </div>
                     </form>
                 </div>
-        </main>
+            </main>
+        </div>
         <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
