@@ -21,6 +21,7 @@
 ?>
         <script type="module" src="/js/validacion.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
@@ -167,9 +168,13 @@
         </div>
         <div class="card shadow-sm border-0">
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="perfilCliente" enctype="multipart/form-data">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h2 class="">Información del perfil</h2>
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-user"></i>
+                        <div>
+                            <h2>Información del perfil</h2>
+                            <small class="text-muted">Modifica tus datos personales y de acceso</small>
+                        </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6 col-m3">
@@ -193,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="contraseña" class="labels">Contraseña</label>
@@ -218,6 +224,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
@@ -230,7 +237,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="labels">Foto de perfil (opcional)</label>
+                            <label for="foto" class="labels">Foto de perfil (opcional)</label>
                             <div class="d-flex align-items-center gap-3 mb-2">
                                 <img class="rounded-circle" src="<?php echo $cliente['foto'] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;">
                                 <span class="text-muted small">Foto actual</span>

@@ -21,6 +21,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -79,7 +80,14 @@
                 </span>
             </div>
             <div class="card shadow-sm border-0">
-                <h3>Escoger pista</h3>
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-plus" aria-hidden="true"></i>
+                        <div>
+                            <h2>Reservar pista</h2>
+                            <small class="text-muted">Escoge la pista en la que reservar un horario</small>
+                        </div>
+                    </div>
                 <div class="accordion accordion-flush" id="elegirPista">
             <?php
                 $contador = 0;
@@ -112,6 +120,7 @@
                 }
             ?>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>  

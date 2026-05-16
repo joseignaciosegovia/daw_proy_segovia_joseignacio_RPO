@@ -1,0 +1,25 @@
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(90deg, #eef2ff 0%, #f8f9fa 100%);
+    border-left: 4px solid var(--bs-primary);
+    border-radius: 0.5rem;
+}
+
+.section-header i {
+    font-size: 1.75rem;
+    color: var(--bs-primary);
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.section-header small {
+    font-size: 0.82rem;
+}

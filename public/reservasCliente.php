@@ -19,6 +19,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -81,6 +82,16 @@
                 echo "</div>";
             }
             else {
+?>
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-calendar" aria-hidden="true"></i>
+                        <div>
+                            <h2>Historial de reservas</h2>
+                            <small class="text-muted">Reservas realizadas anteriormente</small>
+                        </div>
+                    </div>
+<?php
                 
                 $filasTotales = $crud->listar("count(*)", "reservas", "where cliente = \"$_SESSION[cliente]\"")[0]['count(*)'];
                 $totalPaginas = ceil($filasTotales / $filasPorPagina);
@@ -105,6 +116,7 @@
                             <th scope="col">Hora de inicio</th>
                             <th scope="col">Hora de finalización</th>
                             <th scope="col">Pista</th>
+                            <th scope="col">Precio</th>
                             <th scope="col">Cancelar reserva</th>
                         </tr>
                     </thead>
@@ -115,11 +127,13 @@
                             foreach($reservas as $reserva){
                                 // Guardamos el nombre de la pista para mostrarlo
                                 $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
+                                $precio = $crud->listar("precioReserva", "pistas", "where id = $reserva[pista]")[0]['precioReserva'];
                                 echo "<tr>";
                                     echo "<td>$reserva[fecha]</td>";
                                     echo "<td>$reserva[horaInicio]</td>";
                                     echo "<td>$reserva[horaFin]</td>";
                                     echo "<td>$pista</td>";
+                                    echo "<td>$precio</td>";
                                     
                                     $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
                                     // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
@@ -137,6 +151,7 @@
                     </tbody>
                 </table>
             </form>
+            </div>
             </div>
         <?php
             }

@@ -21,6 +21,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
@@ -40,6 +41,7 @@
         $datosReserva = json_decode(($_GET['datos']));
         $crud = new Crud(new DB("proyecto"));
         $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
+        $precio = $crud->listar("precioReserva", "pistas", "where nombre = \"$datosReserva->pista\"")[0]['precioReserva'];
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
         // Datos que vamos a mostrar
@@ -66,7 +68,14 @@
             </span>
         </div>
         <div class="card shadow-sm border-0">
-            <h2>Detalles de la reserva</h2>
+            <div class="p-3 py-4">
+            <div class="section-header mb-4">
+                <i class="ti ti-plus" aria-hidden="true"></i>
+                <div>
+                    <h2>Detalles de la reserva</h2>
+                    <small class="text-muted">Consulta los datos de la reserva que acaba de realizar</small>
+                </div>
+            </div>
             <div class="accordion accordion-flush">
                 <table class="table table-hover">
                     <thead>
@@ -75,6 +84,7 @@
                             <th>Fecha</th>
                             <th>Hora de inicio</th>
                             <th>Hora de fin</th>
+                            <th>Precio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,9 +93,11 @@
                             <td><?php echo $datosReserva->fecha ?></td>
                             <td><?php echo $datosReserva->horaInicio ?></td>
                             <td><?php echo $datosReserva->horaFin ?></td>
+                            <td><?php echo $precio ?> €</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </main>

@@ -20,6 +20,7 @@
 ?>
         <script type="module" src="/js/validacion.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
@@ -76,14 +77,18 @@
                 </div>
                 <div class="card shadow-sm border-0">
                     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
-                        <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 class="text-right">Enviar quejas y sugerencias</h2>
+                        <div class="p-3 py-4">
+                            <div class="section-header mb-4">
+                                <i class="ti ti-mail" aria-hidden="true"></i>
+                                <div>
+                                    <h2>Sugerencias e incidencias</h2>
+                                    <small class="text-muted">Enviar sugerencias/incidencias</small>
+                                </div>
                             </div>
                             <div>
                                 <div>
-                                    <label for="quejaIncidencia" class="labels">Queja o sugerencia</label>
-                                    <textarea style="background: #E0E0E0" class="form-control" id="quejaIncidencia" placeholder="" name="Queja" rows="5" cols="100" required></textarea>
+                                    <label for="quejaIncidencia" class="labels">Sugerencia o incidencia</label>
+                                    <textarea class="form-control" id="quejaIncidencia" placeholder="Escribe aquí tu sugerencia o incidencia" name="Queja" rows="5" cols="100" required></textarea>
                                     <div class="invalid-feedback">
                                         Introduzca un mensaje
                                     </div>
@@ -92,8 +97,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-5 text-center">
-                                <button class="btn btn-primary profile-button" type="submit" name="Enviar">Realizar queja/sugerencia</button>
+                            <div class="mt-4 d-flex justify-content-end">
+                                <button class="btn btn-primary px-4" type="submit" name="Enviar"><i class="ti ti-send me-2"></i>Realizar queja/sugerencia</button>
                             </div>
                         </div>
                     </form>
@@ -112,8 +117,14 @@
     else{
 ?>
         <div class="card shadow-sm border-0">
-            <h2 class="d-flex justify-content-center py-2">Historial de sugerencias/incidencias</h2>
-            <div class="accordion accordion-flush">
+            <div class="p-3 pt-4">
+                <div class="section-header mb-4">
+                    <i class="ti ti-history" aria-hidden="true"></i>
+                    <div>
+                        <h2>Historial de sugerencias/incidencias</h2>
+                        <small class="text-muted">Consulta todas las sugerencias/incidencias enviadas anteriormente</small>
+                    </div>
+                </div>
                 <table class="table table-hover">
                     <?php $contador = 1; ?>
                     <thead>
