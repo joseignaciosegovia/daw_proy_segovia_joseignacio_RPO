@@ -20,7 +20,7 @@
     function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/estilosCliente.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
@@ -159,7 +159,7 @@
         <div class="welcome-bar">
             <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
             <div class="welcome-text">
-                <h1>Bienvenida, <?php echo "$cliente[nombre]"; ?></h1>
+                <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
                 <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
             </div>
             <span class="badge badge-green">

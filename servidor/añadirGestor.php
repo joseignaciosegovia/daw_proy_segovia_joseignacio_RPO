@@ -23,11 +23,29 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
+    // Función para añadir scripts en la cabecera
+    function añadirScriptsCabecera(){
+?>
+        <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+<?php }
+
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
 <?php }
+
+    // Devuelve las iniciales de una cadena con distintas palabras
+    function iniciales(string $nombre): string {
+        $palabras = explode(' ', trim($nombre));
+        $iniciales = '';
+        foreach ($palabras as $palabra) {
+            if ($palabra !== '') {
+                $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
+            }
+        }
+        return $iniciales;
+    }
 
     // Función que comprueba si la cadena recibida está vacía
     function nombreNoVacio(&$nombre) {
@@ -41,6 +59,16 @@
     }
 
     $crud = new Crud(new DB("proyecto"));
+    // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
+    $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
+    $fecha = new DateTime();
+    // Formato de fecha en español
+    $formatter = new IntlDateFormatter(
+        'es_ES',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE
+    );
+    $iniciales = iniciales($gestor['nombre']);
 
     // Si pulsamos el botón de crear Gestor
     if (isset($_POST['Crear'])) {
@@ -105,12 +133,20 @@
         header("Location: intranet.php");
     }
 ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
         <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-        <div class="container-fluid">
-            <div class="row">
-                <!-- La barra de navegación será la primera columna -->
-                <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-
+        <main class="main">
+            <!-- BIENVENIDA -->
+            <div class="welcome-bar">
+                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+                <div class="welcome-text">
+                    <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
+                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
+                </div>
+                <span class="badge badge-green">
+                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+                </span>
+            </div>
                 <!-- El contenido principal de la página será la segunda columna -->
                 <div class="col-12 col-lg-8 d-flex align-items-center">
                     <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -206,8 +242,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
+        </main>
         <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
