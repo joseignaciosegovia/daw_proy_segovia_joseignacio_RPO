@@ -187,7 +187,7 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3">
+                        <div class="col-md-6">
                             <label for="dni" class="labels">DNI</label>
                             <input type="text" class="form-control" id="dni" name="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]" value="<?php echo $cliente['DNI'] ?>" required>
                             <div class="invalid-feedback">

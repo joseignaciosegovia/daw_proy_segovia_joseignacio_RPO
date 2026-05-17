@@ -178,8 +178,8 @@
                     </div>
                 </div>
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestor=" . $gestor['email']; ?>" name="editarGestor">
-                    <div class="row mt-3">
-                        <div class="col-md-12">
+                    <div class="row mt-2">
+                        <div class="col-md-6 col-m3">
                             <label for="nombre" class="labels">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>">
                             <div class="invalid-feedback">
@@ -189,7 +189,20 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-12 mt-3">
+                        <div class="col-md-6">
+                            <label for="dni" class="labels">DNI</label>
+                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>">
+                            <div class="invalid-feedback">
+                                Introduzca un DNI válido
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
                             <label for="contraseña" class="labels">Contraseña</label>
                             <input type="password" class="form-control" id="contraseña" name="Contraseña" pattern=".{8,}" value="">
                             <div id="passwordHelpBlock" class="form-text">
@@ -202,7 +215,7 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-12 col-lg-7">
+                        <div class="col-md-6">
                             <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
                             <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="">
                             <div class="invalid-feedback">
@@ -212,17 +225,20 @@
                                 Dato correcto
                             </div>
                         </div>
+                    </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <div class="row mt-3">
                         <div class="col-md-12">
-                            <label for="dni" class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>">
-                            <div class="invalid-feedback">
-                                Introduzca un DNI válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
+                            <label for="administrador" class="labels">¿Es administrador?</label>
+                            <select id="administrador">
+                                <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
+                                <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
+                            </select>
                         </div>
-                        <div class="col-md-12">
+                    </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
                             <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>">
                             <div class="invalid-feedback">
@@ -232,16 +248,12 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="administrador" class="labels">¿Es administrador?</label>
-                            <select id="administrador">
-                                <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
-                                <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 col-lg-7">
-                            <label for="foto" class="labels">Foto de perfil</label>
-                            <img class="img-thumbnail mb-2" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="100" height="100">
+                        <div class="col-md-6">
+                            <label for="foto" class="labels">Foto de perfil (opcional)</label>
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <img class="rounded-circle" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;">
+                                <span class="text-muted small">Foto actual</span>
+                            </div>
                             <input type="file" class="form-control" id="foto" name="foto">
                             <div class="invalid-feedback">
                                 Introduzca una foto válida
@@ -251,8 +263,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar gestor</button>
+                    <div class="mt-4 d-flex justify-content-end">
+                        <button class="btn btn-primary profile-button" type="submit" name="Actualizar"><i class="bi bi-check-lg me-2"></i>Actualizar gestor</button>
                     </div>
                     <!-- Campo oculto para guardar el email del gestor para poder actualizarlo -->
                     <input id="email" name="email" type="hidden" value="<?php echo "$gestor[email]"?>">
@@ -266,7 +278,9 @@
                 </form>
             </div>
         </div>
-        <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+        <div class="mt-2 text-start">
+            <button class="btn btn-primary " onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+        </div>
     </main>
 </div>
 <?php
