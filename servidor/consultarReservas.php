@@ -18,6 +18,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -79,7 +80,7 @@
         $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista] ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
 ?>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
+        
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -92,10 +93,15 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-                <h1 class="d-flex justify-content-center">Reservas de la pista <?php echo "$pista" ?></h1>
-            
-                <!-- El contenido principal de la página será la segunda columna -->
-                <div class="col-12 col-lg-8 d-flex align-items-center">
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-calendar"></i>
+                        <div>
+                            <h2>Reservas de la pista <?php echo "$pista" ?></h2>
+                            <small class="text-muted">Consulta los horarios reservados de la pista <?php echo "$pista" ?></small>
+                        </div>
+                    </div>
             <?php
                 // Si no hay reservas en esta pista
                 if($reservas == null){
@@ -172,10 +178,11 @@
                         </tbody>
                     </table>
                 </div>
-            <?php } ?>
-        </main>
-    </div>
-    <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+                <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+            </div>
+        <?php } ?>
+    </main>
+</div>
 <?php
     }
 

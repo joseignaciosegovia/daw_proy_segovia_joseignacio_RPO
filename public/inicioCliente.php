@@ -132,7 +132,7 @@
             <!-- SECCIÓN: INSTALACIONES -->
             <div>
                 <div class="section-header">
-                    <span><i class="ti ti-building-stadium" aria-hidden="true"></i> Instalaciones</span>
+                    <span><i class="ti ti-soccer-field" aria-hidden="true"></i></i> Pistas e instalaciones</span>
                     <a href="/public/reservarPista.php">Reservar pista <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                 </div>
                 <div class="dash-grid-3">

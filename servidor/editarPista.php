@@ -32,6 +32,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
@@ -98,78 +99,84 @@
     
 ?>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <main class="main">
         <!-- BIENVENIDA -->
         <div class="welcome-bar">
             <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
             <div class="welcome-text">
-                <h1>Bienvenida, <?php echo "$gestor[nombre]"; ?></h1>
+                <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
                 <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
             </div>
             <span class="badge badge-green">
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-        <h1 class="d-flex justify-content-center">Editar pista</h1>
 
-        <!-- El contenido principal de la página será la segunda columna -->
-        <div class="col-12 col-lg-8 d-flex align-items-center">
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['id']; ?>" name="editarPista">
-                <div class="p-3 py-5">
-                    <div class="row mt-3">
-                        <div class="col-md-12 mt-3">
-                            <label for="nombre" class="labels">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
-                            <div class="invalid-feedback">
-                                Introduzca un nombre válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="Localizacion">Localización</label>
-                            <select name="Localizacion" id="Localizacion">
-                                <?php
-                                    // Obtenemos y recorremos las localizaciones
-                                    $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
-                                    foreach($localizaciones as $localizacion){
-                                        // Añadimos cada localización al select
-                                        echo "<option value=\"$localizacion[localizacion]\"";
-                                        // La opción indicada por defecto será la localización de la pista
-                                        if($pista['localizacion'] == $localizacion['localizacion']){
-                                            echo " selected";
-                                        }
-                                        
-                                        echo ">$localizacion[localizacion]</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <label for="precio" class="labels">Precio de Reserva</label>
-                            <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
-                            <div class="invalid-feedback">
-                                Introduzca un precio válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
+        <div class="card shadow-sm border-0">
+            <div class="p-3 py-4">
+                <div class="section-header mb-4">
+                    <i class="ti ti-soccer-field"></i>
+                    <div>
+                        <h2>Editar la pista <?php echo $pista['nombre'] ?></h2>
+                        <small class="text-muted">Modifica los datos de la pista <?php echo $pista['nombre'] ?></small>
                     </div>
-                    <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
-                        <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
-                    </div>
-                    <!-- Campo oculto para guardar el id de la pista para poder actualizarlo -->
-                    <input id="id" type="hidden" value="<?php echo "$pista[id]"?>">
                 </div>
-            </form>
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['id']; ?>" name="editarPista">
+                    <div class="p-3 py-5">
+                        <div class="row mt-3">
+                            <div class="col-md-12 mt-3">
+                                <label for="nombre" class="labels">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="Localizacion">Localización</label>
+                                <select name="Localizacion" id="Localizacion">
+                                    <?php
+                                        // Obtenemos y recorremos las localizaciones
+                                        $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                                        foreach($localizaciones as $localizacion){
+                                            // Añadimos cada localización al select
+                                            echo "<option value=\"$localizacion[localizacion]\"";
+                                            // La opción indicada por defecto será la localización de la pista
+                                            if($pista['localizacion'] == $localizacion['localizacion']){
+                                                echo " selected";
+                                            }
+                                            
+                                            echo ">$localizacion[localizacion]</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label for="precio" class="labels">Precio de Reserva</label>
+                                <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
+                                <div class="invalid-feedback">
+                                    Introduzca un precio válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
+                            <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
+                        </div>
+                        <!-- Campo oculto para guardar el id de la pista para poder actualizarlo -->
+                        <input id="id" type="hidden" value="<?php echo "$pista[id]"?>">
+                    </div>
+                </form>
+            </div>
+            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </div>
     </main>
 </div>
-<button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 
 <?php
     }

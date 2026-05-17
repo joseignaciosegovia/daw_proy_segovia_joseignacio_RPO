@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="nav-section">General</div>
-        <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/servidor/intranet.php") echo "active"; ?>" href="/servidor/intranet.php"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Inicio</a>
+        <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/servidor/intranet.php") echo "active"; ?>" href="/servidor/intranet.php"><i class="ti ti-home" aria-hidden="true"></i> Inicio</a>
         <?php 
             if($_SESSION['administrador'] != null) {
         ?>

@@ -27,6 +27,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
@@ -59,11 +60,9 @@
 
         if($incidencias == null) {
 ?>
-            <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
             <div class="container-fluid">
                 <div class="row">
                     <h1 class="d-flex justify-content-center">No hay incidencias enviadas por usuarios</h1>
-                    <!-- La barra de navegación será la primera columna -->
 <?php 
                     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; 
         }
@@ -71,22 +70,28 @@
 
 ?>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
     <main class="main">
-         <!-- BIENVENIDA -->
-            <div class="welcome-bar">
-                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
-                <div class="welcome-text">
-                    <h1>Bienvenida, <?php echo "$gestor[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
-                </div>
-                <span class="badge badge-green">
-                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
-                </span>
+        <!-- BIENVENIDA -->
+        <div class="welcome-bar">
+            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+            <div class="welcome-text">
+                <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
+                <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
             </div>
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col-12 col-lg-8 d-flex align-items-center">
-                <h1 class="d-flex justify-content-center">Incidencias de los usuarios</h1>
+            <span class="badge badge-green">
+                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+            </span>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="p-3 py-4">
+                <div class="section-header mb-4">
+                    <i class="ti ti-mail"></i>
+                    <div>
+                        <h2>Incidencias de los usuarios</h2>
+                        <small class="text-muted">Consulta las incidencias enviadas por los usuarios</small>
+                    </div>
+                </div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -116,6 +121,7 @@
                 </table>
             </div>
             <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+        </div>
     </main>
     </div>
  <?php   

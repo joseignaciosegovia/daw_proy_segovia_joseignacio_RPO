@@ -27,6 +27,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -134,7 +135,6 @@
     }
 ?>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -147,104 +147,107 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-                <!-- El contenido principal de la página será la segunda columna -->
-                <div class="col-12 col-lg-8 d-flex align-items-center">
-                    <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 class="text-right">Crear gestor</h2>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="nombre" class="labels">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
-                                <div class="invalid-feedback">
-                                    Introduzca un nombre válido
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-md-12">
-                                    <label for="email" class="labels">Email</label>
-                                    <input type="email" id="email" class="form-control" name="Email" value="" required autocomplete="off">
-                                    <div class="invalid-feedback">
-                                        Introduzca un email válido
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <label for="contraseña" class="labels">Contraseña</label>
-                                    <input type="password" id="contraseña" class="form-control" name="Contraseña" pattern=".{8,}" value="" required>
-                                    <div id="passwordHelpBlock" class="form-text">
-                                        La contraseña debe tener al menos 8 caracteres 
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Introduzca una contraseña
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-7">
-                                <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
-                                <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" required>
-                                <div class="invalid-feedback">
-                                    Confirme la contraseña
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="dni" class="labels">DNI</label>
-                                <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="" required>
-                                <div class="invalid-feedback">
-                                    Introduzca un DNI válido
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="telefono" class="labels">Teléfono (opcional)</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
-                                <div class="invalid-feedback">
-                                    Introduzca un teléfono válido
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="administrador" class="labels">¿Es administrador?</label>
-                                <select id="administrador">
-                                    <option value="1">Sí</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 col-lg-7">
-                                <label for="foto" class="labels">Foto de perfil</label>
-                                <input type="file" class="form-control" id="foto" name="foto">
-                                <div class="invalid-feedback">
-                                    Introduzca una foto válida
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
-                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear gestor</button></div>
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-user"></i>
+                        <div>
+                            <h2>Crear gestor</h2>
+                            <small class="text-muted">Introduce los datos del nuevo gestor</small>
                         </div>
+                    </div>
+                    <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="col-md-12">
+                            <label for="nombre" class="labels">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
+                            <div class="invalid-feedback">
+                                Introduzca un nombre válido
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label for="email" class="labels">Email</label>
+                                <input type="email" id="email" class="form-control" name="Email" value="" required autocomplete="off">
+                                <div class="invalid-feedback">
+                                    Introduzca un email válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label for="contraseña" class="labels">Contraseña</label>
+                                <input type="password" id="contraseña" class="form-control" name="Contraseña" pattern=".{8,}" value="" required>
+                                <div id="passwordHelpBlock" class="form-text">
+                                    La contraseña debe tener al menos 8 caracteres 
+                                </div>
+                                <div class="invalid-feedback">
+                                    Introduzca una contraseña
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-7">
+                            <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" required>
+                            <div class="invalid-feedback">
+                                Confirme la contraseña
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="dni" class="labels">DNI</label>
+                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="" required>
+                            <div class="invalid-feedback">
+                                Introduzca un DNI válido
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="telefono" class="labels">Teléfono (opcional)</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
+                            <div class="invalid-feedback">
+                                Introduzca un teléfono válido
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="administrador" class="labels">¿Es administrador?</label>
+                            <select id="administrador">
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-lg-7">
+                            <label for="foto" class="labels">Foto de perfil</label>
+                            <input type="file" class="form-control" id="foto" name="foto">
+                            <div class="invalid-feedback">
+                                Introduzca una foto válida
+                            </div>
+                            <div class="valid-feedback">
+                                Dato correcto
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear gestor</button></div>
                     </form>
                 </div>
-            </main>
-        </div>
-        <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+            </div>
+            <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+        </main>
+    </div>
 <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

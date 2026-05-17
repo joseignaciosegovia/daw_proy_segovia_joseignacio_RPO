@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="nav-section">General</div>
-        <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/inicioCliente.php") echo "active"; ?>" href="/public/inicioCliente.php"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Inicio</a>
+        <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/inicioCliente.php") echo "active"; ?>" href="/public/inicioCliente.php"><i class="ti ti-home" aria-hidden="true"></i> Inicio</a>
         <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/perfilCliente.php") echo "active"; ?>" href="/public/perfilCliente.php"><i class="ti ti-user" aria-hidden="true"></i> Datos personales</a>
         <div class="nav-section">Reservas</div>
         <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/reservarPista.php") echo "active"; ?>" href="/public/reservarPista.php"><i class="ti ti-plus" aria-hidden="true"></i> Nueva reserva</a>

@@ -19,6 +19,7 @@
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -74,7 +75,6 @@
         $reservasYPista[] = $pista;
 ?>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <main class="container-fluid">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -87,14 +87,25 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-calendar"></i>
+                        <div>
+                            <h2>Calendario de la pista <?php echo "$pista" ?></h2>
+                            <small class="text-muted">Consulta los horarios reservados de la pista <?php echo "$pista" ?></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
+            <div id="calendario" hidden>
+                <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
+                <?php echo json_encode($reservasYPista) ?>
+            </div>
+            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </main>
     </div>
-    <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
-    <div id="calendario" hidden>
-        <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
-        <?php echo json_encode($reservasYPista) ?>
-    </div>
-    <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
 <?php
     }
 
