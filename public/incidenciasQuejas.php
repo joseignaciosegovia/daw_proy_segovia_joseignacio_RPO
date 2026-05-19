@@ -82,7 +82,7 @@
                                 <i class="ti ti-mail" aria-hidden="true"></i>
                                 <div>
                                     <h2>Sugerencias e incidencias</h2>
-                                    <small class="text-muted">Enviar sugerencias/incidencias</small>
+                                    <small class="text-muted">Envia sugerencias/incidencias</small>
                                 </div>
                             </div>
                             <div>

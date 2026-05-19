@@ -157,18 +157,18 @@
                         </div>
                     </div>
                     <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <div class="col-md-12">
-                            <label for="nombre" class="labels">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
-                            <div class="invalid-feedback">
-                                Introduzca un nombre válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
                         <div class="row mt-2">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label for="nombre" class="labels">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <label for="email" class="labels">Email</label>
                                 <input type="email" id="email" class="form-control" name="Email" value="" required autocomplete="off">
                                 <div class="invalid-feedback">
@@ -179,8 +179,9 @@
                                 </div>
                             </div>
                         </div>
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="contraseña" class="labels">Contraseña</label>
                                 <input type="password" id="contraseña" class="form-control" name="Contraseña" pattern=".{8,}" value="" required>
                                 <div id="passwordHelpBlock" class="form-text">
@@ -193,52 +194,58 @@
                                     Dato correcto
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7">
-                            <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" required>
-                            <div class="invalid-feedback">
-                                Confirme la contraseña
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="dni" class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="" required>
-                            <div class="invalid-feedback">
-                                Introduzca un DNI válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-md-6">
+                                <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
+                                <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" required>
+                                <div class="invalid-feedback">
+                                    Confirme la contraseña
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="telefono" class="labels">Teléfono (opcional)</label>
-                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
-                            <div class="invalid-feedback">
-                                Introduzca un teléfono válido
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="dni" class="labels">DNI</label>
+                                <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un DNI válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-md-6">
+                                <label for="administrador" class="labels">¿Es administrador?</label><br>
+                                <select id="administrador">
+                                    <option value="1">Sí</option>
+                                    <option value="0">No</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label for="administrador" class="labels">¿Es administrador?</label>
-                            <select id="administrador">
-                                <option value="1">Sí</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 col-lg-7">
-                            <label for="foto" class="labels">Foto de perfil</label>
-                            <input type="file" class="form-control" id="foto" name="foto">
-                            <div class="invalid-feedback">
-                                Introduzca una foto válida
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="telefono" class="labels">Teléfono (opcional)</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="">
+                                <div class="invalid-feedback">
+                                    Introduzca un teléfono válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-md-6">
+                                <label for="foto" class="labels">Foto de perfil (opcional)</label>
+                                <input type="file" class="form-control" id="foto" name="foto">
+                                <div class="invalid-feedback">
+                                    Introduzca una foto válida
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear gestor</button></div>
