@@ -80,114 +80,112 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-
             <!-- SECCIÓN: RESERVAS -->
-            <div>
-                <div class="section-header">
-                    <span><i class="ti ti-calendar" aria-hidden="true"></i> Reservas</span>
-                    <a href="/public/reservasCliente.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div class="dash-grid-3">
-
-                    <!-- Tarjeta: reservas este mes -->
-                    <div class="dash-card dash-card-accent">
-                        <div class="lbl"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Reservas este mes</div>
-                        <div class="val"><?php echo sizeof($reservasMes); ?></div>
-                        <div class="card-sub"><span class="badge badge-green">Mayo 2026</span></div>
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+                    <div>
+                        <div class="section-header">
+                            <span><i class="ti ti-calendar" aria-hidden="true"></i> Reservas</span>
+                            <a href="/public/reservasCliente.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="dash-grid-3">
+                            <!-- Tarjeta: reservas este mes -->
+                            <div class="dash-card dash-card-accent">
+                                <div class="lbl"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Reservas este mes</div>
+                                <div class="val"><?php echo sizeof($reservasMes); ?></div>
+                                <div class="card-sub"><span class="badge badge-green">Mayo 2026</span></div>
+                            </div>
+                            <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
+                            <div class="dash-card" style="grid-column: span 2;">
+                                <!-- Si hay reservas futuras -->
+                                <?php if($siguienteReserva != null) { ?>
+                                <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> Próxima reserva</div>
+                                <div class="next-card">
+                                    <div class="next-icon">
+                                        <i class="ti ti-soccer-field" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="next-info">
+                                        <div class="val-md"><?php echo "$pistaSiguienteReserva[nombre]"; ?></div>
+                                        <div class="card-sub">
+                                            <i class="ti ti-calendar-event" aria-hidden="true"></i>
+                                            <?php echo "$siguienteReserva[fecha]"; ?>
+                                        </div>
+                                        <div class="pill-row">
+                                            <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> <?php echo "$siguienteReserva[horaInicio]"; ?></span>
+                                            <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> <?php echo "$pistaSiguienteReserva[localizacion]"; ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } 
+                                else { ?>
+                                <!-- Si no hay reservas futuras -->
+                                <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tiene reservas en fechas futuras</div>
+                                <div class="next-card">
+                                    <div class="next-icon">
+                                        <i class="ti ti-ball-football" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="next-info">
+                                        <div class="val-md"></div>
+                                        <div class="card-sub">
+                                            <i class="ti ti-calendar-event" aria-hidden="true"></i>
+                                            
+                                        </div>
+                                        <div class="pill-row">
+                                            <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> </span>
+                                            <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
-                    <div class="dash-card" style="grid-column: span 2;">
-                        <!-- Si hay reservas futuras -->
-                        <?php if($siguienteReserva != null) { ?>
-                        <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> Próxima reserva</div>
-                        <div class="next-card">
-                            <div class="next-icon">
-                                <i class="ti ti-ball-football" aria-hidden="true"></i>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <!-- SECCIÓN: INCIDENCIAS -->
+                    <div>
+                        <div class="section-header">
+                            <span><i class="ti ti-mail" aria-hidden="true"></i> Incidencias</span>
+                            <a href="/public/incidenciasQuejas.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="dash-grid-2">
+                            <div class="dash-card dash-card-accent dash-card-accent-amber">
+                                <div class="lbl"><i class="ti ti-send" aria-hidden="true"></i> Incidencias enviadas</div>
+                                <div class="val"><?php echo "$numeroSugerencias"; ?></div>
                             </div>
-                            <div class="next-info">
-                                <div class="val-md"><?php echo "$pistaSiguienteReserva[nombre]"; ?></div>
-                                <div class="card-sub">
-                                    <i class="ti ti-calendar-event" aria-hidden="true"></i>
-                                    <?php echo "$siguienteReserva[fecha]"; ?>
+                        </div>
+                    </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <!-- SECCIÓN: INSTALACIONES -->
+                    <div>
+                        <div class="section-header">
+                            <span><i class="ti ti-soccer-field" aria-hidden="true"></i> Pistas e instalaciones</span>
+                            <a href="/public/reservarPista.php">Reservar pista <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="dash-grid-3">
+                            <!-- Tarjeta: pistas disponibles -->
+                            <div class="dash-card dash-card-accent dash-card-accent-blue">
+                                <div class="lbl"><i class="ti ti-stack" aria-hidden="true"></i> Pistas disponibles</div>
+                                <div class="val"><?php echo "$numeroPistas"; ?></div>
+                            </div>
+                            <!-- Tarjeta: datos de instalaciones (ocupa 2 columnas) -->
+                            <div class="dash-card" style="grid-column: span 2;">
+                                <div class="info-row">
+                                    <span class="info-lbl"><i class="ti ti-building" aria-hidden="true"></i> Instalaciones</span>
+                                    <span class="info-val"><?php echo "$numeroInstalaciones"; ?></span>
                                 </div>
-                                <div class="pill-row">
-                                    <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> <?php echo "$siguienteReserva[horaInicio]"; ?></span>
-                                    <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> <?php echo "$pistaSiguienteReserva[localizacion]"; ?></span>
+                                <div class="info-row">
+                                    <span class="info-lbl"><i class="ti ti-door-enter" aria-hidden="true"></i> Hora de apertura</span>
+                                    <span class="info-val">08:00</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-lbl"><i class="ti ti-door-exit" aria-hidden="true"></i> Hora de cierre</span>
+                                    <span class="info-val">22:00</span>
                                 </div>
                             </div>
                         </div>
-                        <?php } 
-                        else { ?>
-                        <!-- Si no hay reservas futuras -->
-                        <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tiene reservas en fechas futuras</div>
-                        <div class="next-card">
-                            <div class="next-icon">
-                                <i class="ti ti-ball-football" aria-hidden="true"></i>
-                            </div>
-                            <div class="next-info">
-                                <div class="val-md"></div>
-                                <div class="card-sub">
-                                    <i class="ti ti-calendar-event" aria-hidden="true"></i>
-                                    
-                                </div>
-                                <div class="pill-row">
-                                    <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> </span>
-                                    <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> </span>
-                                </div>
-                            </div>
-                        </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
-
-            <!-- SECCIÓN: INCIDENCIAS -->
-            <div>
-                <div class="section-header">
-                    <span><i class="ti ti-mail" aria-hidden="true"></i> Incidencias</span>
-                    <a href="/public/incidenciasQuejas.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div class="dash-grid-2">
-                    <div class="dash-card dash-card-accent dash-card-accent-amber">
-                        <div class="lbl"><i class="ti ti-send" aria-hidden="true"></i> Incidencias enviadas</div>
-                        <div class="val"><?php echo "$numeroSugerencias"; ?></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECCIÓN: INSTALACIONES -->
-            <div>
-                <div class="section-header">
-                    <span><i class="ti ti-soccer-field" aria-hidden="true"></i></i> Pistas e instalaciones</span>
-                    <a href="/public/reservarPista.php">Reservar pista <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div class="dash-grid-3">
-
-                    <!-- Tarjeta: pistas disponibles -->
-                    <div class="dash-card dash-card-accent dash-card-accent-blue">
-                        <div class="lbl"><i class="ti ti-stack" aria-hidden="true"></i> Pistas disponibles</div>
-                        <div class="val"><?php echo "$numeroPistas"; ?></div>
-                    </div>
-
-                    <!-- Tarjeta: datos de instalaciones (ocupa 2 columnas) -->
-                    <div class="dash-card" style="grid-column: span 2;">
-                        <div class="info-row">
-                            <span class="info-lbl"><i class="ti ti-building" aria-hidden="true"></i> Instalaciones</span>
-                            <span class="info-val"><?php echo "$numeroInstalaciones"; ?></span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-lbl"><i class="ti ti-door-enter" aria-hidden="true"></i> Hora de apertura</span>
-                            <span class="info-val">08:00</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-lbl"><i class="ti ti-door-exit" aria-hidden="true"></i> Hora de cierre</span>
-                            <span class="info-val">22:00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
         </main> 
         <!-- Cerramos la sección principal, creada en navCliente.php -->
     </div>
