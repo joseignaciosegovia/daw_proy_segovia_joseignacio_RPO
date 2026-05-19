@@ -68,7 +68,7 @@
             <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
             <div class="welcome-text">
                 <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
+                <p>Hoy es <?php echo $formatter->format($fecha);?></p>
             </div>
             <span class="badge badge-green">
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
@@ -78,8 +78,16 @@
         <?php
             $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
-                echo "<h2 class=\"d-flex justify-content-center py-2\">Todavía no ha realizado ninguna reserva</h2>";
-                echo "</div>";
+?>
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-circle-number-0" aria-hidden="true"></i>
+                        <div>
+                            <h2>Todavía no ha realizado ninguna reserva</h2>
+                            <small class="text-muted">Cuando realices reservas podrás consultarlas aquí</small>
+                        </div>
+                    </div>
+<?php
             }
             else {
 ?>

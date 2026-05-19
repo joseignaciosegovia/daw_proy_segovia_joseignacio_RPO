@@ -73,7 +73,7 @@
                 <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
                 <div class="welcome-text">
                     <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?> &middot; Usuario activo</p>
+                    <p>Hoy es <?php echo $formatter->format($fecha);?></p>
                 </div>
                 <span class="badge badge-green">
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
