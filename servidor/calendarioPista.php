@@ -18,6 +18,7 @@
 ?>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
@@ -75,7 +76,7 @@
         $reservasYPista[] = $pista;
 ?>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        <main class="container-fluid">
+        <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
                 <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
@@ -96,12 +97,14 @@
                             <small class="text-muted">Consulta los horarios reservados de la pista <?php echo "$pista" ?></small>
                         </div>
                     </div>
+                
+                    <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
+                    <div id="calendario" hidden>
+                        <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
+                        <?php echo json_encode($reservasYPista) ?>
+                    </div>
+                    
                 </div>
-            </div>
-            <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
-            <div id="calendario" hidden>
-                <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
-                <?php echo json_encode($reservasYPista) ?>
             </div>
             <div class="mt-2 text-start">
                 <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
