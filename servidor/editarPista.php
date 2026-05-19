@@ -124,7 +124,7 @@
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?pista=" . $pista['id']; ?>" name="editarPista">
                     <div class="p-3 py-5">
                         <div class="row mt-3">
-                            <div class="col-md-12 mt-3">
+                            <div class="col-md-6">
                                 <label for="nombre" class="labels">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
                                 <div class="invalid-feedback">
@@ -134,8 +134,8 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <label for="Localizacion">Localización</label>
+                            <div class="col-md-6">
+                                <label for="Localizacion">Localización</label><br>
                                 <select name="Localizacion" id="Localizacion">
                                     <?php
                                         // Obtenemos y recorremos las localizaciones
@@ -147,12 +147,14 @@
                                             if($pista['localizacion'] == $localizacion['localizacion']){
                                                 echo " selected";
                                             }
-                                            
                                             echo ">$localizacion[localizacion]</option>";
                                         }
                                     ?>
                                 </select>
                             </div>
+                        </div>
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                        <div class="row mt-3">
                             <div class="col-md-12 mt-3">
                                 <label for="precio" class="labels">Precio de Reserva</label>
                                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
