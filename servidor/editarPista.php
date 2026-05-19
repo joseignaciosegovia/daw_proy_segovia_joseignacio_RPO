@@ -173,7 +173,9 @@
                     </div>
                 </form>
             </div>
-            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+        </div>
+        <div class="mt-2 text-start">
+            <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
         </div>
     </main>
 </div>

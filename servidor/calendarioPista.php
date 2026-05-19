@@ -103,7 +103,9 @@
                 <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
                 <?php echo json_encode($reservasYPista) ?>
             </div>
-            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+            <div class="mt-2 text-start">
+                <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
+            </div>
         </main>
     </div>
 <?php

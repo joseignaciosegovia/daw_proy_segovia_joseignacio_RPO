@@ -97,6 +97,7 @@
 
                     <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
                     <div class="dash-card" style="grid-column: span 2;">
+                        <!-- Si hay reservas futuras -->
                         <?php if($siguienteReserva != null) { ?>
                         <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> Próxima reserva</div>
                         <div class="next-card">
@@ -117,6 +118,7 @@
                         </div>
                         <?php } 
                         else { ?>
+                        <!-- Si no hay reservas futuras -->
                         <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tiene reservas en fechas futuras</div>
                         <div class="next-card">
                             <div class="next-icon">

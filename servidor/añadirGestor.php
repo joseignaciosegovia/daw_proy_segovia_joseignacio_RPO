@@ -245,7 +245,9 @@
                     </form>
                 </div>
             </div>
-            <button class="btn btn-primary form-floating" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+            <div class="mt-2 text-start">
+                <button class="btn btn-primary " onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+            </div>
         </main>
     </div>
 <?php

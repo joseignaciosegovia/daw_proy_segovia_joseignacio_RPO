@@ -80,7 +80,7 @@
                     <i class="ti ti-user"></i>
                     <div>
                         <h2>Lista de Gestores</h2>
-                        <small class="text-muted">Puedes consultar y modificar los datos de los gestores</small>
+                        <small class="text-muted">Consulta y modifica los datos de los gestores</small>
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -128,8 +128,9 @@
             </div>
         </div>
     <?php } ?>
-    <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
-    
+    <div class="mt-2 text-start">
+        <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
+    </div>
     </main>
 </div>
 <?php
