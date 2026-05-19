@@ -103,8 +103,6 @@
                         </div>
                     </form>
                 </div>
-            
-
 <?php
     $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
 
@@ -113,7 +111,6 @@
         echo "<h4 class=\"d-flex justify-content-center py-2\">No has realizado ninguna sugerencia/incidencia</h4>";
         echo "</div>";
     }
-
     else{
 ?>
         <div class="card shadow-sm border-0">

@@ -27,6 +27,7 @@
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -73,7 +74,6 @@
 
 ?>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -86,17 +86,21 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-            <!-- El contenido principal de la página será la segunda columna -->
-            <div class="col-12 col-lg-8 d-flex align-items-center">
-                <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2 class="text-right">Crear pista</h2>
+            
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+                    <div class="section-header mb-4">
+                        <i class="ti ti-soccer-field"></i>
+                        <div>
+                            <h2>Crear pista</h2>
+                            <small class="text-muted">Introduce los datos de la nueva pista</small>
                         </div>
+                    </div>
+                    <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <label for="nombre" class="labels">Nombre</label>
-                                <input type="text" id="nombre" class="form-control" name="Nombre" value="" required>
+                                <input type="text" id="nombre" class="form-control" name="Nombre" value="" placeholder="Nombre de la pista" required>
                                 <div class="invalid-feedback">
                                     Introduzca un nombre
                                 </div>
@@ -104,10 +108,21 @@
                                     Dato correcto
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <label for="precio" class="labels">Precio de Reserva</label>
+                                <input type="number" class="form-control" id="precio" name="Precio" value="" placeholder="0,00" step="0.01" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un precio válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
                         </div>
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <label for="Localizacion">Localización</label>
+                                <label for="Localizacion">Localización</label><br>
                                 <select name="Localizacion" id="Localizacion">
                                     <?php
                                         $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
@@ -118,22 +133,14 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-md-12 mt-3">
-                                <label for="precio" class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" id="precio" name="Precio" value="" step="0.01" required>
-                                <div class="invalid-feedback">
-                                    Introduzca un precio válido
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
-                            </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear pista</button></div>
-                    </div>
-                </form>
+                        <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit" name="Crear">Crear pista</button></div>
+                    </form>
+                </div>
             </div>
-            <button class="btn btn-secondary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+            <div class="mt-2 text-start">
+                <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
+            </div>
         </main>
     </div>
 <?php

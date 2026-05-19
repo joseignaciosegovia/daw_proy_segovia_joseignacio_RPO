@@ -168,7 +168,7 @@
                                 $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
                                 // Si la reserva no se ha pasado, el gestor podrá modificarla
                                 if($fechaReserva > $fechaActual) {
-                                    echo "<td><button class=\"editarPista btn btn-primary\">Editar</button></td>";
+                                    echo "<td><button class=\"editarPista btn btn-warning\">Editar</button></td>";
                                 }
                                 else {
                                     echo "<td>Fecha pasada</td>";

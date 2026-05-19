@@ -126,7 +126,7 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <label for="nombre" class="labels">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $pista['nombre'] ?>">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la pista" value="<?php echo $pista['nombre'] ?>" required>
                                 <div class="invalid-feedback">
                                     Introduzca un nombre válido
                                 </div>
@@ -135,6 +135,19 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <label for="precio" class="labels">Precio de Reserva</label>
+                                <input type="number" class="form-control" id="precio" name="precio" placeholder="0,00" step="0.01" value="<?php echo $pista['precioReserva'] ?>" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un precio válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                        <div class="row mt-3">
+                            <div class="col-md-12">
                                 <label for="Localizacion">Localización</label><br>
                                 <select name="Localizacion" id="Localizacion">
                                     <?php
@@ -151,19 +164,6 @@
                                         }
                                     ?>
                                 </select>
-                            </div>
-                        </div>
-                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
-                        <div class="row mt-3">
-                            <div class="col-md-12 mt-3">
-                                <label for="precio" class="labels">Precio de Reserva</label>
-                                <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="<?php echo $pista['precioReserva'] ?>">
-                                <div class="invalid-feedback">
-                                    Introduzca un precio válido
-                                </div>
-                                <div class="valid-feedback">
-                                    Dato correcto
-                                </div>
                             </div>
                         </div>
                         <div class="mt-5 text-center">
