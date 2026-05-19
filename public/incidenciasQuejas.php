@@ -105,13 +105,18 @@
                 </div>
 <?php
     $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
-
     if($sugerencias == null) {
-        echo "<div class=\"card shadow-sm border-0\">";
-        echo "<h4 class=\"d-flex justify-content-center py-2\">No has realizado ninguna sugerencia/incidencia</h4>";
-        echo "</div>";
-    }
-    else{
+?>
+        <div class="section-header mb-4">
+            <i class="ti ti-circle-number-0" aria-hidden="true"></i>
+            <div>
+                <h2>No has realizado ninguna sugerencia/incidencia</h2>
+                <small class="text-muted">Cuando realizes sugerencias/incidencias podrás consultarlas aquí</small>
+            </div>
+        </div>
+<?php
+                }
+                else{
 ?>
         <div class="card shadow-sm border-0">
             <div class="p-3 pt-4">
@@ -142,14 +147,13 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <?php } ?>
             </div>
         </div>
         </main>
     </div>
 
     <?php
-    
-    }
         // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
     ?>

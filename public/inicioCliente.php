@@ -54,7 +54,9 @@
         $siguienteReserva = $siguienteReserva[0];
         $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];
     }
-    $numeroSugerencias = $crud->listar("count(*)", "sugerencias_incidencias, clientes", "where sugerencias_incidencias.cliente = clientes.email")[0]['count(*)'];
+    $numeroSugerencias = $crud->listar("count(*)", "sugerencias_incidencias, clientes", "where sugerencias_incidencias.cliente = \"$cliente[email]\"");
+    if($numeroSugerencias != null)
+        $numeroSugerencias = $numeroSugerencias[0]['count(*)'];
     $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
     $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
     $fecha = new DateTime();
@@ -92,7 +94,12 @@
                             <!-- Tarjeta: reservas este mes -->
                             <div class="dash-card dash-card-accent">
                                 <div class="lbl"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Reservas este mes</div>
-                                <div class="val"><?php echo sizeof($reservasMes); ?></div>
+                                <?php if($reservasMes != null) { ?>
+                                    <div class="val"><?php echo sizeof($reservasMes); ?></div>
+                                <?php }
+                                else { ?>
+                                    <div class="val">0</div>
+                                <?php } ?>
                                 <div class="card-sub"><span class="badge badge-green">Mayo 2026</span></div>
                             </div>
                             <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
