@@ -267,7 +267,8 @@
                 </div>
             </div>
         </div>
-
+        </div>
+        <div class="card shadow-sm border-0">
         <div id="consultarPistas" class="row column-gap-3">
             <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
             <div class="col-12 accordion accordion-flush d-flex justify-content-center" id="elegirPista">
@@ -302,18 +303,17 @@
                     $contador++;
                 }
             ?>
-                    </div>
                 </div>
             </div>
-            <!-- Div en el que irá el título de la pista -->
-            <div class="d-flex flex-column align-items-center" id="tituloPista">
+        </div>
+        <!-- Div en el que irá el título de la pista -->
+        <div class="d-flex flex-column align-items-center" id="tituloPista">
 
-            </div>
-            <!-- Cerramos la sección principal, creada en navCliente.php -->
         </div>
         <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
         <div class="col" id="calendario">
             
+        </div>
         </div>
     </div>
 <?php

@@ -34,7 +34,7 @@
     }
 
     // Actualizamos el título de la página
-    $titulo = "Administración de gestores | Moral de Calatrava";
+    $titulo = "Administración de gestores · Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
     $home = "/servidor/intranet.php";
 

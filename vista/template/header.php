@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-8 col-sm-9 col-lg-9 fs-1">
                         <!-- El título contiene un enlace a la página principal -->
-                        <div class="hdr-title"><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> >Reserva de pistas · Moral de Calatrava</a></div>
+                        <div class="hdr-title"><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> ><?= isset($titulo) ? $titulo : "Reserva de pistas · Moral de Calatrava"?></a></div>
                         <div class="hdr-sub">Polideportivo y Ciudad Deportiva</div>
                     </div>
                     <div class="col-2">

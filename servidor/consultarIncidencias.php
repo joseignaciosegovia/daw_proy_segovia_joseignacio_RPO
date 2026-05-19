@@ -15,7 +15,7 @@
     }
 
     // Actualizamos el título de la página
-    $titulo = "Gestión de pistas y reservas | Moral de Calatrava";
+    $titulo = "Gestión de pistas y reservas · Moral de Calatrava";
     // Actualizamos la dirección del título y del logo de la página
     $home = "/servidor/intranet.php";
 
