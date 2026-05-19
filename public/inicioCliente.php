@@ -49,6 +49,7 @@
     // Datos que vamos a mostrar
     $reservasMes = $crud->listar("*", "reservas", "where cliente = \"$cliente[email]\" and MONTH(reservas.fecha) = MONTH(CURDATE()) AND YEAR(reservas.fecha) = YEAR(CURDATE()) order by fecha");
     $siguienteReserva = $crud->obtener("reservas", "where cliente = \"$cliente[email]\" and TIMESTAMP(fecha, horaInicio) > CONVERT_TZ(NOW(), @@session.time_zone, 'Europe/Madrid') ORDER BY TIMESTAMP(fecha, horaInicio) ASC LIMIT 1");
+    // Si hay reservas para fechas futuras
     if($siguienteReserva != null) {
         $siguienteReserva = $siguienteReserva[0];
         $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];

@@ -117,7 +117,7 @@
                     if ($pagina > 1){
                         echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaAnterior\">← Anterior</a>";
                     }
-                    echo "<span>Página $pagina de $totalPaginas></span>";
+                    echo "<span> Página $pagina de $totalPaginas </span>";
 
                     if ($pagina < $totalPaginas) {
                         echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
@@ -162,12 +162,16 @@
                             <td><?php echo $cliente ?></td>
                             <td><?php echo $reserva['informacion'] ?></td>
                             <?php
-                                // Si una reserva ha sido añadida a mano por el gestor, desde aquí podrá modificarla
-                                if($cliente == "-") {
-                                    echo "<td><button class=\"editarPista\">Editar</button></td>";
+                                $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
+                                $zonaHoraria = new DateTimeZone('Europe/Madrid');
+                                $fechaMadrid = new DateTime('now', $zonaHoraria);
+                                $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
+                                // Si la reserva no se ha pasado, el gestor podrá modificarla
+                                if($fechaReserva > $fechaActual) {
+                                    echo "<td><button class=\"editarPista btn btn-primary\">Editar</button></td>";
                                 }
                                 else {
-                                    echo "<td>-</td>";
+                                    echo "<td>Fecha pasada</td>";
                                 }
                             ?>
                         </tr>
