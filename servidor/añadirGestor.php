@@ -248,12 +248,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="Crear">Crear gestor</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit" name="Crear">Crear gestor</button></div>
                     </form>
                 </div>
             </div>
             <div class="mt-2 text-start">
-                <button class="btn btn-primary " onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+                <button class="btn btn-secondary" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
             </div>
         </main>
     </div>

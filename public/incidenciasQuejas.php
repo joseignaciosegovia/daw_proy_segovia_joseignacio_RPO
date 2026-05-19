@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 d-flex justify-content-end">
-                                <button class="btn btn-primary px-4" type="submit" name="Enviar"><i class="ti ti-send me-2"></i>Realizar queja/sugerencia</button>
+                                <button class="btn btn-success px-4" type="submit" name="Enviar"><i class="ti ti-send me-2"></i>Realizar queja/sugerencia</button>
                             </div>
                         </div>
                     </form>

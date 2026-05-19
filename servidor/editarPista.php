@@ -167,7 +167,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-center">
-                            <button class="btn btn-primary profile-button" type="submit" name="Actualizar">Actualizar pista</button>
+                            <button class="btn btn-success profile-button" type="submit" name="Actualizar">Actualizar pista</button>
                             <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
                         </div>
                         <!-- Campo oculto para guardar el id de la pista para poder actualizarlo -->
@@ -177,7 +177,7 @@
             </div>
         </div>
         <div class="mt-2 text-start">
-            <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
+            <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </div>
     </main>
 </div>

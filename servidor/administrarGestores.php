@@ -114,7 +114,7 @@
                                     echo "No";
                             ?>
                             </td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='editarGestor.php?gestor=$gestor[email]';\">Editar</button>"?></td>
+                            <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestor=$gestor[email]';\">Editar</button>"?></td>
                         </tr>
                             <?php 
                                 $cont++;
@@ -123,13 +123,13 @@
                     </tbody>
                 </table>
                 <form method='POST' action='<?php echo "añadirGestor.php"; ?>'>
-                    <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir gestor">
+                    <input type="submit" class="btn btn-success" name="Añadir" value="Añadir gestor">
                 </form>
             </div>
         </div>
     <?php } ?>
     <div class="mt-2 text-start">
-        <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
+        <button class="btn btn-secondary " onclick="window.location.href='intranet.php';">Volver atrás</button>
     </div>
     </main>
 </div>

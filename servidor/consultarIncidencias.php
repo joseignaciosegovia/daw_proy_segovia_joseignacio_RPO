@@ -122,7 +122,7 @@
             </div>
         </div>
         <div class="mt-2 text-start">
-            <button class="btn btn-primary " onclick="window.location.href='intranet.php';">Volver atrás</button>
+            <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </div>
     </main>
     </div>

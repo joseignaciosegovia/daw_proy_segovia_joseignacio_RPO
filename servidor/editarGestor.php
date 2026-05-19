@@ -228,16 +228,6 @@
                     </div>
                     <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="administrador" class="labels">¿Es administrador?</label>
-                            <select id="administrador">
-                                <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
-                                <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
-                    <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
                             <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>">
@@ -263,8 +253,18 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="administrador" class="labels">¿Es administrador?</label><br>
+                            <select id="administrador">
+                                <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
+                                <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="mt-4 d-flex justify-content-end">
-                        <button class="btn btn-primary profile-button" type="submit" name="Actualizar"><i class="bi bi-check-lg me-2"></i>Actualizar gestor</button>
+                        <button class="btn btn-success profile-button" type="submit" name="Actualizar"><i class="bi bi-check-lg me-2"></i>Actualizar gestor</button>
                     </div>
                     <!-- Campo oculto para guardar el email del gestor para poder actualizarlo -->
                     <input id="email" name="email" type="hidden" value="<?php echo "$gestor[email]"?>">
@@ -279,7 +279,7 @@
             </div>
         </div>
         <div class="mt-2 text-start">
-            <button class="btn btn-primary " onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
+            <button class="btn btn-secondary" onclick="window.location.href='administrarGestores.php';">Volver atrás</button>
         </div>
     </main>
 </div>

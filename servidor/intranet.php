@@ -104,8 +104,8 @@
                             <td><?php echo $pista['nombre'] ?></td>
                             <td><?php echo $pista['localizacion'] ?></td>
                             <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
+                            <td><?php echo "<button class=\"btn btn-outline-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
+                            <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
                         </tr>
                             <?php 
                                 $cont++;
@@ -114,7 +114,7 @@
                     </tbody>
                 </table>
                 <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
-                    <input type="submit" class="btn btn-primary" name="Añadir" value="Añadir pista">
+                    <input type="submit" class="btn btn-success" name="Añadir" value="Añadir pista">
                 </form>
             </div>
         </div>

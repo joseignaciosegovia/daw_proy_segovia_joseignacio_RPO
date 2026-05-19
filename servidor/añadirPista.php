@@ -133,7 +133,7 @@
                     </div>
                 </form>
             </div>
-            <button class="btn btn-primary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
+            <button class="btn btn-secondary form-floating" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </main>
     </div>
 <?php
