@@ -48,8 +48,11 @@
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     // Datos que vamos a mostrar
     $reservasMes = $crud->listar("*", "reservas", "where cliente = \"$cliente[email]\" and MONTH(reservas.fecha) = MONTH(CURDATE()) AND YEAR(reservas.fecha) = YEAR(CURDATE()) order by fecha");
-    $siguienteReserva = $crud->obtener("reservas", "where cliente = \"$cliente[email]\" and TIMESTAMP(fecha, horaInicio) > CONVERT_TZ(NOW(), @@session.time_zone, 'Europe/Madrid') ORDER BY TIMESTAMP(fecha, horaInicio) ASC LIMIT 1")[0];
-    $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];
+    $siguienteReserva = $crud->obtener("reservas", "where cliente = \"$cliente[email]\" and TIMESTAMP(fecha, horaInicio) > CONVERT_TZ(NOW(), @@session.time_zone, 'Europe/Madrid') ORDER BY TIMESTAMP(fecha, horaInicio) ASC LIMIT 1");
+    if($siguienteReserva != null) {
+        $siguienteReserva = $siguienteReserva[0];
+        $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];
+    }
     $numeroSugerencias = $crud->listar("count(*)", "sugerencias_incidencias, clientes", "where sugerencias_incidencias.cliente = clientes.email")[0]['count(*)'];
     $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
     $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
@@ -94,6 +97,7 @@
 
                     <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
                     <div class="dash-card" style="grid-column: span 2;">
+                        <?php if($siguienteReserva != null) { ?>
                         <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> Próxima reserva</div>
                         <div class="next-card">
                             <div class="next-icon">
@@ -111,6 +115,26 @@
                                 </div>
                             </div>
                         </div>
+                        <?php } 
+                        else { ?>
+                        <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tiene reservas en fechas futuras</div>
+                        <div class="next-card">
+                            <div class="next-icon">
+                                <i class="ti ti-ball-football" aria-hidden="true"></i>
+                            </div>
+                            <div class="next-info">
+                                <div class="val-md"></div>
+                                <div class="card-sub">
+                                    <i class="ti ti-calendar-event" aria-hidden="true"></i>
+                                    
+                                </div>
+                                <div class="pill-row">
+                                    <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> </span>
+                                    <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
