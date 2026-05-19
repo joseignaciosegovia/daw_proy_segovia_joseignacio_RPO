@@ -83,7 +83,7 @@
                     <div class="section-header mb-4">
                         <i class="ti ti-circle-number-0" aria-hidden="true"></i>
                         <div>
-                            <h2>Todavía no ha realizado ninguna reserva</h2>
+                            <h2>No has realizado ninguna reserva</h2>
                             <small class="text-muted">Cuando realices reservas podrás consultarlas aquí</small>
                         </div>
                     </div>

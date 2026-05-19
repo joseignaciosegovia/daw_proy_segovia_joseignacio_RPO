@@ -126,20 +126,17 @@
                                 <?php } 
                                 else { ?>
                                 <!-- Si no hay reservas futuras -->
-                                <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tiene reservas en fechas futuras</div>
+                                <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tienes reservas en fechas futuras</div>
                                 <div class="next-card">
                                     <div class="next-icon">
-                                        <i class="ti ti-ball-football" aria-hidden="true"></i>
+                                        <i class="ti ti-soccer-field" aria-hidden="true"></i>
+                                        
                                     </div>
                                     <div class="next-info">
                                         <div class="val-md"></div>
                                         <div class="card-sub">
                                             <i class="ti ti-calendar-event" aria-hidden="true"></i>
-                                            
-                                        </div>
-                                        <div class="pill-row">
-                                            <span class="badge badge-blue"><i class="ti ti-clock" aria-hidden="true"></i> </span>
-                                            <span class="badge badge-amber"><i class="ti ti-map-pin" aria-hidden="true"></i> </span>
+                                            Cuando tengas reservas futuras, podrás ver las fechas aquí
                                         </div>
                                     </div>
                                 </div>

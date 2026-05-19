@@ -95,6 +95,21 @@
             </div>
             <div class="card shadow-sm border-0">
                 <div class="p-3 py-4">
+            <?php
+                // Si no hay reservas en esta pista
+                if($reservas == null){
+            ?>
+                    <div class="section-header mb-4">
+                        <i class="ti ti-circle-number-0"></i>
+                        <div>
+                            <h2>No hay reservas en la pista <?php echo "$pista" ?></h2>
+                            <small class="text-muted"><small class="text-muted">Cuando haya reservas en la pista <?php echo "$pista" ?> podrás consultarlas aquí</small>
+                        </div>
+                    </div>
+            <?php }
+                // Si hay reservas
+                else {
+            ?>
                     <div class="section-header mb-4">
                         <i class="ti ti-calendar"></i>
                         <div>
@@ -103,12 +118,6 @@
                         </div>
                     </div>
             <?php
-                // Si no hay reservas en esta pista
-                if($reservas == null){
-                    echo "<h2 class=\"d-flex justify-content-center\">No hay reservas en esta pista</h2>";
-                }
-                // Si hay reservas, creamos una tabla y las mostramos
-                else {
                     $filasTotales = $crud->listar("count(*)", "reservas", "where pista = $_GET[pista]")[0]['count(*)'];
                     $totalPaginas = ceil($filasTotales / $filasPorPagina);
                     $paginaSiguiente = $pagina + 1;
