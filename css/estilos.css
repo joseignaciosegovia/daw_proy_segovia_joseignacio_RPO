@@ -216,6 +216,11 @@ h1 {
     background-color: #ffffff !important;
 }
 
+/* Ponemos el ratón encima de las pistas */
+.accordion-body:hover {
+    background-color: #E0E0E0;
+}
+
 /* PIE */
 footer {
     padding: 20px;

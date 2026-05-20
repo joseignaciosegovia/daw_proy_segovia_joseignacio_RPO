@@ -121,9 +121,6 @@
                 </table>
             </div>
         </div>
-        <div class="mt-2 text-start">
-            <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
-        </div>
     </main>
     </div>
  <?php   
