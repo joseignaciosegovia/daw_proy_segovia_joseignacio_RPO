@@ -261,7 +261,7 @@
                             </div>
                         </div>
                         <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-primary w-auto" id="btCrearUsuario" name="crear">Crear Usuario</button>
+                            <button type="submit" class="btn btn-success w-auto" id="btCrearUsuario" name="crear">Crear Usuario</button>
                         </div>
                     </form>
                 </div>

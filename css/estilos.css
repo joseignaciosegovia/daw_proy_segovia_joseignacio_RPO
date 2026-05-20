@@ -49,23 +49,7 @@
     color: rgba(255,255,255,0.55); 
     margin-top: 2px; 
 }
-/* Botón crear usuario e iniciar sesión del cliente y del gestor */
-#btCrearUsuario, #btAccesoCliente, #btAccesoGestor { 
-    width: 100%; 
-    background: #1B3A6B; 
-    color: #fff; border: none; 
-    border-radius: 8px; 
-    padding: 11px; 
-    font-size: 14px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    font-family: inherit; 
-    margin-top: 4px; 
-    transition: background 0.2s; 
-}
-#btCrearUsuario:hover,#btAccesoCliente:hover { 
-    background: #152e56; 
-}
+
 /* Div layout en el que se encuentra el cuerpo */
 .layout { 
     display: grid; 
@@ -151,7 +135,11 @@ body {
 .card {
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cards-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
+}
 .stat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; }
 .stat-card .label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
 .stat-card .value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
@@ -233,26 +221,6 @@ h1 {
 /* Pintamos de blando el fondo de la columna que indica las horas */
 .fc .fc-timegrid-axis {
     background-color: #ffffff !important;
-}
-
-/* Diseño del botón: 'Cerrar sesión' (tanto del cliente como del administrador) */
-.btn-salir{
-    display: flex;
-    margin: 1.5rem auto 0 auto;
-    padding: 12px 20px;
-    border: none;
-    background-color: #4946fd;
-    color: black;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: .4s;
-}
-
-/* Ponemos el ratón encima del botón: 'Cerrar sesión' (tanto del cliente como del administrador) */
-.btn-salir:hover{
-    background-color: red;
-    color: #fdfffc;
 }
 
 /* PIE */

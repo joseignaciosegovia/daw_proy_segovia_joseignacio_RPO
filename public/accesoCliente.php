@@ -138,7 +138,7 @@
                                 <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                             </div>
                             <div class="form-group mb-3 text-right">
-                                <input type="submit" value="Acceder" class="w-auto" name='login' id="btAccesoCliente">
+                                <input type="submit" value="Acceder" class="btn btn-success w-auto" name='login' id="btAccesoCliente">
                             </div>
                         </form>
                     </div>

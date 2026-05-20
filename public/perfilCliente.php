@@ -252,7 +252,7 @@
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-end">
-                        <button class="btn btn-success px-4" type="submit" name="Actualizar"><i class="bi bi-check-lg me-2"></i>Actualizar perfil</button>
+                        <button class="btn btn-success px-4" type="submit" name="Actualizar">Actualizar perfil</button>
                     </div>
                 </div>
             </form>
