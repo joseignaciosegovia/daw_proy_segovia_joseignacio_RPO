@@ -12,10 +12,11 @@
     font-size: 15px; 
     color: rgba(255,255,255,0.5); 
 }
-/* Ponemos el texto título en blanco */
+/* Ponemos el texto del título en blanco */
 #cabecera a {
     color: white;
 }
+/* Botón de la cabecera "Intranet" */
 #cabecera button {
     color: #1B3A6B;
     background-color: white;
@@ -154,39 +155,31 @@ body {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
+/* Inputs y su placeholder */
 input[type=text] {
     background-color: white;
 }
-
 input[type=text]::placeholder { 
    color: #94B9DF;
 }
-
 input[type=email] {
     background-color: white;
 }
-
 input[type=email]::placeholder { 
    color: #94B9DF;
 }
-
 input[type=password] {
     background-color: white;
 }
-
 input[type=password]::placeholder { 
    color: #94B9DF;
 }
-
 input[type=tel] {
     background-color: white;
 }
-
 input[type=tel]::placeholder { 
    color: #94B9DF;
 }
-
 input[type=file] {
     background-color: white;
     color: #94B9DF;
