@@ -110,7 +110,8 @@
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
                     // Borramos la foto antigua antes de actualizar la base de datos
                     $fotoAntigua = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0]['foto'];
-                    if ($fotoAntigua) {
+                    // Si la foto anterior existe y no es la foto por defecto de perfil vacío
+                    if ($fotoAntigua && $fotoAntigua != "/imagenes/blank-profile-picture.png") {
                         $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
                         if (file_exists($rutaFotoAntigua)) {
                             unlink($rutaFotoAntigua);

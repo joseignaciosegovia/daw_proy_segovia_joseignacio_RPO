@@ -72,7 +72,7 @@ SET NAMES utf8mb4;
 INSERT INTO clientes VALUES 
     ('marLop@gmail.com', '$2y$10$lpTs.g49VSLKkD8SGzl9LOVpZ7UNFwmecxGC9PqSioXlREtjGp.r2', 'María López', '87182344I', 655871025, "/imagenes/blank-profile-picture.png", '$2y$12$GRoxOUyMK.YyXPot2/2F..7Q8zTrzrlY4y2k9CZMNmPFgoOiMHq6y', 1),
     ('ferSan@gmail.com', '$2y$10$jEGR/YfIt9Xiu5r/rjrreOYVwISNnJxYKGmybCdmwkDBYoR.XGyCW', 'Fernando Sanz', '11298419O', 664788795, "/imagenes/blank-profile-picture.png", '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1),
-    ('antGar@gmail.com', '$2y$10$DMMANtYfLFFAMXhnIzH7q.jlB7yyHam18wGwUZU1T.Z0o3CJl3qdu', 'Antonio García', '744391209U', 697874169, "/imagenes/blank-profile-picture.png", '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 1),
+    ('antGar@gmail.com', '$2y$10$DMMANtYfLFFAMXhnIzH7q.jlB7yyHam18wGwUZU1T.Z0o3CJl3qdu', 'Antonio García', '74439120U', 697874169, "/imagenes/blank-profile-picture.png", '$2y$10$vgm9646Cb6zlRNT6NKFGeeI4/0rihPFbtv3Sr1y8LW6rE.FyZ/HhC', 1),
     ('ferLui@gmail.com', '$2y$10$u4AZ1xTiDSyXublcDmqv3.8UOt2SXdaeiRCjUPwQdNDIQEyM5pHCC', 'Fernanda Luisa', '11298437H', 604975301, "/imagenes/blank-profile-picture.png", '$2y$10$9T21merzMQpflmLCKtA0v.nlFN05ci5S5042b8BPbD6S4VLQgmOtG', 1);
 
 -- Contraseñas de clientes: 

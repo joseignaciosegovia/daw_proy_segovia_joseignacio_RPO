@@ -120,7 +120,16 @@
                 $rutaBD = "/imagenes/" . $nombreFinal;
 
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-
+                    // Borramos la foto antigua antes de actualizar la base de datos
+                    $crud = new Crud(new DB("proyecto"));
+                    $fotoAntigua = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0]['foto'];
+                    // Si la foto anterior existe y no es la foto por defecto de perfil vacío
+                    if ($fotoAntigua && $fotoAntigua != "/imagenes/blank-profile-picture.png") {
+                        $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
+                        if (file_exists($rutaFotoAntigua)) {
+                            unlink($rutaFotoAntigua);
+                        }
+                    }
                     // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
                     $valores .= ", foto = '$rutaBD'";
 
