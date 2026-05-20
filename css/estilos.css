@@ -2,6 +2,10 @@
 #cabecera {
     background-color: #1B3A6B;
 }
+#cabecera img {
+    height: 45px;
+    width: auto;
+}
 /* Título de la cabecera */
 .hdr-title { 
     font-size: 20px; 
@@ -233,6 +237,7 @@ footer {
     font-size: 15px; 
     color: rgba(255,255,255,0.5);
     margin-top: 1px; 
+    margin-bottom: 0 !important;
 }
 .footer-col strong { 
     font-size: 20px; 

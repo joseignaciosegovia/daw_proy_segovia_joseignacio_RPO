@@ -28,8 +28,8 @@
     <body>
         <header>
             <div class="container-fluid" id="cabecera">
-                <div class="row d-flex align-items-center py-3">
-                    <div class="col">
+                <div class="row d-flex align-items-center py-2">
+                    <div class="col-auto">
                         <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></a>
                     </div>
                     <div class="col-8 col-sm-9 col-lg-9 fs-1">
