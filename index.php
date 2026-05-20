@@ -159,8 +159,8 @@
         }
 ?>
 
-    <div class="container-fluid my-3">
-        <div class="row column-gap-3">
+    <div class="container-fluid my-3 px-0">
+        <div class="row g-0">
             <div class="col-12 col-md-6 pt-4" id="informacionPrincipal">
                 <div class="row px-3">
                     <h1>Reservar pistas en Moral de Calatrava</h1>
@@ -180,7 +180,7 @@
                     <div class="stat"><div class="stat-n">22:00</div><div class="stat-l">Hora de cierre</div></div>
                 </div>
             </div>
-            <div class="card shadow-sm border-0 col-12 col-md-5">
+            <div class="card shadow-sm border-0 col-12 col-md">
                 <div class="card-header text-center">
                     <h2 class="d-flex justify-content-center">Registrarse</h2>
                     <a class="btn btn-primary my-2 text-center w-auto" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
