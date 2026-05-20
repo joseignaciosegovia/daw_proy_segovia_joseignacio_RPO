@@ -269,51 +269,53 @@
         </div>
         </div>
         <div class="card shadow-sm border-0">
-        <div id="consultarPistas" class="row column-gap-3">
-            <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
-            <div class="col-12 accordion accordion-flush d-flex justify-content-center" id="elegirPista">
-            <?php
-                $crud = new Crud(new DB("proyecto"));
-                $contador = 0;
-                // Obtenemos todas las localizaciones y las añadimos al acordeón
-                $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
-                foreach($localizaciones as $localizacion){
-            ?>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
-                                <?php echo "$localizacion[localizacion]"; ?>
-                            </button>
-                        </h2>
-                        <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
+            <div class="p-3 py-4">
+                <div id="consultarPistas" class="row column-gap-3">
+                    <h2 class="d-flex justify-content-center">Consultar pistas y sus horarios</h2>
+                    <div class="col-12 accordion accordion-flush d-flex justify-content-center" id="elegirPista">
                     <?php
-                        // Para cada localización, añadimos las pistas al acordeón
-                        $pistas = $crud->listar("nombre, id", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
-                        foreach($pistas as $pista){
+                        $crud = new Crud(new DB("proyecto"));
+                        $contador = 0;
+                        // Obtenemos todas las localizaciones y las añadimos al acordeón
+                        $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
+                        foreach($localizaciones as $localizacion){
                     ?>
-                            <div class="accordion-body">
-                                <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
-                                <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
-                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?php echo "#flush-collapse$contador"; ?>" aria-expanded="false" aria-controls="<?php echo "flush-collapse$contador"; ?>">
+                                        <?php echo "$localizacion[localizacion]"; ?>
+                                    </button>
+                                </h2>
+                                <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
+                            <?php
+                                // Para cada localización, añadimos las pistas al acordeón
+                                $pistas = $crud->listar("nombre, id", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
+                                foreach($pistas as $pista){
+                            ?>
+                                    <div class="accordion-body">
+                                        <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
+                                        <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
+                                    </div>
+                            <?php
+                                }
+                            ?>
+                                </div>
                     <?php
+                            $contador++;
                         }
                     ?>
                         </div>
-            <?php
-                    $contador++;
-                }
-            ?>
+                    </div>
+                </div>
+                <!-- Div en el que irá el título de la pista -->
+                <div class="d-flex flex-column align-items-center" id="tituloPista">
+
+                </div>
+                <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
+                <div class="col" id="calendario">
+                    
                 </div>
             </div>
-        </div>
-        <!-- Div en el que irá el título de la pista -->
-        <div class="d-flex flex-column align-items-center" id="tituloPista">
-
-        </div>
-        <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
-        <div class="col" id="calendario">
-            
-        </div>
         </div>
     </div>
 <?php

@@ -104,12 +104,15 @@
                         <div id="<?php echo "flush-collapse$contador"; ?>" class="accordion-collapse collapse" data-bs-parent="#elegirPista">
                     <?php
                         // Para cada localización, añadimos las pistas al acordeón
-                        $pistas = $crud->listar("nombre, id", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
+                        $pistas = $crud->listar("nombre, id, precioReserva", "pistas", "where localizacion = \"$localizacion[localizacion]\"");
                         foreach($pistas as $pista){
                     ?>
                             <div class="accordion-body">
                                 <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
-                                <a class="nav-link ms-3 my-1"><?php echo "$pista[nombre]"; ?></a>
+                                <div class="d-flex justify-content-between align-items-center ms-3 my-1">
+                                    <span><?php echo $pista['nombre']; ?></span>
+                                    <span class="fw-semibold">Precio por reserva: <?php echo $pista['precioReserva']; ?></span>
+                                </div>
                             </div>
                     <?php
                         }
