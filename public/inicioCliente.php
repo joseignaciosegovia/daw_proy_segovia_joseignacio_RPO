@@ -54,7 +54,7 @@
         $siguienteReserva = $siguienteReserva[0];
         $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];
     }
-    $numeroSugerencias = $crud->listar("count(*)", "sugerencias_incidencias, clientes", "where sugerencias_incidencias.cliente = \"$cliente[email]\"");
+    $numeroSugerencias = $crud->listar("count(*)", "sugerencias_incidencias", "where sugerencias_incidencias.cliente = \"$cliente[email]\"");
     if($numeroSugerencias != null)
         $numeroSugerencias = $numeroSugerencias[0]['count(*)'];
     $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];

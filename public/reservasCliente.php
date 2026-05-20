@@ -76,7 +76,7 @@
         </div>
         <div class="card shadow-sm border-0">
         <?php
-            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
+            $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio, pista ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
 ?>
                 <div class="p-3 py-4">

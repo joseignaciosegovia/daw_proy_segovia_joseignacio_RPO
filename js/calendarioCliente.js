@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostramos el calendario para el cliente cada vez que pinche en una pista para reservarla
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
+            // Guardamos la sección del acordeón que incluye el título de la pista y su precio
             var acordeon = $(pista)[0];
-            cargarCalendario(acordeon.getElementsByTagName("span")[0].outerText, pista.childNodes[1].value);
+            cargarCalendario(acordeon, pista.childNodes[1].value);
         });
     }
 });
@@ -18,6 +19,9 @@ async function cargarCalendario(pista, id){
     crearModal();
     // Obtenemos el email del cliente
     const cliente = document.getElementById('cliente').outerText;
+
+    var precio = pista.getElementsByTagName("span")[1].outerText;
+    var pista = pista.getElementsByTagName("span")[0].outerText;
 
     var calendarEl = document.getElementById('calendario');
     // Indicamos la pista antes de mostrar el calendario
@@ -109,7 +113,8 @@ async function cargarCalendario(pista, id){
                 modalBotonConfirmar.hidden = false;
                 // Mostramos el mensaje indicando que se va a añadir un horario ocupado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
-                    Añadir una reserva el ${fecha} a las ${horaInicio}
+                    Añadir una reserva el ${fecha} a las ${horaInicio}<br>
+                    ${precio} €
                 `);
 
                 confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente);
