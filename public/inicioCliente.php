@@ -128,15 +128,10 @@
                                 <!-- Si no hay reservas futuras -->
                                 <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tienes reservas en fechas futuras</div>
                                 <div class="next-card">
-                                    <div class="next-icon">
-                                        <i class="ti ti-soccer-field" aria-hidden="true"></i>
-                                        
-                                    </div>
                                     <div class="next-info">
-                                        <div class="val-md"></div>
                                         <div class="card-sub">
                                             <i class="ti ti-calendar-event" aria-hidden="true"></i>
-                                            Cuando tengas reservas futuras, podrás ver sus datos aquí
+                                            Cuando tengas reservas futuras podrás ver sus datos aquí
                                         </div>
                                     </div>
                                 </div>
