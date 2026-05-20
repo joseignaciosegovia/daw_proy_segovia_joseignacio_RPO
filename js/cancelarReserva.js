@@ -20,6 +20,8 @@ function cancelarReserva(icono) {
     const pista = icono.parentNode.parentNode.childNodes[3].textContent;
 
     const modalTitulo = document.getElementsByClassName('modal-title')[0];
+    // Borramos el título para no mostrarlo varias veces cada vez que se pulse el botón de cancelar reserva
+    modalTitulo.replaceChildren();
     modalTitulo.insertAdjacentHTML('afterbegin', `
         Eliminar reserva
     `);
