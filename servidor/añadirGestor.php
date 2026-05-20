@@ -248,7 +248,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="submit" name="Crear">Crear gestor</button></div>
+                        <div class="mt-5 d-flex justify-content-end"><button class="btn btn-success profile-button" type="submit" name="Crear">Crear gestor</button></div>
                     </form>
                 </div>
             </div>

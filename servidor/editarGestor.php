@@ -264,7 +264,7 @@
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-end">
-                        <button class="btn btn-success profile-button" type="submit" name="Actualizar"><i class="bi bi-check-lg me-2"></i>Actualizar gestor</button>
+                        <button class="btn btn-success profile-button" type="submit" name="Actualizar">Actualizar gestor</button>
                     </div>
                     <!-- Campo oculto para guardar el email del gestor para poder actualizarlo -->
                     <input id="email" name="email" type="hidden" value="<?php echo "$gestor[email]"?>">
