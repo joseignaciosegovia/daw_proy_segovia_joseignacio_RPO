@@ -88,7 +88,7 @@
                             <div>
                                 <div>
                                     <label for="quejaIncidencia" class="labels">Sugerencia o incidencia</label>
-                                    <textarea class="form-control" id="quejaIncidencia" placeholder="Escribe aquí tu sugerencia o incidencia" name="Queja" rows="5" cols="100" required></textarea>
+                                    <textarea style="background: #E0E0E0" class="form-control" id="quejaIncidencia" placeholder="Escribe aquí tu sugerencia o incidencia" name="Queja" rows="5" cols="100" required></textarea>
                                     <div class="invalid-feedback">
                                         Introduzca un mensaje
                                     </div>
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 d-flex justify-content-end">
-                                <button class="btn btn-success px-4" type="submit" name="Enviar"><i class="ti ti-send me-2"></i>Realizar queja/sugerencia</button>
+                                <button class="btn btn-success px-4" type="submit" name="Enviar">Realizar queja/sugerencia</button>
                             </div>
                         </div>
                     </form>
