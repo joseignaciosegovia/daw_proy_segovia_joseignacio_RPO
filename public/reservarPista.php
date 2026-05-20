@@ -110,7 +110,7 @@
                             <div class="accordion-body">
                                 <input name="id" type="hidden" value=<?php echo "$pista[id]"; ?>>
                                 <div class="d-flex justify-content-between align-items-center ms-3 my-1">
-                                    <span><?php echo $pista['nombre']; ?></span>
+                                    <span class="spanPista"><?php echo $pista['nombre']; ?></span>
                                     <span class="fw-semibold">Precio por reserva: <?php echo $pista['precioReserva']; ?></span>
                                 </div>
                             </div>
@@ -125,21 +125,21 @@
                         </div>
                     </div>
                     </div>
-                </div>
-            </div>  
-            <!-- Div en el que irá el título de la pista -->
-            <div class="d-flex flex-column align-items-center" id="tituloPista">
+                  
+                <!-- Div en el que irá el título de la pista -->
+                <div class="d-flex flex-column align-items-center" id="tituloPista">
 
-            </div>  
-        </main>
-        <!-- Cerramos la sección principal, creada en navCliente.php -->
-    </div>
-    <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
-    <div class="col" id="calendario">
-        
-    </div>
-    <!-- Incluimos el email del cliente para que JavaScript pueda identificarle -->
-    <p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
+                </div>  
+            </div>
+            <!-- Div en el que se mostrará el calendario de la pista seleccionada -->
+            <div class="col" id="calendario">
+                
+            </div>
+        </div>
+    </main>
+</div>
+<!-- Incluimos el email del cliente para que JavaScript pueda identificarle -->
+<p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
 
 <?php 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";

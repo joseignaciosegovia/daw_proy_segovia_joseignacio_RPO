@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostramos el calendario para el cliente cada vez que pinche en una pista para reservarla
     for (const pista of document.querySelectorAll('.accordion-body')) {
         $(pista).on('click', async function(){
-
-            cargarCalendario(pista.outerText, pista.childNodes[1].value);
+            var acordeon = $(pista)[0];
+            cargarCalendario(acordeon.getElementsByTagName("span")[0].outerText, pista.childNodes[1].value);
         });
     }
 });
