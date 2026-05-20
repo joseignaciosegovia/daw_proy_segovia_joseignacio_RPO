@@ -550,7 +550,7 @@ function validacionPerfilCliente(form) {
   });
 
   ncDNI.addEventListener('change', function (event) {
-    if (!ncTelefono.checkValidity()) {
+    if (!ncDNI.checkValidity()) {
       showFeedBack(ncDNI, false, "Introduzca un DNI válido");
     } else {
       showFeedBack(ncDNI, true);

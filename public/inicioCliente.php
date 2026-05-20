@@ -136,7 +136,7 @@
                                         <div class="val-md"></div>
                                         <div class="card-sub">
                                             <i class="ti ti-calendar-event" aria-hidden="true"></i>
-                                            Cuando tengas reservas futuras, podrás ver las fechas aquí
+                                            Cuando tengas reservas futuras, podrás ver sus datos aquí
                                         </div>
                                     </div>
                                 </div>

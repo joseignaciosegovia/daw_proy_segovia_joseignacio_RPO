@@ -210,7 +210,7 @@
                         <div class="col-6 mb-3">
                             <label for="contraseña" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="contraseña" placeholder="Mínimo 8 caracteres" pattern=".{8,}" required>
-                            <div id="passwordHelpBlock" class="form-text">
+                            <div class="form-text">
                                 La contraseña debe tener al menos 8 caracteres 
                             </div>
                             <div class="invalid-feedback">
