@@ -108,7 +108,14 @@
                 $rutaBD = "/imagenes/" . $nombreFinal;
 
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-
+                    // Borramos la foto antigua antes de actualizar la base de datos
+                    $fotoAntigua = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0]['foto'];
+                    if ($fotoAntigua) {
+                        $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
+                        if (file_exists($rutaFotoAntigua)) {
+                            unlink($rutaFotoAntigua);
+                        }
+                    }
                     // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
                     $valores .= ", foto = '$rutaBD'";
 
