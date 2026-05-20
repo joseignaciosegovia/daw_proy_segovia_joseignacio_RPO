@@ -173,15 +173,15 @@
                 <div class="section-header mb-4">
                     <i class="ti ti-user"></i>
                     <div>
-                        <h2>Gestor: <?php echo "$gestor[nombre]" ?></h2>
-                        <small class="text-muted">Modifica los datos del gestor</small>
+                        <h2>Gestor/a <?php echo "$gestor[nombre]" ?></h2>
+                        <small class="text-muted">Modifica los datos del gestor <?php echo "$gestor[nombre]" ?></small>
                     </div>
                 </div>
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestor=" . $gestor['email']; ?>" name="editarGestor">
                     <div class="row mt-2">
                         <div class="col-md-6 col-m3">
                             <label for="nombre" class="labels">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>">
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>" placeholder="Nombre completo">
                             <div class="invalid-feedback">
                                 Introduzca un nombre válido
                             </div>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="dni" class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>">
+                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>" placeholder="12345678A">
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
                             </div>
@@ -204,7 +204,7 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="contraseña" class="labels">Contraseña</label>
-                            <input type="password" class="form-control" id="contraseña" name="Contraseña" pattern=".{8,}" value="">
+                            <input type="password" class="form-control" id="contraseña" name="Contraseña" pattern=".{8,}" value="" placeholder="Mínimo 8 caracteres">
                             <div class="form-text">
                                 La contraseña debe tener al menos 8 caracteres 
                             </div>
@@ -217,7 +217,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="">
+                            <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" placeholder="Repite la contraseña">
                             <div class="invalid-feedback">
                                 Confirme la contraseña
                             </div>
@@ -230,7 +230,7 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
-                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>">
+                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>" placeholder="600 000 000">
                             <div class="invalid-feedback">
                                 Introduzca un teléfono válido
                             </div>
