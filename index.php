@@ -119,14 +119,16 @@
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
+        $paginaVerificacion = "$_SERVER[HTTP_ORIGIN]/verificar.php?email=$email&codigo=$codigo";
+
         $body = json_encode([
-            'from'    => '<onboarding@resend.dev>',
+            'from'    => 'onboarding@resend.dev',
             'to'      => [$email],
             'subject' => 'Verifica tu cuenta',
             'html'    => "
                 <h2>Hola, $email</h2>
                 <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
-                <a href=\"$_SERVER[DOCUMENT_ROOT]/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
+                <a href=\"$paginaVerificacion\">Código de verificación</a>
                 <p style='color:#64748b; font-size:13px;'>
                     Si no creaste esta cuenta, ignora este mensaje.
                 </p>
