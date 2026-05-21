@@ -41,7 +41,7 @@
 
     // Si hemos iniciado sesión como cliente, mostramos la página de reservar pistas
     if (!empty($_SESSION["cliente"])) {
-        header("Location: ./public/reservarPista.php");
+        header("Location: ./public/inicioCliente.php");
         exit();
     }
 
