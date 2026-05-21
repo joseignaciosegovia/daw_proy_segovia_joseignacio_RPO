@@ -1,0 +1,15 @@
+{
+    "name": "seren/proyecto",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Clases\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "usuario"
+        }
+    ]
+}

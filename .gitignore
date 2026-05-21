@@ -1,5 +1,4 @@
 vendor
-composer.json
 composer.lock
 package.json
 node_modules
