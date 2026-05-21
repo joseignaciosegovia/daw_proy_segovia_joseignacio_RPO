@@ -126,7 +126,7 @@
             'html'    => "
                 <h2>Hola, $email</h2>
                 <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
-                <a href=\"http://localhost:8080/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
+                <a href=\"$_SERVER[DOCUMENT_ROOT]/verificar.php?email=$email&codigo=$codigo\">Código de verificación</a>
                 <p style='color:#64748b; font-size:13px;'>
                     Si no creaste esta cuenta, ignora este mensaje.
                 </p>
