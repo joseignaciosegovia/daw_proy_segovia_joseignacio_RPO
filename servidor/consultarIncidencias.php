@@ -58,31 +58,40 @@
         );
         $iniciales = iniciales($gestor['nombre']);
 
+?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
+        <main class="main">
+            <!-- BIENVENIDA -->
+            <div class="welcome-bar">
+                <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+                <div class="welcome-text">
+                    <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
+                    <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+                </div>
+                <span class="badge badge-green">
+                    <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+                </span>
+            </div>
+            <div class="card shadow-sm border-0">
+                <div class="p-3 py-4">
+<?php
+        // Si no hay incidencias
         if($incidencias == null) {
 ?>
-            <div class="container-fluid">
-                <div class="row">
-                    <h1 class="d-flex justify-content-center">No hay incidencias enviadas por usuarios</h1>
+            <div class="section-header mb-4">
+                <i class="ti ti-circle-number-0"></i>
+                <div>
+                    <h2>No hay incidencias enviadas por usuarios</h2>
+                    <small class="text-muted">Cuando los usuarios envíen incidencias/sugerencias, podrás consultarlas aquí</small>
+                </div>
+            </div>
 <?php 
                     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; 
         }
+        // Si hay incidencias
         else {
 
 ?>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-    <main class="main">
-        <!-- BIENVENIDA -->
-        <div class="welcome-bar">
-            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
-            <div class="welcome-text">
-                <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
-                <p>Hoy es <?php echo $formatter->format($fecha);?></p>
-            </div>
-            <span class="badge badge-green">
-                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
-            </span>
-        </div>
-
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
                 <div class="section-header mb-4">
@@ -119,12 +128,12 @@
                     ?>
                     </tbody>
                 </table>
+                <?php } ?>
             </div>
         </div>
     </main>
     </div>
  <?php   
-        } 
     }
 ?>
 
