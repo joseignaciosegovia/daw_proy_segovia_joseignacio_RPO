@@ -57,6 +57,8 @@ function cancelarReserva(icono) {
     `);
 
     const modal = new bootstrap.Modal('#modal');
+    // Ponemos el botón de confirmar del modal en rojo
+    document.getElementsByClassName("btn-primary")[1].setAttribute("class", "btn btn-danger");
     modal.show();
 
     cerrarModal(modal);
