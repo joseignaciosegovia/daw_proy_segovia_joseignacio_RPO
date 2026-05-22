@@ -12,6 +12,13 @@
     font-size: 1.75rem;
     color: var(--bs-primary);
 }
+/* En algunas páginas hay que usar h1 en vez de h2 porque no hay título de bienvenida */
+.section-header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
 
 .section-header h2 {
     margin: 0;
