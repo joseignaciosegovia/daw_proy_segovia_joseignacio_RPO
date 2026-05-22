@@ -186,7 +186,7 @@
             <div class="card shadow-sm border-0 col-12 col-md">
                 <div class="card-header text-center">
                     <h2 class="d-flex justify-content-center">Registrarse</h2>
-                    <a class="btn btn-primary my-2 text-center w-auto" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
+                    <a class="btn btn-secondary my-2 text-center w-auto" href="public/accesoCliente.php">Si ya tienes cuenta, inicia sesión aquí</a>
                 </div>
                 <div class="card-body" id="crearCuenta">
                     <form class="row needs-validation px-4" name="crearUsuario" novalidate>

@@ -69,7 +69,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-header text-center">
                         <h1>Iniciar sesión como gestor</h1>
-                        <a class="btn btn-primary  w-auto" href="../index.php">Página de inicio</a>
+                        <a class="btn btn-secondary  w-auto" href="../index.php">Página de inicio</a>
                     </div>
                     <div class="card-body">
                         <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
