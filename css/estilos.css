@@ -247,3 +247,30 @@ footer {
     color: #5ab4f0; 
     font-size: 15px; 
 }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    /* Cabecera */
+    .hdr-title {
+        font-size: 14px;
+    }
+    .hdr-sub {
+        font-size: 11px;
+    }
+    #cabecera img {
+        height: 35px;
+    }
+
+    /* Ocultar sidebar y mostrar el contenido a pantalla completa */
+    .layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        display: none;
+    }
+
+    /* Ajuste del main */
+    .main {
+        padding: 0.75rem;
+    }
+}
