@@ -143,9 +143,12 @@
                                     echo "<td>$pista</td>";
                                     echo "<td>$precio</td>";
                                     
-                                    $horaReserva = strtotime($reserva['fecha']) + (explode(":", $reserva['horaInicio'])[0] * 60* 60);
+                                    $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
+                                    $zonaHoraria = new DateTimeZone('Europe/Madrid');
+                                    $fechaMadrid = new DateTime('now', $zonaHoraria);
+                                    $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
                                     // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
-                                    if($horaReserva > $horaActual) {
+                                    if($fechaReserva > $fechaActual) {
                                         // Guardamos el id de la reserva para poder cancelarla
                                         echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
                                     }
