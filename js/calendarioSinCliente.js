@@ -1,6 +1,5 @@
 // Hay que importar "esLocale" para arreglar un bug con el idioma
 import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
-import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -15,8 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función que muestra el calendario
 async function cargarCalendario(pista, id){
-    crearModal();
-
     var calendarEl = document.getElementById('calendario');
     // Indicamos el título de la pista antes de mostrar el calendario
     var tituloPista = document.getElementById('tituloPista');

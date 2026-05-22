@@ -58,7 +58,7 @@ function cancelarReserva(icono) {
 
     const modal = new bootstrap.Modal('#modal');
     // Ponemos el botón de confirmar del modal en rojo
-    document.getElementsByClassName("btn-primary")[1].setAttribute("class", "btn btn-danger");
+    document.getElementsByClassName("btn-success")[0].setAttribute("class", "btn btn-danger");
     modal.show();
 
     cerrarModal(modal);
@@ -67,7 +67,7 @@ function cancelarReserva(icono) {
 
 // Función que define el comportamiento del botón de confirmar la cancelación
 function confirmarCancelacion(id) {
-    const botonConfirmar = $('.modal-footer .btn-primary');
+    const botonConfirmar = $('.modal-footer .btn-danger');
     // Pinchamos en el botón de Confirmar
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  

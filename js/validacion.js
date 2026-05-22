@@ -1568,7 +1568,7 @@ function mostrarModal(titulo, direccion, texto) {
   // Creamos un objeto "Modal" para mostrar el modal recién modificado
   const modal = new bootstrap.Modal('#modal');
 
-  $('.modal-footer .btn-primary')[0].remove();
+  $('.modal-footer .btn-success')[0].remove();
   const botonCerrar = $('.modal-footer .btn-secondary')[0];
   botonCerrar.innerHTML = "Cerrar";
 

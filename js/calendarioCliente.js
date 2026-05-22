@@ -92,7 +92,7 @@ async function cargarCalendario(pista, id){
             const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
             const horaReserva = fechaCompleta.getTime() / 1000 / 60 / 60;
             
-            const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-primary')[0];
+            const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-success')[0];
             const modalCuerpo = document.getElementsByClassName('modal-body')[0];
             // Borramos el cuerpo del modal para que no muestre el mensaje anterior
             modalCuerpo.replaceChildren();
@@ -166,7 +166,7 @@ async function cargarCalendario(pista, id){
 }
 
 function confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente) {
-    const botonConfirmar = $('.modal-footer .btn-primary');
+    const botonConfirmar = $('.modal-footer .btn-success');
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,

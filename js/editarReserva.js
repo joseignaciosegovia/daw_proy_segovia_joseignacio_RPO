@@ -79,7 +79,7 @@ async function actualizarCalendario(datosAEnviar, boton) {
 
 // Se modifica una reserva
 function actualizarReserva() {
-    const botonEditar = document.querySelectorAll('.modal-footer .btn-primary')[0];
+    const botonEditar = document.querySelectorAll('.modal-footer .btn-success')[0];
     $(botonEditar).on('click', function(event) {
         // Datos necesarios para modificar una reserva
         let datosAEnviar = JSON.stringify({  
