@@ -31,6 +31,7 @@ function cargarCalendario(){
     crearModal();
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        forceEventDuration: true,
         initialView: 'timeGridWeek',
 
         firstDay: 1,
@@ -111,11 +112,58 @@ function cargarCalendario(){
                 `);
                 modal.show();
                 
-                confirmarFecha(pista, id, calendar, modal);
+                confirmarFecha(id);
             }
             
             cerrarModal(modal);
             
+        },
+        // Soltamos una reserva después de arrastrarla
+        eventDrop: function(info) {
+            const evento = info.event;
+            const eventoAnterior = info.oldEvent;
+            const delta = info.delta; // Diferencia de tiempo respecto a la posición original
+
+            const idReserva = info.event.id;
+            const nuevaFecha = evento.startStr.substring(0, evento.startStr.indexOf('T'));
+            const nuevaHoraInicio = evento.startStr.substring(evento.startStr.indexOf('T') + 1, evento.startStr.indexOf('+'));
+            const nuevaHoraFin = evento.endStr.substring(evento.endStr.indexOf('T') + 1, evento.endStr.indexOf('+'));
+
+            const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
+            const horaNueva = Date.parse(new Date(evento.startStr)) / 1000 / 60 / 60;
+
+            // Si hemos soltado la reserva en una posición diferente
+            if(delta != 0) {
+                // Si se intenta mover una reserva a una fecha pasada
+                if(horaActual > horaNueva) {
+                    const modal = new bootstrap.Modal('#modal');
+                    const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+                    document.getElementsByClassName('modal-title')[0].innerHTML = "No se puede mover la reserva";
+                    // Mostramos el mensaje indicando que no se puede mover una reserva a un horario pasado
+                    modalCuerpo.insertAdjacentHTML('afterbegin', `
+                        No se puede mover una reserva a una fecha pasada
+                    `);
+                    // Ocultamos el botón de confirmar cambio (porque no se va a poder hacer)
+                    const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-success')[0];
+                    modalBotonConfirmar.hidden = true;
+                    modal.show();
+                    // Revertimos la situación para dejar la reserva donde estaba
+                    info.revert();
+                }
+                // Si se intenta mover una reserva a una fecha pasada
+                else {
+                    const modal = new bootstrap.Modal('#modal');
+                    const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+                    document.getElementsByClassName('modal-title')[0].innerHTML = "Mover la reserva a una nueva fecha";
+                    // Mostramos el mensaje indicando que se va a mover una reserva, indicando el nuevo horario
+                    modalCuerpo.insertAdjacentHTML('afterbegin', `
+                        Va a mover una reserva a ${nuevaFecha} ${nuevaHoraInicio}
+                    `);
+                    modal.show();
+                    // Actualizamos la base de datos
+                    confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin);
+                }
+            }
         }
     });
 
@@ -123,11 +171,14 @@ function cargarCalendario(){
 
     var events = new Array();
     var editable;
+    const horaActual = Date.parse(new Date()) / 1000 / 60 / 60;
 
-    // Rellenamos el array de eventos con las fechas ocupadas para la pista
-    for(let fecha of calendario) {
-        // El administrador solo podrá modificar un horario ocupado que no haya sido fruto de una reserva de un cliente
-        if(fecha.informacion == "Reserva realizada por un cliente") {
+    // Rellenamos el array de eventos con las reservas ocupadas para la pista
+    for(let reserva of calendario) {
+        // Guardamos la hora de cada evento para comprobar si es de una fecha pasada o no
+        const horaEvento = Date.parse(new Date(reserva.fecha + "T" + reserva.horaInicio)) / 1000 / 60 / 60;
+        // El administrador solo podrá modificar un horario ocupado que no sea de una fecha pasada
+        if(horaActual > horaEvento) {
             editable = false;
         }
         else {
@@ -135,9 +186,10 @@ function cargarCalendario(){
         }
 
         events.push({
-            title: fecha.informacion,
-            start: fecha.fecha + "T" + fecha.horaInicio,
-            end: fecha.fecha + "T" + fecha.horaFin,
+            id: reserva.id,
+            title: reserva.informacion,
+            start: reserva.fecha + "T" + reserva.horaInicio,
+            end: reserva.fecha + "T" + reserva.horaFin,
             editable: editable
         })
     }
@@ -147,7 +199,7 @@ function cargarCalendario(){
 }
 
 // Función que define lo que pasará cuando se confirme una reserva
-function confirmarFecha(pista, id) {
+function confirmarFecha(id) {
     const botonConfirmar = $('.modal-footer .btn-success');
     // Comportamiento del botón de Confirmar
     $(botonConfirmar[0]).on('click', async function(event) {
@@ -161,7 +213,6 @@ function confirmarFecha(pista, id) {
             fecha: fecha,
             horaInicio: horaInicio, 
             horaFin: horaFin,
-            pista: pista,
             id: id,
             informacion: informacion
         });
@@ -179,6 +230,39 @@ function confirmarFecha(pista, id) {
         }).then ((response) => response.text()
         ).then(function (data) {
             // Actualizamos la página para mostrar el calendario con el nuevo horario añadido
+            location.reload();
+        }).catch(function (err) {
+            console.log("Ha habido un error");
+        });
+
+        event.stopPropagation();
+    });
+}
+// Función que define lo que pasará cuando se mueva una reserva a otra fecha
+function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin) {
+    const botonConfirmar = $('.modal-footer .btn-success');
+    // Comportamiento del botón de Confirmar
+    $(botonConfirmar[0]).on('click', async function(event) {
+        let datosAEnviar = JSON.stringify({  
+            fecha: nuevaFecha,
+            horaInicio: nuevaHoraInicio, 
+            horaFin: nuevaHoraFin,
+            id: idReserva
+        });
+
+        const formData = new FormData();
+
+        // Al llamar "Confirmar" al parámetro del "formData" que enviamos al servidor,
+        // éste accederá a su contenido (es decir, "datosAEnviar") con "$_POST['Confirmar']"
+
+        formData.append("Confirmar", datosAEnviar);
+
+        await fetch('actualizarCalendario.php', {
+            method: 'post',
+            body: formData
+        }).then ((response) => response.text()
+        ).then(function (data) {
+            // Actualizamos la página para mostrar el calendario con el nuevo horario modificado
             location.reload();
         }).catch(function (err) {
             console.log("Ha habido un error");

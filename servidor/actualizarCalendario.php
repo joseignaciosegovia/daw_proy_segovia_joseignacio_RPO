@@ -40,11 +40,16 @@
         }
     }
 
-    // Si el administrador edita una reserva
+    // Si el administrador edita una reserva, ya sea desde consultarReservas o calendarioPista
     if(isset($_POST['Confirmar'])) {
         $editar = json_decode(($_POST['Confirmar']));
         $crud = new Crud(new DB("proyecto"));
-        $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where id = $editar->id");
+        // Si venimos desde consultarReservas, la nueva reserva incluye la información
+        if(property_exists($editar, "informacion"))
+            $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where id = $editar->id");
+        // Si venimos de calendarioPista, solo modificamos su fecha y su horario, pero no la información
+        else
+            $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\"", "where id = $editar->id");
     }
 
     // Si el administrador borra una reserva
