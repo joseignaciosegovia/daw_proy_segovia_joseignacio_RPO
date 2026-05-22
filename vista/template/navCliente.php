@@ -1,4 +1,4 @@
-<!-- La barra de navegación será una columna dentro del contenido principal de la página -->
+<div class="overlay" id="overlay" onclick="desplegarMenu()"></div>
 <div class="layout" id="seccionPrincipal">
     <nav class="sidebar" aria-label="Menú principal">
         <div class="user-chip">

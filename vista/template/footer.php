@@ -31,5 +31,11 @@
         <?php if (function_exists('añadirScriptsPie')){
             añadirScriptsPie();
         }?>
+        <script>
+            function desplegarMenu() {
+                document.querySelector('.sidebar').classList.toggle('abierta');
+                document.getElementById('overlay').classList.toggle('visible');
+            }
+        </script>
     </body>
 </html>

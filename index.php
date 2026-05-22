@@ -190,81 +190,89 @@
                 </div>
                 <div class="card-body" id="crearCuenta">
                     <form class="row needs-validation px-4" name="crearUsuario" novalidate>
-                        <div class="col-6 mb-3">
-                            <label for="nombre" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" required>
-                            <div class="invalid-feedback">
-                                Introduzca un nombre
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <label for="nombre" class="form-label">Nombre completo</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre completo" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un nombre
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" autocomplete="off" required>
-                            <div class="invalid-feedback">
-                                Introduzca un correo electrónico válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="contraseña" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="contraseña" placeholder="Mínimo 8 caracteres" pattern=".{8,}" required>
-                            <div class="form-text">
-                                La contraseña debe tener al menos 8 caracteres 
-                            </div>
-                            <div class="invalid-feedback">
-                                Introduzca una contraseña válida
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-6">
+                                <label for="email" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" autocomplete="off" required>
+                                <div class="invalid-feedback">
+                                    Introduzca un correo electrónico válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6 mb-3">
-                            <label for="confirmarContraseña" class="form-label">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="confirmarContraseña" placeholder="Repite la contraseña" required>
-                            <div class="invalid-feedback">
-                                Confirme la contraseña
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <label for="contraseña" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="contraseña" placeholder="Mínimo 8 caracteres" pattern=".{8,}" required>
+                                <div class="form-text">
+                                    La contraseña debe tener al menos 8 caracteres 
+                                </div>
+                                <div class="invalid-feedback">
+                                    Introduzca una contraseña válida
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                La contraseña coincide
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="dni" class="form-label">DNI</label>
-                            <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]">
-                            <div class="invalid-feedback">
-                                Introduzca un DNI válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label for="telefono" class="form-label">Teléfono (opcional)</label>
-                            <input type="tel" class="form-control" id="telefono" placeholder="600 000 000" pattern="[0-9]{9}">
-                            <div class="invalid-feedback">
-                                Introduzca un número de teléfono válido
-                            </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-6">
+                                <label for="confirmarContraseña" class="form-label">Confirmar contraseña</label>
+                                <input type="password" class="form-control" id="confirmarContraseña" placeholder="Repite la contraseña" required>
+                                <div class="invalid-feedback">
+                                    Confirme la contraseña
+                                </div>
+                                <div class="valid-feedback">
+                                    La contraseña coincide
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="foto" class="form-label">Foto de perfil (opcional)</label>
-                            <input type="file" class="form-control" id="foto">
-                            <div class="invalid-feedback">
-                                Introduzca una imagen válida
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <label for="dni" class="form-label">DNI</label>
+                                <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]">
+                                <div class="invalid-feedback">
+                                    Introduzca un DNI válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
-                            <div class="valid-feedback">
-                                Dato correcto
+                            <div class="col-6">
+                                <label for="telefono" class="form-label">Teléfono (opcional)</label>
+                                <input type="tel" class="form-control" id="telefono" placeholder="600 000 000" pattern="[0-9]{9}">
+                                <div class="invalid-feedback">
+                                    Introduzca un número de teléfono válido
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-success w-auto" id="btCrearUsuario" name="crear">Crear Usuario</button>
+                        <div class="row mt-3">
+                            <div class="mb-3">
+                                <label for="foto" class="form-label">Foto de perfil (opcional)</label>
+                                <input type="file" class="form-control" id="foto">
+                                <div class="invalid-feedback">
+                                    Introduzca una imagen válida
+                                </div>
+                                <div class="valid-feedback">
+                                    Dato correcto
+                                </div>
+                            </div>
+                            <div class="mb-3 text-center">
+                                <button type="submit" class="btn btn-success w-auto" id="btCrearUsuario" name="crear">Crear Usuario</button>
+                            </div>
                         </div>
                     </form>
                 </div>

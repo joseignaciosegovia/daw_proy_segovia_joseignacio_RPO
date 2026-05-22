@@ -16,19 +16,29 @@
     font-size: 15px; 
     color: rgba(255,255,255,0.5); 
 }
+/* Botón hamburguesa en la cabecera (solo se muestra en pantallas de móvil */
+#btnMenu {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    color: white !important;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+}
 /* Ponemos el texto del título en blanco */
 #cabecera a {
     color: white;
 }
 /* Botón de la cabecera "Intranet" */
-#cabecera button {
+#cabecera .btn-intranet {
     color: #1B3A6B;
     background-color: white;
     border: 1px solid grey;
     font-weight: bold;
 }
 /* Ponemos el ratón encima del botón de la cabecera */
-#cabecera button:hover { 
+#cabecera .btn-intranet:hover { 
     background: #e8eef7; 
 }
 
@@ -248,6 +258,7 @@ footer {
     font-size: 15px; 
 }
 /* RESPONSIVE */
+/* Móvil */
 @media (max-width: 768px) {
 
     /* Cabecera */
@@ -260,13 +271,45 @@ footer {
     #cabecera img {
         height: 35px;
     }
+    
+    #cabecera .btn-intranet {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
 
-    /* Ocultar sidebar y mostrar el contenido a pantalla completa */
     .layout {
         grid-template-columns: 1fr;
     }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+    /* Mostramos el botón para abrir la barra de navegación */
+    .overlay.visible {
+        display: block;
+    }
+    /* Ocultamos la la barra de navegación */
     .sidebar {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 75%;
+        height: 100%;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+    .sidebar.abierta {
+        display: flex;
+        flex-direction: column;
+    }
+    /* Mostramos el botón hamburguesa */
+    #btnMenu { 
+        display: block !important; 
     }
 
     /* Ajuste del main */

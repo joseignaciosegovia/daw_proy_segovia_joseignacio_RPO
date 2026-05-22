@@ -32,13 +32,19 @@
                     <div class="col-auto">
                         <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></a>
                     </div>
-                    <div class="col-8 col-sm-9 col-lg-9 fs-1">
+                    <div class="col col-sm-9 col-lg-9 fs-1">
                         <!-- El título contiene un enlace a la página principal -->
                         <div class="hdr-title"><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> ><?= isset($titulo) ? $titulo : "Reserva de pistas · Moral de Calatrava"?></a></div>
                         <div class="hdr-sub">Polideportivo y Ciudad Deportiva</div>
                     </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>
+                    <div class="col-auto">
+                        <button class="btn btn-primary btn-intranet form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>
+                    </div>
+                    <!-- Botón hamburguesa (solo en pantallas de móviles) -->
+                    <div class="col-auto">
+                        <button id="btnMenu" onclick="desplegarMenu()">
+                            <i class="ti ti-menu-2"></i>
+                        </button>
                     </div>
                 </div>
             </div>
