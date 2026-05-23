@@ -116,7 +116,6 @@
 
                 ?>
                 <form method="post" action="../servidor/actualizarCalendario.php">
-                    <div class="table-responsive">
                         <!-- text-nowrap es para que el texto de cada fila no ocupe más de una línea -->
                         <table class="table table-striped table-hover text-nowrap">
                             <thead>
@@ -162,7 +161,6 @@
                                 ?>
                             </tbody>
                         </table>
-                    </div>
                 </form>
         <?php
             }
