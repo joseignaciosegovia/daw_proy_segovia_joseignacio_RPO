@@ -75,30 +75,28 @@
             </span>
         </div>
         <div class="card shadow-sm border-0">
+            <div class="p-3 py-4">
+                <div class="section-header mb-4">
         <?php
             $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio, pista ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
 ?>
-                <div class="p-3 py-4">
-                    <div class="section-header mb-4">
-                        <i class="ti ti-circle-number-0" aria-hidden="true"></i>
-                        <div>
-                            <h2>No has realizado ninguna reserva</h2>
-                            <small class="text-muted">Cuando realices reservas podrás consultarlas aquí</small>
-                        </div>
+                    <i class="ti ti-circle-number-0" aria-hidden="true"></i>
+                    <div>
+                        <h2>No has realizado ninguna reserva</h2>
+                        <small class="text-muted">Cuando realices reservas podrás consultarlas aquí</small>
                     </div>
+                </div>
 <?php
             }
             else {
 ?>
-                <div class="p-3 py-4">
-                    <div class="section-header mb-4">
-                        <i class="ti ti-calendar" aria-hidden="true"></i>
-                        <div>
-                            <h2>Historial de reservas</h2>
-                            <small class="text-muted">Reservas realizadas anteriormente</small>
-                        </div>
+                    <i class="ti ti-calendar" aria-hidden="true"></i>
+                    <div>
+                        <h2>Historial de reservas</h2>
+                        <small class="text-muted">Reservas realizadas anteriormente</small>
                     </div>
+                </div>
 <?php
                 
                 $filasTotales = $crud->listar("count(*)", "reservas", "where cliente = \"$_SESSION[cliente]\"")[0]['count(*)'];
@@ -117,56 +115,56 @@
 
                 ?>
                 <form method="post" action="../servidor/actualizarCalendario.php">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora de inicio</th>
-                            <th scope="col">Hora de finalización</th>
-                            <th scope="col">Pista</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cancelar reserva</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $horaActual = strtotime("now"); 
-                            // Recorremos las reservas y las mostramos
-                            foreach($reservas as $reserva){
-                                // Guardamos el nombre de la pista para mostrarlo
-                                $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
-                                $precio = $crud->listar("precioReserva", "pistas", "where id = $reserva[pista]")[0]['precioReserva'];
-                                echo "<tr>";
-                                    echo "<td>$reserva[fecha]</td>";
-                                    echo "<td>$reserva[horaInicio]</td>";
-                                    echo "<td>$reserva[horaFin]</td>";
-                                    echo "<td>$pista</td>";
-                                    echo "<td>$precio</td>";
-                                    
-                                    $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
-                                    $zonaHoraria = new DateTimeZone('Europe/Madrid');
-                                    $fechaMadrid = new DateTime('now', $zonaHoraria);
-                                    $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
-                                    // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
-                                    if($fechaReserva > $fechaActual) {
-                                        // Guardamos el id de la reserva para poder cancelarla
-                                        echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
-                                    }
-                                    else {
-                                        echo "<td>Fecha pasada</td>";
-                                    }
-                                    
-                                echo "</tr>";
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </form>
-            </div>
-            </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora de inicio</th>
+                                <th scope="col">Hora de finalización</th>
+                                <th scope="col">Pista</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cancelar reserva</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $horaActual = strtotime("now"); 
+                                // Recorremos las reservas y las mostramos
+                                foreach($reservas as $reserva){
+                                    // Guardamos el nombre de la pista para mostrarlo
+                                    $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
+                                    $precio = $crud->listar("precioReserva", "pistas", "where id = $reserva[pista]")[0]['precioReserva'];
+                                    echo "<tr>";
+                                        echo "<td>$reserva[fecha]</td>";
+                                        echo "<td>$reserva[horaInicio]</td>";
+                                        echo "<td>$reserva[horaFin]</td>";
+                                        echo "<td>$pista</td>";
+                                        echo "<td>$precio</td>";
+                                        
+                                        $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
+                                        $zonaHoraria = new DateTimeZone('Europe/Madrid');
+                                        $fechaMadrid = new DateTime('now', $zonaHoraria);
+                                        $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
+                                        // Si todavía no ha pasado la fecha de reserva, se permite cancelarla
+                                        if($fechaReserva > $fechaActual) {
+                                            // Guardamos el id de la reserva para poder cancelarla
+                                            echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
+                                        }
+                                        else {
+                                            echo "<td>Fecha pasada</td>";
+                                        }
+                                        
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </form>
         <?php
             }
         ?>
+            </div>
+        </div>
     </main>
 </div>
 
