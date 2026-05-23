@@ -333,10 +333,6 @@ footer {
         white-space: nowrap;
     }
 
-    .card, .card > div {
-        overflow: visible !important;
-    }
-
     .table-responsive table {
         min-width: 600px;
     }
