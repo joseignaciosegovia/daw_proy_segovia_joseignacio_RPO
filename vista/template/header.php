@@ -40,9 +40,8 @@
                     <div class="col-auto">
                         <button class="btn btn-primary btn-intranet form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>
                     </div>
-                    <!-- Botón hamburguesa (solo en pantallas de móviles) -->
-                    <?php if($_SERVER['PHP_SELF'] != "/index.php") { ?>
                     <!-- Si no estamos en la página de inicio, mostramos el botón hamburguesa (solo en pantallas móviles) -->
+                    <?php if($_SERVER['PHP_SELF'] != "/index.php") { ?>
                     <div class="col-auto">
                         <button id="btnMenu" onclick="desplegarMenu()">
                             <i class="ti ti-menu-2"></i>

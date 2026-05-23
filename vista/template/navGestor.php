@@ -1,4 +1,4 @@
-<!-- La barra de navegación será una columna dentro del contenido principal de la página -->
+<div class="overlay" id="overlay" onclick="desplegarMenu()"></div>
 <div class="layout" id="seccionPrincipal">
     <nav class="sidebar" aria-label="Menú principal">
         <div class="user-chip">
@@ -11,6 +11,7 @@
         <div class="nav-section">General</div>
         <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/servidor/intranet.php") echo "active"; ?>" href="/servidor/intranet.php"><i class="ti ti-home" aria-hidden="true"></i> Inicio</a>
         <?php 
+            // Si el gestor es también administrador, añadimos la sección de administrar gestores
             if($_SESSION['administrador'] != null) {
         ?>
         <div class="nav-section">Administración</div>
