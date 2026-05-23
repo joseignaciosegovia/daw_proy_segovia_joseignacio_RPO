@@ -18,6 +18,7 @@
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
+        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
@@ -115,7 +116,7 @@
 
                 ?>
                 <form method="post" action="../servidor/actualizarCalendario.php">
-                    <div class="table-responsive">
+                    <div style="overflow-x:auto;">
                         <!-- text-nowrap es para que el texto de cada fila no ocupe más de una línea -->
                         <table class="table table-striped table-hover text-nowrap">
                             <thead>
