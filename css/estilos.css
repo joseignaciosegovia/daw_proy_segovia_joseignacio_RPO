@@ -235,6 +235,11 @@ h1 {
     background-color: #E0E0E0;
 }
 
+.table-responsive table {
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+}
+
 /* PIE */
 footer {
     padding: 20px;
@@ -321,5 +326,13 @@ footer {
         display: block;
         overflow-x: scroll;
         white-space: nowrap;
+    }
+
+    .card, .card > div {
+        overflow: visible !important;
+    }
+
+    .table-responsive table {
+        min-width: 600px;
     }
 }
