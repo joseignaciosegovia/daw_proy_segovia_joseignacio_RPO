@@ -18,7 +18,6 @@
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
-        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
@@ -116,6 +115,7 @@
 
                 ?>
                 <form method="post" action="../servidor/actualizarCalendario.php">
+                    <div class="table-responsive">
                         <!-- text-nowrap es para que el texto de cada fila no ocupe más de una línea -->
                         <table class="table table-striped table-hover text-nowrap">
                             <thead>
@@ -141,7 +141,7 @@
                                             echo "<td>$reserva[horaInicio]</td>";
                                             echo "<td>$reserva[horaFin]</td>";
                                             echo "<td>$pista</td>";
-                                            echo "<td>$precio</td>";
+                                            echo "<td>$precio €</td>";
                                             
                                             $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
                                             $zonaHoraria = new DateTimeZone('Europe/Madrid');
@@ -161,6 +161,7 @@
                                 ?>
                             </tbody>
                         </table>
+                    </div>
                 </form>
         <?php
             }
