@@ -213,6 +213,7 @@ function validacionCrearUsuario(form) {
             method: "POST",
             body: formData
           });
+          mostrarModal("El usuario ha sido creado correctamente", "index.php");
           if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
           }
