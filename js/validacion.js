@@ -208,21 +208,16 @@ function validacionCrearUsuario(form) {
         }
   
         // Invocamos el método en el que se añadirá una fila a la tabla con los datos del formulario
-        try {
-          const response = await fetch('index.php', {
-            method: "POST",
-            body: formData
-          });
+        fetch('index.php', {
+          method: 'post',
+          body: formData
+        }).then((response) => response.text())
+        .then(function(data) {
           mostrarModal("El usuario ha sido creado correctamente", "index.php");
-          if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-          }
-
-          const json = await response.json();
-          console.log(json);
-        } catch (error) {
-          console.error(error.message);
-        }
+          
+        }).catch(function (err) {
+          console.log("Ha habido un error");
+        });
         
         // Disparamos el evento "reset" para resetear el formulario
   
