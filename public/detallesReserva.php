@@ -67,37 +67,39 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0 card-detalles">
             <div class="p-3 py-4">
-            <div class="section-header mb-4">
-                <i class="ti ti-plus" aria-hidden="true"></i>
-                <div>
-                    <h2>Detalles de la reserva</h2>
-                    <small class="text-muted">Consulta los datos de la reserva que acaba de realizar</small>
+                <div class="section-header mb-4">
+                    <i class="ti ti-plus" aria-hidden="true"></i>
+                    <div>
+                        <h2>Detalles de la reserva</h2>
+                        <small class="text-muted">Consulta los datos de la reserva que acaba de realizar</small>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion accordion-flush">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Pista</th>
-                            <th>Fecha</th>
-                            <th>Hora de inicio</th>
-                            <th>Hora de fin</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><?php echo $datosReserva->pista ?></td>
-                            <td><?php echo $datosReserva->fecha ?></td>
-                            <td><?php echo $datosReserva->horaInicio ?></td>
-                            <td><?php echo $datosReserva->horaFin ?></td>
-                            <td><?php echo $precio ?> €</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="accordion accordion-flush">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Pista</th>
+                                    <th>Fecha</th>
+                                    <th>Hora de inicio</th>
+                                    <th>Hora de fin</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $datosReserva->pista ?></td>
+                                    <td><?php echo $datosReserva->fecha ?></td>
+                                    <td><?php echo $datosReserva->horaInicio ?></td>
+                                    <td><?php echo $datosReserva->horaFin ?></td>
+                                    <td><?php echo $precio ?> €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -131,26 +131,29 @@
                         <small class="text-muted">Consulta todas las sugerencias/incidencias enviadas anteriormente</small>
                     </div>
                 </div>
-                <table class="table table-hover">
-                    <?php $contador = 1; ?>
-                    <thead>
-                        <tr>
-                            <th>Número</th>
-                            <th>Fecha</th>
-                            <th>Contenido</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($sugerencias as $sugerencia){ ?>
-                        <tr>
-                            <td><?php echo $contador ?></td>
-                            <td><?php echo $sugerencia['fecha'] ?></td>
-                            <td><?php echo $sugerencia['contenido'] ?></td>
-                            <?php $contador++; ?>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <?php $contador = 1; ?>
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Fecha</th>
+                                <th>Contenido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($sugerencias as $sugerencia){ ?>
+                            <tr>
+                                <td><?php echo $contador ?></td>
+                                <td><?php echo $sugerencia['fecha'] ?></td>
+                                <!-- Ajustamos el ancho de la última columna al contenido con style -->
+                                <td style="width: 1%; white-space: nowrap;"><?php echo $sugerencia['contenido'] ?></td>
+                                <?php $contador++; ?>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
                 <?php } ?>
             </div>
         </div>

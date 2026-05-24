@@ -132,21 +132,22 @@
                         echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
                     }
             ?>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Fecha</th>
-                                <th>Hora de inicio</th>
-                                <th>Hora de Fin</th>
-                                <th>Cliente</th>
-                                <th>Información</th>
-                                <th>Editar</th>
-                                <th hidden></th>
-                                <th hidden></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th>Hora de inicio</th>
+                                    <th>Hora de Fin</th>
+                                    <th>Cliente</th>
+                                    <th>Información</th>
+                                    <th>Editar</th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                     <?php
                         $cont = 1;
                         
@@ -159,17 +160,17 @@
                                 $cliente = $reserva['cliente'];
                             }
                     ?>
-                        <tr>
-                            <!-- Guardamos el id de la pista para poder actualizar la reserva desde actualizarCalendario.php -->
-                            <td hidden><?php echo $_GET['pista'] ?></td>
-                            <!-- Guardamos el id de la reserva para poder actualizarla desde actualizarCalendario.php -->
-                            <td hidden><?php echo $reserva['id'] ?></td>
-                            <td><?php echo $cont ?></td>
-                            <td><?php echo $reserva['fecha'] ?></td>
-                            <td><?php echo $reserva['horaInicio'] ?></td>
-                            <td><?php echo $reserva['horaFin'] ?></td>
-                            <td><?php echo $cliente ?></td>
-                            <td><?php echo $reserva['informacion'] ?></td>
+                            <tr>
+                                <!-- Guardamos el id de la pista para poder actualizar la reserva desde actualizarCalendario.php -->
+                                <td hidden><?php echo $_GET['pista'] ?></td>
+                                <!-- Guardamos el id de la reserva para poder actualizarla desde actualizarCalendario.php -->
+                                <td hidden><?php echo $reserva['id'] ?></td>
+                                <td><?php echo $cont ?></td>
+                                <td><?php echo $reserva['fecha'] ?></td>
+                                <td><?php echo $reserva['horaInicio'] ?></td>
+                                <td><?php echo $reserva['horaFin'] ?></td>
+                                <td><?php echo $cliente ?></td>
+                                <td><?php echo $reserva['informacion'] ?></td>
                             <?php
                                 $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
                                 $zonaHoraria = new DateTimeZone('Europe/Madrid');
@@ -188,8 +189,9 @@
                             $cont++;
                         }
                     ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         <?php } ?>

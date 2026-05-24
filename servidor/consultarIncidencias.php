@@ -101,33 +101,36 @@
                         <small class="text-muted">Consulta las incidencias enviadas por los usuarios</small>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Fecha</th>
-                            <th>Contenido</th>
-                            <th>Usuario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        $cont = 1;
-                        // Recorremos y mostramos las incidencias
-                        foreach($incidencias as $incidencia){
-                    ?>
-                        <tr>
-                            <th><?php echo $cont ?></th>
-                            <td><?php echo $incidencia['fecha'] ?></td>
-                            <td><?php echo $incidencia['contenido'] ?></td>
-                            <td><?php echo $incidencia['cliente'] ?></td>
-                        </tr>
-                    <?php 
-                            $cont++;
-                        } 
-                    ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Contenido</th>
+                                <th>Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $cont = 1;
+                            // Recorremos y mostramos las incidencias
+                            foreach($incidencias as $incidencia){
+                        ?>
+                            <tr>
+                                <th><?php echo $cont ?></th>
+                                <td><?php echo $incidencia['fecha'] ?></td>
+                                <!-- Ajustamos el ancho de la columna al contenido con style -->
+                                <td style="width: 1%; white-space: nowrap;"><?php echo $incidencia['contenido'] ?></td>
+                                <td style="width: 1%; white-space: nowrap;"><?php echo $incidencia['cliente'] ?></td>
+                            </tr>
+                        <?php 
+                                $cont++;
+                            } 
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
                 <?php } ?>
             </div>
         </div>

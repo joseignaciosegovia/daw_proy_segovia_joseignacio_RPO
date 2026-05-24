@@ -83,45 +83,47 @@
                         <small class="text-muted">Consulta y modifica los datos de los gestores</small>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Correo</th>
-                            <th>Nombre</th>
-                            <th>DNI</th>
-                            <th>Teléfono</th>
-                            <th>¿Es administrador?</th>
-                            <th>Editar gestor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $cont = 1;
-                            // Recorremos los gestores y los añadimos a la tabla
-                            foreach($gestores as $gestor){
-                        ?>
-                        <tr>
-                            <th><?php echo $cont ?></th>
-                            <td><?php echo $gestor['email'] ?></td>
-                            <td><?php echo $gestor['nombre'] ?></td>
-                            <td><?php echo $gestor['DNI'] ?></td>
-                            <td><?php echo $gestor['telefono'] ?></td>
-                            <td><?php 
-                                if($gestor['administrador'] == 1)
-                                    echo "Sí";
-                                else
-                                    echo "No";
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Correo</th>
+                                <th>Nombre</th>
+                                <th>DNI</th>
+                                <th>Teléfono</th>
+                                <th>¿Es administrador?</th>
+                                <th>Editar gestor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $cont = 1;
+                                // Recorremos los gestores y los añadimos a la tabla
+                                foreach($gestores as $gestor){
                             ?>
-                            </td>
-                            <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestor=$gestor[email]';\">Editar</button>"?></td>
-                        </tr>
-                            <?php 
-                                $cont++;
-                            } 
-                            ?>
-                    </tbody>
-                </table>
+                            <tr>
+                                <th><?php echo $cont ?></th>
+                                <td><?php echo $gestor['email'] ?></td>
+                                <td><?php echo $gestor['nombre'] ?></td>
+                                <td><?php echo $gestor['DNI'] ?></td>
+                                <td><?php echo $gestor['telefono'] ?></td>
+                                <td><?php 
+                                    if($gestor['administrador'] == 1)
+                                        echo "Sí";
+                                    else
+                                        echo "No";
+                                ?>
+                                </td>
+                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestor=$gestor[email]';\">Editar</button>"?></td>
+                            </tr>
+                                <?php 
+                                    $cont++;
+                                } 
+                                ?>
+                        </tbody>
+                    </table>
+                </div>
                 <form method='POST' action='<?php echo "añadirGestor.php"; ?>'>
                     <input type="submit" class="btn btn-success" name="Añadir" value="Añadir gestor">
                 </form>

@@ -82,37 +82,39 @@
                         <small class="text-muted">Pistas disponibles con sus datos</small>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Localización</th>
-                            <th>Reservas</th>
-                            <th>Calendario</th>
-                            <th>Editar pista</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $cont = 1;
-                            // Recorremos las pistas y las añadimos a la tabla
-                            foreach($pistas as $pista){
-                        ?>
-                        <tr>
-                            <td><?php echo $cont ?></td>
-                            <td><?php echo $pista['nombre'] ?></td>
-                            <td><?php echo $pista['localizacion'] ?></td>
-                            <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-outline-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
-                            <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
-                        </tr>
-                            <?php 
-                                $cont++;
-                            } 
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Localización</th>
+                                <th>Reservas</th>
+                                <th>Calendario</th>
+                                <th>Editar pista</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $cont = 1;
+                                // Recorremos las pistas y las añadimos a la tabla
+                                foreach($pistas as $pista){
                             ?>
-                    </tbody>
-                </table>
+                            <tr>
+                                <td><?php echo $cont ?></td>
+                                <td><?php echo $pista['nombre'] ?></td>
+                                <td><?php echo $pista['localizacion'] ?></td>
+                                <td><?php echo "<button class=\"btn btn-primary form-floating\" onclick=\"window.location.href='consultarReservas.php?pista=$pista[id]';\">Consultar reservas</button>"?></td>
+                                <td><?php echo "<button class=\"btn btn-outline-primary form-floating\" onclick=\"window.location.href='calendarioPista.php?pista=$pista[id]';\">Calendario</button>"?></td>
+                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarPista.php?pista=$pista[id]';\">Editar</button>"?></td>
+                            </tr>
+                                <?php 
+                                    $cont++;
+                                } 
+                                ?>
+                        </tbody>
+                    </table>
+                </div>
                 <form method='POST' action='<?php echo "añadirPista.php"; ?>'>
                     <input type="submit" class="btn btn-success" name="Añadir" value="Añadir pista">
                 </form>
