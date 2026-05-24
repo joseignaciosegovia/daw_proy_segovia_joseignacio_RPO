@@ -188,7 +188,7 @@
                 </div>
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestor=" . $gestor['email']; ?>" name="editarGestor">
                     <div class="row mt-2">
-                        <div class="col-md-6 col-m3">
+                        <div class="col-12 col-sm-6">
                             <label for="nombre" class="labels">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>" placeholder="Nombre completo">
                             <div class="invalid-feedback">
@@ -198,7 +198,7 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="dni" class="labels">DNI</label>
                             <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>" placeholder="12345678A">
                             <div class="invalid-feedback">
@@ -209,9 +209,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
-                        <div class="col-md-6">
+                        <div class="col-12 col-sm-6">
                             <label for="contraseña" class="labels">Contraseña</label>
                             <input type="password" class="form-control" id="contraseña" name="Contraseña" pattern=".{8,}" value="" placeholder="Mínimo 8 caracteres">
                             <div class="form-text">
@@ -224,7 +223,7 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
                             <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" placeholder="Repite la contraseña">
                             <div class="invalid-feedback">
@@ -235,9 +234,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
-                        <div class="col-md-6">
+                        <div class="col-12 col-sm-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
                             <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>" placeholder="600 000 000">
                             <div class="invalid-feedback">
@@ -247,7 +245,7 @@
                                 Dato correcto
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="foto" class="labels">Foto de perfil (opcional)</label>
                             <div class="d-flex align-items-center gap-3 mb-2">
                                 <img class="rounded-circle" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;">
@@ -262,9 +260,8 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-12 col-sm-6">
                             <label for="administrador" class="labels">¿Es administrador?</label><br>
                             <select id="administrador">
                                 <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>

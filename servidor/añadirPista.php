@@ -98,7 +98,7 @@
                     </div>
                     <form method="POST" name="añadirPista" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="row mt-2">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <label for="nombre" class="labels">Nombre</label>
                                 <input type="text" id="nombre" class="form-control" name="Nombre" value="" placeholder="Nombre de la pista" required>
                                 <div class="invalid-feedback">
@@ -108,7 +108,7 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="precio" class="labels">Precio de Reserva</label>
                                 <input type="number" class="form-control" id="precio" name="Precio" value="" placeholder="0,00" step="0.01" required>
                                 <div class="invalid-feedback">
@@ -119,9 +119,8 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
-                            <div class="col-md-12">
+                            <div class="col-12 col-sm-6">
                                 <label for="Localizacion">Localización</label><br>
                                 <select name="Localizacion" id="Localizacion">
                                     <?php

@@ -158,7 +158,7 @@
                     </div>
                     <form method="POST" name="añadirGestor" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="row mt-2">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <label for="nombre" class="labels">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="" placeholder="Nombre completo" required>
                                 <div class="invalid-feedback">
@@ -168,7 +168,7 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="email" class="labels">Email</label>
                                 <input type="email" id="email" class="form-control" name="Email" value="" placeholder="correo@ejemplo.com" required autocomplete="off">
                                 <div class="invalid-feedback">
@@ -179,9 +179,8 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <label for="contraseña" class="labels">Contraseña</label>
                                 <input type="password" id="contraseña" class="form-control" name="Contraseña" pattern=".{8,}" value="" placeholder="Mínimo 8 caracteres" required>
                                 <div class="form-text">
@@ -194,7 +193,7 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="confirmarContraseña" class="labels">Confirmar contraseña</label>
                                 <input type="password" class="form-control" id="confirmarContraseña" name="Confirmar contraseña" value="" placeholder="Repite la contraseña" required>
                                 <div class="invalid-feedback">
@@ -205,9 +204,8 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <label for="dni" class="labels">DNI</label>
                                 <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="" placeholder="12345678A" required>
                                 <div class="invalid-feedback">
@@ -217,7 +215,7 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="administrador" class="labels">¿Es administrador?</label><br>
                                 <select id="administrador">
                                     <option value="1">Sí</option>
@@ -225,9 +223,8 @@
                                 </select>
                             </div>
                         </div>
-                        <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                         <div class="row mt-3">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <label for="telefono" class="labels">Teléfono (opcional)</label>
                                 <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="" placeholder="600 000 000">
                                 <div class="invalid-feedback">
@@ -237,7 +234,7 @@
                                     Dato correcto
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="foto" class="labels">Foto de perfil (opcional)</label>
                                 <input type="file" class="form-control" id="foto" name="foto">
                                 <div class="invalid-feedback">
