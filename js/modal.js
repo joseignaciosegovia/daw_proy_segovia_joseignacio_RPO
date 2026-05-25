@@ -33,5 +33,44 @@ function cerrarModal(modal) {
         event.stopPropagation();
     });
 }
+// Función que crea el modal de confirmación de borrado de reserva desde el gestor
+function crearModalConfirmacion(onConfirmar, mensaje) {
+    // Eliminamos el modal de confirmación si ya existe
+    document.getElementById('modal-confirmacion')?.remove();
 
-export {crearModal, cerrarModal};
+    const footer = document.getElementsByTagName('footer')[0];
+    $(footer).append(`
+        <div class="modal" id="modal-confirmacion" tabindex="-1" style="z-index: 1060;">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar borrado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>${mensaje}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="btn-confirmar-borrado">Borrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+
+    const modalEl = document.getElementById('modal-confirmacion');
+    const modal = new bootstrap.Modal(modalEl);
+
+    // Al cerrar el modal de confirmación, lo eliminamos del DOM
+    modalEl.addEventListener('hidden.bs.modal', () => modalEl.remove());
+
+    document.getElementById('btn-confirmar-borrado').addEventListener('click', () => {
+        modal.hide();
+        onConfirmar();
+    });
+
+    modal.show();
+}
+
+export { crearModal, cerrarModal, crearModalConfirmacion };

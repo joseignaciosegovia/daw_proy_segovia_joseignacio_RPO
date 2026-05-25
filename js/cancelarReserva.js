@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Función para cancelar una reserva
+// Función para cancelar una reserva desde el cliente
 function cancelarReserva(icono) {
     crearModal();
     // Obtenemos la información de la reserva que vamos a cancelar

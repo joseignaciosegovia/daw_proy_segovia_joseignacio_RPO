@@ -62,10 +62,8 @@
     // Si pulsamos el botón de borrar
     if (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
-
-        $id = $crud->listar("id", "pistas", "where nombre = \"$_GET[Borrar]\"")[0]['id'];
-        $crud->eliminar("pistas", "where id = $id");
-        // En confirmacion.js está el mensaje para confirmar el borrado
+        $crud->eliminar("pistas", "where id = $_GET[Borrar]");
+        // En borrarPista.js está el mensaje para confirmar el borrado
         header("Location: intranet.php");
     }
 
@@ -75,7 +73,7 @@
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
-        <script type="module" src="/js/confirmacion.js"></script>
+        <script type="module" src="/js/borrarPista.js"></script>
 <?php }
 
     // Si pulsamos el botón de actualizar

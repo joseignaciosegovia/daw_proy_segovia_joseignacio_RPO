@@ -1,5 +1,5 @@
 <?php
-    ob_start(); // activa el buffer
+    //ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -15,7 +15,7 @@
     }
 
     // Si no hemos llegado a esta página de las maneras adecuadas, volvemos a intranet.php
-    if (!isset($_POST['Actualizar']) && !isset($_POST['Borrar']) && ! isset($_GET['gestor'])) {
+    if (!isset($_POST['Actualizar']) && !isset($_GET['Borrar']) && ! isset($_GET['gestor'])) {
         header('Location: intranet.php');
         die();
     }
@@ -26,8 +26,17 @@
     $home = "/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
+
+    // Si pulsamos el botón de borrar
+    if (isset($_GET['Borrar'])) {
+        $crud = new Crud(new DB("proyecto"));
+        $crud->eliminar("gestores", "where email = \"$_GET[Borrar]\"");
+        header("Location: administrarGestores.php");
+        exit();
+    }
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
@@ -48,19 +57,11 @@
         return $iniciales;
     }
 
-    // Si pulsamos el botón de borrar
-    if (isset($_POST['Borrar'])) {
-        $crud = new Crud(new DB("proyecto"));
-        $crud->eliminar("gestores", "where email = \"$_POST[Email]\"");
-        // En confirmacion.js está el mensaje para confirmar el borrado
-        header("Location: intranet.php");
-    }
-
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
-        <script type="module" src="/js/confirmacion.js"></script>
+        <script type="module" src="/js/borrarGestor.js"></script>
 <?php }
 
     // Función que comprueba si la cadena recibida está vacía
@@ -152,7 +153,7 @@
     if(isset($_GET['gestor'])) {
         $crud = new Crud(new DB("proyecto"));
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
-        $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
+        $gestor = $crud->obtener("gestores", "where email = \"$_GET[gestor]\"")[0];
         $fecha = new DateTime();
         // Formato de fecha en español
         $formatter = new IntlDateFormatter(

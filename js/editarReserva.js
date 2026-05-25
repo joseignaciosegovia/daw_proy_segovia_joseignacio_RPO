@@ -1,4 +1,4 @@
-import {crearModal} from "./modal.js"
+import {crearModal, crearModalConfirmacion} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -105,7 +105,12 @@ function borrarReserva() {
             id: document.getElementById("id").value,
         });
 
-        actualizarCalendario(datosAEnviar, botonBorrar.outerText);
+        // Mostramos el modal de confirmación antes de borrar
+        crearModalConfirmacion(() => {
+            actualizarCalendario(datosAEnviar, botonBorrar.outerText);
+            }, 
+            "¿Deseas borrar la reserva?"
+        );
 
         event.stopPropagation();
     });
