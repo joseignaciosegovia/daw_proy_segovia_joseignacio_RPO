@@ -138,6 +138,8 @@ function cargarCalendario(){
                 if(horaActual > horaNueva) {
                     const modal = new bootstrap.Modal('#modal');
                     const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+                    // Borramos el cuerpo para no mostrarlo varias veces cada vez que se mueva una reserva
+                    modalCuerpo.replaceChildren();
                     document.getElementsByClassName('modal-title')[0].innerHTML = "No se puede mover la reserva";
                     // Mostramos el mensaje indicando que no se puede mover una reserva a un horario pasado
                     modalCuerpo.insertAdjacentHTML('afterbegin', `
@@ -154,14 +156,19 @@ function cargarCalendario(){
                 else {
                     const modal = new bootstrap.Modal('#modal');
                     const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+                    // Borramos el cuerpo para no mostrarlo varias veces cada vez que se mueva una reserva
+                    modalCuerpo.replaceChildren();
                     document.getElementsByClassName('modal-title')[0].innerHTML = "Mover la reserva a una nueva fecha";
                     // Mostramos el mensaje indicando que se va a mover una reserva, indicando el nuevo horario
                     modalCuerpo.insertAdjacentHTML('afterbegin', `
                         Va a mover una reserva a ${nuevaFecha} ${nuevaHoraInicio}
                     `);
+                    // Movemos el botón de confirmar cambio
+                    const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-success')[0];
+                    modalBotonConfirmar.hidden = false;
                     modal.show();
                     // Actualizamos la base de datos
-                    confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin);
+                    confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin, info);
                 }
             }
         }
@@ -190,7 +197,8 @@ function cargarCalendario(){
             title: reserva.informacion,
             start: reserva.fecha + "T" + reserva.horaInicio,
             end: reserva.fecha + "T" + reserva.horaFin,
-            editable: editable
+            editable: editable,
+            borderColor: '#285B8D'
         })
     }
 
@@ -239,8 +247,9 @@ function confirmarFecha(id) {
     });
 }
 // Función que define lo que pasará cuando se mueva una reserva a otra fecha
-function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin) {
+function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin, info) {
     const botonConfirmar = $('.modal-footer .btn-success');
+    const botonCancelar = $('.modal-footer .btn-secondary');
     // Comportamiento del botón de Confirmar
     $(botonConfirmar[0]).on('click', async function(event) {
         let datosAEnviar = JSON.stringify({  
@@ -269,5 +278,10 @@ function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFi
         });
 
         event.stopPropagation();
+    });
+    // Comportamiento del botón de Cancelar
+    $(botonCancelar[0]).on('click', async function(event) {
+        // Revertimos la situación para dejar la reserva donde estaba
+        info.revert();
     });
 }
