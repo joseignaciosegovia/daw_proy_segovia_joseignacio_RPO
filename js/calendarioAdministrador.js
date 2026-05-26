@@ -116,7 +116,26 @@ function cargarCalendario(){
             }
             
             cerrarModal(modal);
-            
+        },
+        // Pulsamos en una reserva
+        eventClick: function(info){
+            const modal = new bootstrap.Modal('#modal');
+            const modalCuerpo = document.getElementsByClassName('modal-body')[0];
+            const fechaInicioFormateada = formatearFecha(info.event.start);
+            const fechaFinFormateada = formatearFecha(info.event.end);
+            // Borramos el cuerpo para no mostrarlo varias veces cada vez que se mueva una reserva
+            modalCuerpo.replaceChildren();
+            document.getElementsByClassName('modal-title')[0].innerHTML = "Información de la reserva";
+            // Mostramos el mensaje indicando que no se puede mover una reserva a un horario pasado
+            modalCuerpo.insertAdjacentHTML('afterbegin', `
+                Fecha de inicio: ${fechaInicioFormateada}<br>
+                Fecha de fin: ${fechaFinFormateada}<br>
+                Información de la reserva: ${info.event.title}
+            `);
+            // Ocultamos el botón de confirmar
+            const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-success')[0];
+            modalBotonConfirmar.hidden = true;
+            modal.show();
         },
         // Soltamos una reserva después de arrastrarla
         eventDrop: function(info) {
@@ -284,4 +303,10 @@ function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFi
         // Revertimos la situación para dejar la reserva donde estaba
         info.revert();
     });
+}
+// Función para transformar un formato de fecha
+function formatearFecha(fecha) {
+  const pad = n => String(n).padStart(2, '0');
+  return `${fecha.getFullYear()}-${pad(fecha.getMonth() + 1)}-${pad(fecha.getDate())} ` +
+         `${pad(fecha.getHours())}:${pad(fecha.getMinutes())}:${pad(fecha.getSeconds())}`;
 }
