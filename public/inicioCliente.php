@@ -163,7 +163,7 @@
                         <div class="dash-grid-3">
                             <!-- Tarjeta: pistas disponibles -->
                             <div class="dash-card dash-card-accent dash-card-accent-blue">
-                                <div class="lbl"><i class="ti ti-stack" aria-hidden="true"></i> Pistas disponibles</div>
+                                <div class="lbl"><i class="ti ti-soccer-field" aria-hidden="true"></i> Pistas disponibles</div>
                                 <div class="val"><?php echo "$numeroPistas"; ?></div>
                             </div>
                             <!-- Tarjeta: datos de instalaciones (ocupa 2 columnas) -->
