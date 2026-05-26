@@ -103,7 +103,7 @@
                         <i class="ti ti-circle-number-0"></i>
                         <div>
                             <h2>No hay reservas en la pista <?php echo "$pista" ?></h2>
-                            <small class="text-muted"><small class="text-muted">Cuando haya reservas en la pista <?php echo "$pista" ?> podrás consultarlas aquí</small>
+                            <small class="text-muted">Cuando haya reservas en la pista <?php echo "$pista" ?> podrás consultarlas aquí</small>
                         </div>
                     </div>
             <?php }
@@ -192,11 +192,11 @@
                             </tbody>
                         </table>
                     </div>
+                <?php } ?>
+                <div class="mt-2 text-start">
+                    <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
                 </div>
             </div>
-        <?php } ?>
-        <div class="mt-2 text-start">
-            <button class="btn btn-secondary" onclick="window.location.href='intranet.php';">Volver atrás</button>
         </div>
     </main>
 </div>
