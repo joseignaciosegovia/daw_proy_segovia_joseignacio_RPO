@@ -22,7 +22,7 @@ function cargarCalendario(){
     // Añadimos el título de la pista seleccionada y la leyenda del calendario
     calendarEl.insertAdjacentHTML('beforebegin', `
         <div class="d-flex justify-content-center" id="leyenda"><strong>Leyenda:</strong>&ensp;&ensp;
-            <span><span class="color" style="background:#4ADE80;"></span>Disponible</span>
+            <span><span class="color" style="background:#4EB272;"></span>Disponible</span>
             <span><span class="color" style="background:#3788D8;"></span>Ocupado</span>
         </div>
     `);

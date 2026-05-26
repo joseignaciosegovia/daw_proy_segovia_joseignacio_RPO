@@ -32,7 +32,7 @@ async function cargarCalendario(pista, id){
     $(tituloPista).append(`
         <h3>Pista: ${pista}</h3>
         <div class="d-flex justify-content-center" id="leyenda">
-            <span><span class="color" style="background:#4ADE80;"></span>Disponible</span>
+            <span><span class="color" style="background:#4EB272;"></span>Disponible</span>
             <span><span class="color" style="background:#F87171;"></span>Ocupado</span>
         </div>
     `);

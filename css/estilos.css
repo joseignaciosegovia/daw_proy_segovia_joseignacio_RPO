@@ -229,7 +229,7 @@ h1 {
 
 /* Color por defecto de las franjas de tiempo del calendario */
 .fc .fc-timegrid-body .fc-timegrid-cols .fc-timegrid-col {
-    background-color: #4ADE80;
+    background-color: #4EB272;
 }
 /* Pintamos de blando el fondo de la columna que indica las horas */
 .fc .fc-timegrid-axis {
