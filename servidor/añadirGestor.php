@@ -217,7 +217,7 @@
                             </div>
                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                 <label for="administrador" class="labels">¿Es administrador?</label><br>
-                                <select id="administrador">
+                                <select class="form-select" id="administrador">
                                     <option value="1">Sí</option>
                                     <option value="0">No</option>
                                 </select>

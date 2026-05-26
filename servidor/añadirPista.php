@@ -122,7 +122,7 @@
                         <div class="row mt-3">
                             <div class="col-12 col-sm-6">
                                 <label for="Localizacion">Localización</label><br>
-                                <select name="Localizacion" id="Localizacion">
+                                <select class="form-select" name="Localizacion" id="Localizacion">
                                     <?php
                                         $localizaciones = $crud->listar("localizacion", "pistas", "group by localizacion");
                                         // Añadimos las localizaciones a las opciones del select

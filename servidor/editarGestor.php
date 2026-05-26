@@ -264,7 +264,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label for="administrador" class="labels">¿Es administrador?</label><br>
-                            <select id="administrador">
+                            <select class="form-select" id="administrador">
                                 <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
                                 <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
                             </select>
