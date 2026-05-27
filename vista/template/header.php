@@ -42,8 +42,8 @@
                     <div class="col-auto">
                         <button class="btn btn-primary btn-intranet form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>
                     </div>
-                    <!-- Si no estamos en la página de inicio ni en la de verificación, mostramos el botón hamburguesa (solo en pantallas móviles) -->
-                    <?php if($_SERVER['PHP_SELF'] != "/index.php" && $_SERVER['PHP_SELF'] != "/verificar.php") { ?>
+                    <!-- Si estamos en una página que tiene la barra de navegación, mostramos el botón hamburguesa (solo en pantallas móviles) -->
+                    <?php if($_SERVER['PHP_SELF'] != "/index.php" && $_SERVER['PHP_SELF'] != "/verificar.php" && $_SERVER['PHP_SELF'] != "/public/accesoCliente.php" && $_SERVER['PHP_SELF'] != "/servidor/accesoAdministrador.php") { ?>
                     <div class="col-auto">
                         <button id="btnMenu" onclick="desplegarMenu()">
                             <i class="ti ti-menu-2"></i>

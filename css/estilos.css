@@ -48,6 +48,10 @@
     grid-template-columns: 350px 1fr; 
     flex: 1;
 }
+/* Sección que incluye todo el cuerpo en las páginas de acceso */
+.acceso {
+    flex: 1;
+}
 body {
     background-color: #e0e0e0;
     display: flex;

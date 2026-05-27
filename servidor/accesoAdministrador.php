@@ -19,6 +19,18 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";    
 
+    // Función para añadir scripts en la cabecera
+    function añadirScriptsCabecera(){
+?>
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!--Fontawesome CDN-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<?php }
+
+    // Actualizamos el título de la página
+    $titulo = "Login Intranet · Moral de Calatrava";
+
     // Si pulsamos el botón de "Acceder
     if (isset($_POST['login'])) {
         $email = trim($_POST['usuario']);
@@ -47,48 +59,36 @@
         }
         
     } else {
-
+        // Cargamos la cabecera
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
 ?>
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!--Fontawesome CDN-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <!-- Hoja de estilos -->
-        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
-        <title>Acceso a la gestión</title>
-    </head>
-
-    <body style="background:#e0e0e0;">
-        <div class="container mt-5">
+        <main class="main container-fluid px-0 acceso" style="background:#e0e0e0;">
             <div class="d-flex justify-content-center h-100">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header text-center">
-                        <h1>Iniciar sesión como gestor</h1>
-                        <a class="btn btn-secondary  w-auto" href="../index.php">Página de inicio</a>
-                    </div>
-                    <div class="card-body">
-                        <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <div class="p-3 py-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header text-center">
+                            <h1>Iniciar sesión como gestor</h1>
+                            <a class="btn btn-secondary  w-auto" href="../index.php">Página de inicio</a>
+                        </div>
+                        <div class="card-body">
+                            <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="email" name='usuario' required>
                                 </div>
-                                <input type="text" class="form-control" placeholder="email" name='usuario' required>
-                            </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
                                 </div>
-                                <input type="password" class="form-control" placeholder="contraseña" name='pass' required>
-                            </div>
-                            <div class="form-group mb-3 text-right">
-                                <input type="submit" value="Acceder" class="btn btn-success w-auto" name='login' id="btAccesoGestor">
-                            </div>
-                        </form>
+                                <div class="form-group mb-3 text-right">
+                                    <input type="submit" value="Acceder" class="btn btn-success w-auto" name='login' id="btAccesoGestor">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,8 @@
                     unset($_SESSION['error']);
                 }
             ?>
-        </div>
-        <?php } ?>
-    </body>
-</html>
+        </main>
+        <?php } 
+    // Cargamos el pie
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
+?>
