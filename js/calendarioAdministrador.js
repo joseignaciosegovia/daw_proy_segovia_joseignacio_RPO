@@ -130,7 +130,7 @@ function cargarCalendario(){
             modalCuerpo.insertAdjacentHTML('afterbegin', `
                 Fecha de inicio: ${fechaInicioFormateada}<br>
                 Fecha de fin: ${fechaFinFormateada}<br>
-                Información de la reserva: ${info.event.title}
+                Detalles de la reserva: ${info.event.title}
             `);
             // Ocultamos el botón de confirmar
             const modalBotonConfirmar = document.getElementsByClassName('modal-footer')[0].getElementsByClassName('btn-success')[0];

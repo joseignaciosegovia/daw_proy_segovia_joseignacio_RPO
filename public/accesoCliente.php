@@ -21,7 +21,7 @@
 
     // Si pulsamos en el botón "Acceder"
     if (isset($_POST['login'])) {
-        $nombre = trim($_POST['usuario']);
+        $email = trim($_POST['usuario']);
         $contraseña = trim($_POST['pass']);
 
         $crud = new Crud(new DB("proyecto"));
@@ -33,33 +33,33 @@
         $crud->eliminar("conexiones", "where (hora + 600) < $fecha");
 
         // Si es la primera vez que intentamos acceder con este usuario
-        if(!isset($_SESSION[$nombre])){
-            $_SESSION[$nombre]['bloqueado'] = 0;
+        if(!isset($_SESSION[$email])){
+            $_SESSION[$email]['bloqueado'] = 0;
         }
 
         // Si el usuario con el que intentamos acceder está bloqueado
-        if($_SESSION[$nombre]['bloqueado'] + 600 >= $fecha)
-            error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión durante diez minutos");
+        if($_SESSION[$email]['bloqueado'] + 600 >= $fecha)
+            error("Demasiados intentos erróneos con el usuario '$email'. No podrá iniciar sesión durante diez minutos");
         
         // Si el usuario no está bloqueado
         // Si el nombre de usuario o la contraseña son solo espacios en blanco
-        if (strlen($nombre) == 0 || strlen($contraseña) == 0) {
+        if (strlen($email) == 0 || strlen($contraseña) == 0) {
             error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
         }
 
         // Comprobamos si existe un cliente con el usuario y la contraseña introducidos
         
-        $cliente = $crud->isValido("clientes", $nombre, $contraseña);
+        $cliente = $crud->isValido("clientes", $email, $contraseña);
         // Si no existe, mostramos el error y actualizamos la página
         if ($cliente == null) {
             $acceso = "Denegado";
-            $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$nombre\", $fecha, \"$acceso\"");
+            $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$email\", $fecha, \"$acceso\"");
             
             unset($_POST['login']);
             
             // Comprobamos si el usuario debería bloquearse
             $accesosIncorrectos = 0;
-            $accesos = $crud->listar("*", "conexiones", " WHERE usuario = \"$nombre\" AND (hora + 180) >= $fecha ORDER BY hora DESC");
+            $accesos = $crud->listar("*", "conexiones", " WHERE usuario = \"$email\" AND (hora + 180) >= $fecha ORDER BY hora DESC");
             
             // Recorremos los accesos con este usuario en los últimos tres minutos empezando por los más recientes
             foreach($accesos as $acceso) {
@@ -76,24 +76,23 @@
                     $fechaBloqueado = $acceso['hora'];
                 // Si ha habido cinco accesos denegados seguidos bloqueamos al usuario guardando la fecha de bloqueo
                 else if($accesosIncorrectos == 5) {
-                    $_SESSION[$nombre]['bloqueado'] = $fechaBloqueado;
-                    error("Demasiados intentos erróneos con el usuario '$nombre'. No podrá iniciar sesión en los próximos diez minutos");
+                    $_SESSION[$email]['bloqueado'] = $fechaBloqueado;
+                    error("Demasiados intentos erróneos con el usuario '$email'. No podrá iniciar sesión en los próximos diez minutos");
                 }
             }
             
             error("Credenciales Inválidas");
         }
-        // Si el acceso es correcto
-        // Si el cliente no está validado
+        // Si el acceso es correcto y el cliente no está validado
         if($cliente['activo'] == 0) {
             error("El cliente no está validado");
         }
         // Si el cliente está validado
         else {
             $acceso = "Concedido";
-            $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$nombre\", $fecha, \"$acceso\"");
+            $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$email\", $fecha, \"$acceso\"");
 
-            $_SESSION['cliente'] = $nombre;
+            $_SESSION['cliente'] = $email;
             header('Location: inicioCliente.php');
             exit();
         }

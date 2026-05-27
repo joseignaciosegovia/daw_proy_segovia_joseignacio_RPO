@@ -6,7 +6,7 @@
         <meta name="author" content="José Ignacio Segovia Ramírez">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
-        <title><?= isset($titulo) ? $titulo : "Reserva de pistas | Moral de Calatrava"?></title>
+        <title><?php echo isset($titulo) ? $titulo : "Reserva de pistas · Moral de Calatrava"?></title>
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="/imagenes/Moral.png">
         <!-- Bootstrap -->
@@ -30,12 +30,14 @@
             <div class="container-fluid" id="cabecera">
                 <div class="row d-flex align-items-center py-2">
                     <div class="col-auto">
-                        <a href=<?= isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></a>
+                        <a href=<?php echo isset($home) ? $home : "/index.php"?> ><img src="/imagenes/Moral2.png" alt="Logo de la página"></a>
                     </div>
-                    <div class="col col-sm-9 col-lg-9 fs-1">
+                    <div class="col col-lg-9 fs-1">
                         <!-- El título contiene un enlace a la página principal -->
-                        <div class="hdr-title"><a class="text-decoration-none" href=<?= isset($home) ? $home : "/index.php"?> ><?= isset($titulo) ? $titulo : "Reserva de pistas · Moral de Calatrava"?></a></div>
-                        <div class="hdr-sub">Polideportivo y Ciudad Deportiva</div>
+                        <div class="cabeceraTitulo">
+                            <a class="text-decoration-none" href=<?php echo isset($home) ? $home : "/index.php"?> ><?php echo isset($titulo) ? $titulo : "Reserva de pistas · Moral de Calatrava"?></a>
+                        </div>
+                        <div class="cabeceraSubtitulo">Polideportivo y Ciudad Deportiva</div>
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary btn-intranet form-floating" onclick="window.location.href='/servidor/accesoAdministrador.php';">Intranet</button>

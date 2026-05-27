@@ -7,14 +7,14 @@
 }
 
 /* --- ENCABEZADOS DE SECCIÓN --- */
-.section-header {
+.seccionSubtitulo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.section-header span {
+.seccionSubtitulo span {
     font-size: 12px;
     font-weight: 500;
     text-transform: uppercase;
@@ -25,7 +25,7 @@
     gap: 5px;
 }
 
-.section-header a {
+.seccionSubtitulo a {
     font-size: 12px;
     color: #2A71B2;
     text-decoration: none;
@@ -35,7 +35,7 @@
     transition: opacity 0.15s;
 }
 
-.section-header a:hover {
+.seccionSubtitulo a:hover {
     opacity: 0.75;
 }
 

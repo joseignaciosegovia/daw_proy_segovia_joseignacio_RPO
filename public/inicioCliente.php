@@ -86,7 +86,7 @@
             <div class="card shadow-sm border-0">
                 <div class="p-3 py-4">
                     <div>
-                        <div class="section-header">
+                        <div class="seccionSubtitulo">
                             <span><i class="ti ti-calendar" aria-hidden="true"></i> Reservas</span>
                             <a href="/public/reservasCliente.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                         </div>
@@ -142,7 +142,7 @@
                     <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <!-- SECCIÓN: INCIDENCIAS -->
                     <div>
-                        <div class="section-header">
+                        <div class="seccionSubtitulo">
                             <span><i class="ti ti-mail" aria-hidden="true"></i> Incidencias</span>
                             <a href="/public/incidenciasQuejas.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                         </div>
@@ -156,7 +156,7 @@
                     <hr class="mt-0 mb-4" style="border-color: #dee2e6;">
                     <!-- SECCIÓN: INSTALACIONES -->
                     <div>
-                        <div class="section-header">
+                        <div class="seccionSubtitulo">
                             <span><i class="ti ti-soccer-field" aria-hidden="true"></i> Pistas e instalaciones</span>
                             <a href="/public/reservarPista.php">Reservar pista <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                         </div>

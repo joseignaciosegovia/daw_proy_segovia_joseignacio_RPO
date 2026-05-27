@@ -5,13 +5,14 @@
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    // Importamos config.php para poder enviar el correo de verificación
     require_once 'config.php';
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosDatosPistas.css">
 <?php }
 
     // Función para añadir scripts en el pie
@@ -39,7 +40,7 @@
         $nombre = ucwords($nombre); 
     }
 
-    // Si hemos iniciado sesión como cliente, mostramos la página de reservar pistas
+    // Si hemos iniciado sesión como cliente, mostramos la página de inicio del cliente
     if (!empty($_SESSION["cliente"])) {
         header("Location: ./public/inicioCliente.php");
         exit();
@@ -55,42 +56,41 @@
         $nombre = trim($datos->nombre);
         $email = trim($datos->email);
 
-        // Si el usuario ha introducido un teléfono
+        // Si el usuario no ha introducido un teléfono
         if($datos->telefono == null)
             $telefono =  'null';
+        // Si el usuario ha introducido un teléfono
         else
             $telefono = $datos->telefono;
 
-        // Si el usuario ha elegido una imagen
+        // Si el usuario ha elegido un archivo como foto de perfil
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
-            $nombreTmp = $_FILES['foto']['tmp_name'];
+            $nombreTemporal = $_FILES['foto']['tmp_name'];
 
-            // Obtener extensión real
+            // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
             // Lista de extensiones permitidas
             $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
-
+            // Si la extensión del archivo es una extensión válida de foto
             if (in_array(strtolower($ext), $extPermitidas)) {
-
-                // Generar nombre único
+                // Generar nombre único para la foto
                 $nombreFinal = uniqid("img_") . "." . $ext;
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/imagenes/" . $nombreFinal;
 
-                // Ruta de la base de datos (para mostrar en HTML)
+                // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
-
-                if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-
+                // Si podemos mover la foto a la ruta del servidor
+                if (move_uploaded_file($nombreTemporal, $rutaServidor)) {
                     // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
                     $foto = $rutaBD;
-
+                // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
                 }
-
+            // Si la extensión del archivo no es una extensión válida de foto
             } else {
                 echo "Formato de imagen no permitido";
             }
@@ -102,25 +102,26 @@
         // Comprobamos si el nombre del usuario está vacío
         nombreNoVacio($nombre);
 
-        // Comprobamos si ya existe un usuario con el email introducido
         $respuesta = $crud->obtener("clientes", "where email = \"$email\"");
+        // Si ya existe un usuario con el email introducido
         if($respuesta != null) {
             error("El email está repetido");
         }
 
-        // Comprobamos si la contraseña coincide con la confirmación de la contraseña
+        // Si la contraseña no coincide con la confirmación de la contraseña
         if($datos->contraseña != $datos->confirmarContraseña){
             error("La contraseña tiene que coincidir");
         }
 
         // Guardamos en una variable la contraseña cifrada
         $contraseña = password_hash($datos->contraseña, PASSWORD_DEFAULT);
+        // Guardamos en una variable el código necesario para crear el enlace de validación del usuario
         $codigo = password_hash(rand(0,1000), PASSWORD_DEFAULT);
         // Insertamos el usuario en la base de datos
         $crud->insertar("clientes", "\"$email\", \"$contraseña\", \"$nombre\", \"$datos->dni\", $telefono, \"$foto\", \"$codigo\", 0");
 
         $paginaVerificacion = "$_SERVER[HTTP_ORIGIN]/verificar.php?email=$email&codigo=$codigo";
-
+        // Cuerpo del email de validación
         $body = json_encode([
             'from'    => 'onboarding@resend.dev',
             'to'      => [$email],
@@ -150,7 +151,7 @@
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
-        //$_SESSION['cliente'] = $email;
+    // Si no hemos pulsado ningún botón
     } else {
         // Si ha habido algún error, lo mostramos antes que la información principal de la página
         if (isset($_SESSION['error'])) {
@@ -160,27 +161,42 @@
             // Borramos la variable para no volver a mostrar el error
             unset($_SESSION['error']);
         }
+    // Si no hemos pulsado ningún botón y no ha habido ningún error, mostramos la página
 ?>
-
     <div class="container-fluid my-3 px-0">
         <div class="row g-0">
+            <!-- Columna izquierda, Reservar pistas -->
             <div class="col-12 col-md-6 pt-4" id="informacionPrincipal">
                 <div class="row px-3">
                     <h1>Reservar pistas en Moral de Calatrava</h1>
-                    <p>Consulta la disponibilidad de las pistas del Polideportivo y la Ciudad Deportiva en Moral de Calatrava</p>
                     <p>Información sobre las pistas:</p>
                 </div>
                 <!-- Sección con los datos de las pistas -->
-                <div class="stats px-5">
+                <div class="datosPistas px-5">
 <?php
                     $crud = new Crud(new DB("proyecto"));
                     $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
                     $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
-                    echo "<div class=\"stat\"><div class=\"stat-n\">$numeroPistas</div><div class=\"stat-l\">Pistas disponibles</div></div>";
-                    echo "<div class=\"stat\"><div class=\"stat-n\">$numeroInstalaciones</div><div class=\"stat-l\">Instalaciones</div></div>";
 ?>
-                    <div class="stat"><div class="stat-n">08:00</div><div class="stat-l">Hora de apertura</div></div>
-                    <div class="stat"><div class="stat-n">22:00</div><div class="stat-l">Hora de cierre</div></div>
+                    <div class="datosPistasSeccion">
+                        <div class="datosPistasTitulo"><?php echo $numeroPistas ?></div>
+                        <div class="datosPistasSubtitulo">Pistas disponibles</div>
+                    </div>
+                    <div class="datosPistasSeccion">
+                        <div class="datosPistasTitulo"><?php echo $numeroInstalaciones ?></div>
+                        <div class="datosPistasSubtitulo">Instalaciones</div>
+                    </div>
+                    <div class="datosPistasSeccion">
+                        <div class="datosPistasTitulo">08:00</div>
+                        <div class="datosPistasSubtitulo">Hora de apertura</div>
+                    </div>
+                    <div class="datosPistasSeccion">
+                        <div class="datosPistasTitulo">22:00</div>
+                        <div class="datosPistasSubtitulo">Hora de cierre</div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <p>Consulta la disponibilidad de las pistas del Polideportivo y la Ciudad Deportiva en Moral de Calatrava</p>
                 </div>
             </div>
             <div class="card shadow-sm border-0 col-12 col-md">

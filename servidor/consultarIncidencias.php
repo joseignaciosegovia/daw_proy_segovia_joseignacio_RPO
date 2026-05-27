@@ -78,7 +78,7 @@
         // Si no hay incidencias
         if($incidencias == null) {
 ?>
-            <div class="section-header mb-4">
+            <div class="seccionSubtitulo mb-4">
                 <i class="ti ti-circle-number-0"></i>
                 <div>
                     <h2>No hay incidencias enviadas por usuarios</h2>
@@ -92,7 +92,7 @@
         else {
 
 ?>
-                <div class="section-header mb-4">
+                <div class="seccionSubtitulo mb-4">
                     <i class="ti ti-mail"></i>
                     <div>
                         <h2>Incidencias de los usuarios</h2>

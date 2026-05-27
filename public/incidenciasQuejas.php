@@ -78,7 +78,7 @@
                 <div class="card shadow-sm border-0">
                     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
                         <div class="p-3 py-4">
-                            <div class="section-header mb-4">
+                            <div class="seccionSubtitulo mb-4">
                                 <i class="ti ti-mail" aria-hidden="true"></i>
                                 <div>
                                     <h2>Sugerencias e incidencias</h2>
@@ -109,7 +109,7 @@
     $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
     if($sugerencias == null) {
 ?>
-                <div class="section-header mb-4">
+                <div class="seccionSubtitulo mb-4">
                     <i class="ti ti-circle-number-0" aria-hidden="true"></i>
                     <div>
                         <h2>No has realizado ninguna sugerencia/incidencia</h2>
@@ -120,7 +120,7 @@
                 }
                 else{
 ?>
-                <div class="section-header mb-4">
+                <div class="seccionSubtitulo mb-4">
                     <i class="ti ti-history" aria-hidden="true"></i>
                     <div>
                         <h2>Historial de sugerencias/incidencias</h2>

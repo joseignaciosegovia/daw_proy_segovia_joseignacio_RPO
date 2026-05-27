@@ -99,7 +99,7 @@
                 // Si no hay reservas en esta pista
                 if($reservas == null){
             ?>
-                    <div class="section-header mb-4">
+                    <div class="seccionSubtitulo mb-4">
                         <i class="ti ti-circle-number-0"></i>
                         <div>
                             <h2>No hay reservas en la pista <?php echo "$pista" ?></h2>
@@ -110,7 +110,7 @@
                 // Si hay reservas
                 else {
             ?>
-                    <div class="section-header mb-4">
+                    <div class="seccionSubtitulo mb-4">
                         <i class="ti ti-calendar"></i>
                         <div>
                             <h2>Reservas de la pista <?php echo "$pista" ?></h2>
@@ -124,12 +124,12 @@
                     $paginaAnterior = $pagina - 1;
 
                     if ($pagina > 1){
-                        echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaAnterior\">← Anterior</a>";
+                        echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaAnterior\">← Anterior</a> ";
                     }
                     echo "<span> Página $pagina de $totalPaginas </span>";
 
                     if ($pagina < $totalPaginas) {
-                        echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
+                        echo " <a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
                     }
             ?>
                     <div class="table-responsive">

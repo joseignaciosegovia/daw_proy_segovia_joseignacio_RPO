@@ -1,0 +1,25 @@
+/* Sección con los datos de las pistas */
+.datosPistas { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-bottom: 1.5rem; 
+}
+/* Subsección con datos de las pistas */
+.datosPistasSeccion { 
+    background: rgba(255,255,255,0.08); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 9px; 
+    padding: 12px; 
+}
+/* Título */
+.datosPistasTitulo { 
+    font-size: 20px; 
+    font-weight: 600; 
+}
+/* Subtítulo */
+.datosPistasSubtitulo { 
+    font-size: 15px; 
+    color: rgba(255,255,255,0.55); 
+    margin-top: 2px; 
+}

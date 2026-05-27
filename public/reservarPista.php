@@ -81,7 +81,7 @@
             </div>
             <div class="card shadow-sm border-0">
                 <div class="p-3 py-4">
-                    <div class="section-header mb-4">
+                    <div class="seccionSubtitulo mb-4">
                         <i class="ti ti-plus" aria-hidden="true"></i>
                         <div>
                             <h2>Reservar pista</h2>

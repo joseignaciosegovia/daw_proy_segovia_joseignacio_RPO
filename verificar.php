@@ -12,16 +12,16 @@
 <?php }
 ?>
     <div class="card shadow-sm border-0">
-            <div class="p-3 py-4">
-                <div class="section-header mb-4">
-                    
+        <div class="p-3 py-4">
+            <div class="seccionSubtitulo mb-4">
 <?php
     // Si hemos recibido el correo y el código del usuario
     if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['codigo']) && !empty($_GET['codigo'])){
         $crud = new Crud(new DB("proyecto"));
-	    $devolver = $crud->listar("email, codigo", "clientes", "where email = \"$_GET[email]\" and codigo = \"$_GET[codigo]\" and activo = 0");
+	    $usuarioPendienteValidar = $crud->listar("email, codigo", "clientes", "where email = \"$_GET[email]\" and codigo = \"$_GET[codigo]\" and activo = 0");
         // Si tenemos una coincidencia, significa que hay que validar el usuario
-        if($devolver != null){
+        if($usuarioPendienteValidar != null){
+            // Ponemos la columna "activo" del usuario a 1
             $crud->actualizar("clientes", "activo = 1", "where email = \"$_GET[email]\" and codigo = \"$_GET[codigo]\" and activo = 0");
 ?>
             <i class="ti ti-user-scan"></i>
@@ -29,7 +29,6 @@
                     <h1>Has activado el usuario con email <?php echo $_GET['email'] ?></h1>
                     <small class="text-muted">Ahora puedes iniciar sesión dede <a href="/public/accesoCliente.php">aquí</a></small>
                 </div>
-            </div>
 <?php
         } 
         // Si no hay una coincidencia
@@ -40,7 +39,6 @@
                     <h1>La URL no es válida o la cuenta <?php echo $_GET['email'] ?> ya está activa</h1>
                     <small class="text-muted">Por favor, usa el enlace que se le ha enviado al email</small>
                 </div>
-            </div>
 <?php     
         }
     }
@@ -52,9 +50,9 @@
                 <h1>La URL no tiene un formato válido</h1>
                 <small class="text-muted">Por favor, usa el enlace que se le ha enviado al email</small>
             </div>
-        </div>
 <?php
     }
+    echo "        </div>";
     echo "    </div>";
     echo "</div>";
 

@@ -32,6 +32,7 @@
             añadirScriptsPie();
         }?>
         <script>
+            // Cada vez que se invoque esta función, se alternará la visibilidad de la barra de navegación y del resto de la página
             function desplegarMenu() {
                 document.querySelector('.sidebar').classList.toggle('abierta');
                 document.getElementById('overlay').classList.toggle('visible');

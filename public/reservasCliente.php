@@ -76,7 +76,7 @@
         </div>
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
-                <div class="section-header mb-4">
+                <div class="seccionSubtitulo mb-4">
         <?php
             $reservas = $crud->listar("*", "reservas", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha, horaInicio, pista ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
             if($reservas == null){
@@ -105,12 +105,12 @@
                 $paginaAnterior = $pagina - 1;
 
                 if ($pagina > 1){
-                    echo "<a href=\"?pagina=$paginaAnterior\">← Anterior</a>";
+                    echo "<a href=\"?pagina=$paginaAnterior\">← Anterior</a> ";
                 }
                 echo "<span>Página $pagina de $totalPaginas></span>";
 
                 if ($pagina < $totalPaginas) {
-                    echo "<a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
+                    echo " <a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
                 }
 
                 ?>

@@ -2,12 +2,14 @@
 <div class="layout" id="seccionPrincipal">
     <nav class="sidebar" aria-label="Menú principal">
         <div class="user-chip">
+            <!-- Mostramos el nombre y la foto de perfil del cliente que ha iniciado sesión -->
             <div class="avatar"><img class="rounded-circle" src="<?php echo $cliente['foto'] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;"></div>
             <div>
                 <span><?php echo "$cliente[nombre]";  ?></span>
                 <small>Usuario activo</small>
             </div>
         </div>
+        <!-- Cada enlace tendrá clase "active" si nos encontramos en la página a la que apunta -->
         <div class="nav-section">General</div>
         <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/inicioCliente.php") echo "active"; ?>" href="/public/inicioCliente.php"><i class="ti ti-home" aria-hidden="true"></i> Inicio</a>
         <a class="nav-item <?php if($_SERVER['PHP_SELF'] == "/public/perfilCliente.php") echo "active"; ?>" href="/public/perfilCliente.php"><i class="ti ti-user" aria-hidden="true"></i> Datos personales</a>
