@@ -161,7 +161,10 @@
             // Borramos la variable para no volver a mostrar el error
             unset($_SESSION['error']);
         }
-    // Si no hemos pulsado ningún botón y no ha habido ningún error, mostramos la página
+        // Si no hemos pulsado ningún botón y no ha habido ningún error, mostramos la página
+        $crud = new Crud(new DB("proyecto"));
+        $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
+        $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
 ?>
     <div class="container-fluid my-3 px-0">
         <div class="row g-0">
@@ -173,11 +176,6 @@
                 </div>
                 <!-- Sección con los datos de las pistas -->
                 <div class="datosPistas px-5">
-<?php
-                    $crud = new Crud(new DB("proyecto"));
-                    $numeroPistas = $crud->listar("count(*)", "pistas", "")[0]['count(*)'];
-                    $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
-?>
                     <div class="datosPistasSeccion">
                         <div class="datosPistasTitulo"><?php echo $numeroPistas ?></div>
                         <div class="datosPistasSubtitulo">Pistas disponibles</div>
@@ -295,6 +293,7 @@
             </div>
         </div>
     </div>
+    <!-- Sección con las pistas y calendarios -->
     <div class="card shadow-sm border-0">
         <div class="p-3 py-4">
             <div id="consultarPistas" class="row column-gap-3">

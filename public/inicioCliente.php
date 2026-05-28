@@ -1,5 +1,4 @@
 <?php
-    //ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -31,12 +30,13 @@
         <script type="module" src="/js/calendarioCliente.js"></script>
 <?php }
 
-    // Devuelve las iniciales de una cadena con distintas palabras
+    // Devuelve las iniciales de una cadena formada por varias palabras
     function iniciales(string $nombre): string {
         $palabras = explode(' ', trim($nombre));
         $iniciales = '';
         foreach ($palabras as $palabra) {
             if ($palabra !== '') {
+                // Para cada palabra, nos quedamos con la primera letra y la transformamos a mayúscula
                 $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -49,7 +49,7 @@
     // Datos que vamos a mostrar
     $reservasMes = $crud->listar("*", "reservas", "where cliente = \"$cliente[email]\" and MONTH(reservas.fecha) = MONTH(CURDATE()) AND YEAR(reservas.fecha) = YEAR(CURDATE()) order by fecha");
     $siguienteReserva = $crud->obtener("reservas", "where cliente = \"$cliente[email]\" and TIMESTAMP(fecha, horaInicio) > CONVERT_TZ(NOW(), @@session.time_zone, 'Europe/Madrid') ORDER BY TIMESTAMP(fecha, horaInicio) ASC LIMIT 1");
-    // Si hay reservas para fechas futuras
+    // Si hay una reserva futura, obtenemos la pista
     if($siguienteReserva != null) {
         $siguienteReserva = $siguienteReserva[0];
         $pistaSiguienteReserva = $crud->obtener("pistas", "where id = $siguienteReserva[pista]")[0];
@@ -61,11 +61,14 @@
     $numeroInstalaciones = sizeof($crud->listar("localizacion, count(*)", "pistas", "group by localizacion"));
     $fecha = new DateTime();
     // Formato de fecha en español
-    $formatter = new IntlDateFormatter(
+    $formatoFecha = new IntlDateFormatter(
+        // fecha en español
         'es_ES',
+        // Formato Martes, 12 de abril de 1952 d. C. o 15:30:42 h (hora del Pacífico)
         IntlDateFormatter::FULL,
         IntlDateFormatter::NONE
     );
+    // Guardamos las iniciales del nombre completo del usuario
     $iniciales = iniciales($cliente['nombre']);
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
@@ -76,7 +79,7 @@
                 <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
                 <div class="welcome-text">
                     <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+                    <p>Hoy es <?php echo $formatoFecha->format($fecha);?></p>
                 </div>
                 <span class="badge badge-green">
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
@@ -90,6 +93,7 @@
                             <span><i class="ti ti-calendar" aria-hidden="true"></i> Reservas</span>
                             <a href="/public/reservasCliente.php">Ver todas <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
                         </div>
+                        <!-- SECCIÓN: RESERVAS -->
                         <div class="dash-grid-3">
                             <!-- Tarjeta: reservas este mes -->
                             <div class="dash-card dash-card-accent">
@@ -124,8 +128,8 @@
                                     </div>
                                 </div>
                                 <?php } 
+                                // Si no hay reservas futuras
                                 else { ?>
-                                <!-- Si no hay reservas futuras -->
                                 <div class="lbl"><i class="ti ti-clock" aria-hidden="true"></i> No tienes reservas en fechas futuras</div>
                                 <div class="next-card">
                                     <div class="next-info">
@@ -194,7 +198,7 @@
     </div>
     <!-- Incluimos el email del cliente para que JavaScript pueda identificarle -->
     <p id="cliente" hidden><?php echo $_SESSION['cliente'] ?></p>
-
 <?php 
+    // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

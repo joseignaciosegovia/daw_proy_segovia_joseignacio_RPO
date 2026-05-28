@@ -1,5 +1,4 @@
 <?php
-    ob_start(); // activa el buffer
     session_start();
 
     // Si ya hemos iniciado sesión como gestor, redirigimos a la página de gestión
@@ -33,13 +32,13 @@
 
     // Si pulsamos el botón de "Acceder
     if (isset($_POST['login'])) {
+        // Trimamos los datos
         $email = trim($_POST['usuario']);
         $contraseña = trim($_POST['pass']);
 
         $crud = new Crud(new DB("proyecto"));
 
         // Comprobamos si existe un gestor con el usuario y la contraseña introducidos
-        
         $gestor = $crud->isValido("gestores", $email, $contraseña);
         // Si no existe el gestor
         if ($gestor == null) {

@@ -1,3 +1,4 @@
+/* SECCIÓN BIENVENIDA */
 .welcome-bar {
     display: flex;
     align-items: center;
@@ -7,7 +8,7 @@
     border-radius: 12px;
     padding: 14px 18px;
 }
-
+/* Iniciales */
 .welcome-avatar {
     width: 48px;
     height: 48px;
@@ -22,11 +23,11 @@
     flex-shrink: 0;
     border: 2px solid #185FA5;
 }
-
+/* Texto de vienvenida */
 .welcome-text {
     flex: 1;
 }
-
+/* Título de bienvenida */
 .welcome-text h1 {
     margin: 0;
     font-size: 20px;
@@ -34,14 +35,14 @@
     color: #111;
     font-family: inherit;
 }
-
+/* Fecha */
 .welcome-text p {
     margin: 2px 0 0;
     font-size: 13px;
     color: #666;
 }
 
-/* --- BADGES --- */
+/* Etiquetas */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -51,7 +52,7 @@
     border-radius: 20px;
     font-weight: 500;
 }
-
+/* Etiquetas verde */
 .badge-green {
     background: #E1F5EE;
     color: #0F6E56;

@@ -1,5 +1,4 @@
 <?php
-    ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -10,6 +9,12 @@
     // Si no hemos iniciado sesión como cliente, volvemos a la página de inicio
     if (empty($_SESSION["cliente"])) {
         header("Location: ../index.php");
+        exit();
+    }
+
+    // Si no hemos recibido los datos de la reserva desde calendarioCliente.js, vamos a la página de inicio
+    if(!isset($_GET['datos'])){
+        header("Location: inicioCliente.php");
         exit();
     }
 
@@ -30,6 +35,7 @@
         $iniciales = '';
         foreach ($palabras as $palabra) {
             if ($palabra !== '') {
+                // Para cada palabra, nos quedamos con la primera letra y la transformamos a mayúscula
                 $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -40,6 +46,7 @@
     if(isset($_GET['datos'])){
         $datosReserva = json_decode(($_GET['datos']));
         $crud = new Crud(new DB("proyecto"));
+        // Guardamos el cliente para que puedan mostrarse sus datos en la barra de navegación
         $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
         $precio = $crud->listar("precioReserva", "pistas", "where nombre = \"$datosReserva->pista\"")[0]['precioReserva'];
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
@@ -47,21 +54,24 @@
         // Datos que vamos a mostrar
         $fecha = new DateTime();
         // Formato de fecha en español
-        $formatter = new IntlDateFormatter(
+        $formatoFecha = new IntlDateFormatter(
+            // fecha en español
             'es_ES',
+            // Formato Martes, 12 de abril de 1952 d. C. o 15:30:42 h (hora del Pacífico)
             IntlDateFormatter::FULL,
             IntlDateFormatter::NONE
         );
+        // Guardamos las iniciales del nombre completo del usuario
         $iniciales = iniciales($cliente['nombre']);
 
 ?>
-
     <main class="main">
+        <!-- BIENVENIDA -->
         <div class="welcome-bar">
             <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
             <div class="welcome-text">
                 <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+                <p>Hoy es <?php echo $formatoFecha->format($fecha);?></p>
             </div>
             <span class="badge badge-green">
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
@@ -103,14 +113,10 @@
             </div>
         </div>
     </main>
+    <!-- Cerramos la sección principal, creada en navCliente.php -->
 </div>
-
-<?php 
+<?php
+        // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
-    }
-
-    // Si hemos accedido a esta página de otra forma (por ejemplo, escribiendo la dirección), redirigimos a la página de inicio del cliente
-    else {
-        header("Location: inicioCliente.php");
     }
 ?>

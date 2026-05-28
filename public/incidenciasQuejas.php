@@ -29,6 +29,7 @@
         $iniciales = '';
         foreach ($palabras as $palabra) {
             if ($palabra !== '') {
+                // Para cada palabra, nos quedamos con la primera letra y la transformamos a mayúscula
                 $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -49,64 +50,68 @@
 
     // Cargamos la cabecera
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-
+    // Guardamos el cliente para que puedan mostrarse sus datos en la barra de navegación
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
     // Datos que vamos a mostrar
     $fecha = new DateTime();
     // Formato de fecha en español
-    $formatter = new IntlDateFormatter(
+    $formatoFecha = new IntlDateFormatter(
+        // fecha en español
         'es_ES',
+        // Formato Martes, 12 de abril de 1952 d. C. o 15:30:42 h (hora del Pacífico)
         IntlDateFormatter::FULL,
         IntlDateFormatter::NONE
     );
+    // Guardamos las iniciales del nombre completo del usuario
     $iniciales = iniciales($cliente['nombre']);
 ?>
-            <!-- El contenido principal de la página será la segunda columna -->
-            <main class="main">
-                <div class="welcome-bar">
-                    <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
-                    <div class="welcome-text">
-                        <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                        <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+    <main class="main">
+        <!-- BIENVENIDA -->
+        <div class="welcome-bar">
+            <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
+            <div class="welcome-text">
+                <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
+                <p>Hoy es <?php echo $formatoFecha->format($fecha);?></p>
+            </div>
+            <span class="badge badge-green">
+                <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
+            </span>
+        </div>
+        <div class="card shadow-sm border-0">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
+                <div class="p-3 py-4">
+                    <div class="seccionSubtitulo mb-4">
+                        <i class="ti ti-mail" aria-hidden="true"></i>
+                        <div>
+                            <h2>Sugerencias e incidencias</h2>
+                            <small class="text-muted">Envia sugerencias/incidencias</small>
+                        </div>
                     </div>
-                    <span class="badge badge-green">
-                        <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
-                    </span>
-                </div>
-                <div class="card shadow-sm border-0">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="enviarIncidencias">
-                        <div class="p-3 py-4">
-                            <div class="seccionSubtitulo mb-4">
-                                <i class="ti ti-mail" aria-hidden="true"></i>
-                                <div>
-                                    <h2>Sugerencias e incidencias</h2>
-                                    <small class="text-muted">Envia sugerencias/incidencias</small>
-                                </div>
+                    <div>
+                        <div>
+                            <label for="quejaIncidencia" class="labels">Sugerencia o incidencia</label>
+                            <textarea style="background: #E0E0E0" class="form-control" id="quejaIncidencia" placeholder="Escribe aquí tu sugerencia o incidencia" name="Queja" rows="5" cols="100" required></textarea>
+                            <div class="invalid-feedback">
+                                Introduzca un mensaje
                             </div>
-                            <div>
-                                <div>
-                                    <label for="quejaIncidencia" class="labels">Sugerencia o incidencia</label>
-                                    <textarea style="background: #E0E0E0" class="form-control" id="quejaIncidencia" placeholder="Escribe aquí tu sugerencia o incidencia" name="Queja" rows="5" cols="100" required></textarea>
-                                    <div class="invalid-feedback">
-                                        Introduzca un mensaje
-                                    </div>
-                                    <div class="valid-feedback">
-                                        Dato correcto
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-4 d-flex justify-content-end">
-                                <button class="btn btn-success px-4" type="submit" name="Enviar">Realizar queja/sugerencia</button>
+                            <div class="valid-feedback">
+                                Dato correcto
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-end">
+                        <button class="btn btn-success px-4" type="submit" name="Enviar">Realizar queja/sugerencia</button>
+                    </div>
                 </div>
-                <div class="card shadow-sm border-0">
-                    <div class="p-3 pt-4">
+            </form>
+        </div>
+        <div class="card shadow-sm border-0">
+            <div class="p-3 pt-4">
 <?php
     $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
+    // Si el usuario no ha enviado ninguna incidencia
     if($sugerencias == null) {
 ?>
                 <div class="seccionSubtitulo mb-4">
@@ -117,8 +122,9 @@
                     </div>
                 </div>
 <?php
-                }
-                else{
+    }
+    // Si el usuario ha enviado alguna incidencia
+    else{
 ?>
                 <div class="seccionSubtitulo mb-4">
                     <i class="ti ti-history" aria-hidden="true"></i>
@@ -138,6 +144,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Recorremos las incidencias -->
                             <?php foreach($sugerencias as $sugerencia){ ?>
                             <tr>
                                 <td><?php echo $contador ?></td>
@@ -150,13 +157,13 @@
                         </tbody>
                     </table>
                 </div>
-                <?php } ?>
+    <?php } ?>
             </div>
         </div>
-        </main>
-    </div>
-
-    <?php
-        // Cargamos el pie
-        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
-    ?>
+    </main>
+    <!-- Cerramos la sección principal, creada en navCliente.php -->
+</div>
+<?php
+    // Cargamos el pie
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
+?>

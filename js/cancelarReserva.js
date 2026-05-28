@@ -40,14 +40,14 @@ function cancelarReserva(icono) {
     // Si quedan más de 12 horas hasta la hora de la reserva, se devuelve el dinero
     if(horaReserva >= (horaActual+12)) {
         modalCuerpo.insertAdjacentHTML('afterbegin', `
-            Se devolverá el dinero
+            <br><br>Se devolverá el dinero
         `);
         devolverDinero = true;
     }
 
     else {
         modalCuerpo.insertAdjacentHTML('afterbegin', `
-           No se devolverá el dinero porque quedan menos de 12 horas 
+           <br><br>No se devolverá el dinero porque quedan menos de 12 horas 
         `);
         devolverDinero = false;
     }

@@ -21,15 +21,15 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <?php }
 
-    // Actualizamos el título de la página
-    $titulo = "Login · Moral de Calatrava";
-
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página
     function error($mensaje) {
         $_SESSION['error'] = $mensaje;
         header('Location: accesoCliente.php');
         exit;
     }
+
+    // Actualizamos el título de la página
+    $titulo = "Login · Moral de Calatrava";
 
     // Si pulsamos en el botón "Acceder"
     if (isset($_POST['login'])) {
@@ -53,14 +53,12 @@
         if($_SESSION[$email]['bloqueado'] + 600 >= $fecha)
             error("Demasiados intentos erróneos con el usuario '$email'. No podrá iniciar sesión durante diez minutos");
         
-        // Si el usuario no está bloqueado
-        // Si el nombre de usuario o la contraseña son solo espacios en blanco
+        // Si el usuario no está bloqueado y el nombre de usuario o la contraseña son solo espacios en blanco
         if (strlen($email) == 0 || strlen($contraseña) == 0) {
             error("Error, El nombre o la contraseña no pueden contener solo espacios en blancos.");
         }
 
         // Comprobamos si existe un cliente con el usuario y la contraseña introducidos
-        
         $cliente = $crud->isValido("clientes", $email, $contraseña);
         // Si no existe, mostramos el error y actualizamos la página
         if ($cliente == null) {
@@ -92,14 +90,14 @@
                     error("Demasiados intentos erróneos con el usuario '$email'. No podrá iniciar sesión en los próximos diez minutos");
                 }
             }
-            
+            // Si el acceso es incorrecto pero no ha habido cinco accesos denegados en los últimos minutos
             error("Credenciales Inválidas");
         }
         // Si el acceso es correcto y el cliente no está validado
         if($cliente['activo'] == 0) {
             error("El cliente no está validado");
         }
-        // Si el cliente está validado
+        // Si el acceso es correcto y el cliente está validado
         else {
             $acceso = "Concedido";
             $crud->insertarColumnas("conexiones", "(usuario, hora, acceso)", "\"$email\", $fecha, \"$acceso\"");
@@ -108,7 +106,7 @@
             header('Location: inicioCliente.php');
             exit();
         }
-    // Si no pulsamos el botón de acceder
+    // Si no pulsamos el botón de acceder, mostramos la página
     } else {
         // Cargamos la cabecera
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";

@@ -33,6 +33,7 @@
         $iniciales = '';
         foreach ($palabras as $palabra) {
             if ($palabra !== '') {
+                // Para cada palabra, nos quedamos con la primera letra y la transformamos a mayúscula
                 $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -67,11 +68,14 @@
         $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
         $fecha = new DateTime();
         // Formato de fecha en español
-        $formatter = new IntlDateFormatter(
+        $formatoFecha = new IntlDateFormatter(
+            // fecha en español
             'es_ES',
+            // Formato Martes, 12 de abril de 1952 d. C. o 15:30:42 h (hora del Pacífico)
             IntlDateFormatter::FULL,
             IntlDateFormatter::NONE
         );
+        // Guardamos las iniciales del nombre completo del gestor
         $iniciales = iniciales($gestor['nombre']);
 
         $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0]['nombre'];
@@ -87,7 +91,7 @@
                 <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
                 <div class="welcome-text">
                     <h1>Bienvenida/o, <?php echo "$gestor[nombre]"; ?></h1>
-                    <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+                    <p>Hoy es <?php echo $formatoFecha->format($fecha);?></p>
                 </div>
                 <span class="badge badge-green">
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
@@ -199,9 +203,10 @@
             </div>
         </div>
     </main>
+    <!-- Cerramos la sección principal, creada en navGestor.php -->
 </div>
 <?php
     }
-
+    // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

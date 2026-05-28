@@ -1,4 +1,4 @@
-/* CABECERA */
+/* --- CABECERA --- */
 #cabecera {
     background-color: #1B3A6B;
 }
@@ -46,10 +46,12 @@
 .layout { 
     display: grid; 
     grid-template-columns: 350px 1fr; 
+    /* El layout se extiende hasta ocupar el alto de la página */
     flex: 1;
 }
 /* Sección que incluye todo el cuerpo en las páginas de acceso */
 .acceso {
+    /* La sección se extiende hasta ocupar el alto de la página */
     flex: 1;
 }
 body {
@@ -66,7 +68,7 @@ body {
     min-width: 0;
 }
 
-/* BARRA DE NAVEGACIÓN */
+/* --- BARRA DE NAVEGACIÓN --- */
 .sidebar { 
     background: #1B3A6B; 
     padding: 1rem 0; 
@@ -237,7 +239,7 @@ h1 {
     overflow-x: auto !important;
 }
 
-/* PIE */
+/* --- PIE --- */
 footer {
     padding: 20px;
     background-color: #1A2332;
@@ -263,10 +265,8 @@ footer {
     font-size: 15px; 
 }
 
-/* RESPONSIVE */
-/* Móvil */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-
     /* Cabecera */
     .cabeceraTitulo {
         font-size: 14px;
@@ -321,6 +321,12 @@ footer {
     #btnMenu { 
         display: block !important; 
     }
+    /* Barra de bienvenida */
+    .welcome-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 
     .table-responsive {
         overflow-x: auto;
@@ -340,11 +346,5 @@ footer {
     }
     body {
         overflow-x: clip;
-    }
-    /* Barra de bienvenida */
-    .welcome-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
     }
 }

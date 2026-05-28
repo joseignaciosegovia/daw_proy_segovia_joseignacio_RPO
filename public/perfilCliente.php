@@ -1,5 +1,4 @@
 <?php
-    //ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -48,6 +47,7 @@
         $iniciales = '';
         foreach ($palabras as $palabra) {
             if ($palabra !== '') {
+                // Para cada palabra, nos quedamos con la primera letra y la transformamos a mayúscula
                 $iniciales .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -74,9 +74,10 @@
 
         $valores = "nombre = \"$nombre\", DNI = \"$datos->dni\"";
 
-        // Si el usuario introduce un telefono
+        // Si el usuario no ha introducido un teléfono
         if($datos->telefono != null)
             $valores .= ", telefono = $datos->telefono";
+        // Si el usuario ha introducido un teléfono
         else
             $valores .= ", telefono = null";
 
@@ -86,44 +87,44 @@
             $valores .= ", contrasena = \"$contraseña\"";
         }
 
-        // Si el usuario ha elegido una imagen
+        // Si el usuario ha elegido un archivo como foto de perfil
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
-            // Obtener extensión real
+            // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
             // Lista de extensiones permitidas
             $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
-
+            // Si la extensión del archivo es una extensión válida de foto
             if (in_array(strtolower($ext), $extPermitidas)) {
-
-                // Generar nombre único
+                // Generar nombre único para la foto
                 $nombreFinal = uniqid("img_") . "." . $ext;
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
 
-                // Ruta de la base de datos (para mostrar en HTML)
+                // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
-
+                // Si podemos mover la foto a la ruta del servidor
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-                    // Borramos la foto antigua antes de actualizar la base de datos
+                    // Obtenemos la foto anterior antes de actualizar la base de datos
                     $fotoAntigua = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0]['foto'];
                     // Si la foto anterior existe y no es la foto por defecto de perfil vacío
                     if ($fotoAntigua && $fotoAntigua != "/imagenes/blank-profile-picture.png") {
                         $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
                         if (file_exists($rutaFotoAntigua)) {
+                            // Borramos del servidor la foto anterior
                             unlink($rutaFotoAntigua);
                         }
                     }
                     // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
                     $valores .= ", foto = '$rutaBD'";
-
+                // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
                 }
-
+            // Si la extensión del archivo no es una extensión válida de foto
             } else {
                 echo "Formato de imagen no permitido";
             }
@@ -145,11 +146,14 @@
     // Datos que vamos a mostrar
     $fecha = new DateTime();
     // Formato de fecha en español
-    $formatter = new IntlDateFormatter(
+    $formatoFecha = new IntlDateFormatter(
+        // fecha en español
         'es_ES',
+        // Formato Martes, 12 de abril de 1952 d. C. o 15:30:42 h (hora del Pacífico)
         IntlDateFormatter::FULL,
         IntlDateFormatter::NONE
     );
+    // Guardamos las iniciales del nombre completo del usuario
     $iniciales = iniciales($cliente['nombre']);
 
     // Si ha habido algún error, lo mostramos antes que la información principal de la página
@@ -164,11 +168,12 @@
 
     <!-- El contenido principal de la página será la segunda columna -->
     <main class="main">
+        <!-- BIENVENIDA -->
         <div class="welcome-bar">
             <div class="welcome-avatar"><?php echo "$iniciales"; ?></div>
             <div class="welcome-text">
                 <h1>Bienvenida/o, <?php echo "$cliente[nombre]"; ?></h1>
-                <p>Hoy es <?php echo $formatter->format($fecha);?></p>
+                <p>Hoy es <?php echo $formatoFecha->format($fecha);?></p>
             </div>
             <span class="badge badge-green">
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
@@ -263,7 +268,8 @@
                 </div>
             </form>
         </div>
-    </div>
+    </main>
+    <!-- Cerramos la sección principal, creada en navCliente.php -->
 </div>
     
 <?php
