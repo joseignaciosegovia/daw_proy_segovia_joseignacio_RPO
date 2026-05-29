@@ -16,6 +16,7 @@
 
     // Actualizamos el título de la página
     $titulo = "Login Intranet · Moral de Calatrava";
+    
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";    

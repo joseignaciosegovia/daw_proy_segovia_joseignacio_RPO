@@ -1,8 +1,7 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['administrador']);
         unset($_SESSION['gestor']);
@@ -46,8 +45,6 @@
     // Si hemos iniciado sesión como gestor y el gestor es administrador
     if(!empty($_SESSION["gestor"]) && !empty($_SESSION["administrador"])){
         $crud = new Crud(new DB("proyecto"));
-        $pistas = $crud->listar("*", "pistas", "");
-        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
         $gestores = $crud->listar("*", "gestores", "");
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
         $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
@@ -62,9 +59,9 @@
         );
         // Guardamos las iniciales del nombre completo del gestor
         $iniciales = iniciales($gestor['nombre']);
+
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
-    <!-- Creamos un container en el que estará la barra de navegación y el contenido principal de la página -->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
     <main class="main">
         <!-- BIENVENIDA -->
         <div class="welcome-bar">
@@ -77,7 +74,6 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
                 <div class="seccionSubtitulo mb-4">
@@ -113,6 +109,7 @@
                                 <td><?php echo $gestor['DNI'] ?></td>
                                 <td><?php echo $gestor['telefono'] ?></td>
                                 <td><?php 
+                                    // Si el gestor es también administrador lo indicamos
                                     if($gestor['administrador'] == 1)
                                         echo "Sí";
                                     else

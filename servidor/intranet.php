@@ -1,5 +1,4 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -76,7 +75,6 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
                 <div class="seccionSubtitulo mb-4">
