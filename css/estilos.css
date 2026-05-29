@@ -46,13 +46,11 @@
 .layout { 
     display: grid; 
     grid-template-columns: 350px 1fr; 
-    /* El layout se extiende hasta ocupar el alto de la página */
-    flex: 1;
+    flex: 1; /* El layout se extiende hasta ocupar el alto de la página */
 }
 /* Sección que incluye todo el cuerpo en las páginas de acceso */
 .acceso {
-    /* La sección se extiende hasta ocupar el alto de la página */
-    flex: 1;
+    flex: 1; /* La sección se extiende hasta ocupar el alto de la página */
 }
 body {
     background-color: #e0e0e0;

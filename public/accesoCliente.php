@@ -1,5 +1,4 @@
 <?php
-    ob_start(); // activa el buffer
     session_start();
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio
@@ -8,6 +7,8 @@
         exit();
     }
 
+    // Actualizamos el título de la página
+    $titulo = "Login · Moral de Calatrava";
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";
@@ -27,9 +28,6 @@
         header('Location: accesoCliente.php');
         exit;
     }
-
-    // Actualizamos el título de la página
-    $titulo = "Login · Moral de Calatrava";
 
     // Si pulsamos en el botón "Acceder"
     if (isset($_POST['login'])) {
@@ -125,8 +123,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="email" name='usuario' required>
-
+                                    <input type="email" class="form-control" placeholder="email" name='usuario' required>
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
@@ -153,7 +150,7 @@
                 }
             ?>
         </main>
-        <?php } 
+<?php } 
     // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>

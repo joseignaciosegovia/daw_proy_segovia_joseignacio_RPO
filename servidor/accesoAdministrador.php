@@ -14,6 +14,8 @@
         die();
     }
 
+    // Actualizamos el título de la página
+    $titulo = "Login Intranet · Moral de Calatrava";
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";    
@@ -27,9 +29,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <?php }
 
-    // Actualizamos el título de la página
-    $titulo = "Login Intranet · Moral de Calatrava";
-
     // Si pulsamos el botón de "Acceder
     if (isset($_POST['login'])) {
         // Trimamos los datos
@@ -37,7 +36,6 @@
         $contraseña = trim($_POST['pass']);
 
         $crud = new Crud(new DB("proyecto"));
-
         // Comprobamos si existe un gestor con el usuario y la contraseña introducidos
         $gestor = $crud->isValido("gestores", $email, $contraseña);
         // Si no existe el gestor
@@ -45,18 +43,18 @@
             unset($_POST['login']);
             error("Credenciales Inválidas");
         }
-
+        // Si existe el gestor
         else {
-            // Si el acceso es correcto
             $_SESSION['gestor'] = $email;
             // Si el gestor también es administrador
             if($gestor['administrador'] == 1)
                 $_SESSION['administrador'] = $email;
+            // Si el gestor no es administrador
             else
                 $_SESSION['administrador'] = null;
             header('Location: intranet.php');
         }
-        
+    // Si no pulsamos el botón de "Acceder", mostramos la página
     } else {
         // Cargamos la cabecera
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
@@ -67,7 +65,7 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-header text-center">
                             <h1>Iniciar sesión como gestor</h1>
-                            <a class="btn btn-secondary  w-auto" href="../index.php">Página de inicio</a>
+                            <a class="btn btn-secondary w-auto" href="../index.php">Página de inicio</a>
                         </div>
                         <div class="card-body">
                             <form name='login' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
@@ -75,7 +73,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="email" name='usuario' required>
+                                    <input type="email" class="form-control" placeholder="email" name='usuario' required>
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
@@ -102,7 +100,7 @@
                 }
             ?>
         </main>
-        <?php } 
+<?php } 
     // Cargamos el pie
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
 ?>
