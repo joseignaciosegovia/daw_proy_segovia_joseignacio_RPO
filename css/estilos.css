@@ -2,6 +2,7 @@
 #cabecera {
     background-color: #1B3A6B;
 }
+/* Logo de la página */
 #cabecera img {
     height: 45px;
     width: auto;
@@ -11,24 +12,14 @@
     font-size: 20px; 
     font-weight: 600; 
 }
+/* Ponemos el texto del título en blanco */
+#cabecera a {
+    color: white;
+}
 /* Subtítulo de la cabecera */
 .cabeceraSubtitulo { 
     font-size: 15px; 
     color: rgba(255,255,255,0.5); 
-}
-/* Botón hamburguesa en la cabecera (solo se muestra en pantallas de móvil) */
-#btnMenu {
-    display: none !important;
-    background: none !important;
-    border: none !important;
-    color: white !important;
-    font-size: 28px;
-    cursor: pointer;
-    padding: 0;
-}
-/* Ponemos el texto del título en blanco */
-#cabecera a {
-    color: white;
 }
 /* Botón de la cabecera "Intranet" */
 #cabecera .btn-intranet {
@@ -41,37 +32,22 @@
 #cabecera .btn-intranet:hover { 
     background: #e8eef7; 
 }
-
-/* Div layout en el que se encuentra el cuerpo */
-.layout { 
-    display: grid; 
-    grid-template-columns: 350px 1fr; 
-    flex: 1; /* El layout se extiende hasta ocupar el alto de la página */
-}
-/* Sección que incluye todo el cuerpo en las páginas de acceso */
-.acceso {
-    flex: 1; /* La sección se extiende hasta ocupar el alto de la página */
-}
-body {
-    background-color: #e0e0e0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-.main { 
-    padding: 1.25rem; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 1rem; 
-    min-width: 0;
+/* Botón hamburguesa en la cabecera (solo se muestra en pantallas de móvil) */
+#btnMenu {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    color: white !important;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
 }
 
 /* --- BARRA DE NAVEGACIÓN --- */
 .sidebar { 
     background: #1B3A6B; 
     padding: 1rem 0; 
-    /* se estira con el layout */
-    min-height: 100%; 
+    min-height: 100%; /* se estira con el layout */ 
 }
 /* Secciones de la barra de navegación */
 .nav-section { 
@@ -83,8 +59,7 @@ body {
 }
 /* Cada enlace de la barra de navegación */
 .sidebar .nav-item { 
-    /* Quita la decoración de los enlaces en el nav */
-    text-decoration: none;
+    text-decoration: none; /* Quita la decoración de los enlaces en el nav */
     display: flex; 
     align-items: center; 
     gap: 10px; 
@@ -111,7 +86,8 @@ body {
     font-size: 16px; 
     opacity: 0.8; 
 }
-.user-chip { 
+/* Sección con los datos del usuario dentro de la barra de navegación */
+.nav-usuario { 
     display: flex; 
     align-items: center; 
     gap: 8px; 
@@ -134,40 +110,49 @@ body {
     color: white; 
     flex-shrink: 0; 
 }
-.user-chip span { 
+/* Nombre del usuario/gestor */
+.nav-usuario span { 
     font-size: 13px; 
     color: white; 
     font-weight: 500;
 }
-.user-chip small { 
+/* Texto debajo del nombre de usuario/gestor */
+.nav-usuario small { 
     font-size: 11px; 
     color: rgba(255,255,255,0.6); 
     display: block; 
 }
 
+/* --- CUERPO --- */
+/* Div layout en el que se encuentra el cuerpo */
+.layout { 
+    display: grid; 
+    grid-template-columns: 350px 1fr; 
+    flex: 1; /* El layout se extiende hasta ocupar el alto de la página */
+}
+/* Sección que incluye todo el cuerpo en las páginas de acceso */
+.acceso {
+    flex: 1; /* La sección se extiende hasta ocupar el alto de la página */
+}
+body {
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main { 
+    padding: 1.25rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+    min-width: 0;
+}
+/* Sección principal de la página, después de la bienvenida */
 .card {
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
-.cards-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
-}
-.stat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; }
-.stat-card .label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
-.stat-card .value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.stat-card .sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
-.stat-card.accent { border-left: 3px solid #1d9e75; }
-.section-title { font-size: 15px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-.section-title a { font-size: 12px; color: #185fa5; cursor: pointer; font-weight: 400; }
 
-#informacionPrincipal {
-    background-color: #1B3A6B;
-    color: white;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-/* Inputs y su placeholder */
+/* --- INPUTS Y SU PLACEHOLDER */
 input[type=text] {
     background-color: white;
 }
@@ -206,6 +191,7 @@ h1 {
     margin-left: auto;
 }
 
+/* --- CALENDARIO --- */
 /* Leyenda del calendario */
 #leyenda span {
     margin-right: 15px;
@@ -218,21 +204,20 @@ h1 {
     margin-right: 5px;
     border-radius: 2px;
 }
-
 /* Color por defecto de las franjas de tiempo del calendario */
 .fc .fc-timegrid-body .fc-timegrid-cols .fc-timegrid-col {
     background-color: #4EB272;
 }
-/* Pintamos de blando el fondo de la columna que indica las horas */
+/* Pintamos de blanco el fondo de la columna que indica las horas */
 .fc .fc-timegrid-axis {
     background-color: #ffffff !important;
 }
-
 /* Ponemos el ratón encima de las pistas */
 .accordion-body:hover {
     background-color: #E0E0E0;
 }
 
+/* Scroll lateral a las tablas */
 .table-responsive table {
     overflow-x: auto !important;
 }

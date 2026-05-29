@@ -12,7 +12,7 @@
     function añadirScriptsCabecera(){
 ?>
         <script type="module" src="/js/validacion.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/estilosDatosPistas.css">
+        <link rel="stylesheet" type="text/css" href="/css/estilosIndex.css">
 <?php }
 
     // Función para añadir scripts en el pie

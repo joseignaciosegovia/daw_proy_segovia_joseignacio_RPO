@@ -1,7 +1,7 @@
 <div class="overlay" id="overlay" onclick="desplegarMenu()"></div>
 <div class="layout" id="seccionPrincipal">
     <nav class="sidebar" aria-label="Menú principal">
-        <div class="user-chip">
+        <div class="nav-usuario">
             <!-- Mostramos el nombre y la foto de perfil del gestor que ha iniciado sesión -->
             <div class="avatar"><img class="rounded-circle" src="<?php echo $gestor['foto'] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;"></div>
             <div>

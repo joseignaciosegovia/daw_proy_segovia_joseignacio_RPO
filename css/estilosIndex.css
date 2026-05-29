@@ -1,3 +1,10 @@
+/* Columna izquierda */
+#informacionPrincipal {
+    background-color: #1B3A6B;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 /* Sección con los datos de las pistas */
 .datosPistas { 
     display: grid; 
