@@ -1,5 +1,4 @@
 <?php
-    //ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
@@ -45,7 +44,6 @@
 
     // Si hemos iniciado sesión como gestor
     if(!empty($_SESSION["gestor"])){
-
         $crud = new Crud(new DB("proyecto"));
         $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
@@ -62,8 +60,8 @@
         // Guardamos las iniciales del nombre completo del gestor
         $iniciales = iniciales($gestor['nombre']);
 
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
