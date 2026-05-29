@@ -133,7 +133,7 @@
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
                     // Obtenemos la foto anterior antes de actualizar la base de datos
                     $crud = new Crud(new DB("proyecto"));
-                    $fotoAntigua = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0]['foto'];
+                    $fotoAntigua = $crud->obtener("gestores", "where email = \"$datos->email\"")[0]['foto'];
                     // Si la foto anterior existe y no es la foto por defecto de perfil vacío
                     if ($fotoAntigua && $fotoAntigua != "/imagenes/blank-profile-picture.png") {
                         $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
