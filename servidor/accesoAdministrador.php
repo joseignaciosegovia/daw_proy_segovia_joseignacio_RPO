@@ -1,4 +1,5 @@
 <?php
+    ob_start(); // activa el buffer
     session_start();
 
     // Si ya hemos iniciado sesión como gestor, redirigimos a la página de gestión

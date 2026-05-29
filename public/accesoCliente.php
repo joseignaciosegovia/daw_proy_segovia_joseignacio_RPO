@@ -1,4 +1,5 @@
 <?php
+    ob_start(); // activa el buffer
     session_start();
 
     // Si ya hemos iniciado sesión como cliente, volvemos a la página de inicio

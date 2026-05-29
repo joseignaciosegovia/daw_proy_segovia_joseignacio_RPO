@@ -83,7 +83,7 @@
                     <i class="ti ti-plus" aria-hidden="true"></i>
                     <div>
                         <h2>Detalles de la reserva</h2>
-                        <small class="text-muted">Consulta los datos de la reserva que acaba de realizar</small>
+                        <small class="text-muted">Consulta los datos de la reserva que acabas de realizar</small>
                     </div>
                 </div>
                 <div class="accordion accordion-flush">
