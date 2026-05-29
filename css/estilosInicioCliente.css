@@ -1,11 +1,3 @@
-/* Contenedor principal del dashboard */
-.dash {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
 /* --- ENCABEZADOS DE SECCIÓN --- */
 .seccionSubtitulo {
     display: flex;
@@ -13,7 +5,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
-
+/* Títulos de las secciones */
 .seccionSubtitulo span {
     font-size: 12px;
     font-weight: 500;
@@ -24,7 +16,7 @@
     align-items: center;
     gap: 5px;
 }
-
+/* Enlaces de las secciones */
 .seccionSubtitulo a {
     font-size: 12px;
     color: #2A71B2;
@@ -34,42 +26,33 @@
     gap: 4px;
     transition: opacity 0.15s;
 }
-
+/* Ponemos el ratón encima de los enlaces de las secciones */
 .seccionSubtitulo a:hover {
     opacity: 0.75;
 }
 
-/* --- GRIDS --- */
+/* --- SECCIONES QUE CONTIENEN LAS TARJETAS --- */
+/* Secciones con dos tarjetas */
 .dash-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
 }
 
+/* --- TARJETAS --- */
+/* --- TARJETA QUE OCUPA TODO EL ANCHO (LA DE INCIDENCIAS) --- */
 .dash-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
 }
 
-/* --- TARJETAS --- */
+/* --- PRIMERA TARJETA DE LAS SECCIONES QUE TIENEN DOS TARJETAS --- */
 .dash-card {
     background: #30302E;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 14px 16px;
-}
-/* Borde verde */
-.dash-card-accent {
-    border-left: 3px solid #1D9E75;
-}
-/* Borde azul */
-.dash-card-accent-blue {
-    border-left: 3px solid #185FA5;
-}
-/* Borde ámbar */
-.dash-card-accent-amber {
-    border-left: 3px solid #BA7517;
 }
 /* Etiqueta de la tarjeta */
 .dash-card .lbl {
@@ -103,7 +86,8 @@
     align-items: center;
     gap: 4px;
 }
-/* --- PRÓXIMA RESERVA --- */
+
+/* --- TARJETA DE RESERVA FUTURA (LA SEGUNDA DE LA PRIMERA SECCIÓN) --- */
 .next-card {
     display: flex;
     gap: 14px;
@@ -126,19 +110,29 @@
     font-size: 20px;
     color: #185FA5;
 }
-/* Información */
+/* Información de la reserva futura */
 .next-info {
     flex: 1;
 }
-/* Etiquetas */
+/* Etiquetas de la reserva futura */
 .pill-row {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
     margin-top: 8px;
 }
+/* Etiqueta azul */
+.badge-blue {
+    background: #E6F1FB;
+    color: #185FA5;
+}
+/* Etiqueta ambar */
+.badge-amber {
+    background: #FAEEDA;
+    color: #854F0B;
+}
 
-/* --- INSTALACIONES --- */
+/* --- TARJETA CON INFORMACIÓN DE INSTALACIONES (LA SEGUNDA DE LA ÚLTIMA SECCIÓN --- */
 /* Datos de las instalaciones */
 .info-row {
     display: flex;
@@ -150,6 +144,7 @@
 .info-row:last-child {
     border-bottom: none;
 }
+/* Primera columna de la tarjeta */
 .info-lbl {
     font-size: 13px;
     color: #BBB8A2;
@@ -157,22 +152,25 @@
     align-items: center;
     gap: 6px;
 }
+/* Segunda columna de la tarjeta */
 .info-val {
     font-size: 13px;
     font-weight: 500;
     color: white;
 }
 
-/* --- ETIQUETAS --- */
-/* Etiqueta azul */
-.badge-blue {
-    background: #E6F1FB;
-    color: #185FA5;
+/* --- BORDES --- */
+/* Borde verde */
+.dash-card-accent {
+    border-left: 3px solid #1D9E75;
 }
-/* Etiqueta ambar */
-.badge-amber {
-    background: #FAEEDA;
-    color: #854F0B;
+/* Borde azul */
+.dash-card-accent-blue {
+    border-left: 3px solid #185FA5;
+}
+/* Borde ámbar */
+.dash-card-accent-amber {
+    border-left: 3px solid #BA7517;
 }
 
 /* --- RESPONSIVE --- */
@@ -187,18 +185,6 @@
 
     /* Tarjetas con span inline */
     .dash-card {
-        grid-column: span 1 !important;
-    }
-}
-
-@media (max-width: 640px) {
-    .dash-grid-3 {
-        grid-template-columns: 1fr;
-    }
-    .dash-grid-2 {
-        grid-template-columns: 1fr;
-    }
-    .dash-card[style*="grid-column: span 2"] {
         grid-column: span 1 !important;
     }
 }
