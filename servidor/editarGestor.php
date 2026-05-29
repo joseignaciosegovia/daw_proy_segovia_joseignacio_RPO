@@ -1,5 +1,4 @@
 <?php
-    //ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
@@ -28,7 +27,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     use Clases\DB;
 
-    // Si pulsamos el botón de borrar
+    // Si pulsamos el botón de Borrar
     if (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
         $crud->eliminar("gestores", "where email = \"$_GET[Borrar]\"");
@@ -76,7 +75,7 @@
         $nombre = ucwords($nombre); 
     }
 
-    // Si pulsamos el botón de actualizar
+    // Si pulsamos el botón de Actualizar
     if (isset($_POST['Actualizar'])) {
         $datos = json_decode($_POST['Actualizar']);
      
@@ -91,6 +90,7 @@
         // Si el gestor introduce un telefono
         if($datos->telefono != null)
             $valores .= ", telefono = $datos->telefono";
+        // Si el gestor no introduce un telefono
         else
             $valores .= ", telefono = null";
 
@@ -100,51 +100,51 @@
             $valores .= ", contrasena = \"$contraseña\"";
         }
 
-        // Si el gestor ha elegido una imagen
+        // Si el gestor ha elegido un archivo como foto de perfil
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
-            // Obtener extensión real
+            // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
             // Lista de extensiones permitidas
             $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
-
+            // Si la extensión del archivo es una extensión válida de foto
             if (in_array(strtolower($ext), $extPermitidas)) {
-
-                // Generar nombre único
+                // Generar nombre único para la foto
                 $nombreFinal = uniqid("img_") . "." . $ext;
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
 
-                // Ruta de la base de datos (para mostrar en HTML)
+                // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
-
+                // Si podemos mover la foto a la ruta del servidor
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-                    // Borramos la foto antigua antes de actualizar la base de datos
+                    // Obtenemos la foto anterior antes de actualizar la base de datos
                     $crud = new Crud(new DB("proyecto"));
                     $fotoAntigua = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0]['foto'];
                     // Si la foto anterior existe y no es la foto por defecto de perfil vacío
                     if ($fotoAntigua && $fotoAntigua != "/imagenes/blank-profile-picture.png") {
                         $rutaFotoAntigua = __DIR__ . "/.." . $fotoAntigua;
                         if (file_exists($rutaFotoAntigua)) {
+                            // Borramos del servidor la foto anterior
                             unlink($rutaFotoAntigua);
                         }
                     }
-                    // Añadimos la ruta de la imagen para actualizar el cliente en la base de datos
+                    // Añadimos la ruta de la imagen para actualizar el gestor en la base de datos
                     $valores .= ", foto = '$rutaBD'";
-
+                // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
                 }
-
+            // Si la extensión del archivo no es una extensión válida de foto
             } else {
                 echo "Formato de imagen no permitido";
             }
         }
 
-        // Actualizamos el perfil en la base de datos
+        // Actualizamos el perfil del gestor en la base de datos
         $crud = new Crud(new DB("proyecto"));
         $condicion = "where email = \"$datos->email\"";
         $crud->actualizar("gestores", $valores, $condicion);
@@ -166,9 +166,9 @@
         );
         // Guardamos las iniciales del nombre completo del gestor
         $iniciales = iniciales($gestor['nombre']);
-    
+
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
     <main class="main">
         <!-- BIENVENIDA -->
         <div class="welcome-bar">
@@ -181,7 +181,6 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
                 <div class="seccionSubtitulo mb-4">
@@ -195,7 +194,7 @@
                     <div class="row mt-2">
                         <div class="col-12 col-sm-6">
                             <label for="nombre" class="labels">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>" placeholder="Nombre completo">
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>" placeholder="Nombre completo" required>
                             <div class="invalid-feedback">
                                 Introduzca un nombre válido
                             </div>
@@ -205,7 +204,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="dni" class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>" placeholder="12345678A">
+                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>" placeholder="12345678A" required>
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
                             </div>

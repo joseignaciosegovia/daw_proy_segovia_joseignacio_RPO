@@ -132,7 +132,7 @@
 
         $condicion = "where email = \"$_SESSION[cliente]\"";
 
-        // Actualizamos el perfil en la base de datos
+        // Actualizamos el perfil del cliente en la base de datos
         $crud->actualizar("clientes", $valores, $condicion);
     }
     
