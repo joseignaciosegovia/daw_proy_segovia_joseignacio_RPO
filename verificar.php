@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
 ?>
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 verificar">
         <div class="p-3 py-4">
             <div class="seccionSubtitulo mb-4">
 <?php

@@ -1,3 +1,4 @@
+/* --- SECCIÓN DE SUBTÍTULO --- */
 .seccionSubtitulo {
     display: flex;
     align-items: center;
@@ -7,26 +8,19 @@
     border-left: 4px solid var(--bs-primary);
     border-radius: 0.5rem;
 }
-
+/* Icono del subtítulo */
 .seccionSubtitulo i {
     font-size: 1.75rem;
     color: var(--bs-primary);
 }
-/* En algunas páginas hay que usar h1 en vez de h2 porque no hay título de bienvenida */
-.seccionSubtitulo h1 {
+/* Texto del subtítulo */
+.seccionSubtitulo h1, .seccionSubtitulo h2 {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
     color: #1a1a2e;
 }
-
-.seccionSubtitulo h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1a1a2e;
-}
-
+/* Texto secundario del subtítulo */
 .seccionSubtitulo small {
     font-size: 0.82rem;
 }
