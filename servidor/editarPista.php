@@ -1,5 +1,4 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
@@ -63,7 +62,7 @@
     // Guardamos las iniciales del nombre completo del gestor
     $iniciales = iniciales($gestor['nombre']);
 
-    // Si pulsamos el botón de borrar
+    // Si pulsamos el botón de Borrar
     if (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
         $crud->eliminar("pistas", "where id = $_GET[Borrar]");
@@ -80,7 +79,7 @@
         <script type="module" src="/js/borrarPista.js"></script>
 <?php }
 
-    // Si pulsamos el botón de actualizar
+    // Si pulsamos el botón de Actualizar
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
@@ -90,17 +89,18 @@
         // Actualizamos el perfil en la base de datos
         $crud = new Crud(new DB("proyecto"));
         $crud->actualizar("pistas", $valores, $condicion);
-
+        // Volvemos a guardar el nombre de la pista para mostrar la página
         $_GET['pista'] = $datos->nombre;
     }
 
-    // Si se obtiene la variable "pista" (pulsando el botón "Editar" de intranet.php)
+    // Si se obtiene la variable "pista" (pulsando el botón "Editar" de intranet.php), mostramos la página
     if(isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
         $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0];
+
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
     
 ?>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
     <main class="main">
         <!-- BIENVENIDA -->
         <div class="welcome-bar">
@@ -113,7 +113,6 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
-
         <div class="card shadow-sm border-0">
             <div class="p-3 py-4">
                 <div class="seccionSubtitulo mb-4">
@@ -157,7 +156,7 @@
                                         foreach($localizaciones as $localizacion){
                                             // Añadimos cada localización al select
                                             echo "<option value=\"$localizacion[localizacion]\"";
-                                            // La opción indicada por defecto será la localización de la pista
+                                            // La opción indicada por defecto será la localización actual de la pista
                                             if($pista['localizacion'] == $localizacion['localizacion']){
                                                 echo " selected";
                                             }
@@ -171,7 +170,7 @@
                             <button class="btn btn-success profile-button" type="submit" name="Actualizar">Actualizar pista</button>
                             <button class="btn btn-danger profile-button" name="Borrar" id="borrar">Borrar pista</button>
                         </div>
-                        <!-- Campo oculto para guardar el id de la pista para poder actualizarlo -->
+                        <!-- Campo oculto para guardar el id de la pista para poder actualizarla -->
                         <input id="id" type="hidden" value="<?php echo "$pista[id]"?>">
                     </div>
                 </form>
