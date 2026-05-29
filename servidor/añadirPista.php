@@ -1,5 +1,4 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
@@ -64,7 +63,7 @@
     // Guardamos las iniciales del nombre completo del gestor
     $iniciales = iniciales($gestor['nombre']);
 
-    // Si pulsamos el botón de crear pista
+    // Si pulsamos el botón de Crear pista
     if (isset($_POST['datos'])) {
         $datos = json_decode($_POST['datos']);
 
@@ -75,9 +74,10 @@
         $crud->insertarColumnas("pistas", "(nombre, localizacion, precioReserva)", $valores);
         header("Location: intranet.php");
     }
+    // Si no pulsamos el botón de Crear pista, mostramos la página
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 
 ?>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -90,7 +90,6 @@
                     <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
                 </span>
             </div>
-            
             <div class="card shadow-sm border-0">
                 <div class="p-3 py-4">
                     <div class="seccionSubtitulo mb-4">
