@@ -14,7 +14,7 @@
     }
 
     // Si no hemos llegado a esta página de las maneras adecuadas, volvemos a intranet.php
-    if (!isset($_POST['Actualizar']) && !isset($_GET['Borrar']) && ! isset($_GET['gestor'])) {
+    if (!isset($_POST['Actualizar']) && !isset($_GET['Borrar']) && ! isset($_GET['gestorEditar'])) {
         header('Location: intranet.php');
         die();
     }
@@ -30,6 +30,16 @@
     // Si pulsamos el botón de Borrar
     if (isset($_GET['Borrar'])) {
         $crud = new Crud(new DB("proyecto"));
+        $foto = $crud->obtener("gestores", "where email = \"$_GET[Borrar]\"")[0]['foto'];
+        // Si la foto anterior existe y no es la foto por defecto de perfil vacío
+        if ($foto && $foto != "/imagenes/blank-profile-picture.png") {
+            $rutaFoto = __DIR__ . "/.." . $foto;
+            if (file_exists($rutaFoto)) {
+                // Borramos del servidor la foto
+                unlink($rutaFoto);
+            }
+        }
+        // Borramos el gestor de la base de datos
         $crud->eliminar("gestores", "where email = \"$_GET[Borrar]\"");
         header("Location: administrarGestores.php");
         exit();
@@ -150,11 +160,13 @@
         $crud->actualizar("gestores", $valores, $condicion);
     }
 
-    // Si se obtiene la variable "gestor" (pulsando el botón "Editar gestor" de intranet.php)
-    if(isset($_GET['gestor'])) {
+    // Si se obtiene la variable "gestorEditar" (pulsando el botón "Editar gestor" de administrarGestores.php)
+    if(isset($_GET['gestorEditar'])) {
         $crud = new Crud(new DB("proyecto"));
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
-        $gestor = $crud->obtener("gestores", "where email = \"$_GET[gestor]\"")[0];
+        $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
+        // Guardamos los datos del gestor que vamos a editar
+        $gestorEditar = $crud->obtener("gestores", "where email = \"$_GET[gestorEditar]\"")[0];
         $fecha = new DateTime();
         // Formato de fecha en español
         $formatoFecha = new IntlDateFormatter(
@@ -186,15 +198,15 @@
                 <div class="seccionSubtitulo mb-4">
                     <i class="ti ti-user"></i>
                     <div>
-                        <h2>Gestor/a <?php echo "$gestor[nombre]" ?></h2>
-                        <small class="text-muted">Modifica los datos del gestor <?php echo "$gestor[nombre]" ?></small>
+                        <h2>Gestor/a <?php echo "$gestorEditar[nombre]" ?></h2>
+                        <small class="text-muted">Modifica los datos del gestor <?php echo "$gestorEditar[nombre]" ?></small>
                     </div>
                 </div>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestor=" . $gestor['email']; ?>" name="editarGestor">
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?gestorEditar=" . $gestorEditar['email']; ?>" name="editarGestor">
                     <div class="row mt-2">
                         <div class="col-12 col-sm-6">
                             <label for="nombre" class="labels">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestor['nombre'] ?>" placeholder="Nombre completo" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $gestorEditar['nombre'] ?>" placeholder="Nombre completo" required>
                             <div class="invalid-feedback">
                                 Introduzca un nombre válido
                             </div>
@@ -204,7 +216,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="dni" class="labels">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestor['DNI'] ?>" placeholder="12345678A" required>
+                            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Z]" value="<?php echo $gestorEditar['DNI'] ?>" placeholder="12345678A" required>
                             <div class="invalid-feedback">
                                 Introduzca un DNI válido
                             </div>
@@ -241,7 +253,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label for="telefono" class="labels">Teléfono (opcional)</label>
-                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestor['telefono'] ?>" placeholder="600 000 000">
+                            <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9}" value="<?php echo $gestorEditar['telefono'] ?>" placeholder="600 000 000">
                             <div class="invalid-feedback">
                                 Introduzca un teléfono válido
                             </div>
@@ -252,7 +264,7 @@
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                             <label for="foto" class="labels">Foto de perfil (opcional)</label>
                             <div class="d-flex align-items-center gap-3 mb-2">
-                                <img class="rounded-circle" src="<?php echo $gestor["foto"] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;">
+                                <img class="rounded-circle" src="<?php echo $gestorEditar["foto"] ?>" alt="Foto de perfil" width="60" height="60" style="object-fit:cover;">
                                 <span class="text-muted small">Foto actual</span>
                             </div>
                             <input type="file" class="form-control" id="foto" name="foto">
@@ -268,8 +280,8 @@
                         <div class="col-12 col-sm-6">
                             <label for="administrador" class="labels">¿Es administrador?</label><br>
                             <select class="form-select" id="administrador">
-                                <option value="1" <?php if($gestor['administrador'] == 1) echo "selected" ?>>Sí</option>
-                                <option value="0" <?php if($gestor['administrador'] == 0) echo "selected" ?>>No</option>
+                                <option value="1" <?php if($gestorEditar['administrador'] == 1) echo "selected" ?>>Sí</option>
+                                <option value="0" <?php if($gestorEditar['administrador'] == 0) echo "selected" ?>>No</option>
                             </select>
                         </div>
                     </div>
@@ -277,11 +289,11 @@
                         <button class="btn btn-success profile-button" type="submit" name="Actualizar">Actualizar gestor</button>
                     </div>
                     <!-- Campo oculto para guardar el email del gestor para poder actualizarlo -->
-                    <input id="email" name="email" type="hidden" value="<?php echo "$gestor[email]"?>">
+                    <input id="email" name="email" type="hidden" value="<?php echo "$gestorEditar[email]"?>">
                 </form>
             
                 <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="Email" value="<?php echo $gestor['email']; ?>">
+                    <input type="hidden" name="Email" value="<?php echo $gestorEditar['email']; ?>">
                     <div class="mt-3 text-center">
                         <button class="btn btn-danger profile-button" type="submit" name="Borrar" value="1">Borrar gestor</button>
                     </div>

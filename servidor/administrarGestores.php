@@ -116,7 +116,7 @@
                                         echo "No";
                                 ?>
                                 </td>
-                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestor=$gestor[email]';\">Editar</button>"?></td>
+                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestorEditar=$gestor[email]';\">Editar</button>"?></td>
                             </tr>
                                 <?php 
                                     $cont++;
