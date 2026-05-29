@@ -18,7 +18,6 @@
 ?>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="/css/estilos.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
 <?php }
@@ -52,7 +51,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
 
-    // Si se obtiene la variable "pista" (pulsando el botón "Consultar reservas" de accesoAdministrador.php)
+    // Si se obtiene la variable "pista" (pulsando el botón "Calendario" de intranet.php)
     if (isset($_GET['pista'])) {
         $crud = new Crud(new DB("proyecto"));
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
@@ -72,14 +71,13 @@
         // Guardamos el id de la pista
         $pista = $crud->obtener("pistas", "where id = $_GET[pista]")[0]['nombre'];
 
-        $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
-
         // Guardamos las fechas ocupadas, el id de la pista y su nombre
         $reservasYPista = $crud->listar("*", "reservas", " WHERE pista = $_GET[pista]");
         $reservasYPista[] = $_GET['pista'];
         $reservasYPista[] = $pista;
+
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -104,10 +102,9 @@
                 
                     <!-- Ocultamos esta sección porque solo se utilizará para pasar información a JavaScript -->
                     <div id="calendario" hidden>
-                        <!-- Incluimos las fechas ocupadas y el nombre de la pista para que JavaScript pueda acceder a esta información -->
+                        <!-- Incluimos las fechas ocupadas, el nombre de la pista y su id para que JavaScript pueda acceder a esta información -->
                         <?php echo json_encode($reservasYPista) ?>
                     </div>
-                    
                 </div>
             </div>
             <div class="mt-2 text-start">
