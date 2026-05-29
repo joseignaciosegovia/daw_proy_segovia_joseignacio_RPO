@@ -75,7 +75,7 @@
     // Guardamos las iniciales del nombre completo del gestor
     $iniciales = iniciales($gestor['nombre']);
 
-    // Si pulsamos el botón de crear Gestor
+    // Si pulsamos el botón de Crear Gestor
     if (isset($_POST['Crear'])) {
         $datos = json_decode($_POST['Crear']);
      
@@ -90,44 +90,43 @@
         // Si el gestor introduce un telefono
         if($datos->telefono != null)
             $telefono = $datos->telefono;
+        // Si el gestor no introduce un telefono
         else
             $telefono = 'null';
 
-        // Si el gestor ha elegido una imagen
+        // Si el gestor ha elegido un archivo como foto de perfil
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
-            // Obtener extensión real
+            // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
             // Lista de extensiones permitidas
             $extPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
-
+            // Si la extensión del archivo es una extensión válida de foto
             if (in_array(strtolower($ext), $extPermitidas)) {
-
-                // Generar nombre único
+                // Generar nombre único para la foto
                 $nombreFinal = uniqid("img_") . "." . $ext;
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
 
-                // Ruta de la base de datos (para mostrar en HTML)
+                // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
-
+                // Si podemos mover la foto a la ruta del servidor
                 if (move_uploaded_file($nombreTmp, $rutaServidor)) {
-
                     // Añadimos la ruta de la imagen para añadirla al nuevo gestor en la base de datos
                     $foto = $rutaBD;
-
+                // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
                 }
-
+            // Si la extensión del archivo no es una extensión válida de foto
             } else {
                 echo "Formato de imagen no permitido";
             }
         }
-        // Si el usuario no introduce ninguna foto de perfil, se le asigna la foto de perfil vacío
+        // Si el gestor no introduce ninguna foto de perfil, se le asigna la foto de perfil vacío
         else
             $foto = "/imagenes/blank-profile-picture.png";
 
@@ -137,8 +136,9 @@
 
         header("Location: intranet.php");
     }
+    // Si no pulsamos el botón Crear Gestor, mostramos la página
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
