@@ -1,8 +1,7 @@
 <?php
-    // ob_start(); // activa el buffer
     session_start();
 
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['gestor']);
         unset($_SESSION['administrador']);
@@ -49,6 +48,7 @@
 
     // Variables relacionadas con la tabla de reservas
     $filasPorPagina = 10;
+    // Por defecto, estaremos en la página 1
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     $desplazamiento = ($pagina - 1) * $filasPorPagina;
     
@@ -82,9 +82,9 @@
         $nombre = $crud->listar("nombre", "gestores", "where email = \"$_SESSION[gestor]\"")[0]['nombre'];
 
         $reservas = $crud->listar("*", "reservas", "where pista = $_GET[pista] ORDER BY fecha, horaInicio ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
-?>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php"; ?>
-        
+
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
+?>      
         <main class="main">
             <!-- BIENVENIDA -->
             <div class="welcome-bar">
@@ -123,20 +123,23 @@
                     </div>
             <?php
                     $filasTotales = $crud->listar("count(*)", "reservas", "where pista = $_GET[pista]")[0]['count(*)'];
+                    // Redondeamos al número superior para saber cuántas páginas tendrá la tabla
                     $totalPaginas = ceil($filasTotales / $filasPorPagina);
                     $paginaSiguiente = $pagina + 1;
                     $paginaAnterior = $pagina - 1;
-
+                    // Si nos encontramos en una página que no sea la primera, mostramos una opción para volver a la página anterior
                     if ($pagina > 1){
                         echo "<a href=\"?pista=$_GET[pista]&pagina=$paginaAnterior\">← Anterior</a> ";
                     }
+                    // Mostramos la página en la que nos encontramos
                     echo "<span> Página $pagina de $totalPaginas </span>";
-
+                    // Si no estamos en la última página, mostramos una opción para ir a la siguiente
                     if ($pagina < $totalPaginas) {
                         echo " <a href=\"?pista=$_GET[pista]&pagina=$paginaSiguiente\">Siguiente →</a>";
                     }
             ?>
                     <div class="table-responsive">
+                        <!-- text-nowrap para que el texto de cada fila no ocupe más de una línea -->
                         <table class="table table-striped table-hover text-nowrap">
                             <thead>
                                 <tr>
@@ -165,9 +168,8 @@
                             }
                     ?>
                             <tr>
-                                <!-- Guardamos el id de la pista para poder actualizar la reserva desde actualizarCalendario.php -->
+                                <!-- Guardamos el id de la pista y de la reserva para poder actualizar la reserva desde actualizarCalendario.php -->
                                 <td hidden><?php echo $_GET['pista'] ?></td>
-                                <!-- Guardamos el id de la reserva para poder actualizarla desde actualizarCalendario.php -->
                                 <td hidden><?php echo $reserva['id'] ?></td>
                                 <td><?php echo $cont ?></td>
                                 <td><?php echo $reserva['fecha'] ?></td>
@@ -180,7 +182,7 @@
                                 $zonaHoraria = new DateTimeZone('Europe/Madrid');
                                 $fechaMadrid = new DateTime('now', $zonaHoraria);
                                 $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
-                                // Si la reserva no se ha pasado, el gestor podrá modificarla
+                                // Si todavía no se ha pasado la fecha de la reserva, el gestor podrá modificarla
                                 if($fechaReserva > $fechaActual) {
                                     echo "<td><button class=\"editarPista btn btn-warning\">Editar</button></td>";
                                 }

@@ -2,7 +2,7 @@
     // ob_start(); // activa el buffer
     session_start();
 
-    // Si pulsamos el botón de cerrar sesión, borramos la variable de sesión
+    // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
     if(isset($_GET['salir'])) {
         unset($_SESSION['gestor']);
         unset($_SESSION['administrador']);
