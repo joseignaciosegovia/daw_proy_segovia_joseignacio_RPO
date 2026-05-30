@@ -155,8 +155,7 @@
                                         $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
                                         // Si todavía no se ha pasado la fecha de reserva, se permite cancelarla
                                         if($fechaReserva > $fechaActual) {
-                                            // Guardamos el id de la reserva para poder cancelarla
-                                            //echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
+                                            // Guardamos el id de la reserva en un atributo personalizado para poder cancelarla en cancelaReserva.js
                                             echo "<td><button class=\"cancelarReserva btn btn-danger\" data-id=\"$reserva[id]\">Cancelar</button></td>";
                                         }
                                         else {
