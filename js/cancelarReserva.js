@@ -2,22 +2,22 @@ import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Recorremos todos los iconos de cancelar
-    for (const icono of document.querySelectorAll('.bi')) {
-        // Cada vez que pinchamos en uno de los iconos de cancelar, cancelamos la reserva asociada
-        $(icono).on('click', function(){
-            cancelarReserva(icono);
+    // Recorremos todos los botones de cancelar
+    for (const botonCancelar of document.querySelectorAll('.cancelarReserva')) {
+        // Cada vez que pinchamos en uno de los botones de cancelar, cancelamos la reserva asociada
+        $(botonCancelar).on('click', function(){
+            cancelarReserva(botonCancelar);
         });
     }
 });
 
 // Función para cancelar una reserva desde el cliente
-function cancelarReserva(icono) {
+function cancelarReserva(botonCancelar) {
     crearModal();
     // Obtenemos la información de la reserva que vamos a cancelar
-    const fecha = icono.parentNode.parentNode.childNodes[0].textContent;
-    const horaInicio = icono.parentNode.parentNode.childNodes[1].textContent;
-    const pista = icono.parentNode.parentNode.childNodes[3].textContent;
+    const fecha = botonCancelar.parentNode.parentNode.childNodes[0].textContent;
+    const horaInicio = botonCancelar.parentNode.parentNode.childNodes[1].textContent;
+    const pista = botonCancelar.parentNode.parentNode.childNodes[3].textContent;
 
     const modalTitulo = document.getElementsByClassName('modal-title')[0];
     // Borramos el título para no mostrarlo varias veces cada vez que se pulse el botón de cancelar reserva
@@ -62,7 +62,7 @@ function cancelarReserva(icono) {
     modal.show();
 
     cerrarModal(modal);
-    confirmarCancelacion(parseInt(icono.dataset.id));
+    confirmarCancelacion(parseInt(botonCancelar.dataset.id));
 }
 
 // Función que define el comportamiento del botón de confirmar la cancelación

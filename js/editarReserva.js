@@ -1,7 +1,6 @@
 import {crearModal, crearModalConfirmacion} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
-
     // Recorremos todos los botones de "Editar"
     for (const botonEditar of document.querySelectorAll('.editarPista')) {
         // Cada vez que pinchamos en uno de los botones de "Editar", editamos la reserva asociada

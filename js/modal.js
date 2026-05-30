@@ -26,7 +26,6 @@ function crearModal() {
 function cerrarModal(modal) {
     const botonCerrar = $('.modal-footer .btn-secondary');
     $(botonCerrar[0]).on('click', function(event) {
-  
         // Ocultamos el modal
         modal.hide();
   

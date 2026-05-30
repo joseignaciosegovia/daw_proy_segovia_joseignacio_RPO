@@ -121,55 +121,53 @@
                     echo " <a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
                 }
 ?>
-                <form method="post" action="../servidor/actualizarCalendario.php">
-                    <div class="table-responsive">
-                        <!-- text-nowrap para que el texto de cada fila no ocupe más de una línea -->
-                        <table class="table table-striped table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Hora de inicio</th>
-                                    <th scope="col">Hora de finalización</th>
-                                    <th scope="col">Pista</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col">Cancelar reserva</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    // Recorremos las reservas y las mostramos
-                                    foreach($reservas as $reserva){
-                                        // Guardamos el nombre de la pista para mostrarlo
-                                        $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
-                                        $precio = $crud->listar("precioReserva", "pistas", "where id = $reserva[pista]")[0]['precioReserva'];
-                                        echo "<tr>";
-                                            echo "<td>$reserva[fecha]</td>";
-                                            echo "<td>$reserva[horaInicio]</td>";
-                                            echo "<td>$reserva[horaFin]</td>";
-                                            echo "<td>$pista</td>";
-                                            echo "<td>$precio €</td>";
-                                            
-                                            $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
-                                            // Fecha actual con la hora de Madrid
-                                            $fechaMadrid = new DateTime('now', new DateTimeZone('Europe/Madrid'));
-                                            // Fecha actual con un formato que permita comparar con la fecha de la reserva
-                                            $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
-                                            // Si todavía no se ha pasado la fecha de reserva, se permite cancelarla
-                                            if($fechaReserva > $fechaActual) {
-                                                // Guardamos el id de la reserva para poder cancelarla
-                                                echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
-                                                //echo "<td><button class=\"cancelarReserva btn btn-danger\">Cancelar</button></td>";
-                                            }
-                                            else {
-                                                echo "<td>Fecha pasada</td>";
-                                            }
-                                        echo "</tr>";
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
+                <div class="table-responsive">
+                    <!-- text-nowrap para que el texto de cada fila no ocupe más de una línea -->
+                    <table class="table table-striped table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora de inicio</th>
+                                <th scope="col">Hora de finalización</th>
+                                <th scope="col">Pista</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cancelar reserva</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                // Recorremos las reservas y las mostramos
+                                foreach($reservas as $reserva){
+                                    // Guardamos el nombre de la pista para mostrarlo
+                                    $pista = $crud->obtener("pistas", "where id = $reserva[pista]")[0]['nombre'];
+                                    $precio = $crud->listar("precioReserva", "pistas", "where id = $reserva[pista]")[0]['precioReserva'];
+                                    echo "<tr>";
+                                        echo "<td>$reserva[fecha]</td>";
+                                        echo "<td>$reserva[horaInicio]</td>";
+                                        echo "<td>$reserva[horaFin]</td>";
+                                        echo "<td>$pista</td>";
+                                        echo "<td>$precio €</td>";
+                                        
+                                        $fechaReserva = $reserva['fecha'] . " " . $reserva['horaInicio'];
+                                        // Fecha actual con la hora de Madrid
+                                        $fechaMadrid = new DateTime('now', new DateTimeZone('Europe/Madrid'));
+                                        // Fecha actual con un formato que permita comparar con la fecha de la reserva
+                                        $fechaActual = $fechaMadrid->format('Y-m-d H:i:s');
+                                        // Si todavía no se ha pasado la fecha de reserva, se permite cancelarla
+                                        if($fechaReserva > $fechaActual) {
+                                            // Guardamos el id de la reserva para poder cancelarla
+                                            //echo "<td><i class=\"bi bi-x-circle\" data-id=\"$reserva[id]\"></i></td>";
+                                            echo "<td><button class=\"cancelarReserva btn btn-danger\" data-id=\"$reserva[id]\">Cancelar</button></td>";
+                                        }
+                                        else {
+                                            echo "<td>Fecha pasada</td>";
+                                        }
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
         <?php
             }
         ?>
