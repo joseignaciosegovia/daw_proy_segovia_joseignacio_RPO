@@ -37,7 +37,7 @@ function editarReserva(botonEditar) {
             <label for="horaFin">Hora de fin</label>
             <input type="time" id="horaFin" min="08:30" max="23:00" value=${botonEditar.parentNode.parentNode.childNodes[13].outerText}>
             <label for="informacion">Información de la reserva</label>
-            <input type="text" id="informacion" value=${botonEditar.parentNode.parentNode.childNodes[17].outerText}>
+            <textarea id="informacion">${botonEditar.parentNode.parentNode.childNodes[17].outerText}</textarea>
         </form>
     `);
 
@@ -84,8 +84,8 @@ function actualizarReserva() {
         // Datos necesarios para modificar una reserva
         let datosAEnviar = JSON.stringify({  
             fecha: document.getElementById("fecha").value,
-            horaInicio: document.getElementById("horaInicio").value + ":00", 
-            horaFin: document.getElementById("horaFin").value + ":00",
+            horaInicio: document.getElementById("horaInicio").value, 
+            horaFin: document.getElementById("horaFin").value,
             informacion: document.getElementById("informacion").value,
             id: document.getElementById("id").value
         });
