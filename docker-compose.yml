@@ -9,6 +9,7 @@ services:
       - "9003:9003" # Puerto para el depurador
     volumes:
       - ./:/var/www/html
+      - imagenes_data:/var/www/html/imagenes
     depends_on:
       - db
     environment:
@@ -34,3 +35,4 @@ services:
 
 volumes:
   db_data:
+  imagenes_data:
