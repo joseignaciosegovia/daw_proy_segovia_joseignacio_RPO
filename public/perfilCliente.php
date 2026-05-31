@@ -95,7 +95,7 @@
     error_log("DOCUMENT_ROOT: " . $_SERVER['DOCUMENT_ROOT']);
     error_log("__DIR__: " . __DIR__);
 
-    error_log("Ruta destino: " . $rutaServidor ?? "aún no definida");
+    
 
             // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
@@ -109,6 +109,7 @@
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
+                error_log("Ruta destino: " . $rutaServidor ?? "aún no definida");
 
                 // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
