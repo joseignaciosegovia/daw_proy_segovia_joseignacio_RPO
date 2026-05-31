@@ -47,3 +47,6 @@ WORKDIR /var/www/html
 # Ajustar permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+# Permisos para Dokploy
+RUN chown -R www-data:www-data /var/www/html/imagenes \
+    && chmod -R 775 /var/www/html/imagenes

@@ -91,12 +91,6 @@
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
-    error_log("FILES: " . print_r($_FILES, true));
-    error_log("DOCUMENT_ROOT: " . $_SERVER['DOCUMENT_ROOT']);
-    error_log("__DIR__: " . __DIR__);
-
-    
-
             // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
@@ -109,7 +103,6 @@
 
                 // Ruta en el servidor
                 $rutaServidor = __DIR__ . "/.." . "/imagenes/" . $nombreFinal;
-                error_log("Ruta destino: " . $rutaServidor ?? "aún no definida");
 
                 // Ruta de la base de datos
                 $rutaBD = "/imagenes/" . $nombreFinal;
@@ -130,16 +123,11 @@
                 // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
-                    error_log("FALLO move_uploaded_file - escribible: " . (is_writable(dirname($rutaServidor)) ? "SÍ" : "NO"));
                 }
             // Si la extensión del archivo no es una extensión válida de foto
             } else {
                 echo "Formato de imagen no permitido";
             }
-        }
-
-        else {
-            error_log("Error FILES foto: " . ($_FILES['foto']['error'] ?? 'no existe'));
         }
 
         $condicion = "where email = \"$_SESSION[cliente]\"";
