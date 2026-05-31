@@ -178,8 +178,6 @@
         );
         // Guardamos las iniciales del nombre completo del gestor
         $iniciales = iniciales($gestor['nombre']);
-        $a = __DIR__;
-        echo "$a";
 
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navGestor.php";
 ?>
