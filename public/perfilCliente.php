@@ -91,6 +91,12 @@
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $nombreTmp = $_FILES['foto']['tmp_name'];
 
+    error_log("FILES: " . print_r($_FILES, true));
+    error_log("DOCUMENT_ROOT: " . $_SERVER['DOCUMENT_ROOT']);
+    error_log("__DIR__: " . __DIR__);
+
+    error_log("Ruta destino: " . $rutaServidor ?? "aún no definida");
+
             // Obtenemos la extensión del archivo
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
@@ -128,6 +134,10 @@
             } else {
                 echo "Formato de imagen no permitido";
             }
+        }
+
+        else {
+            error_log("Error FILES foto: " . ($_FILES['foto']['error'] ?? 'no existe'));
         }
 
         $condicion = "where email = \"$_SESSION[cliente]\"";
