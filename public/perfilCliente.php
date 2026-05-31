@@ -130,6 +130,7 @@
                 // Si no se ha podido mover la foto al servidor
                 } else {
                     echo "Error al mover el archivo";
+                    error_log("FALLO move_uploaded_file - escribible: " . (is_writable(dirname($rutaServidor)) ? "SÍ" : "NO"));
                 }
             // Si la extensión del archivo no es una extensión válida de foto
             } else {
