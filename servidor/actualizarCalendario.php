@@ -23,6 +23,8 @@
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     use Clases\DB;
+    // Importamos config.php para poder enviar correos
+    require_once '../config.php';
 
     // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva
     if (isset($_POST['datos'])) {
@@ -43,7 +45,7 @@
         $editar = json_decode(($_POST['Confirmar']));
         $crud = new Crud(new DB("proyecto"));
         $reservaEditar = $crud->obtener("reservas", "where id = $editar->id")[0];
-        $pistaReserva = $crud->obtener("pistas", "where id = $editar->id");
+        $pistaReserva = $crud->obtener("pistas", "where id = $reservaEditar[pista]")[0];
         // Si venimos desde consultarReservas, la nueva reserva incluye la información
         if(property_exists($editar, "informacion"))
             $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\", informacion = \"$editar->informacion\"", "where id = $editar->id");
@@ -51,32 +53,36 @@
         else
             $crud->actualizar("reservas", "fecha = \"$editar->fecha\", horaInicio = \"$editar->horaInicio\", horaFin = \"$editar->horaFin\"", "where id = $editar->id");
 
-        $reservaNueva = $crud->obtener("reservas", "where id = $editar->id")[0];
-        // Se envía un email al usuario para avisarle del cambio
-        $body = json_encode([
-            'from'    => 'onboarding@resend.dev',
-            'to'      => [$reservaEditar->email],
-            'subject' => 'Verifica tu cuenta',
-            'html'    => "
-                <h2>Hola, $email</h2>
-                <p>Por diversos motivos, ha sido necesario modificar su reserva en horario $reservaEditar->fecha a la hora $reservaEditar->horaInicio en la pista $pistaReserva->nombre</p>
-                <p>Ahora la reserva tendrá la fecha $reservaNueva->fecha a la hora $reservaNueva->horaInicio (en la misma pista)</p>
-            ",
-        ]);
+        // Si ese horario lo reservó un cliente, le enviamos un email informándole de la modificación
+        if($reservaEditar['cliente'] != null) {
+            $reservaNueva = $crud->obtener("reservas", "where id = $editar->id")[0];
+            $cliente = $crud->obtener("clientes", "where email = \"$reservaNueva[cliente]\"")[0]['nombre'];
+            // Se envía un email al usuario para avisarle del cambio
+            $body = json_encode([
+                'from'    => 'onboarding@resend.dev',
+                'to'      => [$reservaEditar['cliente']],
+                'subject' => 'Modificación de su reserva',
+                'html'    => "
+                    <h2>Hola, $cliente</h2>
+                    <p>Por diversos motivos, ha sido necesario modificar su reserva en horario $reservaEditar[fecha] a la hora $reservaEditar[horaInicio] en la pista $pistaReserva[nombre]</p>
+                    <p>Ahora la reserva tendrá lugar en la fecha $reservaNueva[fecha] a la hora $reservaNueva[horaInicio] (en la misma pista)</p>
+                ",
+            ]);
 
-        $ch = curl_init('https://api.resend.com/emails');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => $body,
-            CURLOPT_HTTPHEADER     => [
-                'Authorization: Bearer ' . RESEND_API_KEY,
-                'Content-Type: application/json',
-            ],
-        ]);
+            $ch = curl_init('https://api.resend.com/emails');
+            curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST           => true,
+                CURLOPT_POSTFIELDS     => $body,
+                CURLOPT_HTTPHEADER     => [
+                    'Authorization: Bearer ' . RESEND_API_KEY,
+                    'Content-Type: application/json',
+                ],
+            ]);
 
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        }
     }
 
     // Si el administrador borra una reserva
@@ -84,18 +90,19 @@
         $borrar = json_decode(($_POST['Borrar']));
         $crud = new Crud(new DB("proyecto"));
         $reservaEliminar = $crud->obtener("reservas", "where id = $borrar->id")[0];
-        $pistaReserva = $crud->obtener("pistas", "where id = $borrar->id");
+        $pistaReserva = $crud->obtener("pistas", "where id = $reservaEliminar[pista]")[0];
         $crud->eliminar("reservas", "where id = $borrar->id");
         // Si ese horario lo reservó un cliente, le enviamos un email informándole de la cancelación
-        if($reservaEliminar->cliente != "null") {
+        if($reservaEliminar['cliente'] != null) {
+            $cliente = $crud->obtener("clientes", "where email = \"$reservaEliminar[cliente]\"")[0]['nombre'];
             // Cuerpo del email
             $body = json_encode([
                 'from'    => 'onboarding@resend.dev',
-                'to'      => [$reservaEliminar->email],
-                'subject' => 'Verifica tu cuenta',
+                'to'      => [$reservaEliminar['cliente']],
+                'subject' => 'Cancelación de reserva',
                 'html'    => "
-                    <h2>Hola, $reservaEliminar->email</h2>
-                    <p>Por diversos motivos, ha sido necesario cancelar su reserva en horario $reservaEliminar->fecha a la hora $reservaEliminar->horaInicio en la pista $pistaReserva->nombre</p>
+                    <h2>Hola, $cliente</h2>
+                    <p>Por diversos motivos, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
                 ",
             ]);
 
