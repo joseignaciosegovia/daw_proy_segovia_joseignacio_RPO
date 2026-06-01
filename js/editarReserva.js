@@ -40,6 +40,11 @@ function editarReserva(botonEditar) {
         </form>
     `);
 
+    // Si la reserva la ha realizado un cliente, no se podrá modificar el texto de información
+    if(botonEditar.parentNode.parentNode.childNodes[17].outerText == "Reserva realizada por un cliente"){ 
+        document.getElementById("informacion").setAttribute("disabled", "disabled");
+    }
+
     // Solo creamos el botón de Borrar la primera vez que pulsamos en Editar
     if(document.getElementsByClassName('btn-danger')[0] == null) {
         const modalPie = document.getElementsByClassName('modal-footer')[0];
