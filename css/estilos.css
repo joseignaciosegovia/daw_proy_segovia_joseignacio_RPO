@@ -304,12 +304,6 @@ footer {
     #btnMenu { 
         display: block !important; 
     }
-    /* Barra de bienvenida */
-    .welcome-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
 
     .table-responsive {
         overflow-x: auto;
