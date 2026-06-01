@@ -68,6 +68,17 @@
         IntlDateFormatter::FULL,
         IntlDateFormatter::NONE
     );
+    // Formato de fecha de mes y año en español
+    $formatoFechaMesAño = new IntlDateFormatter(
+        // fecha en español
+        'es_ES',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+        null,
+        null,
+        // Formato Mes Año
+        'MMMM yyyy'
+    );
     // Guardamos las iniciales del nombre completo del usuario
     $iniciales = iniciales($cliente['nombre']);
     
@@ -104,7 +115,7 @@
                                 else { ?>
                                     <div class="val">0</div>
                                 <?php } ?>
-                                <div class="card-sub"><span class="badge badge-green">Mayo 2026</span></div>
+                                <div class="card-sub"><span class="badge badge-green"><?php echo $formatoFechaMesAño->format(new DateTime()); ?></span></div>
                             </div>
                             <!-- Tarjeta: próxima reserva (ocupa 2 columnas) -->
                             <div class="dash-card" style="grid-column: span 2;">
