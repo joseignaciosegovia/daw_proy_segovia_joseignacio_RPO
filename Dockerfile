@@ -44,6 +44,9 @@ RUN composer install
 COPY . /var/www/html
 WORKDIR /var/www/html
 
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
 # Ajustar permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html

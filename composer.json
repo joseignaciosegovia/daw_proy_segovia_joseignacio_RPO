@@ -11,5 +11,8 @@
         {
             "name": "usuario"
         }
-    ]
+    ],
+    "require": {
+        "stripe/stripe-php": "^13.0"
+    }
 }
