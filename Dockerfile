@@ -29,8 +29,6 @@ WORKDIR /var/www/html
 # ---------------------------------------------------
 COPY composer.json composer.lock ./
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # ---------------------------------------------------
 # 6. Instalar dependencias PHP (capa cacheable)
 # ---------------------------------------------------
