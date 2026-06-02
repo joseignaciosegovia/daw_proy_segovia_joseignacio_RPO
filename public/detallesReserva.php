@@ -21,12 +21,22 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
+<?php }
+
+    // Función para añadir scripts en el pie
+    function añadirScriptsPie(){
+?>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+        <script type="module" src="/js/calendarioSinCliente.js"></script>
+        <script src="/js/pasarela.js"></script>
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
@@ -64,6 +74,20 @@
         // Guardamos las iniciales del nombre completo del usuario
         $iniciales = iniciales($cliente['nombre']);
 
+        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+
+        try {
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount'   => $precio * 100, // precio en céntimos
+                'currency' => 'eur',
+                'automatic_payment_methods' => ['enabled' => true],
+            ]);
+
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            http_response_code(500);
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+
 ?>
     <main class="main">
         <!-- BIENVENIDA -->
@@ -77,6 +101,7 @@
                 <i class="ti ti-circle-check" aria-hidden="true"></i> Sesión activa
             </span>
         </div>
+        <!-- DETALLES RESERVA -->
         <div class="card shadow-sm border-0 card-detalles">
             <div class="p-3 py-4">
                 <div class="seccionSubtitulo mb-4">
@@ -112,9 +137,25 @@
                 </div>
             </div>
         </div>
+       <!-- PASARELA DE PAGO --> 
+        <div class="card shadow-sm border-0 card-detalles">
+            <div class="p-3 py-4">
+                <div class="seccionSubtitulo mb-4">
+                    <i class="ti ti-credit-card-pay" aria-hidden="true"></i>
+                    <div>
+                        <h2>Pago de la reserva</h2>
+                        <small class="text-muted">Realice el pago de la reserva</small>
+                    </div>
+                </div>
+                <div id="payment-element"></div>
+                <button class="btn btn-success" id="submit" data-secret="<?php echo $paymentIntent->client_secret; ?>"></button>>Pagar</button>
+                <div id="error-message"></div>
+            </div>
+        </div>
     </main>
     <!-- Cerramos la sección principal, creada en navCliente.php -->
 </div>
+
 <?php
         // Cargamos el pie
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/footer.php";
