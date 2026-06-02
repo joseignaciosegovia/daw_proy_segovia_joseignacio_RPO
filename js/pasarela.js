@@ -1,5 +1,5 @@
 const clientSecret = document.getElementById('submit').dataset.secret;
-const stripe = require('stripe')(process.env.STRIPE_PUBLIC_KEY);
+const stripe = Stripe("pk_test_51TdSfNCW2BUFTJFItgpsndXlpipC2MUAvxLHZR0bPDp0MQHEIISDXOgtM2r3kC0eInyfLSPZZSMh72Bv5kbM9RJN003v4gQ9Wo");
 
 async function iniciarPago() {
     const elements = stripe.elements({ clientSecret });

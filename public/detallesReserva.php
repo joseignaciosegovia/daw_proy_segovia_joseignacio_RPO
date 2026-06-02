@@ -21,7 +21,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
     use Clases\DB;
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
@@ -74,7 +74,9 @@
         // Guardamos las iniciales del nombre completo del usuario
         $iniciales = iniciales($cliente['nombre']);
 
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv->load();
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
