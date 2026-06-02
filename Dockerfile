@@ -30,18 +30,16 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
 # ---------------------------------------------------
-# 6. Instalar dependencias PHP (capa cacheable)
+# 7. Copiar el resto del proyecto (código cambia más a menudo)
 # ---------------------------------------------------
+COPY . .
+
+# Instalar dependencias PHP después de copiar el código
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
     --no-interaction \
     --no-progress
-
-# ---------------------------------------------------
-# 7. Copiar el resto del proyecto (código cambia más a menudo)
-# ---------------------------------------------------
-COPY . .
 
 # ---------------------------------------------------
 # 8. Permisos finales
