@@ -1,51 +1,32 @@
 FROM php:8.2-apache
 
-# ---------------------------------------------------
-# 1. Dependencias del sistema (capa cacheable estable)
-# ---------------------------------------------------
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    ca-certificates curl git unzip zip \
-    libzip-dev libicu-dev \
-    && docker-php-ext-install zip mysqli pdo pdo_mysql intl \
-    && update-ca-certificates
+    unzip \
+    zip \
+    git \
+    libzip-dev \
+    libicu-dev \
+    && docker-php-ext-install zip mysqli pdo pdo_mysql intl
 
-# ---------------------------------------------------
-# 2. Apache modules (capa estable)
-# ---------------------------------------------------
+# Activar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# ---------------------------------------------------
-# 3. Composer (capa estable, no cambia casi nunca)
-# ---------------------------------------------------
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# ---------------------------------------------------
-# 4. Directorio de trabajo
-# ---------------------------------------------------
+# Configurar directorio de trabajo
 WORKDIR /var/www/html
 
-# ---------------------------------------------------
-# 5. Copiar SOLO archivos de dependencias primero (cache clave)
-# ---------------------------------------------------
+# Copiar composer.json y composer.lock primero para aprovechar cache
 COPY composer.json composer.lock ./
 
-# ---------------------------------------------------
-# 6. Instalar dependencias PHP (capa cacheable)
-# ---------------------------------------------------
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction \
-    --no-progress
+# Instalar dependencias PHP (sin dev y con autoloader optimizado)
+RUN composer install --no-dev --optimize-autoloader
 
-# ---------------------------------------------------
-# 7. Copiar el resto del proyecto (código cambia más a menudo)
-# ---------------------------------------------------
+# Copiar el resto del código
 COPY . .
 
-# ---------------------------------------------------
-# 8. Permisos finales
-# ---------------------------------------------------
+# Ajustar permisos
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && chmod -R 775 /var/www/html/imagenes
+    && chmod -R 755 /var/www/html
