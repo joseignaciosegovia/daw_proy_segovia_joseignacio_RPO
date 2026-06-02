@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div id="payment-element"></div>
-                <button class="btn btn-success" id="submit" data-secret="<?php echo $paymentIntent->client_secret; ?>"></button>>Pagar</button>
+                <button class="btn btn-success" id="submit" data-secret="<?php echo $paymentIntent->client_secret; ?>">Pagar</button>
                 <div id="error-message"></div>
             </div>
         </div>
