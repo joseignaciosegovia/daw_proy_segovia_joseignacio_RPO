@@ -44,6 +44,7 @@ CREATE TABLE if not exists reservas(
     pista INT NOT NULL,
     cliente VARCHAR(100),
     informacion VARCHAR(255) NOT NULL,
+    idPago VARCHAR(255) NOT NULL,
     CONSTRAINT fk_res_pist FOREIGN KEY(pista) REFERENCES pistas(id),
     CONSTRAINT fk_res_cli FOREIGN KEY(cliente) REFERENCES clientes(email)
 );

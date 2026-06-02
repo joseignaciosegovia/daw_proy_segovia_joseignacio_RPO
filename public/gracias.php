@@ -15,8 +15,8 @@
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
     <?php }
 
-    $status = $_GET['redirect_status'] ?? '';
-    $paymentIntent = $_GET['payment_intent'] ?? '';
+    $estado = $_GET['redirect_status'] ?? '';
+    $idPago = $_GET['payment_intent'] ?? '';
     $crud = new Crud(new DB("proyecto"));
     $cliente = $crud->obtener("clientes", "where email = \"$_SESSION[cliente]\"")[0];
 
@@ -26,14 +26,15 @@
 <main class="main">
     <div class="card shadow-sm border-0 card-detalles">
         <div class="p-3 py-4">
-        <?php if ($status === 'succeeded'){ 
+        <?php if ($estado === 'succeeded'){ 
+            
         ?>
             <div class="seccionSubtitulo mb-4">
                 <i class="ti ti-thumb-up" aria-hidden="true"></i>
                 <div>
                     <h2>¡Pago completado!</h2>
                     <small class="text-muted">Tu reserva ha sido confirmada correctamente.</small>
-                    <p><small>Referencia: <?= htmlspecialchars($paymentIntent) ?></small></p>
+                    <p><small>Referencia: <?= htmlspecialchars($idPago) ?></small></p>
                 </div>
             </div>
         <?php }
