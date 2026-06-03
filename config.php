@@ -15,14 +15,14 @@ function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml):
         'html'    => $cuerpoHtml,
     ]);
 
-    $ch = curl_init('https://sandbox.api.mailtrap.io/api/send/inboxes/' . $_ENV['MAILTRAP_INBOX_ID']);
+    $ch = curl_init('https://sandbox.api.mailtrap.io/api/send/inboxes/' . (getenv('MAILTRAP_INBOX_ID') ?: $_ENV['MAILTRAP_INBOX_ID']));
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
         CURLOPT_POSTFIELDS     => $body,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTPHEADER     => [
-            'Authorization: Bearer ' . $_ENV['MAILTRAP_TOKEN'],
+            'Authorization: Bearer ' . (getenv('MAILTRAP_TOKEN') ?: $_ENV['MAILTRAP_TOKEN']),
             'Content-Type: application/json',
         ],
     ]);
