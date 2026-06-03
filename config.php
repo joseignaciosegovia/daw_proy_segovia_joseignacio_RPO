@@ -15,7 +15,7 @@ function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml):
         'html'    => $cuerpoHtml,
     ]);
 
-    $ch = curl_init('https://sandbox.api.mailtrap.io/api/send/' . $_ENV['MAILTRAP_INBOX_ID']);
+    $ch = curl_init('https://sandbox.api.mailtrap.io/api/send/inboxes/' . $_ENV['MAILTRAP_INBOX_ID']);
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
