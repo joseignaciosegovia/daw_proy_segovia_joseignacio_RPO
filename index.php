@@ -122,33 +122,16 @@
 
         $paginaVerificacion = "$_SERVER[HTTP_ORIGIN]/verificar.php?email=$email&codigo=$codigo";
         // Cuerpo del email de validación
-        $body = json_encode([
-            'from'    => 'onboarding@resend.dev',
-            'to'      => [$email],
-            'subject' => 'Verifica tu cuenta',
-            'html'    => "
-                <h2>Hola, $email</h2>
-                <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
-                <a href=\"$paginaVerificacion\">Código de verificación</a>
-                <p style='color:#64748b; font-size:13px;'>
-                    Si no creaste esta cuenta, ignora este mensaje.
-                </p>
-            ",
-        ]);
+        
+        $cuerpo = ("
+            <h2>Hola, $nombre</h2>
+            <p>Te has registrado en el servicio https://reservas.inf.somosdelprieto.com/</p>
+            <p>Pincha en el siguiente enlace para verificar tu cuenta:</p>
+            <a href=\"$paginaVerificacion\">Código de verificación</a>
+            <p>Si no creaste esta cuenta, ignora este mensaje.</p>
+        ");
 
-        $ch = curl_init('https://api.resend.com/emails');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => $body,
-            CURLOPT_HTTPHEADER     => [
-                'Authorization: Bearer ' . RESEND_API_KEY,
-                'Content-Type: application/json',
-            ],
-        ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $resultado = enviarCorreo($email, "Verificar correo", $cuerpo);
         
         $_SESSION['mensaje'] = 'Cliente creado Correctamente';
     // Si no hemos pulsado ningún botón

@@ -61,31 +61,15 @@
         if($reservaEditar['cliente'] != null) {
             $reservaNueva = $crud->obtener("reservas", "where id = $editar->id")[0];
             $cliente = $crud->obtener("clientes", "where email = \"$reservaNueva[cliente]\"")[0]['nombre'];
-            // Se envía un email al usuario para avisarle del cambio
-            $body = json_encode([
-                'from'    => 'onboarding@resend.dev',
-                'to'      => [$reservaEditar['cliente']],
-                'subject' => 'Modificación de su reserva',
-                'html'    => "
-                    <h2>Hola, $cliente</h2>
-                    <p>Por diversos motivos, ha sido necesario modificar su reserva en horario $reservaEditar[fecha] a la hora $reservaEditar[horaInicio] en la pista $pistaReserva[nombre]</p>
-                    <p>Ahora la reserva tendrá lugar en la fecha $reservaNueva[fecha] a la hora $reservaNueva[horaInicio] (en la misma pista)</p>
-                ",
-            ]);
+            // Enviamos un email al usuario para avisarle del cambio
+            $cuerpo = ("
+                <h2>Hola, $cliente</h2>
+                <p>Por diversos motivos, ha sido necesario modificar su reserva en horario $reservaEditar[fecha] a la hora $reservaEditar[horaInicio] en la pista $pistaReserva[nombre]</p>
+                <p>Ahora la reserva tendrá lugar en la fecha $reservaNueva[fecha] a la hora $reservaNueva[horaInicio] (en la misma pista)</p>
+                <p>Disculpe las molestias</p>
+            ");
 
-            $ch = curl_init('https://api.resend.com/emails');
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST           => true,
-                CURLOPT_POSTFIELDS     => $body,
-                CURLOPT_HTTPHEADER     => [
-                    'Authorization: Bearer ' . RESEND_API_KEY,
-                    'Content-Type: application/json',
-                ],
-            ]);
-
-            $response = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $resultado = enviarCorreo($reservaEditar['cliente'], "Modificación de reserva", $cuerpo);
         }
     }
 
@@ -120,30 +104,13 @@
             }
             $cliente = $crud->obtener("clientes", "where email = \"$reservaEliminar[cliente]\"")[0]['nombre'];
             // Enviamos un email al cliente informándole de la cancelación
-            $body = json_encode([
-                'from'    => 'onboarding@resend.dev',
-                'to'      => [$reservaEliminar['cliente']],
-                'subject' => 'Cancelación de reserva',
-                'html'    => "
-                    <h2>Hola, $cliente</h2>
-                    <p>Debido a motivos imposibles de evitar, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
-                    <p>Por las molestias, se le devolverá el dinero</p>
-                ",
-            ]);
+            $cuerpo = ("
+                <h2>Hola, $cliente</h2>
+                <p>Debido a motivos imposibles de evitar, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
+                <p>Por las molestias, se le devolverá el dinero</p>
+            ");
 
-            $ch = curl_init('https://api.resend.com/emails');
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST           => true,
-                CURLOPT_POSTFIELDS     => $body,
-                CURLOPT_HTTPHEADER     => [
-                    'Authorization: Bearer ' . RESEND_API_KEY,
-                    'Content-Type: application/json',
-                ],
-            ]);
-
-            $response = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $resultado = enviarCorreo($reservaEliminar['cliente'], "Cancelación de reserva", $cuerpo);
         }
     }
 
