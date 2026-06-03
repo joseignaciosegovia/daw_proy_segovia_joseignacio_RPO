@@ -4,8 +4,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+$dotenv->safeLoad(); 
 
 function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml): bool {
     $mail = new PHPMailer(true);

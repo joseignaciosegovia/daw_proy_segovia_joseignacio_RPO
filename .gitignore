@@ -1,5 +1,5 @@
 .env
-vendor
+vendor/
 package.json
 package-lock.json
 db_data
