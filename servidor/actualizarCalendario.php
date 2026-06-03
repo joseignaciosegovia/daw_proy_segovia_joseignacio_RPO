@@ -99,7 +99,7 @@
         // Si ese horario lo reservó un cliente
         if($reservaEliminar['cliente'] != null) {
             // Si el cliente realizó el pago, se le devolverá el dinero
-            if($borrar->devolverDinero && !empty($reservaEliminar['idPago'])) {
+            if(!empty($reservaEliminar['idPago'])) {
                 \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
                 try {
@@ -126,8 +126,8 @@
                 'subject' => 'Cancelación de reserva',
                 'html'    => "
                     <h2>Hola, $cliente</h2>
-                    <p>Por diversos motivos, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
-                    <p>Se le devolverá el dinero</p>
+                    <p>Debido a motivos imposibles de evitar, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
+                    <p>Por las molestias, se le devolverá el dinero</p>
                 ",
             ]);
 

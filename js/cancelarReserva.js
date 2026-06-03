@@ -62,11 +62,11 @@ function cancelarReserva(botonCancelar) {
     modal.show();
 
     cerrarModal(modal);
-    confirmarCancelacion(parseInt(botonCancelar.dataset.id));
+    confirmarCancelacion(parseInt(botonCancelar.dataset.id), devolverDinero);
 }
 
 // Función que define el comportamiento del botón de confirmar la cancelación
-function confirmarCancelacion(id) {
+function confirmarCancelacion(id, devolverDinero) {
     const botonConfirmar = $('.modal-footer .btn-danger');
     // Pinchamos en el botón de Confirmar
     $(botonConfirmar[0]).on('click', function(event) {
