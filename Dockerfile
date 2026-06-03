@@ -41,17 +41,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 # -----------------------------
-# 7. Copiar dependencias primero (cache)
-# -----------------------------
-COPY composer.json composer.lock ./
-
-# Instalar dependencias
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
-
-# -----------------------------
-# 8. Copiar el proyecto
+# 7. Copiar el proyecto completo
 # -----------------------------
 COPY . .
+
+# -----------------------------
+# 8. Instalar dependencias
+# -----------------------------
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # -----------------------------
 # 9. Permisos
