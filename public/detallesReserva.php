@@ -61,8 +61,8 @@
         $precio = $crud->listar("precioReserva", "pistas", "where nombre = \"$datosReserva->pista\"")[0]['precioReserva'];
         $idReserva = $crud->obtener("reservas", "where cliente = \"$datosReserva->cliente\" and pista = $datosReserva->id and fecha = \"$datosReserva->fecha\" and horaInicio = \"$datosReserva->horaInicio\"")[0]['id'];
 
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-        $dotenv->load();
+        $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+        $dotenv->safeLoad(); 
         \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
         try {
