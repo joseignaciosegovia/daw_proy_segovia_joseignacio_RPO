@@ -27,12 +27,8 @@ function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml):
         ],
     ]);
 
-    error_log("URL: " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL));
-
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    error_log("HTTP: " . curl_getinfo($ch, CURLINFO_HTTP_CODE));
-error_log("RESPUESTA: " . $response);
 
     if ($httpCode !== 200) {
         error_log("Error al enviar correo: HTTP $httpCode - $response");
