@@ -20,6 +20,7 @@ function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml):
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
         CURLOPT_POSTFIELDS     => $body,
+        CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTPHEADER     => [
             'Authorization: Bearer ' . $_ENV['MAILTRAP_TOKEN'],
             'Content-Type: application/json',
