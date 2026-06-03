@@ -64,7 +64,7 @@
             // Enviamos un email al usuario para avisarle del cambio
             $cuerpo = ("
                 <h2>Hola, $cliente</h2>
-                <p>Por diversos motivos, ha sido necesario modificar su reserva en horario $reservaEditar[fecha] a la hora $reservaEditar[horaInicio] en la pista $pistaReserva[nombre]</p>
+                <p>Debido a motivos imposibles de evitar, ha sido necesario modificar su reserva en horario $reservaEditar[fecha] a la hora $reservaEditar[horaInicio] en la pista $pistaReserva[nombre]</p>
                 <p>Ahora la reserva tendrá lugar en la fecha $reservaNueva[fecha] a la hora $reservaNueva[horaInicio] (en la misma pista)</p>
                 <p>Disculpe las molestias</p>
             ");
@@ -107,7 +107,8 @@
             $cuerpo = ("
                 <h2>Hola, $cliente</h2>
                 <p>Debido a motivos imposibles de evitar, ha sido necesario cancelar su reserva en horario $reservaEliminar[fecha] a la hora $reservaEliminar[horaInicio] en la pista $pistaReserva[nombre]</p>
-                <p>Por las molestias, se le devolverá el dinero</p>
+                <p>Se le devolverá el dinero</p>
+                <p>Disculpe las molestias</p>
             ");
 
             $resultado = enviarCorreo($reservaEliminar['cliente'], "Cancelación de reserva", $cuerpo);
