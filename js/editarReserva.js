@@ -57,7 +57,7 @@ function editarReserva(botonEditar) {
     modal.show();
 
     actualizarReserva();
-    borrarReserva();
+    borrarReserva(botonEditar.parentNode.parentNode.childNodes[17].outerText);
 }
 
 // Función que se invocará al pinchar en el botón de Editar o Borrar una reserva 
@@ -101,7 +101,7 @@ function actualizarReserva() {
 }
 
 // Se borra una reserva
-function borrarReserva() {
+function borrarReserva(cliente) {
     const botonBorrar = document.querySelectorAll('.modal-footer .btn-danger')[0];
     $(botonBorrar).on('click', function(event) {
         // Datos necesarios para borrar una reserva

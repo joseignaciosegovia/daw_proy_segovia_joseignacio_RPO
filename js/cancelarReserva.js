@@ -71,7 +71,8 @@ function confirmarCancelacion(id) {
     // Pinchamos en el botón de Confirmar
     $(botonConfirmar[0]).on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
-            id: id
+            id: id,
+            devolverDinero: devolverDinero
         });
 
         const formData = new FormData();
