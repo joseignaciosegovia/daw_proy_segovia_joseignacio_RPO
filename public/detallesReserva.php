@@ -59,6 +59,26 @@
         // Guardamos el cliente para que puedan mostrarse sus datos en la barra de navegación
         $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
         $precio = $crud->listar("precioReserva", "pistas", "where nombre = \"$datosReserva->pista\"")[0]['precioReserva'];
+        $idReserva = $crud->obtener("reservas", "where cliente = \"$datosReserva->cliente\" and pista = $datosReserva->id and fecha = \"$datosReserva->fecha\" and horaInicio = \"$datosReserva->horaInicio\"")[0]['id'];
+
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv->load();
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+
+        try {
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount'   => $precio * 100, // precio en céntimos
+                'currency' => 'eur',
+                'automatic_payment_methods' => ['enabled' => true],
+                'metadata' => ['id_reserva' => $idReserva],
+            ]);
+
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            http_response_code(500);
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        // Guardamos el id del pago en la reserva para poder verificarlo después
+        $crud->actualizar("reservas", "idPago = \"$paymentIntent->id\"", "where id = $idReserva");
         require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/navCliente.php";
 
         // Datos que vamos a mostrar
@@ -73,22 +93,6 @@
         );
         // Guardamos las iniciales del nombre completo del usuario
         $iniciales = iniciales($cliente['nombre']);
-
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-        $dotenv->load();
-        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
-
-        try {
-            $paymentIntent = \Stripe\PaymentIntent::create([
-                'amount'   => $precio * 100, // precio en céntimos
-                'currency' => 'eur',
-                'automatic_payment_methods' => ['enabled' => true],
-            ]);
-
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-            http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
-        }
 
 ?>
     <main class="main">
@@ -150,7 +154,7 @@
                     </div>
                 </div>
                 <div id="payment-element"></div>
-                <button class="btn btn-success" id="submit" data-secret="<?php echo $paymentIntent->client_secret; ?>" data-id="<?php echo $datosReserva->id; ?>">Pagar</button>
+                <button class="btn btn-success" id="submit" data-secret="<?php echo $paymentIntent->client_secret; ?>" data-id="<?php echo $idReserva; ?>">Pagar</button>
                 <div id="error-message"></div>
             </div>
         </div>

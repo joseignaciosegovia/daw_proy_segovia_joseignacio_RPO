@@ -1,4 +1,5 @@
 const clientSecret = document.getElementById('submit').dataset.secret;
+const idReserva = document.getElementById('submit').dataset.id;
 const stripe = Stripe("pk_test_51TdSfNCW2BUFTJFItgpsndXlpipC2MUAvxLHZR0bPDp0MQHEIISDXOgtM2r3kC0eInyfLSPZZSMh72Bv5kbM9RJN003v4gQ9Wo");
 
 async function iniciarPago() {
@@ -12,7 +13,7 @@ async function iniciarPago() {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: window.location.origin + '/public/gracias.php',
+                return_url: window.location.origin + '/public/gracias.php?idReserva=' + idReserva,
             },
         });
 
