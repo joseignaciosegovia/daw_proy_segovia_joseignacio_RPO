@@ -15,6 +15,9 @@ function enviarCorreo(string $destinatario, string $asunto, string $cuerpoHtml):
         'html'    => $cuerpoHtml,
     ]);
 
+    error_log("TOKEN: " . (getenv('MAILTRAP_TOKEN') ?: 'VACIO'));
+error_log("INBOX: " . (getenv('MAILTRAP_INBOX_ID') ?: 'VACIO'));
+
     $ch = curl_init('https://sandbox.api.mailtrap.io/api/send/inboxes/' . (getenv('MAILTRAP_INBOX_ID') ?: $_ENV['MAILTRAP_INBOX_ID']));
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
