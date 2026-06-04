@@ -50,6 +50,7 @@
     
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     use Clases\DB;
 
     // Si se obtiene la variable "pista" (pulsando el botón "Calendario" de intranet.php)

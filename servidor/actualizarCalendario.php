@@ -25,7 +25,7 @@
     require_once __DIR__ . '/../vendor/autoload.php';
     use Clases\DB;
     // Importamos config.php para poder enviar correos
-    require_once '../config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
 
     $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
     $dotenv->safeLoad(); 

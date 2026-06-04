@@ -20,7 +20,8 @@
     
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";    
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php"; 
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';   
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){

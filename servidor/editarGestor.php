@@ -25,6 +25,7 @@
     $home = "/servidor/intranet.php";
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     use Clases\DB;
 
     // Si pulsamos el botón de Borrar

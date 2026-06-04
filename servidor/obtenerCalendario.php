@@ -9,6 +9,7 @@
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
 
     // Si se obtiene la variable "pista" (pinchando en una pista desde reservarPista.php)
     if(isset($_GET['pista'])){
