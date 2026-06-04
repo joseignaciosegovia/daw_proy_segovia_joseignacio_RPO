@@ -58,3 +58,7 @@ RUN echo 'PassEnv STRIPE_SECRET_KEY' >> /etc/apache2/apache2.conf \
 # -----------------------------
 RUN chown -R www-data:www-data /var/www/html \
  && chmod -R 755 /var/www/html
+
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+CMD ["docker-entrypoint.sh"]
