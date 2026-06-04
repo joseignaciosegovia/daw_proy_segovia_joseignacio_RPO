@@ -84,7 +84,7 @@
         if($reservaEliminar['cliente'] != null) {
             // Si el cliente realizó el pago, se le devolverá el dinero
             if(!empty($reservaEliminar['idPago'])) {
-                \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+                \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
                 try {
                     $refund = \Stripe\Refund::create([
@@ -123,7 +123,7 @@
 
         // Si el cliente ha realizado el pago y tiene derecho a devolución
         if($reserva->devolverDinero && !empty($reservaEliminar['idPago'])) {
-            \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+            \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
             try {
                 $refund = \Stripe\Refund::create([
