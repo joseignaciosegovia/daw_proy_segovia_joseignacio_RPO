@@ -11,7 +11,7 @@
     require_once __DIR__ . '/../vendor/autoload.php';
     use Clases\DB;
 
-    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
     $dotenv->safeLoad(); 
 
     // Función para añadir scripts en la cabecera
