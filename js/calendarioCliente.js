@@ -1,5 +1,3 @@
-// Hay que importar "esLocale" para arreglar un bug con el idioma
-import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
 import {crearModal, cerrarModal} from "./modal.js"
 
 document.addEventListener('DOMContentLoaded', function() {
