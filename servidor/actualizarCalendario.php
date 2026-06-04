@@ -41,8 +41,6 @@
         else {
             $crud->insertarColumnas("reservas", "(fecha, horaInicio, horaFin, pista, cliente, informacion, idPago)", "\"$datos->fecha\", \"$datos->horaInicio\", \"$datos->horaFin\", \"$datos->id\", \"$datos->cliente\", \"$datos->informacion\", \"No pagada\"");
         }
-        $reservaInsertada = $crud->obtener("reservas", "where cliente = \"$datos->cliente\" and pista = $datos->id and fecha = \"$datos->fecha\" and horaInicio = \"$datos->horaInicio\"");
-    error_log("Reserva insertada: " . var_export($reservaInsertada, true));
     }
 
     // Si el administrador edita una reserva, ya sea desde consultarReservas o calendarioPista
