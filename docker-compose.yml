@@ -18,11 +18,8 @@ services:
       MYSQL_PASSWORD: secreto
       MAILTRAP_TOKEN: a14911d8d73e6cd65e1701c1ec080756
       MAILTRAP_INBOX_ID: 4686267
-<<<<<<< HEAD
-=======
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
       STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
->>>>>>> 8d19dfb (error con \Stripe\Stripe8)
 
   db:
     image: mysql:8.0
