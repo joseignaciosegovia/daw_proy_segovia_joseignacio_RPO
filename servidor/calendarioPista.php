@@ -25,8 +25,9 @@
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script type="module" src="/js/calendarioAdministrador.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/es.global.min.js"></script>
+        <script src="/js/calendarioAdministrador.js"></script>
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras

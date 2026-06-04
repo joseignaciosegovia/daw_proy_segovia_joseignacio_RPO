@@ -18,8 +18,9 @@
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-        <script type="module" src="/js/calendarioSinCliente.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/es.global.min.js"></script>
+        <script src="/js/calendarioSinCliente.js"></script>
 <?php }
 
     // Función que guarda un mensaje de error (en caso de que haya habido algún problema) y actualiza la página

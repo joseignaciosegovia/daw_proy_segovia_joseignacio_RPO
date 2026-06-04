@@ -1,6 +1,3 @@
-// Hay que importar "esLocale" para arreglar un bug con el idioma
-import esLocale from '../node_modules/@fullcalendar/core/locales/es.js';
-
 document.addEventListener('DOMContentLoaded', function() {
     
     // Mostramos el calendario para el cliente cada vez que pinche en una pista para reservarla
@@ -36,7 +33,7 @@ async function cargarCalendario(pista, id){
 
         firstDay: 1,
         // Ponemos el calendario en español
-        locale: esLocale,
+        locale: 'es',
 
         // Solo se muestran horas enteras
         slotDuration: "01:00:00",

@@ -21,15 +21,14 @@
 ?>
         <link rel="stylesheet" type="text/css" href="/css/estilosBienvenida.css">
         <link rel="stylesheet" type="text/css" href="/css/estilosSubtitulo.css">
-        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 <?php }
 
     // Función para añadir scripts en el pie
     function añadirScriptsPie(){
 ?>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales/es.global.js"></script>
-        <script type="module" src="/js/calendarioCliente.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/es.global.min.js"></script>
+        <script src="/js/calendarioCliente.js"></script>
 <?php }
 
     // Devuelve las iniciales de una cadena con distintas palabras
