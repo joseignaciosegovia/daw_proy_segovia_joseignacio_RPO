@@ -27,7 +27,7 @@
     // Importamos config.php para poder enviar correos
     require_once '../config.php';
 
-    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
     $dotenv->safeLoad(); 
 
     // Si el administrador ha añadido una fecha ocupada o un cliente ha realizado una reserva
