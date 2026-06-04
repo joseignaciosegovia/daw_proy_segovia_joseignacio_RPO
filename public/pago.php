@@ -3,7 +3,7 @@
 
     header('Content-Type: application/json');
 
-    \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+    \Stripe\Stripe::setApiKey($_SERVER['STRIPE_SECRET_KEY']);
 
     // Si hemos recibido el pago
     if(isset($_POST['cantidad'])){

@@ -1,7 +1,7 @@
 <?php 
 require 'vendor/autoload.php';
 
-\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+\Stripe\Stripe::setApiKey($_SERVER['STRIPE_SECRET_KEY']);
 
 $payload   = file_get_contents('php://input');
 $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'];

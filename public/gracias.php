@@ -41,7 +41,7 @@
         // Si la reserva no está pagada
         } else {
             
-            \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+            \Stripe\Stripe::setApiKey($_SERVER['STRIPE_SECRET_KEY']);
 
             try {
                 // Recuperamos el pago real desde la API de Stripe

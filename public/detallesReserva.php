@@ -63,7 +63,7 @@
 
         $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
         $dotenv->safeLoad(); 
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+        \Stripe\Stripe::setApiKey($_SERVER['STRIPE_SECRET_KEY']);
 
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
