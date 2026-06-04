@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     session_start();
 
     // Si no hemos iniciado sesión ni como gestor ni como cliente, volvemos a la página de inicio de sesión de la intranet

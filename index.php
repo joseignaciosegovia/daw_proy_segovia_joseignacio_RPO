@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     ob_start(); // activa el buffer
     session_start();
 
