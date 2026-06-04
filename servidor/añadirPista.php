@@ -1,4 +1,5 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     session_start();
 
     // Si pulsamos el botón de cerrar sesión, borramos las variables de sesión
@@ -20,7 +21,6 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     use Clases\DB;
 
     // Función para añadir scripts en la cabecera

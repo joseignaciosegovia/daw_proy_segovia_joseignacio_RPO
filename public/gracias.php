@@ -1,4 +1,5 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     session_start();
 
     if (empty($_SESSION["cliente"])) {
@@ -8,7 +9,6 @@
 
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     require_once __DIR__ . '/../vendor/autoload.php';
     use Clases\DB;
 

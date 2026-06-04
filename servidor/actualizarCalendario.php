@@ -1,4 +1,5 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     session_start();
 
     // Si no hemos iniciado sesión ni como gestor ni como cliente, volvemos a la página de inicio de sesión de la intranet
@@ -24,8 +25,6 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once __DIR__ . '/../vendor/autoload.php';
     use Clases\DB;
-    // Importamos config.php para poder enviar correos
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
 
     $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
     $dotenv->safeLoad(); 

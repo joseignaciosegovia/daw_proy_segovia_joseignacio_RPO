@@ -1,12 +1,11 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     ob_start(); // activa el buffer
     session_start();
 
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
     require_once $_SERVER['DOCUMENT_ROOT'] . "/vista/template/header.php";
-    // Importamos config.php para poder enviar el correo de verificación
-    require_once 'config.php';
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){

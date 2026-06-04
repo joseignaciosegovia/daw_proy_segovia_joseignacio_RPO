@@ -1,4 +1,5 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';
     ob_start(); // activa el buffer
     session_start();
 
@@ -20,8 +21,7 @@
     
     use Clases\DB;
     require_once $_SERVER['DOCUMENT_ROOT'] . "/controlador/Crud.php";
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php"; 
-    require_once $_SERVER['DOCUMENT_ROOT'] . 'config.php';   
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/modelo/Conexion.inc.php";  
 
     // Función para añadir scripts en la cabecera
     function añadirScriptsCabecera(){
