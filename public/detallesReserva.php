@@ -70,7 +70,7 @@
                 'amount'   => $precio * 100, // precio en céntimos
                 'currency' => 'eur',
                 'automatic_payment_methods' => ['enabled' => true],
-                'metadata' => ['id_reserva' => $idReserva],
+                'metadata' => ['id_reserva' => (string)$idReserva],
             ]);
 
         } catch (\Stripe\Exception\ApiErrorException $e) {
