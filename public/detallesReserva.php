@@ -62,7 +62,8 @@
         $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
         $precio = $crud->listar("precioReserva", "pistas", "where nombre = \"$datosReserva->pista\"")[0]['precioReserva'];
         $idReserva = $crud->obtener("reservas", "where cliente = \"$datosReserva->cliente\" and pista = $datosReserva->id and fecha = \"$datosReserva->fecha\" and horaInicio = \"$datosReserva->horaInicio\"")[0]['id'];
-
+error_log("idReserva: " . var_export($idReserva, true));
+error_log("Query result: " . var_export($crud->obtener("reservas", "where cliente = \"$datosReserva->cliente\" and pista = $datosReserva->id and fecha = \"$datosReserva->fecha\" and horaInicio = \"$datosReserva->horaInicio\""), true));
         $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/..');
         $dotenv->safeLoad(); 
         \Stripe\Stripe::setApiKey($_SERVER['STRIPE_SECRET_KEY']);
