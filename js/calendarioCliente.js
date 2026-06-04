@@ -45,7 +45,7 @@ async function cargarCalendario(pista, id){
 
         firstDay: 1,
         // Ponemos el calendario en español
-        locale: esLocale,
+        locale: 'es',
 
         // Solo se muestran horas enteras
         slotDuration: "01:00:00",
