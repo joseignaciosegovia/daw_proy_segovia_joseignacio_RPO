@@ -53,7 +53,7 @@
                 $idPagoCoincide    = $reserva['idPago'] === $paymentIntent->id;
                 $importeCorrecto   = $paymentIntent->amount === intval($precioReserva * 100);
                 $estadoCorrecto    = $paymentIntent->status === 'succeeded';
-                $metadataCorrecta  = isset($paymentIntent->metadata['id_reserva']) && intval($paymentIntent->metadata['id_reserva']) === (string)$idReserva;
+                $metadataCorrecta = isset($paymentIntent->metadata['id_reserva']) && $paymentIntent->metadata['id_reserva'] === (string)$idReserva;
 
                 // Si coinciden el id del pago, el importe el estado y los metadatos, actualizamos la reserva
                 if ($idPagoCoincide && $importeCorrecto && $estadoCorrecto && $metadataCorrecta) {
