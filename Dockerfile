@@ -50,6 +50,9 @@ COPY . .
 # -----------------------------
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
+RUN echo 'PassEnv STRIPE_SECRET_KEY' >> /etc/apache2/apache2.conf \
+ && echo 'PassEnv STRIPE_PUBLIC_KEY' >> /etc/apache2/apache2.conf
+
 # -----------------------------
 # 9. Permisos
 # -----------------------------
