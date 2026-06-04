@@ -55,6 +55,7 @@
     // Si hemos recibido los datos de la reserva desde calendarioCliente.js
     if(isset($_GET['datos'])){
         $datosReserva = json_decode(($_GET['datos']));
+        error_log(print_r($datosReserva, true));
         $crud = new Crud(new DB("proyecto"));
         // Guardamos el cliente para que puedan mostrarse sus datos en la barra de navegación
         $cliente = $crud->obtener("clientes", "where email = \"$datosReserva->cliente\"")[0];
