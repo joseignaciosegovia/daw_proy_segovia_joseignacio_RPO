@@ -1,7 +1,8 @@
 #!/bin/bash
 # Inyectar variables de entorno en Apache
-echo "SetEnv STRIPE_SECRET_KEY ${STRIPE_SECRET_KEY}" >> /etc/apache2/apache2.conf
-echo "SetEnv STRIPE_PUBLIC_KEY ${STRIPE_PUBLIC_KEY}" >> /etc/apache2/apache2.conf
+printenv | grep -E "STRIPE" | while IFS='=' read -r key value; do
+    echo "SetEnv $key $value" >> /etc/apache2/apache2.conf
+done
 
 # Arrancar Apache
-apache2-foreground
+exec apache2-foreground
