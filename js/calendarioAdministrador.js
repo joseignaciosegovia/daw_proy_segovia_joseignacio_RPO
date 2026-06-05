@@ -167,7 +167,7 @@ function cargarCalendario(){
                     // Revertimos la situación para dejar la reserva donde estaba
                     info.revert();
                 }
-                // Si se intenta mover una reserva a una fecha pasada
+                // Si se intenta mover una reserva a una fecha que no se ha pasado
                 else {
                     const modal = new bootstrap.Modal('#modal');
                     const modalCuerpo = document.getElementsByClassName('modal-body')[0];
@@ -264,6 +264,7 @@ function confirmarFecha(id) {
 // Función que define lo que pasará cuando se mueva una reserva a otra fecha
 function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin, info) {
     const botonConfirmar = $('.modal-footer .btn-success');
+    const botonCancelar = $('.modal-footer .btn-secondary');
     // Comportamiento del botón de Confirmar
     $(botonConfirmar[0]).off('click').on('click', async function(event) {
         let datosAEnviar = JSON.stringify({  
