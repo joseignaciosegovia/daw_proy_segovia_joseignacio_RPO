@@ -237,7 +237,7 @@
                         <div class="row mt-3">
                             <div class="col-12 col-sm-6">
                                 <label for="dni" class="form-label">DNI</label>
-                                <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]">
+                                <input type="text" class="form-control" id="dni" placeholder="12345678A" pattern="[0-9]{8}[A-Z]" required>
                                 <div class="invalid-feedback">
                                     Introduzca un DNI válido
                                 </div>
