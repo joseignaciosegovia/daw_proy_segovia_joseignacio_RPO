@@ -225,7 +225,7 @@ function cargarCalendario(){
 function confirmarFecha(id) {
     const botonConfirmar = $('.modal-footer .btn-success');
     // Comportamiento del botón de Confirmar
-    $(botonConfirmar[0]).on('click', async function(event) {
+    $(botonConfirmar[0]).off('click').on('click', async function(event) {
 
         const informacion = document.getElementById("informacion").value;
         const fecha = document.getElementById("fecha").value;
@@ -264,9 +264,8 @@ function confirmarFecha(id) {
 // Función que define lo que pasará cuando se mueva una reserva a otra fecha
 function confirmarMoverFecha(idReserva, nuevaFecha, nuevaHoraInicio, nuevaHoraFin, info) {
     const botonConfirmar = $('.modal-footer .btn-success');
-    const botonCancelar = $('.modal-footer .btn-secondary');
     // Comportamiento del botón de Confirmar
-    $(botonConfirmar[0]).on('click', async function(event) {
+    $(botonConfirmar[0]).off('click').on('click', async function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: nuevaFecha,
             horaInicio: nuevaHoraInicio, 
@@ -334,7 +333,7 @@ function crearModal() {
 // Función que oculta el modal recibido al pulsar en el botón de cerrar
 function cerrarModal(modal) {
     const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
+    $(botonCerrar[0]).off('click').on('click', function(event) {
         // Ocultamos el modal
         modal.hide();
   
