@@ -101,27 +101,30 @@
                             <?php
                                 $cont = 1;
                                 // Recorremos los gestores y los añadimos a la tabla
-                                foreach($gestores as $gestor){
+                                foreach($gestores as $gestorMostrar){
+                                    // No mostramos el gestor que ha iniciado sesión porque no se podrá modificar los datos a sí mismo
+                                    if($gestor['email'] != $gestorMostrar['email']){
                             ?>
                             <tr>
                                 <th><?php echo $cont ?></th>
-                                <td><?php echo $gestor['email'] ?></td>
-                                <td><?php echo $gestor['nombre'] ?></td>
-                                <td><?php echo $gestor['DNI'] ?></td>
-                                <td><?php echo $gestor['telefono'] ?></td>
+                                <td><?php echo $gestorMostrar['email'] ?></td>
+                                <td><?php echo $gestorMostrar['nombre'] ?></td>
+                                <td><?php echo $gestorMostrar['DNI'] ?></td>
+                                <td><?php echo $gestorMostrar['telefono'] ?></td>
                                 <td><?php 
                                     // Si el gestor es también administrador lo indicamos
-                                    if($gestor['administrador'] == 1)
+                                    if($gestorMostrar['administrador'] == 1)
                                         echo "Sí";
                                     else
                                         echo "No";
                                 ?>
                                 </td>
-                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestorEditar=$gestor[email]';\">Editar</button>"?></td>
+                                <td><?php echo "<button class=\"btn btn-warning form-floating\" onclick=\"window.location.href='editarGestor.php?gestorEditar=$gestorMostrar[email]';\">Editar</button>"?></td>
                             </tr>
                                 <?php 
                                     $cont++;
-                                } 
+                                    } 
+                                }
                                 ?>
                         </tbody>
                     </table>
