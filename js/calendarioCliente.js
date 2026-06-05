@@ -109,7 +109,7 @@ async function cargarCalendario(pista, id){
                 // Mostramos el mensaje indicando que se va a añadir un horario ocupado
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
                     Añadir una reserva el ${fecha} a las ${horaInicio}<br>
-                    ${precio} €
+                    ${precio} €<br>
                     ¡Advertencia: Si cancela una reserva menos de doce horas antes de la fecha reservada, no se le devolverá el dinero!
                 `);
 
