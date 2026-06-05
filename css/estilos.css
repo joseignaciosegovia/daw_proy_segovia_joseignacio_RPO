@@ -307,7 +307,6 @@ footer {
 
     .table-responsive {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         max-width: 100%;
     }
 
