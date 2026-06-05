@@ -111,7 +111,21 @@
         <div class="card shadow-sm border-0">
             <div class="p-3 pt-4">
 <?php
-    $sugerencias = $crud->listar("fecha, contenido", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"");
+    // Variables relacionadas con la tabla de incidencias
+    $filasPorPagina = 10;
+    // Por defecto, estaremos en la página 1
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $desplazamiento = ($pagina - 1) * $filasPorPagina;
+
+    $filasTotales = $crud->listar("count(*)", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\"")[0]['count(*)'];
+    // Redondeamos al número superior para saber cuántas páginas tendrá la tabla
+    $totalPaginas = ceil($filasTotales / $filasPorPagina);
+    $paginaSiguiente = $pagina + 1;
+    $paginaAnterior = $pagina - 1;
+
+    // Obtenemos tantas incidencias como filas por página, empezando por la que toque para la página en la que nos encontremos
+    $sugerencias = $crud->listar("*", "sugerencias_incidencias", "where cliente = \"$_SESSION[cliente]\" ORDER BY fecha ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
+
     // Si el usuario no ha enviado ninguna incidencia
     if($sugerencias == null) {
 ?>
@@ -134,6 +148,18 @@
                         <small class="text-muted">Consulta todas las sugerencias/incidencias enviadas anteriormente</small>
                     </div>
                 </div>
+<?php
+        // Si nos encontramos en una página que no sea la primera, mostramos una opción para volver a la página anterior
+        if ($pagina > 1){
+            echo "<a href=\"?pagina=$paginaAnterior\">← Anterior</a> ";
+        }
+        // Mostramos la página en la que nos encontramos
+        echo "<span>Página $pagina de $totalPaginas></span>";
+        // Si no estamos en la última página, mostramos una opción para ir a la siguiente
+        if ($pagina < $totalPaginas) {
+            echo " <a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
+        }
+?>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover text-nowrap">
                         <?php $contador = 1; ?>

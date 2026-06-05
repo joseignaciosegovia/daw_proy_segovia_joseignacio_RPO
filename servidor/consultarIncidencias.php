@@ -46,7 +46,22 @@
     // Si hemos iniciado sesión como gestor
     if(!empty($_SESSION["gestor"])){
         $crud = new Crud(new DB("proyecto"));
-        $incidencias = $crud->listar("*", "sugerencias_incidencias", " order by fecha");
+
+        // Variables relacionadas con la tabla de incidencias
+        $filasPorPagina = 10;
+        // Por defecto, estaremos en la página 1
+        $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+        $desplazamiento = ($pagina - 1) * $filasPorPagina;
+
+        $filasTotales = $crud->listar("count(*)", "sugerencias_incidencias", "")[0]['count(*)'];
+        // Redondeamos al número superior para saber cuántas páginas tendrá la tabla
+        $totalPaginas = ceil($filasTotales / $filasPorPagina);
+        $paginaSiguiente = $pagina + 1;
+        $paginaAnterior = $pagina - 1;
+
+        // Obtenemos tantas incidencias como filas por página, empezando por la que toque para la página en la que nos encontremos
+        $incidencias = $crud->listar("*", "sugerencias_incidencias", "ORDER BY fecha ASC LIMIT $filasPorPagina OFFSET $desplazamiento");
+
         // Guardamos el gestor para que puedan mostrarse sus datos en la barra de navegación
         $gestor = $crud->obtener("gestores", "where email = \"$_SESSION[gestor]\"")[0];
         $fecha = new DateTime();
@@ -101,6 +116,18 @@
                         <small class="text-muted">Consulta las incidencias enviadas por los usuarios</small>
                     </div>
                 </div>
+<?php
+                // Si nos encontramos en una página que no sea la primera, mostramos una opción para volver a la página anterior
+                if ($pagina > 1){
+                    echo "<a href=\"?pagina=$paginaAnterior\">← Anterior</a> ";
+                }
+                // Mostramos la página en la que nos encontramos
+                echo "<span>Página $pagina de $totalPaginas></span>";
+                // Si no estamos en la última página, mostramos una opción para ir a la siguiente
+                if ($pagina < $totalPaginas) {
+                    echo " <a href=\"?pagina=$paginaSiguiente\">Siguiente →</a>";
+                }
+?>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover text-nowrap">
                         <thead>
