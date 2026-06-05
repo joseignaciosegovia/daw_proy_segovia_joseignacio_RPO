@@ -162,7 +162,7 @@ async function cargarCalendario(pista, id){
 
 function confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente) {
     const botonConfirmar = $('.modal-footer .btn-success');
-    $(botonConfirmar[0]).on('click', function(event) {
+    $(botonConfirmar[0]).off('click').on('click', function(event) {
         let datosAEnviar = JSON.stringify({  
             fecha: fecha,
             horaInicio: horaInicio, 
@@ -231,7 +231,7 @@ function crearModal() {
 // Función que oculta el modal recibido al pulsar en el botón de cerrar
 function cerrarModal(modal) {
     const botonCerrar = $('.modal-footer .btn-secondary');
-    $(botonCerrar[0]).on('click', function(event) {
+    $(botonCerrar[0]).off('click').on('click', function(event) {
         // Ocultamos el modal
         modal.hide();
   
