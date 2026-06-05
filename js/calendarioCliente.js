@@ -110,6 +110,7 @@ async function cargarCalendario(pista, id){
                 modalCuerpo.insertAdjacentHTML('afterbegin', `
                     Añadir una reserva el ${fecha} a las ${horaInicio}<br>
                     ${precio} €
+                    ¡Advertencia: Si cancela una reserva menos de doce horas antes de la fecha reservada, no se le devolverá el dinero!
                 `);
 
                 confirmarFecha(fecha, horaInicio, horaFin, pista, id, cliente);
