@@ -151,7 +151,7 @@
                     <i class="ti ti-credit-card-pay" aria-hidden="true"></i>
                     <div>
                         <h2>Pago de la reserva</h2>
-                        <small class="text-muted">Realice el pago de la reserva</small>
+                        <small class="text-muted">Realiza el pago de la reserva</small>
                     </div>
                 </div>
                 <div id="payment-element"></div>
